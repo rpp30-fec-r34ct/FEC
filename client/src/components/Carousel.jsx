@@ -6,7 +6,9 @@ export default class Carousel extends React.Component {
 
   render() {
     return (
-      <h2 className="carousel">Carousel</h2>
+      <div className="carousel">
+        <h2>Carousel</h2>
+      </div>
     )
   }
 }

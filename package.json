@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./server/index.js --watch",
-    "react-dev": "clear && webpack --watch"
+    "react-dev": "clear && webpack --watch",
+    "start-inspect": "clear && node --inspect ./server/index.js"
   },
   "repository": {
     "type": "git",

@@ -23,6 +23,6 @@ Front End Capstone Project
     e) Generate Token. Note that this token is only viewable once, at generation time.
 5) Copy the token to the config.js API_KEY variable. Save the file.
 6) In the terminal, run 'npm run start' to start the server
-7) In a separate terminal, run 'npm react-dev' to start webpack
+7) In a separate terminal, run 'npm run react-dev' to start webpack
 8) Open your browser and enter 'localhost:3000' into your search bar
 9) The client index page will be served by the express server with initial data retrieved from the Atlier API.

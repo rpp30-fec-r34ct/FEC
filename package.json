@@ -4,7 +4,8 @@
   "description": "Front End Capstone Project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./server/index.js --watch",
+    "react-dev": "clear && webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,9 @@
     "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.15.0",
     "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
     "jest": "^27.1.0",
+    "nodemon": "^2.0.12",
     "standard": "^16.0.3",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"

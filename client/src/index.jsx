@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import Carousel from './components/Carousel.jsx';
+import './styles.css';
+
 
 class App extends React.Component {
   constructor(props) {

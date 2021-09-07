@@ -9,7 +9,6 @@ export default class ProductCards extends React.Component {
     return (
       <div className="product-cards">
         {this.props.item.category}
-        {/* <Comparison /> */}
       </div>
     )
   }

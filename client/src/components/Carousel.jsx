@@ -43,7 +43,6 @@ export default class Carousel extends React.Component {
 
   goPrev() {
     let index = this.state.currentIndex;
-
     if (index > 0) {
       index--;
       this.setState({
@@ -52,11 +51,11 @@ export default class Carousel extends React.Component {
     }
   }
 
+
   goNext() {
     let index = this.state.currentIndex;
     let length = this.state.data.length;
-
-    if (index <= length - 1) {
+    if (index < length - 1) {
       index++;
       this.setState({
         currentIndex: index
@@ -66,23 +65,19 @@ export default class Carousel extends React.Component {
 
 
 
-
-
-
   render() {
     return (
-      <div className="carousel-wrapper">
-        <h2>Carousel</h2>
-        <div className="carousel-container">
-          <FaChevronLeft className="left-arrow" onClick={this.goPrev} />
-          {this.state.data.map((item, index) => {
-            return (
+      <div className="carousel-container">
+        <FaChevronLeft className="left-arrow" onClick={this.goPrev} />
+        {
+          this.state.data.map((item, index) => {
+            return <div className={index === this.state.currentIndex ? 'show' : 'hide'}>
               <ProductCards key={item.id} item={item} />
-            )
-          })}
-          <FaChevronRight className="right-arrow" onClick={this.goNext} />
-        </div>
-      </div>
+            </div>
+          })
+        }
+        <FaChevronRight className="right-arrow" onClick={this.goNext} />
+      </div >
     )
   }
 }

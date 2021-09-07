@@ -19,7 +19,7 @@ class App extends React.Component {
   }
 
   getProductDetails (id) {
-    axios.get(`http://localhost:3000/productDetail${id}`)
+    axios.get(`/productDetail${id}`)
     .then((data) => {
       console.log('data received from server for product');
       this.setState({

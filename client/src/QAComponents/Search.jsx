@@ -2,12 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 
-const Search = () => (
+const Search = (props) => (
   (
     <div>
       <form>
-        <input type="text" placeholder="Search Questions and Answers"></input>
-        <button type="Submit">Search</button>
+        <input type="text" placeholder="Search Questions and Answers" onChange={props.handleSearch}></input>
       </form>
     </div>
   )

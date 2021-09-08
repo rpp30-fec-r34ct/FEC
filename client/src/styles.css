@@ -1,21 +1,40 @@
  /* .hide {
-   display: none;
+   display: 'none'
  }
 
 
  .show {
-   display: block;
+   display: 'block'
  } */
 
- .carousel-wrapper {
-   position: relative;
-   height: 100;
-   width: 100;
-   margin: 0 auto;
-   overflow: hidden;
+ .left-arrow,
+ .right-arrow {
+   top: 50%;
+   width: 20px;
+   height: 20px;
+   border: 1px solid rgb(161, 150, 150);
+   border-radius: 10px;
  }
 
- .container-carousel {
+ .left-arrow {
+   left: 30px;
+ }
+
+ .right-arrow {
+   right: 30px;
+ }
+
+ .carousel-content {
+   position: relative;
+   height: 100%;
+   width: 100%;
+   margin: 0 auto;
+   overflow: hidden;
+   display: flex;
+ }
+
+ .carousel-container {
+   width: 100%;
    position: relative;
    display: flex;
    flex-direction: row;

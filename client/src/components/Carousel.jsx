@@ -3,18 +3,31 @@ import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
+// const fetchURL = 'https://jsonplaceholder.typicode.com'
+
 
 import css from './../styles.css';
 
 
 
 export default function Carousel(props) {
-
+  const [data, setData] = useState(null);
   const [products, setProducts] = useState(
     [{ 'name': 'Apple' }, { 'name': 'Grass' }, { 'name': 'Juice' }, { 'name': 'Bird' }]); //length 2
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = products.length;
 
+  // const getProducts = () =>
+  //   fetch(`${fetchURL}/posts`)
+  //     .then((res) => res.json())
+
+  // useEffect(() => {
+  //   getProducts().then((data) => setData(data))
+  // }, [])
+
+  const hideArrow = {
+    display: 'none'
+  }
 
 
   const nextCard = () => {
@@ -32,15 +45,19 @@ export default function Carousel(props) {
 
 
   return (
-    <div className="carousel-wrapper">
-      <div className="carousel-container">
-        <ProductList />
+    <div className="carousel-container">
+      {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
+      <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
+        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+        <img src="https://via.placeholder.com/1600x300" alt="placeholder" />
+        {/* {products?.map((item) =>
+          <div key={item.id}>{item.name}</div>
+        )}
+      </div> */}
       </div>
-      <div className="carousel-controls">
-        <FaChevronLeft className="left-arrow" onClick={prevCard} />
-        <FaChevronRight className="right-arrow" onClick={nextCard} />
-      </div>
-    </div >
+      {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}
+    </div>
   )
 
 }

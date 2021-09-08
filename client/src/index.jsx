@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import QAs from './QAComponents/QAs.jsx';
 
 class App extends React.Component {
   constructor (props) {
@@ -40,6 +41,7 @@ class App extends React.Component {
         <div>{this.state.productDetails.name}</div>
         <h2>Product Description</h2>
         <div>{this.state.productDetails.description}</div>
+        <QAs />
       </div>
     )
   }

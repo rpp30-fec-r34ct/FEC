@@ -1,15 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Comparison from './Comparison.jsx';
 
 
-export default class ProductCards extends React.Component {
+export default function ProductCards() {
 
+  return (
+    <div className="product-cards">
+      Cards
+      <Comparison />
+    </div>
+  )
 
-  render() {
-    return (
-      <div className="product-cards">
-        {this.props.item.category}
-      </div>
-    )
-  }
 }

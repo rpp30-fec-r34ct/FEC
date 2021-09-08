@@ -1,8 +1,22 @@
- .hide {
+ /* .hide {
    display: none;
  }
 
 
  .show {
    display: block;
+ } */
+
+ .carousel-wrapper {
+   position: relative;
+   height: 100;
+   width: 100;
+   margin: 0 auto;
+   overflow: hidden;
+ }
+
+ .container-carousel {
+   position: relative;
+   display: flex;
+   flex-direction: row;
  }

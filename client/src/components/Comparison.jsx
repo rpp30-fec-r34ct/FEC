@@ -1,16 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 
-export default class Comparison extends React.Component {
+export default function Comparison() {
 
-
-  render() {
-
-    return (
-      <div className="comparison-table" >
-      </div >
-    )
-
-  }
-
+  return (
+    <div className="comparison-table">
+    </div>
+  )
 }

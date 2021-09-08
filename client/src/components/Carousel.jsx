@@ -1,5 +1,5 @@
-import React from 'react';
-import ProductCards from './ProductCards.jsx';
+import React, { useState, useEffect } from 'react';
+import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
@@ -8,76 +8,49 @@ import css from './../styles.css';
 
 
 
-export default class Carousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [
-        {
-          id: 1,
-          category: 'Shoes'
-        },
+export default function Carousel(props) {
 
-        {
-          id: 2,
-          category: 'Jackets'
-        },
-
-        {
-          id: 3,
-          category: 'Accessories'
-        },
-
-        {
-          id: 4,
-          category: 'Pants'
-        }
-      ],
-      currentIndex: 0
-    }
-
-    this.goNext = this.goNext.bind(this);
-    this.goPrev = this.goPrev.bind(this);
-  }
+  const [products, setProducts] = useState(
+    [{ 'name': 'Apple' }, { 'name': 'Grass' }, { 'name': 'Juice' }, { 'name': 'Bird' }]); //length 2
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const length = products.length;
 
 
-  goPrev() {
-    let index = this.state.currentIndex;
-    if (index > 0) {
-      index--;
-      this.setState({
-        currentIndex: index
-      });
+
+  const nextCard = () => {
+    if (currentIndex >= 0 && currentIndex < products.length - 1) {
+      setCurrentIndex(currentIndex => currentIndex + 1);
     }
   }
 
 
-  goNext() {
-    let index = this.state.currentIndex;
-    let length = this.state.data.length;
-    if (index < length - 1) {
-      index++;
-      this.setState({
-        currentIndex: index
-      });
+  const prevCard = () => {
+    if (currentIndex > 0 && currentIndex <= products.length - 1) {
+      setCurrentIndex(currentIndex => currentIndex - 1);
     }
   }
 
 
-
-  render() {
-    return (
+  return (
+    <div className="carousel-wrapper">
       <div className="carousel-container">
-        <FaChevronLeft className="left-arrow" onClick={this.goPrev} />
-        {
-          this.state.data.map((item, index) => {
-            return <div className={index === this.state.currentIndex ? 'show' : 'hide'}>
-              <ProductCards key={item.id} item={item} />
-            </div>
-          })
-        }
-        <FaChevronRight className="right-arrow" onClick={this.goNext} />
-      </div >
-    )
-  }
+        <ProductList />
+      </div>
+      <div className="carousel-controls">
+        <FaChevronLeft className="left-arrow" onClick={prevCard} />
+        <FaChevronRight className="right-arrow" onClick={nextCard} />
+      </div>
+    </div >
+  )
+
 }
+{/* <FaChevronLeft className="left-arrow" onClick={() => setCurrentIndex(currentIndex - 1)} />
+<div className="carousel-container"
+{...products.map((item, index) => {
+  return <div className={index === state.currentIndex ? 'show' : 'hide'}>
+    <ProductCards key={item.id} item={item} />
+})
+  </div>
+}
+</div>
+<FaChevronRight className="right-arrow" onClick={() => setCurrentIndex(currentIndex + 1)} /> */}

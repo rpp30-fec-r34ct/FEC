@@ -1,41 +1,66 @@
- /* .hide {
-   display: 'none'
- }
+.left-arrow,
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  width: 15px;
+  height: 15px;
+  color: white;
+  background-color: #ddd;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  z-index: 1001;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.left-arrow {
+  left: 0px;
+}
+
+.right-arrow {
+  right: 0px;
+}
+
+.carousel-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.carousel-wrapper {
+  display: flex;
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+}
 
 
- .show {
-   display: 'block'
- } */
+.carousel-content-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: 100%
+}
 
- .left-arrow,
- .right-arrow {
-   top: 50%;
-   width: 20px;
-   height: 20px;
-   border: 1px solid rgb(161, 150, 150);
-   border-radius: 10px;
- }
+.carousel-content {
+  display: flex;
+  padding: 10px;
+  transition: transform .5s, z-index .5s
+}
 
- .left-arrow {
-   left: 30px;
- }
+.carousel-content * {
+  width: 90%;
+  flex-shrink: 0;
+  flex-grow: 1;
+}
 
- .right-arrow {
-   right: 30px;
- }
+/* .carousel-content.show-2>* {
+  width: 50%;
+}
 
- .carousel-content {
-   position: relative;
-   height: 100%;
-   width: 100%;
-   margin: 0 auto;
-   overflow: hidden;
-   display: flex;
- }
+.carousel-content.show-3>* {
+  width: calc(100% /3);
+}
 
- .carousel-container {
-   width: 100%;
-   position: relative;
-   display: flex;
-   flex-direction: row;
- }
+.carousel-content.show-4>* {
+  width: calc(100% /4); */
+/* } */

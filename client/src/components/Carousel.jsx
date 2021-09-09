@@ -2,17 +2,12 @@ import React, { useState, useEffect } from 'react';
 import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-
-
-
-
 import css from './../styles.css';
-
 
 
 export default function Carousel(props) {
   const [products, setProducts] = useState(
-    [{ 'name': 'Apple' }, { 'name': 'Grass' }, { 'name': 'Juice' }, { 'name': 'Bird' }]); //length 2
+    [{ 'name': 'Apple' }, { 'name': 'Grass' }, { 'name': 'Juice' }, { 'name': 'Bird' }]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = products.length;
 

@@ -11,6 +11,14 @@ export default function Carousel(props) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = products.length;
 
+  // useEffect(() => {
+  //   getRelatedProducts();
+  // }, [])
+
+  // getRelatedProducts = () => {
+
+  // }
+
 
   const nextCard = () => {
     if (currentIndex >= 0 && currentIndex < (length - 1)) {

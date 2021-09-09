@@ -26,6 +26,23 @@ app.get('/productDetail*', (req, res) => {
   })
 });
 
+app.get('/productDetail*', (req, res) => {
+  console.log('related product details request received', req.url);
+  let productId = req.url.slice(14,req.url.length);
+  axios.get(APIurl + `products/${productId}/related`, {
+    headers: {
+      'Authorization': token.API_KEY
+    }
+  })
+  .then((data) => {
+    console.log('Grabbed related products from API');
+    res.status(200).send(data.data);
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  })
+})
+
 app.listen(port, () => {
   console.log(`Server listening http://localhost:${port}`);
 })

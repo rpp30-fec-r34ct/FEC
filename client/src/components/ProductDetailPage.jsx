@@ -10,7 +10,7 @@ const ProductDetailPageComponent = (props) => {
   },[])
 
   let getProductDetails = () => {
-    axios.get(`http://localhost:3000/productDetail${props.match.params.id}`)
+    axios.get(`/productDetail${props.match.params.id}`)
     .then((data) => {
       console.log('data received from server for product');
       setProductDetails(data.data)

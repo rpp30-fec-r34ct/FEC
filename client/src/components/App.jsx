@@ -9,10 +9,12 @@ const App = (props) => {
     <Router>
       <h1>PROJECT ATLIER</h1>
       <Switch>
-        <Route path="/product/:id" component={ProductDetailPage} />
-      </Switch>
-      <Switch>
-        <Route path="/product:id/related" component={Carousel} />
+        <Route path="/product/:productId">
+          <ProductDetailPage />
+        </Route>
+        <Route path="/product/:productId/related">
+          <Carousel />
+        </Route>
       </Switch>
     </Router>
   )

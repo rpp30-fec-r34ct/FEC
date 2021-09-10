@@ -6,18 +6,24 @@ import css from './../styles.css';
 
 
 export default function Carousel(props) {
-  const [products, setProducts] = useState(
-    [{ 'name': 'Apple' }, { 'name': 'Grass' }, { 'name': 'Juice' }, { 'name': 'Bird' }]);
+  const [relatedProducts, setRelatedProducts] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = products.length;
 
-  // useEffect(() => {
-  //   getRelatedProducts();
-  // }, [])
+  useEffect(() => {
+    getRelatedProducts();
+  }, [])
 
-  // getRelatedProducts = () => {
-
-  // }
+  let getRelatedProducts = () => {
+    axios.get(`/related${productId}`)
+      .then((data) => {
+        console.log('data received from server for product');
+        setRelatedProducts(data.data)
+      })
+      .catch((err) => {
+        console.error('error while getting product data from server');
+      })
+  }
 
 
   const nextCard = () => {
@@ -42,14 +48,7 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
         <div className="carousel-content-wrapper">
           <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
-            <img src="https://via.placeholder.com/50x100" alt="placeholder" />
-
-            <img src="https://via.placeholder.com/50x100" alt="placeholder" />
-
-            <img src="https://via.placeholder.com/50x100" alt="placeholder" />
-
-            <img src="https://via.placeholder.com/50x100" alt="placeholder" />
-
+            {relatedProducts.name}
             {/* {products?.map((item) =>
           <div key={item.id}>{item.name}</div>
           )}

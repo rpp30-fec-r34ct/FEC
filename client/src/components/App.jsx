@@ -8,7 +8,13 @@ const App = (props) => {
     <Router>
       <h1>PROJECT ATLIER</h1>
       <Switch>
+<<<<<<< HEAD
         <Route path="/product/:id" component={ProductDetailPage} />
+=======
+        <Route path="/product/:productId">
+          <ProductDetailPage />
+        </Route>
+>>>>>>> 466f7d028b01146b5b18c604b168616ee13376e8
       </Switch>
     </Router>
   )

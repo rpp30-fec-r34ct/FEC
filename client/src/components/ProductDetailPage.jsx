@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import MainImageGallery from './MainImageGallery.jsx';
+import ProductDescription from './ProductDescription.jsx';
 
 const ProductDetailPageComponent = (props) => {
   const [productDetails, setProductDetails] = useState({});
@@ -22,14 +24,20 @@ const ProductDetailPageComponent = (props) => {
     })
   }
 
+  let styles = {
+    "display": "flex",
+
+  }
+
   return (
-      <div>
-        <h2>Product Name</h2>
-        <div>{productDetails.name}</div>
-        <h2>Product Description</h2>
-        <div>{productDetails.description}</div>
-      </div>
-    )
+    <div>
+    <div style={styles}>
+      <MainImageGallery />
+      <ProductDescription productDetails={productDetails}/>
+    </div>
+    {productDetails.description}
+    </div>
+  )
 }
 
 export default ProductDetailPageComponent;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductDetailPage from './ProductDetailPage.jsx';
+import QAList from '../QAComponents/QAList.jsx';
 
 const App = (props) => {
 
@@ -10,6 +11,10 @@ const App = (props) => {
       <Switch>
         <Route path="/product/:productId">
           <ProductDetailPage />
+          <QAList />
+        </Route>
+        <Route path="qa/question/:productId">
+          <QAList />
         </Route>
       </Switch>
   </Router>

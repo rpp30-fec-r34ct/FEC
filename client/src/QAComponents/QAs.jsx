@@ -26,7 +26,7 @@ export default class QAs extends React.Component {
       <div>
         <h1>Questions and Answers</h1>
         <Search />
-        <QAList questions={this.state.list}/>
+        <QAList />
       </div>
     )
   }

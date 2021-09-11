@@ -7,7 +7,7 @@
     "start": "nodemon ./server/index.js --watch",
     "react-dev": "clear && webpack --watch",
     "start-inspect": "clear && node --inspect ./server/index.js",
-    "test": "jest --verbose"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,8 +31,6 @@
     "jest": "^27.1.0",
     "msw": "^0.35.0",
     "nodemon": "^2.0.12",
-    "react-icons": "^4.2.0",
-    "react-router-dom": "^5.3.0",
     "regenerator-runtime": "^0.13.9",
     "standard": "^16.0.3",
     "style-loader": "^3.2.1",

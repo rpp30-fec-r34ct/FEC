@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductDetailPage from './ProductDetailPage.jsx';
-import Carousel from './Carousel.jsx';
 
 const App = (props) => {
 
@@ -11,9 +10,6 @@ const App = (props) => {
       <Switch>
         <Route path="/product/:productId">
           <ProductDetailPage />
-        </Route>
-        <Route path="/product/:productId/related">
-          <Carousel />
         </Route>
       </Switch>
     </Router>

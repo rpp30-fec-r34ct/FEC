@@ -25,6 +25,23 @@ app.get('/productDetail*', (req, res) => {
   })
 });
 
+app.get('/qa/questions', (req, res) => {
+  console.log('questions and answers...', req._parsedUrl);
+  // let
+  axios.get(APIurl + 'qa/questions/' + req._parsedUrl.query, {
+    // let productId = req.url.slice(14,req.url.length);
+    // axios.get(APIurl + `qa/questions/?${productId}`, {
+    headers: {
+      'Authorization': token.API_KEY
+    }
+  })
+  .then(data => res.status(200).send(data))
+  .catch(err => {
+    console.error(err);
+    res.status(500).send(err);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server listening http://localhost:${port}`);
 })

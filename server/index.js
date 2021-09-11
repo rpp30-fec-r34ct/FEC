@@ -55,10 +55,15 @@ app.get('/products/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data;
 
+
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
 
       console.log('default', defaultStyle)
+
+      // response = await axios.get(`${APIurl}products/${relatedId}/reviews/meta`, options)
+
+
 
       relatedProducts.push({
         category: product.category,

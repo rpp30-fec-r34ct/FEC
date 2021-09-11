@@ -9,6 +9,7 @@ export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState({});
   const [currentIndex, setCurrentIndex] = useState(0);
   const length = products.length;
+  const { productId } = useParams();
 
   useEffect(() => {
     getRelatedProducts();
@@ -48,11 +49,7 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
         <div className="carousel-content-wrapper">
           <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
-
-            {/* {products?.map((item) =>
-          <div key={item.id}>{item.name}</div>
-          )}
-        </div> */}
+            {relatedProducts.category}
           </div>
         </div>
         {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}

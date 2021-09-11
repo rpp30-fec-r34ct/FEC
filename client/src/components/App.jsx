@@ -12,7 +12,7 @@ const App = (props) => {
         <Route path="/product/:productId">
           <ProductDetailPage />
         </Route>
-        <Route path="/product/:productId/related">
+        <Route path="/products/:productId/related">
           <Carousel />
         </Route>
       </Switch>

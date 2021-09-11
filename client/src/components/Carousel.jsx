@@ -15,7 +15,7 @@ export default function Carousel(props) {
   }, [])
 
   let getRelatedProducts = () => {
-    axios.get(`/relatedProducts${productId}`)
+    axios.get(`/products/${productId}/related`)
       .then((data) => {
         console.log('data received from server for product');
         setRelatedProducts(data.data)
@@ -48,7 +48,7 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
         <div className="carousel-content-wrapper">
           <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
-            {relatedProducts.name}
+
             {/* {products?.map((item) =>
           <div key={item.id}>{item.name}</div>
           )}

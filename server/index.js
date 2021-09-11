@@ -9,7 +9,7 @@ app.use(express.static('client/dist'));
 app.use('/product/:id', express.static('client/dist'));
 
 app.get('/productDetail*', (req, res) => {
-  console.log('product details request received', req.url);
+  // console.log('product details request received', req.url);
   let productId = req.url.slice(14,req.url.length);
   axios.get(APIurl + `products/${productId}`, {
     headers: {
@@ -28,22 +28,21 @@ app.get('/productDetail*', (req, res) => {
 
 
 /////RELATED PRODUCTS////
+app.get('/products/:id/related', (req, res) => {
 
-app.get('/productDetail*', (req, res) => {
-  // console.log('product details request received', req.url);
-  let productId = req.url.slice(14,req.url.length);
-  axios.get(APIurl + `products/${productId}/related`, {
+  let productId = req.params.id
+
+  axios.get(`${APIurl}products/${productId}/related`, {
     headers: {
       'Authorization': token.API_KEY
     }
   })
   .then((data) => {
-    console.log('related products id obtained');
+    console.log('related products id obtained', data.data);
     res.status(200).send(data.data);
   })
   .catch ((err) => {
-    console.error(err);
-    res.sendStatus(500);
+   res.status(500).send(err);
   })
 });
 

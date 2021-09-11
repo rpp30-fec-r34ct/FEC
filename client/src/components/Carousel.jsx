@@ -15,7 +15,7 @@ export default function Carousel(props) {
   }, [])
 
   let getRelatedProducts = () => {
-    axios.get(`/productDetail${productId}/related`)
+    axios.get(`/relatedProducts${productId}`)
       .then((data) => {
         console.log('data received from server for product');
         setRelatedProducts(data.data)

@@ -13,7 +13,7 @@ const App = (props) => {
           <ProductDetailPage />
           <QAList />
         </Route>
-        <Route path="qa/question/:productId">
+        <Route path="/product/:productId/questions">
           <QAList />
         </Route>
       </Switch>

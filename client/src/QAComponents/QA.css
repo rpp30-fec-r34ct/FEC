@@ -1,0 +1,12 @@
+.question-block {
+  border: 1px solid black;
+}
+
+.question-body {
+  border: 1px solid black;
+  color: blue;
+}
+
+.helpful {
+  color: red;
+}

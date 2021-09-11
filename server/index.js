@@ -26,7 +26,10 @@ app.get('/productDetail*', (req, res) => {
   })
 });
 
-app.get('/related/:id', (req, res) => {
+
+/////RELATED PRODUCTS////
+
+app.get('/productDetail*', (req, res) => {
   // console.log('product details request received', req.url);
   let productId = req.url.slice(14,req.url.length);
   axios.get(APIurl + `products/${productId}/related`, {

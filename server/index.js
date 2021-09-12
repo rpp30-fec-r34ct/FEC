@@ -59,36 +59,39 @@ app.get('/products/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
 
-      console.log('default', defaultStyle)
+      // console.log('default', defaultStyle)
 
-      // response = await axios.get(`${APIurl}products/${relatedId}/reviews/meta`, options)
+      // response = await axios.get(`${APIurl}products/reviews/meta/`, options)
+      // const averageRating = response.data.ratings;
 
+      // console.log('rating', averageRating)
+
+      // const ratingStyle = (ratings) => {
+      //   let result = 0;
+
+      //   let values = Object.values(ratings);
+
+      //   let sum = values.reduce((previous, current) => previous + current);
+
+      //   for (let key in ratings) {
+      //     result += ((key * ratings[key] / sum));
+      //   }
+      //   return result;
+      //   console.log('result', result)
+      // }
 
 
       relatedProducts.push({
         category: product.category,
         name: product.name,
         price: defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price
+        // rating: averageRating.ratings
       })
     }
     res.status(200).send(relatedProducts)
   } catch(err) {
     res.status(500).send(err);
   }
-
-
-  // axios.get(`${APIurl}products/${productId}/related`, {
-  //   headers: {
-  //     'Authorization': token.API_KEY
-  //   }
-  // })
-  // .then((data) => {
-  //   console.log('related products id obtained', data.data);
-  //   res.status(200).send(data.data);
-  // })
-  // .catch ((err) => {
-  //  res.status(500).send(err);
-  // })
 });
 
 

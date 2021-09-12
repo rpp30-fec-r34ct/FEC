@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Carousel from './Carousel.jsx';
+
 
 
 const ProductDetailPageComponent = (props) => {
@@ -28,6 +30,7 @@ const ProductDetailPageComponent = (props) => {
       <div>{productDetails.name}</div>
       <h2>Product Description</h2>
       <div>{productDetails.description}</div>
+      <Carousel />
     </div>
   )
 }

@@ -2,11 +2,11 @@ import React from 'react';
 import ProductCards from './ProductCards.jsx';
 
 
-export default function ProductList() {
+export default function ProductList(props) {
   return (
     <div className="product-list">
       List
-      <ProductCards />
+      <ProductCards product={props.product} />
     </div>
   )
 

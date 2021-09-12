@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ProductList from './ProductList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
@@ -6,9 +7,9 @@ import css from './../styles.css';
 
 
 export default function Carousel(props) {
-  const [relatedProducts, setRelatedProducts] = useState({});
+  const [relatedProducts, setRelatedProducts] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const length = products.length;
+  const length = relatedProducts.length;
   const { productId } = useParams();
 
   useEffect(() => {
@@ -49,7 +50,11 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
         <div className="carousel-content-wrapper">
           <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
-            {relatedProducts.category}
+            {
+              relatedProducts.map((product, index) => {
+                return <ProductList key={product.id} product={product} />
+              })
+            }
           </div>
         </div>
         {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}

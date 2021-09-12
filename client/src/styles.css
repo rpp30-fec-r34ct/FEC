@@ -1,4 +1,4 @@
-.carousel-container h2 {
+h3 {
   font-family: Arial, Helvetica, sans-serif;
   color: #757575;
   font-weight: 200;
@@ -52,6 +52,9 @@
   position: relative;
 }
 
+.product-details {
+  margin: 0px 5px;
+}
 
 .product-card {
   display: flex;

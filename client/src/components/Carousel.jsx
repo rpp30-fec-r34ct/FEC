@@ -43,20 +43,21 @@ export default function Carousel(props) {
 
 
   return (
-    <div className="carousel-container">
-      {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
-      <div className="carousel-content-wrapper">
-        <h2>RELATED PRODUCTS</h2>
-        <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
-          {
-            relatedProducts.map((product) => {
-              return <ProductList key={product.id} product={product} />
-            })
-          }
+    <div>
+      <h3>RELATED PRODUCTS</h3>
+      <div className="carousel-container">
+        {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
+        <div className="carousel-content-wrapper">
+          <div className="carousel-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
+            {
+              relatedProducts.map((product) => {
+                return <ProductList key={product.id} product={product} />
+              })
+            }
+          </div>
         </div>
+        {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}
       </div>
-      {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}
-
     </div>
   )
 

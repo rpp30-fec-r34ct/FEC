@@ -11,10 +11,8 @@ const App = (props) => {
       <Switch>
         <Route path="/product/:productId">
           <ProductDetailPage />
-        </Route>
-        {/* <Route path="/products/:productId/related">
           <Carousel />
-        </Route> */}
+        </Route>
       </Switch>
     </Router>
   )

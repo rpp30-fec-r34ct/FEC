@@ -30,7 +30,6 @@ const ProductDetailPageComponent = (props) => {
       <div>{productDetails.name}</div>
       <h2>Product Description</h2>
       <div>{productDetails.description}</div>
-      <Carousel />
     </div>
   )
 }

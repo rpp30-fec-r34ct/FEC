@@ -5,7 +5,6 @@ import ProductCards from './ProductCards.jsx';
 export default function ProductList(props) {
   return (
     <div className="product-list">
-      List
       <ProductCards product={props.product} />
     </div>
   )

@@ -33,6 +33,10 @@ const ProductDetailPageComponent = (props) => {
       });
   }
 
+  const updateSelectedStyle = (index) => {
+    setSelectedStyle(styles[index]);
+  }
+
   useEffect(()=> {
     getStyles();
   }, [productDetails])
@@ -49,7 +53,7 @@ const ProductDetailPageComponent = (props) => {
     <div>
     <div style={productDetailStyles}>
       <MainImageGallery selectedStyle={selectedStyle}/>
-      <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle}/>
+      <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle}/>
     </div>
     {productDetails ? <ProductDetailFooter productDetails={productDetails}/> : <div></div>}
     </div>

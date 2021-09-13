@@ -9,7 +9,7 @@ const App = (props) => {
     <Router>
       <h1>PROJECT ATLIER</h1>
       <Switch>
-        <Route path="/product/:productId">
+        <Route path="/product/:productId" exact>
           <ProductDetailPage />
           <Carousel />
         </Route>

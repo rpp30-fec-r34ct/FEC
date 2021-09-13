@@ -28,7 +28,7 @@ app.get('/productDetail*', (req, res) => {
 
 
 /////RELATED PRODUCTS////
-app.get('/products/:id/related', async (req, res) => {
+app.get('/product/:id/related', async (req, res) => {
   let options = {
     headers: {
       'Authorization': token.API_KEY
@@ -38,15 +38,7 @@ app.get('/products/:id/related', async (req, res) => {
   try {
     let response = await axios.get(`${APIurl}products/${productId}/related`, options)
     const relatedIds = response.data;
-    /**
-     * {
-     *  category: '',
-     *  name: '',
-     *  price: 0,
-     *  star_rating: 3.75,
-     *  default_image: image
-     * }
-     */
+
     let relatedProducts = [];
 
     for (let i = 0; i < relatedIds.length; i++) {
@@ -55,9 +47,14 @@ app.get('/products/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data;
 
+      // console.log('product', product)
+
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
+      // const photoStyle = response.data.results[0].photos[1].url;
+
+      // console.log('photo', response.data.results.find(item => item.photos))
 
       // console.log('default', defaultStyle)
 
@@ -82,10 +79,11 @@ app.get('/products/:id/related', async (req, res) => {
 
 
       relatedProducts.push({
+        // photo: "",
         category: product.category,
         name: product.name,
         price: defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price
-        // rating: averageRating.ratings
+        // rating: ""
       })
     }
     res.status(200).send(relatedProducts)

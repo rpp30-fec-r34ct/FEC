@@ -8,22 +8,20 @@ const token = require('./config.js');
 app.use(express.static('client/dist'));
 app.use('/product/:id', express.static('client/dist'));
 
-app.get('/productDetail*', (req, res) => {
-  console.log('product details request received', req.url);
-  let productId = req.url.slice(14,req.url.length);
-  axios.get(APIurl + `products/${productId}`, {
-    headers: {
-      'Authorization': token.API_KEY
-    }
-  })
-  .then((data) => {
-    console.log('[GET][PRODUCT DETAILS] data successfully retrieved from API, sending back to client');
-    res.status(200).send(data.data);
-  })
-  .catch ((err) => {
-    console.error(err);
-    res.sendStatus(500);
-  })
+app.get('/api/*', async (req, res) => {
+  let path = req.url.split('/api/')[1]
+  try {
+    let response = await axios.get(APIurl + path,
+      {
+        headers: {
+        'Authorization': token.API_KEY
+        }
+      }
+    );
+    res.json(response.data);
+  } catch(err) {
+    res.status(500).send(err);
+  }
 });
 
 app.listen(port, () => {

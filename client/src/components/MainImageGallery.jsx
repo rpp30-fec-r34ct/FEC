@@ -31,7 +31,8 @@ let MainImageGalleryComponent = (props) => {
     "width": "500px",
     "backgroundColor": "grey",
     "display": "flex",
-    "justifyContent": "space-evenly"
+    "justifyContent": "space-evenly",
+    "overflow": "hidden"
   }
 
   const imgStyle = {

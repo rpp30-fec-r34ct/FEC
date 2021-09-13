@@ -16,7 +16,7 @@ const ProductDescriptionComponent = (props) => {
       <h4>{props.productDetails.category}</h4>
       <h2>{props.productDetails.name}</h2>
       <p>${props.productDetails.default_price}</p>
-      <ProductStyleSelector styles={props.styles} selectedStyle={props.selectedStyle}/>
+      <ProductStyleSelector styles={props.styles} selectedStyle={props.selectedStyle} updateSelectedStyle={props.updateSelectedStyle}/>
       <ProductCheckout />
     </div>
   )

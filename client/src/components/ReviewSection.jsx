@@ -31,8 +31,8 @@ const ReviewSection = (props) => {
 
   return (
     <div>
+      <h3>Ratings and Reviews</h3>
       <ReviewList reviews={reviews}/>
-      <h2>details for {props.product_id}</h2>
     </div>
   );
 };

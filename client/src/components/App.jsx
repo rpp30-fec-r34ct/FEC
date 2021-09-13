@@ -16,7 +16,7 @@ const App = (props) => {
           <ReviewSection />
         </Route>
         <Route path="/">
-          <h1>Homepage</h1>
+          <h1>Home Page Route</h1>
           <ReviewSection product_id={47421}/>
         </Route>
       </Switch>

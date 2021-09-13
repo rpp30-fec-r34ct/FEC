@@ -9,6 +9,7 @@ const ProductDetailPageComponent = (props) => {
   const [productDetails, setProductDetails] = useState({});
   const { productId } = useParams();
 
+
   useEffect(() => {
     getProductDetails();
   },[])
@@ -16,7 +17,6 @@ const ProductDetailPageComponent = (props) => {
   let getProductDetails = () => {
     axios.get(`/productDetail${productId}`)
     .then((data) => {
-      console.log('data received from server for product');
       setProductDetails(data.data)
     })
     .catch ((err) => {
@@ -33,7 +33,7 @@ const ProductDetailPageComponent = (props) => {
     <div>
     <div style={styles}>
       <MainImageGallery />
-      <ProductDescription productDetails={productDetails}/>
+      <ProductDescription productDetails={productDetails} productId={props.match.params.id}/>
     </div>
     {productDetails.description}
     </div>

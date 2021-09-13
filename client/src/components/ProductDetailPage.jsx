@@ -48,7 +48,7 @@ const ProductDetailPageComponent = (props) => {
   return (
     <div>
     <div style={productDetailStyles}>
-      { (selectedStyle === false) ? <MainImageGallery selectedStyle={{photos: [{url: "https://via.placeholder.com/500"}]}}/> : <MainImageGallery selectedStyle={selectedStyle}/>}
+      { (selectedStyle === false) ? <div></div> : <MainImageGallery selectedStyle={selectedStyle}/>}
       <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle}/>
     </div>
     {productDetails ? <ProductDetailFooter productDetails={productDetails}/> : <div></div>}

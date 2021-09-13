@@ -159,6 +159,9 @@ h3 {
   transition: transform .5s, z-index .5s;
 }
 
+
+/**ADD OUTFIT CARD**/
+
 .add-card {
   display: flex;
   justify-content: center;
@@ -184,5 +187,13 @@ h3 {
 .add-btn {
   z-index: 1001;
   align-items: center;
+  top: 10px;
+}
+
+/**DELETE OUTFIT**/
+
+.delete-btn {
+  z-index: 1001;
+  align-items: right;
   top: 10px;
 }

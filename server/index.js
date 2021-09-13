@@ -47,7 +47,7 @@ app.get('/product/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data;
 
-      // console.log('product', product)
+      console.log('product', product)
 
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
@@ -55,7 +55,8 @@ app.get('/product/:id/related', async (req, res) => {
 
       const productStyle = response.data.results.map(item => item.photos[0].url)
 
-      console.log('PRODUCT', productStyle)
+
+      // console.log('PRODUCT', response.data.results)
 
 
 
@@ -86,7 +87,7 @@ app.get('/product/:id/related', async (req, res) => {
         photo: productStyle[0],
         category: product.category,
         name: product.name,
-        price: defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price
+        price: defaultStyle.sale_price ? defaultStyle.sale_price : product.default_price
 
       })
     }

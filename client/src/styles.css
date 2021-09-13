@@ -58,6 +58,7 @@ h3 {
 }
 
 .product-card {
+  overflow-x: hidden;
   display: flex;
   align-items: flex-start;
   float: left;
@@ -71,6 +72,8 @@ h3 {
 
 .favorite-btn {
   z-index: 1001;
+  color: white;
+  stroke-width: 30%;
   position: absolute;
   left: 170px;
   top: 10px;
@@ -79,7 +82,7 @@ h3 {
 .card-image img {
   align-self: start;
   object-fit: cover;
-  object-position: 50% 80%;
+  object-position: 50% 85%;
   height: 220px;
   width: 200px;
   position: relative;

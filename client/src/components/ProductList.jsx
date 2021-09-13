@@ -7,6 +7,7 @@ export default function ProductList(props) {
     <div className="product-list">
       <ProductCards product={props.product} />
     </div>
+
   )
 
 

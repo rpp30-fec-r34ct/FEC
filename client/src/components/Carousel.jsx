@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductList from './ProductList.jsx';
+import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import css from './../styles.css';
@@ -57,6 +58,18 @@ export default function Carousel(props) {
           </div>
         </div>
         {currentIndex < (length - 1) && <FaChevronRight className="right-arrow" onClick={nextCard} />}
+      </div>
+      <div>
+        <h3>YOUR OUTFIT</h3>
+        <div className="outfit-container">
+          {currentIndex > 0 && <FaChevronLeft className="left-arrow" onClick={prevCard} />}
+          <div className="outfit-carousel-wrapper">
+            <div className="outfit-content" style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
+              <OutfitList />
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   )

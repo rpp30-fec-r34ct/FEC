@@ -47,41 +47,15 @@ app.get('/product/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data;
 
-      console.log('product', product)
+      // console.log('product', product)
 
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
 
-      const productStyle = response.data.results.map(item => item.photos[0].url)
+      const productStyle = response.data.results.map(item => item.photos[0].url);
 
-
-      // console.log('PRODUCT', response.data.results)
-
-
-
-
-
-
-      // response = await axios.get(`${APIurl}products/reviews/meta/`, options)
-      // const averageRating = response.data.ratings;
-
-      // console.log('rating', averageRating)
-
-      // const ratingStyle = (ratings) => {
-      //   let result = 0;
-
-      //   let values = Object.values(ratings);
-
-      //   let sum = values.reduce((previous, current) => previous + current);
-
-      //   for (let key in ratings) {
-      //     result += ((key * ratings[key] / sum));
-      //   }
-      //   return result;
-      //   console.log('result', result)
-      // }
-
+      // console.log('default', defaultStyle)
 
       relatedProducts.push({
         photo: productStyle[0],

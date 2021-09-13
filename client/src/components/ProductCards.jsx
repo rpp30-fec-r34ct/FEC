@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import Comparison from './Comparison.jsx';
 import { AiOutlineStar } from "react-icons/ai";
+import { RiCameraOffFill } from "react-icons/ri";
+
 
 
 export default function ProductCards(props) {
+
+
+
   return (
     <div className="product-card">
       <div className="card-container">
@@ -13,6 +18,7 @@ export default function ProductCards(props) {
             <img src={props.product.photo} />
           </div>
         </div>
+
         <div className="product-details">
           <div className="card-category">{props.product.category}</div>
           <div className="card-name">{props.product.name}</div>

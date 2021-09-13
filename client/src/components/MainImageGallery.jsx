@@ -32,7 +32,6 @@ let MainImageGalleryComponent = (props) => {
 
   return(
     <div>
-      <h2>Image Gallery</h2>
       <div style={containerStyle}>
         <div style={listStyles}>
         {props.selectedStyle.photos.map((image, index) => {

@@ -8,7 +8,7 @@ const StylesSelectorItemComponent = (props) => {
     "border": "solid, 1px, black"
   }
   return(
-    <img style={styles} src={props.style.photos[0].thumbnail_url}></img>
+    <img style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.selectorClickHandler}></img>
   )
 }
 

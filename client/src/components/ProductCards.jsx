@@ -9,7 +9,9 @@ export default function ProductCards(props) {
       <div className="card-container">
         <div className="card-visuals">
           <div className="favorite-btn"><AiOutlineStar /></div>
-          <div className="card-image"></div>
+          <div className="card-image">
+            <img src={props.product.photo} />
+          </div>
         </div>
         <div className="product-details">
           <div className="card-category">{props.product.category}</div>

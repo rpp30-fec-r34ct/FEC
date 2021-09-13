@@ -52,11 +52,15 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
-      // const photoStyle = response.data.results[0].photos[1].url;
 
-      // console.log('photo', response.data.results.find(item => item.photos))
+      const productStyle = response.data.results.map(item => item.photos[0].url)
 
-      // console.log('default', defaultStyle)
+      console.log('PRODUCT', productStyle)
+
+
+
+
+
 
       // response = await axios.get(`${APIurl}products/reviews/meta/`, options)
       // const averageRating = response.data.ratings;
@@ -79,11 +83,11 @@ app.get('/product/:id/related', async (req, res) => {
 
 
       relatedProducts.push({
-        // photo: "",
+        photo: productStyle[0],
         category: product.category,
         name: product.name,
         price: defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price
-        // rating: ""
+
       })
     }
     res.status(200).send(relatedProducts)

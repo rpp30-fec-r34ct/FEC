@@ -76,9 +76,10 @@ h3 {
   top: 10px;
 }
 
-.card-image {
+.card-image img {
   align-self: start;
-  background-color: #E0E0E0;
+  object-fit: cover;
+  object-position: 50% 80%;
   height: 220px;
   width: 200px;
   position: relative;
@@ -111,6 +112,7 @@ h3 {
 .checked {
   color: orange;
 }
+
 
 /****YOUR OUTFIT LIST *****/
 

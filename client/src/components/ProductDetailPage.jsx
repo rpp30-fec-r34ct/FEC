@@ -4,10 +4,11 @@ import axios from 'axios';
 
 import MainImageGallery from './MainImageGallery.jsx';
 import ProductDescription from './ProductDescription.jsx';
+import ProductDetailFooter from './ProductDetailFooter.jsx';
 
 const ProductDetailPageComponent = (props) => {
   const { productId } = useParams();
-  const [productDetails, setProductDetails] = useState({});
+  const [productDetails, setProductDetails] = useState(false);
   const [styles, setStyles] = useState([]);
   const [selectedStyle, setSelectedStyle] = useState(false)
 
@@ -50,7 +51,7 @@ const ProductDetailPageComponent = (props) => {
       { (selectedStyle === false) ? <MainImageGallery selectedStyle={{photos: [{url: "https://via.placeholder.com/500"}]}}/> : <MainImageGallery selectedStyle={selectedStyle}/>}
       <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle}/>
     </div>
-    {productDetails.description}
+    {productDetails ? <ProductDetailFooter productDetails={productDetails}/> : <div></div>}
     </div>
   )
 }

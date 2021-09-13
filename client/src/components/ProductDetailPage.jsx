@@ -9,7 +9,7 @@ const ProductDetailPageComponent = (props) => {
   const { productId } = useParams();
   const [productDetails, setProductDetails] = useState({});
   const [styles, setStyles] = useState([]);
-  const [selectedStyle, setSelectedStyle] = useState({})
+  const [selectedStyle, setSelectedStyle] = useState(false)
 
   const getProductDetails = () => {
     axios.get(`/api/products/${productId}`)
@@ -47,7 +47,7 @@ const ProductDetailPageComponent = (props) => {
   return (
     <div>
     <div style={productDetailStyles}>
-      <MainImageGallery />
+      { (selectedStyle === false) ? <MainImageGallery selectedStyle={{photos: [{url: "https://via.placeholder.com/500"}]}}/> : <MainImageGallery selectedStyle={selectedStyle}/>}
       <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle}/>
     </div>
     {productDetails.description}

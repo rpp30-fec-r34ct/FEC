@@ -7,6 +7,7 @@ const token = require('./config.js');
 
 app.use(express.static('client/dist'));
 app.use('/product/:id', express.static('client/dist'));
+app.use('/product/:id/carousel', express.static('client/dist'));
 
 app.get('/productDetail*', (req, res) => {
   // console.log('product details request received', req.url);

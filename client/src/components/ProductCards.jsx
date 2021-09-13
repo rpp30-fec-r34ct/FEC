@@ -4,11 +4,7 @@ import { AiOutlineStar } from "react-icons/ai";
 import { RiCameraOffFill } from "react-icons/ri";
 
 
-
 export default function ProductCards(props) {
-
-
-
   return (
     <div className="product-card">
       <div className="card-container">

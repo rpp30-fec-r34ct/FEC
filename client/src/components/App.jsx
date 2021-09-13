@@ -13,6 +13,9 @@ const App = (props) => {
           <ProductDetailPage />
           <Carousel />
         </Route>
+        <Route path="/product/:productId/carousel/">
+          <Carousel />
+        </Route>
       </Switch>
     </Router>
   )

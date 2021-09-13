@@ -15,7 +15,7 @@ const ProductDetailPageComponent = (props) => {
   },[])
 
   let getProductDetails = () => {
-    axios.get(`/productDetail${productId}`)
+    axios.get(`/api/products/${productId}`)
     .then((data) => {
       setProductDetails(data.data)
     })
@@ -33,7 +33,7 @@ const ProductDetailPageComponent = (props) => {
     <div>
     <div style={styles}>
       <MainImageGallery />
-      <ProductDescription productDetails={productDetails} productId={props.match.params.id}/>
+      <ProductDescription productDetails={productDetails} productId={productId}/>
     </div>
     {productDetails.description}
     </div>

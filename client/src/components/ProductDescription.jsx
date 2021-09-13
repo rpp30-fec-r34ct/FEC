@@ -1,6 +1,6 @@
 import React from "react";
 import ProductStars from "./ProductStars.jsx";
-import ProductStyle from "./ProductStyleSelector.jsx";
+import ProductStyleSelector from "./ProductStyleSelector.jsx";
 
 const ProductDescriptionComponent = (props) => {
 
@@ -15,7 +15,7 @@ const ProductDescriptionComponent = (props) => {
       <h4>{props.productDetails.category}</h4>
       <h2>{props.productDetails.name}</h2>
       <p>${props.productDetails.default_price}</p>
-      <ProductStyle productId={props.productId}/>
+      <ProductStyleSelector styles={props.styles} selectedStyle={props.selectedStyle}/>
     </div>
   )
 }

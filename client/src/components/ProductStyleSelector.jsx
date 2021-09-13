@@ -4,11 +4,16 @@ import StyleSelectorItem from './StyleSelectorItem.jsx';
 import axios from "axios";
 const ProductStyleComponent = (props) => {
 
+  const selectorClickHandler = (e) => {
+    let index = e.target.getAttribute('data-index');
+    props.updateSelectedStyle(index);
+  }
+
   let styleSelectors = [];
 
   if (props.styles.length > 0) {
     styleSelectors = props.styles.map((style, index) => (
-      <StyleSelectorItem key={index} style={style}/>
+      <StyleSelectorItem key={index} index={index} style={style} selectorClickHandler={selectorClickHandler} />
     ));
   }
 

@@ -114,13 +114,6 @@ h3 {
 
 /****YOUR OUTFIT LIST *****/
 
-.add-text {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #757575;
-  font-weight: 200;
-  font-size: 14px;
-}
-
 .left-arrow,
 .right-arrow {
   position: relative;
@@ -161,27 +154,29 @@ h3 {
 }
 
 .add-card {
-  /* display: flex; */
-  /* align-items: flex-start; */
+  display: flex;
+  justify-content: center;
   float: left;
-  width: 200px;
-  height: 100%;
-  margin: 7px;
-  /* object-fit: cover; */
+  width: 201.99px;
+  height: 309.32px;
+  margin: 0px;
+  object-fit: cover;
   border: 1px solid #888;
+}
+
+.add-details {
+  flex-wrap: nowrap;
+  margin: auto;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #757575;
+  font-weight: 200;
+  font-size: 14px;
+
 }
 
 .add-btn {
   z-index: 1001;
   align-items: center;
-  /* top: 10px; */
-}
-
-.add-image {
-  align-self: start;
-  background-color: #E0E0E0;
-  height: 220px;
-  width: 200px;
-  position: relative;
-  z-index: 1;
+  top: 10px;
 }

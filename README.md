@@ -26,3 +26,5 @@ Front End Capstone Project
 7) In a separate terminal, run 'npm run react-dev' to start webpack
 8) Open your browser and enter 'localhost:3000' into your search bar
 9) The client index page will be served by the express server with initial data retrieved from the Atlier API.
+
+NOTE - default product ID to use for testing: 47421

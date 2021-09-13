@@ -1,8 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 let MainImageGalleryComponent = (props) => {
 
-  const [selectedImage, setSelectedImage] = useState(props.selectedStyle.photos[0].url)
+  const [selectedStyle, setSelectedStyle] = useState(false);
+  const [selectedImage, setSelectedImage] = useState();
+  const [thumbnails, setThumbnails] = useState([]);
+
+  useEffect(() => {
+    if (props.selectedStyle !== false) {
+      setSelectedStyle(props.selectedStyle);
+      setSelectedImage(props.selectedStyle.photos[0].url);
+    }
+  }, [props])
+
+  useEffect(() => {
+    if (selectedStyle !== false) {
+      setThumbnails(selectedStyle.photos.map((image, index) => {
+        return <img key={index} data-index={index} style={thumbnailStyle} src={image.thumbnail_url} onClick={imageClickHandler}></img>
+      }))
+    }
+  }, [selectedStyle])
+
+  const imageClickHandler = (e) => {
+    e.preventDefault();
+    setSelectedImage(selectedStyle.photos[e.target.getAttribute('data-index')].url)
+  }
 
   const containerStyle = {
     "height": "500px",
@@ -34,9 +56,7 @@ let MainImageGalleryComponent = (props) => {
     <div>
       <div style={containerStyle}>
         <div style={listStyles}>
-        {props.selectedStyle.photos.map((image, index) => {
-          return <img key={index} style={thumbnailStyle} src={image.thumbnail_url}></img>
-        })}
+          {thumbnails}
         </div>
         <img style={imgStyle} src={selectedImage}></img>
       </div>

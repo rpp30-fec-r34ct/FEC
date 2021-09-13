@@ -48,7 +48,7 @@ const ProductDetailPageComponent = (props) => {
   return (
     <div>
     <div style={productDetailStyles}>
-      { (selectedStyle === false) ? <div></div> : <MainImageGallery selectedStyle={selectedStyle}/>}
+      <MainImageGallery selectedStyle={selectedStyle}/>
       <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle}/>
     </div>
     {productDetails ? <ProductDetailFooter productDetails={productDetails}/> : <div></div>}

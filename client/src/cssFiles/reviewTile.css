@@ -1,0 +1,25 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+}
+
+.reviewTile {
+  border-style: none none solid none;
+}
+
+.tile_user_date_rating {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tile_user_date {
+  justify-content: flex-end;
+  display: block
+}
+
+.tile_summary {
+  font-weight: bold;
+}
+
+

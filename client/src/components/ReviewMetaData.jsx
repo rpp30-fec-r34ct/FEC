@@ -3,7 +3,10 @@ import AverageRating from './AverageRating.jsx';
 import axios from 'axios';
 
 const ReviewMetaData = (props) => {
-  const [reviewsMeta, setReviewsMeta] = useState([]);
+  const [reviewsMeta, setReviewsMeta] = useState({
+    reviewsMeta: [],
+    average: 0
+  });
 
   useEffect(() => {
     getReviewsMeta();
@@ -16,17 +19,32 @@ const ReviewMetaData = (props) => {
         }
       })
       .then ((data) => {
-        setReviewsMeta(data.data);
+        calculateAverage(data.data);
       })
       .catch ((error) => {
       console.error(error);
     });
   };
 
+  const calculateAverage = (data) => {
+    let currentAverage = 0;
+    let reviewCount = 0;
+
+    for (var key in data.ratings) {
+      currentAverage = currentAverage + parseInt(key) * parseInt(data.ratings[key]);
+      reviewCount = reviewCount + parseInt(data.ratings[key]);
+    }
+
+    currentAverage = currentAverage/reviewCount;
+    setReviewsMeta({
+      reviewsMeta: data,
+      average: currentAverage
+    });
+  };
+
   return (
     <div>
-      <h1>loaded</h1>
-      <AverageRating reviewsMeta={reviewsMeta}/>
+      <AverageRating average={reviewsMeta.average}/>
       {/* <RatingBreakdown ratings={props.ratings}/>
       <ProductCharacteristics characteristics={props.characteristics}/> */}
     </div>
@@ -34,3 +52,4 @@ const ReviewMetaData = (props) => {
 };
 
 export default ReviewMetaData
+

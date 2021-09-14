@@ -9,10 +9,12 @@
 .question-body {
   border: 1px solid blueviolet;
   color: blue;
+  background-color: springgreen;
 }
 
 .answer-body {
   border: 1px solid black;
+  background-color: lightcyan;
 }
 
 .answer-panel {
@@ -26,6 +28,17 @@
   position: fixed;
   background-color: yellow;
   top: 0;
+  opacity: 1.0;
+  border: 3px solid grey;
+  z-index: 9;
+}
+
+.add-question-form {
+  /* display: none; */
+  position: fixed;
+  background-color: skyblue;
+  top: 0;
+  right:0;
   opacity: 1.0;
   border: 3px solid grey;
   z-index: 9;

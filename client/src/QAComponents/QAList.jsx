@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './QA.css';
 import Question from './Question.jsx';
+import QuestionModal from './QuestionModal.jsx';
 // import './Test.jsx';
 
 
@@ -12,6 +13,7 @@ const QAList = () => {
   const [questions, setQuestions] = useState(['test1', 'test2', 'test3']);
   const [allQuestions, setAllQuestions] = useState();
   const [firstRender, setFirstRender] = useState(true);
+  const [showQuestionModal, setShowQuestionModal] = useState(false);
   const productID = useParams().productId;
 
   // const parseAnswers = (answers) => {
@@ -69,6 +71,7 @@ const QAList = () => {
   const addQuestion = (e) => {
     e.preventDefault();
     console.log('event clicked');
+    setShowQuestionModal(true);
   };
 
   const addAnswer = () => {
@@ -136,6 +139,7 @@ const QAList = () => {
         question_id={question.question_id}
           />
         })}
+        <QuestionModal showQuestionModal={showQuestionModal} />
       <button onClick={renderAllQuestions}>More Answered Questions</button>
       <button onClick={addQuestion}>Add A Question</button>
     </>

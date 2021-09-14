@@ -13,6 +13,7 @@ import { setupServer } from 'msw/node'
 
 // components
 import ProductDetailPage from '../../client/src/components/ProductDetailPage.jsx'
+import FourOhFour from '../../client/src/components/FourOhFour.jsx'
 
 // setup test data
 const productResponse = {
@@ -398,14 +399,7 @@ const productStyleResponse = {
 }
 
 // setup worker
-const server = setupServer(
-  rest.get('/api/products/47421/', (req, res, ctx) => {
-    return res(ctx.json(productResponse))
-  }),
-  rest.get('/api/products/47421/styles', (req, res, ctx) => {
-    return res(ctx.json(productStyleResponse))
-  })
-)
+const server = setupServer()
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
@@ -413,6 +407,14 @@ afterAll(() => server.close())
 
 describe('Product Detail Page', () => {
   test('Should render product details from get request', async function () {
+    server.use(
+      rest.get('/api/products/47421/', (req, res, ctx) => {
+        return res(ctx.json(productResponse))
+      }),
+      rest.get('/api/products/47421/styles', (req, res, ctx) => {
+        return res(ctx.json(productStyleResponse))
+      })
+    )
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -427,5 +429,59 @@ describe('Product Detail Page', () => {
     )
     expect(await app.findByText(productResponse.name)).toBeInTheDocument()
     expect(await app.findByText(productResponse.description)).toBeInTheDocument()
+  })
+
+  test('Should replace the page with a 404 message if the server fails to respond with product', async function () {
+    server.use(
+      rest.get('/api/products/47421/', (req, res, ctx) => {
+        return res(ctx.status(500))
+      }),
+      rest.get('/api/products/47421/styles', (req, res, ctx) => {
+        return res(ctx.status(500))
+      })
+    )
+    const history = createMemoryHistory()
+    const route = '/product/47421'
+    history.push(route)
+    const app = render(
+      <Router history={history}>
+        <Switch>
+          <Route path='/product/:productId'>
+            <ProductDetailPage />
+          </Route>
+          <Route path='/404'>
+            <FourOhFour />
+          </Route>
+        </Switch>
+      </Router>
+    )
+    expect(await app.findByText('404')).toBeInTheDocument()
+  })
+
+  test('Should replace the page with a 404 message if the server fails to respond with styles', async function () {
+    server.use(
+      rest.get('/api/products/47421/', (req, res, ctx) => {
+        return res(ctx.json(productResponse))
+      }),
+      rest.get('/api/products/47421/styles', (req, res, ctx) => {
+        return res(ctx.status(500))
+      })
+    )
+    const history = createMemoryHistory()
+    const route = '/product/47421'
+    history.push(route)
+    const app = render(
+      <Router history={history}>
+        <Switch>
+          <Route path='/product/:productId'>
+            <ProductDetailPage />
+          </Route>
+          <Route path='/404'>
+            <FourOhFour />
+          </Route>
+        </Switch>
+      </Router>
+    )
+    expect(await app.findByText('404')).toBeInTheDocument()
   })
 })

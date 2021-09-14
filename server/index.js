@@ -115,6 +115,25 @@ app.put('/qa/answers/helpful', (req, res) => {
   });
 });
 
+app.post('/qa/answer', (req, res) => {
+  // console.log(req);
+  axios.post('/qa/questions/' + req.query.id + '/answers', {
+    body: req.query.answer,
+    name: req.query.nickname,
+    email: req.query.email,
+    photos: req.query.photos
+  }, {
+    headers: {
+      'Authorization': token.API_KEY
+    }
+  })
+  .then(data => {
+    res.status(200).send('new answer added');
+  })
+  .catch(err => console.error(err));
+});
+
+
 app.listen(port, () => {
   console.log(`Server listening http://localhost:${port}`);
 })

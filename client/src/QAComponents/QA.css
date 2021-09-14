@@ -1,3 +1,7 @@
+#search-bar {
+  width: 500px;
+}
+
 .question-block {
   border: 1px solid black;
 }
@@ -15,6 +19,16 @@
   color: black;
   display: inline-block;
   justify-content: baseline;
+}
+
+.add-answer-form {
+  /* display: none; */
+  position: fixed;
+  background-color: yellow;
+  top: 0;
+  opacity: 1.0;
+  border: 3px solid grey;
+  z-index: 9;
 }
 
 .helpful-answer {

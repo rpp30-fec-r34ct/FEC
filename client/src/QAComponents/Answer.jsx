@@ -94,6 +94,7 @@ const Answer = (props) => {
           return prev = data.slice(0,2);
         });
         setMoreAnswers(prev => { return prev = data});
+
       }
     });
   }, [props.question_id])
@@ -117,6 +118,7 @@ const Answer = (props) => {
           <div className="answer-body" id={answer.answer_id}>
             <div>A: {answer.body}</div>
             <div className="answer-panel"><div>by {answer.answerer_name}, {month} {day}, {year} | <div>Helpful?</div><div className="helpful-answer" onClick={helpfulAnswer}>Yes </div><div>({answer.helpfulness})</div> | <div className="report-answer" onClick={reportAnswer}>Report</div></div></div>
+            {/* <div>{didMount ? answer.photos : null}</div> */}
           </div>
           )
       })}</div>

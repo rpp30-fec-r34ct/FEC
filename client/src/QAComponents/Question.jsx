@@ -4,11 +4,13 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './QA.css';
 import Answer from './Answer.jsx';
+import AnswerModal from './AnswerModal.jsx';
 
 const Question = (props) => {
   const [question, setQuestion] = useState(['test', 'testing', 'TESTING']);
   const [answers, setAnswers] = useState();
   const [firstRender, setFirstRender] = useState(true);
+  const [showModal, setShowModal] = useState(false);
   const productID = useParams().productId;
 
   // SERVER REQUESTS
@@ -26,6 +28,12 @@ const Question = (props) => {
 
   const addAnswer = (e) => {
     console.log('adding answer...', e.target.parentNode.id);
+    openModal();
+  }
+
+  // SHOW MODAL
+  const openModal = () => {
+    setShowModal(prev => !prev);
   }
 
   const addHelpfulQuestion = (e) => {
@@ -60,12 +68,11 @@ const Question = (props) => {
     <>
       <div id={props.question_id} className="question-body">
         <div>Q: {props.question_body}</div><div>Helpful?</div><div className="helpful-question" onClick={addHelpfulQuestion}>Yes</div> <div>({props.question_helpfulness || 0})</div>
+        {<div id="add-answer" onClick={addAnswer}>ADD ANSWER
+        </div>}
       </div>
-        {/* <div id="add-answer" onClick={addAnswer}>ADD ANSWER
-        </div>} */}
-
-
         <Answer question_id={props.question_id}/>
+        <AnswerModal showModal={showModal} question_id={props.question_id}/>
       {/* </div> */}
       {/* {console.log('working', question)} */}
       {/* <div className="question-block">{question.map(question => {

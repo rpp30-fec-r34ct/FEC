@@ -189,11 +189,3 @@ h3 {
   align-items: center;
   top: 10px;
 }
-
-/**DELETE OUTFIT**/
-
-.delete-btn {
-  z-index: 1001;
-  align-items: right;
-  top: 10px;
-}

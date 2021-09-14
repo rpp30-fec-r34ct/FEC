@@ -48,15 +48,16 @@ app.get('/product/:id/related', async (req, res) => {
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data;
 
-      // console.log('product', product)
+
 
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {};
-
       const productStyle = response.data.results.map(item => item.photos[0].url);
 
-      // console.log('default', defaultStyle)
+
+      response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
+      console.log('reviews', response.data)
 
       relatedProducts.push({
         photo: productStyle[0],
@@ -71,6 +72,7 @@ app.get('/product/:id/related', async (req, res) => {
     res.status(500).send(err);
   }
 });
+
 
 
 

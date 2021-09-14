@@ -4,7 +4,7 @@ import ProductList from './ProductList.jsx';
 import OutfitList from './OutfitList.jsx';
 import axios from 'axios';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import css from './../styles.css';
+import './../styles.css';
 
 
 export default function Carousel(props) {
@@ -41,6 +41,7 @@ export default function Carousel(props) {
       setCurrentIndex(currentIndex => currentIndex - 1);
     }
   }
+
 
 
   return (

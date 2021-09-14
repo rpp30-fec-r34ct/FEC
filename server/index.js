@@ -27,7 +27,7 @@ app.get('/productDetail*', (req, res) => {
 });
 
 app.get('/qa/questions', (req, res) => {
-  // console.log('questions and answers...', req);
+  console.log('questions and answers...', req);
   // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -48,15 +48,15 @@ app.get('/qa/questions', (req, res) => {
 app.get('/qa/answers', (req, res) => {
   console.log('questions and answers...', req);
   // let
-  axios.get(APIurl + 'qa/answers/' + req._parsedUrl.search, {
+  axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
     headers: {
       'Authorization': token.API_KEY
     }
   })
   .then(data => {
-    // console.log('I found the data');
-    // console.log(data.data.results);
-    res.status(200).send(data.data);
+    console.log('I found the answers');
+    console.log(data.data.results);
+    res.status(200).send(data.data.results);
   })
   .catch(err => {
     console.error(err);

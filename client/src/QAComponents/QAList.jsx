@@ -25,8 +25,12 @@ const QAList = () => {
   const getAllQuestions = (event) => {
     axios.get('/qa/questions?product_id=' + productID)
     .then((data) => {
-      console.log('questions received from server for product', data.data.results[0].answers);
-      setQuestions(data.data.results);
+      // console.log('questions received from server for product', data.data.results[0].answers);
+      if (data.data.results) {
+        setQuestions((prev) => {
+          prev = data.data.results;
+        });
+      }
     })
     .catch ((err) => {
       console.error ('error while getting product data from server');
@@ -34,8 +38,11 @@ const QAList = () => {
   };
 
   const getAllAnswers = (question, callback) => {
-    console.log('getting all answers...');
-    axios.get('/qa/all_answers?question_id=' + question)
+    console.log('getting all answers...', question);
+    if (question === undefined) {
+      return;
+    }
+    axios.get('/qa/answers?question_id=' + question)
     .then(data => {
       console.log('all answers', data);
       callback(null, data);
@@ -52,16 +59,12 @@ const QAList = () => {
     console.log('adding answer');
   }
 
-  useEffect(() => {
-    initialize();
-  }, []);
-
-  const initialize = () => {
+  const initialize = (callback) => {
     // e.preventDefault();
     axios.get('/qa/questions' + '?product_id=' + productID)
     .then((data) => {
-      console.log('questions received from server for product', data.data.results);
-      setQuestions([data.data.results[0], data.data.results[1]]);
+      // console.log('questions received from server for product', data.data.results);
+      callback(null, data.data.results)
     })
     .catch ((err) => {
       console.error ('error while getting product data from server');
@@ -84,17 +87,35 @@ const QAList = () => {
     console.log('Answer Reported');
   }
 
+
+  useEffect(() => {
+    initialize((err, data) => {
+      if (err) {
+        console.error(err);
+      } else {
+        setQuestions(prev => {
+          prev = data;
+          // console.log('data', );
+        });
+      }
+    });
+    console.log('questions', questions);
+  }, []);
+
+
   return (
     <div>
       <h1>Questions and Answers</h1>
       <form>
         <input id="search-bar" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS"></input>
       </form>
+      {console.log(questions)}
       <div>{questions.map(question => {
         let answers;
         getAllAnswers(question.question_id, (err, answers) => {
+          console.log('rendering answers...');
           if (err) {
-            return console.log(err);
+            console.error(err);
           } else {
             if (answerCount) {
               answers = answers.slice(0, 1);

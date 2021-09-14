@@ -1,15 +1,14 @@
-import React from "react";
+import React from 'react'
 
 const ProductCheckoutComponent = (props) => {
-
-  return(
+  return (
     <div>
-      <select defaultValue="none">
-        <option value="none" disabled hidden>Select an Option</option>
+      <select defaultValue='none'>
+        <option value='none' disabled hidden>Select an Option</option>
       </select>
 
       <select>
-        <option value="1" >1</option>
+        <option value='1'>1</option>
       </select>
 
       <button>Add to bag    +</button>
@@ -19,4 +18,4 @@ const ProductCheckoutComponent = (props) => {
   )
 }
 
-export default ProductCheckoutComponent;
+export default ProductCheckoutComponent

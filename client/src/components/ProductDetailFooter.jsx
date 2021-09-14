@@ -1,19 +1,18 @@
-import React from 'react';
+import React from 'react'
 
 const ProductDetailFooterComponent = (props) => {
-
-  const footerStyles ={
-    display: "flex",
-    alignItems: "space-around"
+  const footerStyles = {
+    display: 'flex',
+    alignItems: 'space-around'
   }
 
   const descriptionStyles = {
-    "borderRight": "solid",
-    "paddingRight": "10px",
-    "marginRight": "10px",
-    "maxWidth": "500px"
+    borderRight: 'solid',
+    paddingRight: '10px',
+    marginRight: '10px',
+    maxWidth: '500px'
   }
-  return(
+  return (
     <div style={footerStyles}>
       <p style={descriptionStyles}>{props.productDetails.description}</p>
       <div>
@@ -25,4 +24,4 @@ const ProductDetailFooterComponent = (props) => {
   )
 }
 
-export default ProductDetailFooterComponent;
+export default ProductDetailFooterComponent

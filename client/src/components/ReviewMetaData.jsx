@@ -1,26 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import AverageRating from './AverageRating.jsx';
+import axios from 'axios';
 
 const ReviewMetaData = (props) => {
-  const [average, setAverage] = useState(0);
+  const [reviewsMeta, setReviewsMeta] = useState([]);
 
   useEffect(() => {
-    calculateAverage();
+    getReviewsMeta();
   }, []);
 
-  const calculateAverage = () => {
-    let currentAverage = 0;
-
-    for (var key in props.ratings) {
-      currentAverage = currentAverage + parseInt(key) * parseInt(props.ratings[key]);
-    }
-    setAverage(currentAverage)
+  const getReviewsMeta = () => {
+    axios.get('http://localhost:3000/reviews/meta', {
+        params: {
+          product_id: props.product_id
+        }
+      })
+      .then ((data) => {
+        setReviewsMeta(data.data);
+      })
+      .catch ((error) => {
+      console.error(error);
+    });
   };
 
   return (
     <div>
       <h1>loaded</h1>
-      <AverageRating average={average}/>
+      <AverageRating reviewsMeta={reviewsMeta}/>
       {/* <RatingBreakdown ratings={props.ratings}/>
       <ProductCharacteristics characteristics={props.characteristics}/> */}
     </div>

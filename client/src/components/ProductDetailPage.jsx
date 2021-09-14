@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Redirect } from 'react-router-dom'
 import axios from 'axios'
 
 import MainImageGallery from './MainImageGallery.jsx'
@@ -11,14 +11,16 @@ const ProductDetailPageComponent = (props) => {
   const [productDetails, setProductDetails] = useState(false)
   const [styles, setStyles] = useState([])
   const [selectedStyle, setSelectedStyle] = useState(false)
+  const [redirect, setRedirect] = useState(false)
 
   const getProductDetails = () => {
     axios.get(`/api/products/${productId}`)
       .then((data) => {
         setProductDetails(data.data)
+        getStyles()
       })
       .catch((err) => {
-        console.error('error while getting product data from server', err)
+        setRedirect(err)
       })
   }
 
@@ -29,17 +31,13 @@ const ProductDetailPageComponent = (props) => {
         setSelectedStyle(res.data.results[0])
       })
       .catch(err => {
-        console.log(err)
+        setRedirect(err)
       })
   }
 
   const updateSelectedStyle = (index) => {
     setSelectedStyle(styles[index])
   }
-
-  useEffect(() => {
-    getStyles()
-  }, [productDetails])
 
   useEffect(() => {
     getProductDetails()
@@ -51,6 +49,13 @@ const ProductDetailPageComponent = (props) => {
 
   return (
     <div>
+      {redirect
+        ? <Redirect to={{
+          pathname: '/404',
+          state: { errorMsg: redirect }
+        }}
+          />
+        : null}
       <div style={productDetailStyles}>
         <MainImageGallery selectedStyle={selectedStyle} />
         <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />

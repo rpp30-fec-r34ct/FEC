@@ -27,7 +27,7 @@ app.get('/productDetail*', (req, res) => {
 });
 
 app.get('/qa/questions', (req, res) => {
-  console.log('questions and answers...', req);
+  // console.log('questions and answers...', req);
   // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -46,7 +46,7 @@ app.get('/qa/questions', (req, res) => {
 });
 
 app.get('/qa/answers', (req, res) => {
-  console.log('questions and answers...', req);
+  // console.log('questions and answers...', req);
   // let
   axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
     headers: {
@@ -54,8 +54,8 @@ app.get('/qa/answers', (req, res) => {
     }
   })
   .then(data => {
-    console.log('I found the answers');
-    console.log(data.data.results);
+    // console.log('I found the answers');
+    // console.log(data.data.results);
     res.status(200).send(data.data.results);
   })
   .catch(err => {
@@ -65,20 +65,53 @@ app.get('/qa/answers', (req, res) => {
 });
 
 
-app.post('/qa/helpfulquestion/', (req, res) => {
-  console.log(req.query.question_id);
-  axios.post(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
+app.put('/qa/helpfulquestion/', (req, res) => {
+  console.log('helpful question', req.query.question_id);
+  axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       'Authorization': token.API_KEY
     }
   })
   .then(data => {
-    console.log('this is what I get from a successful post of helpful question', data);
+    // console.log('this is what I get from a successful post of helpful question', data);
     res.status(204).send(data);
   })
   .catch(err => {
     console.error(err);
     res.status(500).send(err);
+  });
+});
+
+
+
+app.put('/qa/answers/report', (req, res) => {
+  console.log('made it this far', req.query.answer_id);
+  axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/report', null, {
+    headers: {
+      'Authorization': token.API_KEY
+    }
+  })
+  .then(data => {
+    res.status(200).send('ANSWER REPORTED');
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).send(err);
+  });
+});
+
+app.put('/qa/answers/helpful', (req, res) => {
+  console.log('made it this far...', req.query.answer_id);
+  axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
+    headers: {
+      'Authorization': token.API_KEY
+    }
+  })
+  .then(data => {
+    res.status(200).send('ANSWER MARKED AS HELPFUL');
+  })
+  .catch(err => {
+    console.error(err);
   });
 });
 

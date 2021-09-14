@@ -3,10 +3,24 @@
 }
 
 .question-body {
-  border: 1px solid black;
+  border: 1px solid blueviolet;
   color: blue;
 }
 
-.helpful {
+.answer-body {
+  border: 1px solid black;
+}
+
+.answer-panel {
+  color: black;
+  display: inline-block;
+  justify-content: baseline;
+}
+
+.helpful-answer {
+  color: red;
+}
+
+.report-answer {
   color: red;
 }

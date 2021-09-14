@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProductDetailPage from './ProductDetailPage.jsx';
 import QAList from '../QAComponents/QAList.jsx';
 
+
 const App = (props) => {
 
   return (

@@ -3,32 +3,41 @@ import { useParams } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import './QA.css';
+import Question from './Question.jsx';
+// import './Test.jsx';
 
 
 const QAList = () => {
   const [answerCount, setAnswerCount] = useState(2);
   const [questions, setQuestions] = useState(['test1', 'test2', 'test3']);
+  const [allQuestions, setAllQuestions] = useState();
+  const [firstRender, setFirstRender] = useState(true);
   const productID = useParams().productId;
 
-  const parseAnswers = (answers) => {
-    let result = [];
-    for (let key in answers) {
-      result.push(answers[key]);
-      for (let answer in key) {
+  // const parseAnswers = (answers) => {
+  //   let result = [];
+  //   for (let key in answers) {
+  //     result.push(answers[key]);
+  //     for (let answer in key) {
 
-      }
-    }
-    // console.log('???', result);
-    return result;
-  }
+  //     }
+  //   }
+  //   // console.log('???', result);
+  //   return result;
+  // }
 
-  const getAllQuestions = (event) => {
+  const getAllQuestions = () => {
+    // setFirstRender(prev => { return prev = false; })
+    // return console.log(firstRender);
     axios.get('/qa/questions?product_id=' + productID)
     .then((data) => {
-      // console.log('questions received from server for product', data.data.results[0].answers);
+      console.log('questions received...', data.data.results);
       if (data.data.results) {
         setQuestions((prev) => {
-          prev = data.data.results;
+          return prev = data.data.results;
+        });
+        setAllQuestions((prev) => {
+          return prev = data.data.results;
         });
       }
     })
@@ -37,18 +46,25 @@ const QAList = () => {
     })
   };
 
-  const getAllAnswers = (question, callback) => {
-    console.log('getting all answers...', question);
-    if (question === undefined) {
-      return;
-    }
-    axios.get('/qa/answers?question_id=' + question)
-    .then(data => {
-      console.log('all answers', data);
-      callback(null, data);
-    })
-    .catch(err => console.log(err));
+  const renderAllQuestions = () => {
+    console.log('ALL OF THE QUESTIONS', allQuestions);
+    setQuestions((prev) => {
+      return prev = allQuestions;
+    });
   }
+
+  // const getAllAnswers = (question, callback) => {
+  //   console.log('getting all questions...', question);
+  //   if (question === undefined) {
+  //     return;
+  //   }
+  //   axios.get('/qa/answers?question_id=' + question)
+  //   .then(data => {
+  //     console.log('all answers', data);
+  //     callback(null, data);
+  //   })
+  //   .catch(err => console.log(err));
+  // }
 
   const addQuestion = (e) => {
     e.preventDefault();
@@ -71,21 +87,15 @@ const QAList = () => {
     })
   };
 
-  const addHelpfulQuestion = (e) => {
-    console.log('this question was helpful', e.target.id);
-    axios.post('/qa/helpfulquestion?question_id=' + e.target.id, {
-      'question_id': e.target.id
-    })
-    .then(data => console.log(data) );
-  }
 
-  const addHelpfulAnswer = () => {
-    console.log('this question was helpful');
-  }
 
-  const reportAnswer = () => {
-    console.log('Answer Reported');
-  }
+  // const addHelpfulAnswer = () => {
+  //   console.log('this question was helpful');
+  // }
+
+  // const reportAnswer = () => {
+  //   console.log('Answer Reported');
+  // }
 
 
   useEffect(() => {
@@ -94,9 +104,14 @@ const QAList = () => {
         console.error(err);
       } else {
         setQuestions(prev => {
-          prev = data;
+          return prev = data.slice(0,2);
           // console.log('data', );
         });
+        setAllQuestions(prev => {
+          return prev = data;
+          // console.log('data', );
+        });
+
       }
     });
     console.log('questions', questions);
@@ -104,41 +119,26 @@ const QAList = () => {
 
 
   return (
-    <div>
+    <>
       <h1>Questions and Answers</h1>
+      {/* <Question /> */}
+      {/* <Question firstRender={firstRender}/> */}
       <form>
         <input id="search-bar" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS"></input>
       </form>
-      {console.log(questions)}
-      <div>{questions.map(question => {
-        let answers;
-        getAllAnswers(question.question_id, (err, answers) => {
-          console.log('rendering answers...');
-          if (err) {
-            console.error(err);
-          } else {
-            if (answerCount) {
-              answers = answers.slice(0, 1);
-            }
-            return (
-              <div className="question-block"><div className="question-body">Q: {question.question_body}<div id={question.question_id} className="helpful-question" onClick={addHelpfulQuestion}>Helpful?</div> ({question.question_helpfulness})  |  <div className="add-answer" onClick={addAnswer}>Add Answer</div></div>
-                    <div>
-                      <div className="answer"><h4>A:</h4> {answers[0].body}
-                        <div> by {answers[0].answerer_name}, {answers[0].date}  |  <div className="helpful-answer" onClick={addHelpfulAnswer}>Helpful? Yes ({answers[0].helpfulness})</div>
-                          <div className="load-answers" onClick={setAnswerCount((prev)=> prev = null)}>LOAD MORE ANSWERS</div>
-                          <div className="report" onClick={reportAnswer}>Report</div>
-                        </div>
-                      </div>
-                    </div>
-              </div>
-            )
-          }
-        });
-
-        })}</div>
-      <button onClick={getAllQuestions}>More Answered Questions</button>
+      {/* {console.log('questions?', questions)} */}
+      {questions.map(question => {
+        // console.log('questions?????', question);
+        return <Question
+        asker={question.asker_name}
+        question_body={question.question_body}
+        question_helpfulness={question.question_helpfulness}
+        question_id={question.question_id}
+          />
+        })}
+      <button onClick={renderAllQuestions}>More Answered Questions</button>
       <button onClick={addQuestion}>Add A Question</button>
-    </div>
+    </>
   )
 }
 

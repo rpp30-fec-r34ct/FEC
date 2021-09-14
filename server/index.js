@@ -58,15 +58,16 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
       const productRatings = response.data.ratings;
-      console.log(productRatings);
-
+      const productChar = response.data.characteristics;
 
       relatedProducts.push({
         photo: productStyle[0],
         category: product.category,
         name: product.name,
-        price: defaultStyle.sale_price ? defaultStyle.sale_price : product.default_price,
-        rating: productRatings
+        sale: defaultStyle.sale_price,
+        price: product.default_price,
+        rating: productRatings,
+        characteristic: productChar
       })
     }
     res.status(200).send(relatedProducts)

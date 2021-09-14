@@ -2,9 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductDetailPage from './ProductDetailPage.jsx'
 import FourOhFour from './FourOhFour.jsx'
-import Carousel from './Carousel.jsx';
-import ReviewSection from './ReviewSection.jsx';
-
+import Carousel from './Carousel.jsx'
+import ReviewSection from './ReviewSection.jsx'
+import QAList from '../QAComponents/QAList.jsx'
 
 const App = (props) => {
   return (
@@ -14,6 +14,8 @@ const App = (props) => {
         <Route path="/product/:productId" exact>
           <ProductDetailPage />
           <Carousel />
+          <QAList />
+          <ReviewSection product_id={47421}/>
         </Route>
         <Route path="/product/:productId/carousel/">
           <Carousel />
@@ -23,6 +25,9 @@ const App = (props) => {
         </Route>
         <Route path="/reviewPage">
           <ReviewSection product_id={47421}/>
+        </Route>
+        <Route path="/product/:productId/questions">
+          <QAList />
         </Route>
       </Switch>
      </Router>

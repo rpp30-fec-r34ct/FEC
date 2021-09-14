@@ -5,8 +5,9 @@ const axios = require('axios');
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
 const token = require('./config.js');
 
-// app.use('/product/:id', express.static('client/dist'));
-app.use(express.static('client/dist'));
+app.use('/product/:id', express.static('client/dist'));
+app.use('/reviewPage', express.static('client/dist'));
+// app.use(express.static('client/dist'));
 
 app.get('/productDetail*', (req, res) => {
   console.log('product details request received', req.url);
@@ -27,13 +28,30 @@ app.get('/productDetail*', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
-  console.log('got reviews request');
   axios.get(APIurl + 'reviews', {
     headers: {
       'Authorization': token.API_KEY
     },
     params: {
       sort: req.query.sort,
+      product_id: req.query.product_id
+    }
+  }).then ((data) => {
+    res.status(200).send(data.data);
+  })
+  .catch ((err) => {
+    console.error(err);
+    res.sendStatus(500);
+  })
+});
+
+app.get('/reviews/meta', (req, res) => {
+  console.log('got reviews request');
+  axios.get(APIurl + 'reviews/meta', {
+    headers: {
+      'Authorization': token.API_KEY
+    },
+    params: {
       product_id: req.query.product_id
     }
   }).then ((data) => {

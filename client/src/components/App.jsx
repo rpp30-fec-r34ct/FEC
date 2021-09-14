@@ -12,12 +12,11 @@ const App = (props) => {
         <Route path="/product/:productId">
           <ProductDetailPage />
         </Route>
-        <Route path="/reviews">
-          <ReviewSection />
+        <Route path="/reviewPage">
+          <ReviewSection product_id={47421}/>
         </Route>
         <Route path="/">
           <h1>Home Page Route</h1>
-          <ReviewSection product_id={47421}/>
         </Route>
       </Switch>
      </Router>

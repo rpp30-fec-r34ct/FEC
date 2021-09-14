@@ -1,10 +1,10 @@
-const path = require('path');
+const path = require('path')
 module.exports = {
-  mode: "development",
-  entry: __dirname + '/client/src/index.jsx',
+  mode: 'development',
+  entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
     filename: 'bundle.js',
-    path: __dirname + '/client/dist'
+    path: path.join(__dirname, '/client/dist')
   },
   module: {
     rules: [
@@ -20,8 +20,8 @@ module.exports = {
       },
       {
         test: /\.css$/,
-      use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader']
       }
     ]
   }
-};
+}

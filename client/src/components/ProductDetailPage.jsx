@@ -1,37 +1,68 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import Carousel from './Carousel.jsx';
+import React, { useState, useEffect } from 'react'
+import { useParams, Redirect } from 'react-router-dom'
+import axios from 'axios'
 
-
+import MainImageGallery from './MainImageGallery.jsx'
+import ProductDescription from './ProductDescription.jsx'
+import ProductDetailFooter from './ProductDetailFooter.jsx'
 
 const ProductDetailPageComponent = (props) => {
-  const [productDetails, setProductDetails] = useState({});
-  const { productId } = useParams();
+  const { productId } = useParams()
+  const [productDetails, setProductDetails] = useState(false)
+  const [styles, setStyles] = useState([])
+  const [selectedStyle, setSelectedStyle] = useState(false)
+  const [redirect, setRedirect] = useState(false)
 
-  useEffect(() => {
-    getProductDetails();
-  }, [])
-
-  let getProductDetails = () => {
-    axios.get(`/productDetail${productId}`)
+  const getProductDetails = () => {
+    axios.get(`/api/products/${productId}`)
       .then((data) => {
-        console.log('data received from server for product');
         setProductDetails(data.data)
+        getStyles()
       })
       .catch((err) => {
-        console.error('error while getting product data from server');
+        setRedirect(err)
       })
+  }
+
+  const getStyles = () => {
+    axios.get(`/api/products/${productId}/styles`)
+      .then(res => {
+        setStyles(res.data.results)
+        setSelectedStyle(res.data.results[0])
+      })
+      .catch(err => {
+        setRedirect(err)
+      })
+  }
+
+  const updateSelectedStyle = (index) => {
+    setSelectedStyle(styles[index])
+  }
+
+  useEffect(() => {
+    getProductDetails()
+  }, [])
+
+  const productDetailStyles = {
+    display: 'flex'
   }
 
   return (
     <div>
-      <h2>Product Name</h2>
-      <div>{productDetails.name}</div>
-      <h2>Product Description</h2>
-      <div>{productDetails.description}</div>
+      {redirect
+        ? <Redirect to={{
+          pathname: '/404',
+          state: { errorMsg: redirect }
+        }}
+          />
+        : null}
+      <div style={productDetailStyles}>
+        <MainImageGallery selectedStyle={selectedStyle} />
+        <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
+      </div>
+      {productDetails ? <ProductDetailFooter productDetails={productDetails} /> : <div />}
     </div>
   )
 }
 
-export default ProductDetailPageComponent;
+export default ProductDetailPageComponent

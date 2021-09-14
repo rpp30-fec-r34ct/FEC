@@ -1,9 +1,9 @@
-const express = require('express');
-const app = express();
-const port = 3000;
-const axios = require('axios');
-const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/';
-const token = require('./config.js');
+const express = require('express')
+const app = express()
+const port = 3000
+const axios = require('axios')
+const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
+const token = require('./config.js')
 
 app.use(express.static('client/dist'));
 app.use('/product/:id', express.static('client/dist'));
@@ -27,6 +27,21 @@ app.get('/productDetail*', (req, res) => {
   })
 });
 
+app.get('/api/*', async (req, res) => {
+  const path = req.url.split('/api/')[1]
+  try {
+    const response = await axios.get(APIurl + path,
+      {
+        headers: {
+          Authorization: token.API_KEY
+        }
+      }
+    )
+    res.json(response.data)
+  } catch (err) {
+    res.status(500).send(err)
+  }
+})
 
 /////RELATED PRODUCTS////
 app.get('/product/:id/related', async (req, res) => {
@@ -76,11 +91,6 @@ app.get('/product/:id/related', async (req, res) => {
   }
 });
 
-
-
-
-
 app.listen(port, () => {
-  console.log(`Server listening http://localhost:${port}`);
+  console.log(`Server listening http://localhost:${port}`)
 })
-

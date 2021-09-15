@@ -139,7 +139,7 @@ describe('Carousel', () => {
           price: '450.00'
         })
       ])
-     )
+    )
     )
   })
 })

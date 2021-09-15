@@ -41,12 +41,12 @@ export default function Carousel(props) {
   }
 
   return (
-    <div>
+    <div className="carousel-overview">
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
-        {currentIndex > 0 && <FaChevronLeft className='left-arrow' />}
+        {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <div className='carousel-content-wrapper'>
-          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
+          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
             {
               relatedProducts.map((product) => {
                 return <ProductList key={product.id} product={product} />
@@ -54,19 +54,19 @@ export default function Carousel(props) {
             }
           </div>
         </div>
-        {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' />}
+        {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
-      <div>
+      <div className="outfit-overview">
         <h3>YOUR OUTFIT</h3>
         <div className='outfit-container'>
-          {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+          {<FaChevronLeft className='left-arrow' />}
           <div className='outfit-carousel-wrapper'>
-            <div className='outfit-content' style={{ transform: `translateX(-${currentIndex * 80}%)` }}>
+            <div className='outfit-content'>
               <OutfitList />
             </div>
           </div>
+          {<FaChevronRight className='right-arrow' />}
         </div>
-
       </div>
     </div >
   )

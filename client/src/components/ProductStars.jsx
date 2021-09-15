@@ -2,8 +2,7 @@ import React from 'react'
 
 const ProductStarsComponent = (props) => {
   const totalStars = 5
-  const tempRating = 4.8
-  const roundedRating = Math.round((tempRating * 4) / 4).toFixed(2)
+  const roundedRating = Math.round(((props.rating || 5) * 4) / 4).toFixed(2)
   const fillPercentage = ((roundedRating / totalStars) * 100)
 
   const stylesOuter = {

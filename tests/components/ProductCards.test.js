@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import ProductCards from '../../client/src/components/ProductCards.jsx'
+import ProductCards from '../../client/src/components/relatedProducts/ProductCards.jsx'
 
 const data =
 [

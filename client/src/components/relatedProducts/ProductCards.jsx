@@ -2,8 +2,7 @@ import React from 'react'
 // import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 
-
-export default function ProductCards(props) {
+export default function ProductCards (props) {
   return (
     <div className='product-card'>
       <div className='card-container'>

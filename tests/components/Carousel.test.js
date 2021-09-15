@@ -108,7 +108,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('Carousel', () => {
-  test('Should fetch category, name, and price of related products', async function () {
+  test('Should fetch related product items from get API', async function () {
     server.use(
       rest.get('/product/47421/related', (req, res, ctx) => {
         return res(ctx.json(data))
@@ -131,9 +131,15 @@ describe('Carousel', () => {
 
     await waitFor(() => expect(data).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ category: 'Accessories', name: 'Bright Future Sunglasses', price: '69.00' })
+        expect.objectContaining({
+          name: 'YEasy 350',
+          rating: {
+            1: '1', 3: '1', 4: '1', 5: '2'
+          },
+          price: '450.00'
+        })
       ])
-    )
+     )
     )
   })
 })

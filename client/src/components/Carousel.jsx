@@ -41,7 +41,7 @@ export default function Carousel(props) {
   }
 
   return (
-    <div className="carousel-overview">
+    <div className="carousels-overview">
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}

@@ -67,7 +67,6 @@ h3 {
   margin: 7px;
   object-fit: cover;
   border: 1px solid #888;
-
 }
 
 .favorite-btn {
@@ -163,13 +162,13 @@ h3 {
 /**ADD OUTFIT CARD**/
 
 .add-card {
+  overflow-x: hidden;
   display: flex;
   justify-content: center;
   float: left;
-  width: 201.99px;
-  height: 309.32px;
-  margin: 0px;
-  object-fit: cover;
+  width: 202px;
+  height: 300px;
+  margin: 1px;
   border: 1px solid #888;
 }
 
@@ -193,25 +192,57 @@ h3 {
 /**OUTFIT CARD**/
 
 .outfit-card {
+  overflow-x: hidden;
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
   float: left;
-  width: 201.99px;
-  height: 309.32px;
-  margin: 0px;
+  width: 200px;
+  height: 99%;
+  /* margin: 7px; */
   object-fit: cover;
   border: 1px solid #888;
 }
 
+.outfit-visuals {
+  position: relative;
+}
+
 .outfit-details {
-  flex-wrap: nowrap;
-  margin: auto;
-  padding: 10px;
+  margin: 0px 5px;
+}
+
+
+.outfit-image img {
+  align-self: start;
+  object-fit: cover;
+  object-position: 50% 85%;
+  background-color: #888;
+  height: 220px;
+  width: 200px;
+  position: relative;
+  z-index: 1;
+}
+
+.outfit-category,
+.outfit-name,
+.outfit-price,
+.outfit-rating {
   font-family: Arial, Helvetica, sans-serif;
   color: #757575;
-  font-weight: 200;
-  font-size: 14px;
+  margin: 5px 0px 0px 0px;
+}
 
+.outfit-category,
+.outfit-price {
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 10px;
+}
+
+.outfit-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #757575;
 }
 
 .delete-btn {
@@ -219,6 +250,6 @@ h3 {
   color: #757575;
   stroke-width: 30%;
   position: absolute;
-  right: 15px;
+  left: 170px;
   top: 10px;
 }

@@ -6,7 +6,7 @@ import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
-export default function Carousel(props) {
+export default function Carousel (props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const length = relatedProducts.length
@@ -41,12 +41,12 @@ export default function Carousel(props) {
   }
 
   return (
-    <div className="carousels-overview">
+    <div className='carousels-overview'>
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <div className='carousel-content-wrapper'>
-          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
+          <div className='carousel-content' data-testid='product-list' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
             {
               relatedProducts.map((product) => {
                 return <ProductList key={product.id} product={product} />
@@ -56,18 +56,18 @@ export default function Carousel(props) {
         </div>
         {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
-      <div className="outfit-overview">
+      <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>
         <div className='outfit-container'>
-          {<FaChevronLeft className='left-arrow' />}
+          <FaChevronLeft className='left-arrow' />
           <div className='outfit-carousel-wrapper'>
             <div className='outfit-content'>
               <OutfitList />
             </div>
           </div>
-          {<FaChevronRight className='right-arrow' />}
+          <FaChevronRight className='right-arrow' />
         </div>
       </div>
-    </div >
+    </div>
   )
 }

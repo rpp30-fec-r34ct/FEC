@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
 
 const MainImageGalleryComponent = (props) => {
   const [selectedStyle, setSelectedStyle] = useState(false)
   const [selectedImage, setSelectedImage] = useState()
   const [thumbnails, setThumbnails] = useState([])
+  const [topIndex, setTopIndex] = useState(2)
 
   useEffect(() => {
     if (props.selectedStyle !== false) {
@@ -49,14 +51,17 @@ const MainImageGalleryComponent = (props) => {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    overflow: 'hidden'
   }
 
   return (
     <div>
       <div style={containerStyle}>
         <div style={listStyles}>
+          {(topIndex > 0) && <FaChevronUp className='up-arrow' />}
           {thumbnails}
+          {(topIndex < thumbnails.length - 1) && <FaChevronDown className='down-arrow' />}
         </div>
         <img style={imgStyle} src={selectedImage} />
       </div>

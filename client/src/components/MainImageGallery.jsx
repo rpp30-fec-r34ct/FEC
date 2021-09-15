@@ -56,7 +56,9 @@ const MainImageGalleryComponent = (props) => {
   const thumbnailStyle = {
     height: '75px',
     width: '75px',
-    border: 'solid, 2px, black'
+    marginBottom: '4px',
+    border: 'solid, 2px, black',
+    objectFit: 'cover'
   }
 
   const listStyles = {
@@ -67,7 +69,7 @@ const MainImageGalleryComponent = (props) => {
   }
 
   const carouselListStyles = {
-    transform: `translateY(-${topIndex * 75}px)`,
+    transform: `translateY(-${topIndex * 77}px)`,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -79,7 +81,7 @@ const MainImageGalleryComponent = (props) => {
       <div style={containerStyle}>
         <div style={listStyles}>
           {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
-          <div style={{ maxHeight: '375px', overflow: 'hidden' }}>
+          <div style={{ maxHeight: '395px', overflow: 'hidden' }}>
             <div style={carouselListStyles}>
               {thumbnails}
             </div>

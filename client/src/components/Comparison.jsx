@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react'
 
-
-export default function Comparison() {
+export default function Comparison () {
   return (
-    <div className="comparison-table">
-    </div>
+    <div className='comparison-table' />
   )
 }

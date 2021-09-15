@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import ReviewTile from './ReviewTile.jsx';
-import axios from 'axios';
+/* eslint-disable */
+import React, { useState, useEffect } from 'react'
+import ReviewTile from './ReviewTile.jsx'
+import axios from 'axios'
 
 const ReviewList = (props) => {
-  const [reviews, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([])
 
   useEffect(() => {
-    getReviews();
-  }, []);
+    getReviews()
+  }, [])
 
   const getReviews = () => {
     axios.get('http://localhost:3000/reviews', {
-        params: {
-          sort: "newest",
-          product_id: props.product_id
-        }
+      params: {
+        sort: 'newest',
+        product_id: props.product_id
+      }
+    })
+      .then((data) => {
+        setReviews(data.data.results)
       })
-      .then ((data) => {
-        setReviews(data.data.results);
+      .catch((error) => {
+        console.error(error)
       })
-      .catch ((error) => {
-      console.error(error);
-    });
-  };
+  }
 
-  let reviewListTiles = [];
+  const reviewListTiles = []
   reviews.map((reviewData) => {
-    reviewListTiles.push(<ReviewTile reviewData={reviewData}/>);
-  });
+    reviewListTiles.push(<ReviewTile reviewData={reviewData} />)
+  })
 
   return (
-    <div className="ReviewList">{reviewListTiles}</div>
+    <div className='ReviewList'>{reviewListTiles}</div>
   )
-};
+}
 
-export default ReviewList;
+export default ReviewList

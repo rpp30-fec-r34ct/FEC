@@ -97,13 +97,12 @@ const data =
 ]
 
 describe('Product Cards Component', function () {
-  test('Should render the related product category', function () {
+  test('Should render the related product categories', function () {
     render(
       <ProductCards
         product={data}
       />
     )
-
-    expect(data.map(item => item.category)).toBeDefined()
+    expect(data[0].category).toContain('Accessories')
   })
 })

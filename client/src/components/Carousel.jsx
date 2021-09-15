@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import ProductList from './ProductList.jsx'
-import OutfitList from './OutfitList.jsx'
+import ProductList from './relatedProducts/ProductList.jsx'
+import OutfitList from './userOutfit/OutfitList.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
-export default function Carousel (props) {
+export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const length = relatedProducts.length

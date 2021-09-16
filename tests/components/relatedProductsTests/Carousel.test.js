@@ -11,7 +11,7 @@ import { Router, Route, Switch } from 'react-router-dom'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import Carousel from '../../client/src/components/Carousel.jsx'
+import Carousel from '../../../client/src/components/Carousel.jsx'
 
 const data =
 [

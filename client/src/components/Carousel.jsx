@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ProductList from './relatedProducts/ProductList.jsx'
-import OutfitList from './userOutfit/OutfitList.jsx'
+import OutfitList from './userOutfits/OutfitList.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'

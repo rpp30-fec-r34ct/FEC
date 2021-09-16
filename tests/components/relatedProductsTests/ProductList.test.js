@@ -7,8 +7,7 @@ import 'regenerator-runtime/runtime'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import ProductList from '../../client/src/components/relatedProducts/ProductList.jsx'
-// import Carousel from '../../client/src/components/relatedProducts/Carousel.jsx'
+import ProductList from '../../../client/src/components/relatedProducts/ProductList.jsx'
 
 const dummyJSON =
   [
@@ -102,10 +101,4 @@ describe('Product ListComponent', () => {
     const ProductListComponent = render(<ProductList product={dummyJSON} />)
     expect(ProductListComponent).toBeTruthy()
   })
-
-  // test('Total length of the list should be 4', () => {
-  //   const { getByTestId } = render(<ProductList product={dummyJSON} />)
-  //   const listProducts = getByTestId('list-item')
-  //   expect(listProducts.children.length).toBe(4)
-  // })
 })

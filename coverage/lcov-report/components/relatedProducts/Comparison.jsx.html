@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/userOutfits/OutfitCard.jsx</title>
+    <title>Code coverage report for components/relatedProducts/Comparison.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/userOutfits</a> OutfitCard.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/relatedProducts</a> Comparison.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -83,24 +83,20 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -109,28 +105,56 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable */
+import React from 'react'
+import { GiCheckMark } from 'react-icons/gi'
 &nbsp;
-export default function OutfitCard (props) {
+export default function Comparison(props) {
   return (
-    &lt;div className='outfit-card'&gt;
-      &lt;div className='outfit-container'&gt;
-        &lt;div className='outfit-visuals'&gt;
-          &lt;div className='delete-btn'&gt;&lt;AiOutlineCloseCircle /&gt;&lt;/div&gt;
-          &lt;div className='outfit-image' /&gt;
-          &lt;img src='https://via.placeholder.com/200' /&gt;
+    &lt;div className='modal-overview'&gt;
+      &lt;div className='modal-content'&gt;
+        &lt;div className='modal-header'&gt;
+          &lt;table&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;th className='modal-col-1'&gt;Current Item&lt;/th&gt;
+                &lt;th className='modal-col-2'&gt;COMPARING&lt;/th&gt;
+                &lt;th className='modal-col-3'&gt;Related Item&lt;/th&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-      &lt;div className='outfit-details'&gt;
-        &lt;div className='outfit-category'&gt;CATEGORY&lt;/div&gt;
-        &lt;div className='outfit-name'&gt;NAME&lt;/div&gt;
-        &lt;div className='outfit-price'&gt;$PRICE&lt;/div&gt;
-        &lt;span className='fa fa-star checked' /&gt;
-        &lt;span className='fa fa-star checked' /&gt;
-        &lt;span className='fa fa-star checked' /&gt;
-        &lt;span className='fa fa-star' /&gt;
-        &lt;span className='fa fa-star' /&gt;
+        &lt;div className='modal-body'&gt;
+          &lt;table&gt;
+            &lt;tbody&gt;
+              &lt;tr&gt;
+                &lt;td className='modal-col-1'&gt;Current Item Feature&lt;/td&gt;
+                &lt;td className='modal-col-2'&gt;Feature&lt;/td&gt;
+                &lt;td className='modal-col-3'&gt;Related Item Feature&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/tbody&gt;
+          &lt;/table&gt;
+        &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   )

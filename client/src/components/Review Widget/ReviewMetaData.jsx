@@ -1,58 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './cssFiles/reviewSection.css';
-import ReviewStars from './ReviewStars.jsx';
-
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import './cssFiles/reviewSection.css'
+import ReviewStars from './ReviewStars.jsx'
 
 const ReviewMetaData = (props) => {
   const [reviewsMeta, setReviewsMeta] = useState({
     reviewsMeta: [],
     average: 0
-  });
+  })
 
   useEffect(() => {
-    getReviewsMeta();
-  }, []);
+    getReviewsMeta()
+  }, [])
 
   const getReviewsMeta = () => {
     axios.get('http://localhost:3000/reviews/meta', {
-        params: {
-          product_id: props.product_id
-        }
+      params: {
+        product_id: props.product_id
+      }
+    })
+      .then((data) => {
+        calculateAverage(data.data)
       })
-      .then ((data) => {
-        calculateAverage(data.data);
+      .catch((error) => {
+        console.error(error)
       })
-      .catch ((error) => {
-      console.error(error);
-    });
-  };
+  }
 
   const calculateAverage = (data) => {
-    let currentAverage = 0;
-    let reviewCount = 0;
+    let currentAverage = 0
+    let reviewCount = 0
 
-    for (var key in data.ratings) {
-      currentAverage = currentAverage + parseInt(key) * parseInt(data.ratings[key]);
-      reviewCount = reviewCount + parseInt(data.ratings[key]);
+    for (const key in data.ratings) {
+      currentAverage = currentAverage + parseInt(key) * parseInt(data.ratings[key])
+      reviewCount = reviewCount + parseInt(data.ratings[key])
     }
 
-    currentAverage = Math.round((currentAverage/reviewCount) * 10) /10;
+    currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
     setReviewsMeta({
       reviewsMeta: data,
       average: currentAverage
-    });
-  };
+    })
+  }
 
   return (
-    <div className="reviewSummary">
-      <div className="ratingItem">{reviewsMeta.average}</div>
-      <ReviewStars className="ratingItem" starRating={reviewsMeta.average}/>
+    <div className='reviewSummary'>
+      <div className='ratingItem'>{reviewsMeta.average}</div>
+      <ReviewStars className='ratingItem' starRating={reviewsMeta.average} />
       {/* <RatingBreakdown ratings={props.ratings}/>
       <ProductCharacteristics characteristics={props.characteristics}/> */}
     </div>
   )
-};
+}
 
 export default ReviewMetaData
-

@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import './QA.css';
-import Question from './Question.jsx';
-import QuestionModal from './QuestionModal.jsx';
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import ReactDOM from 'react-dom'
+import axios from 'axios'
+import './QA.css'
+import Question from './Question.jsx'
+import QuestionModal from './QuestionModal.jsx'
 // import './Test.jsx';
 
-
 const QAList = () => {
-  const [answerCount, setAnswerCount] = useState(2);
-  const [questions, setQuestions] = useState(['test1', 'test2', 'test3']);
-  const [allQuestions, setAllQuestions] = useState();
-  const [firstRender, setFirstRender] = useState(true);
-  const [showQuestionModal, setShowQuestionModal] = useState(false);
-  const productID = useParams().productId;
+  const [answerCount, setAnswerCount] = useState(2)
+  const [questions, setQuestions] = useState(['test1', 'test2', 'test3'])
+  const [allQuestions, setAllQuestions] = useState()
+  const [firstRender, setFirstRender] = useState(true)
+  const [showQuestionModal, setShowQuestionModal] = useState(false)
+  const productID = useParams().productId
 
   // const parseAnswers = (answers) => {
   //   let result = [];
@@ -32,27 +31,27 @@ const QAList = () => {
     // setFirstRender(prev => { return prev = false; })
     // return console.log(firstRender);
     axios.get('/qa/questions?product_id=' + productID)
-    .then((data) => {
-      console.log('questions received...', data.data.results);
-      if (data.data.results) {
-        setQuestions((prev) => {
-          return prev = data.data.results;
-        });
-        setAllQuestions((prev) => {
-          return prev = data.data.results;
-        });
-      }
-    })
-    .catch ((err) => {
-      console.error ('error while getting product data from server');
-    })
-  };
+      .then((data) => {
+        console.log('questions received...', data.data.results)
+        if (data.data.results) {
+          setQuestions((prev) => {
+            return prev = data.data.results
+          })
+          setAllQuestions((prev) => {
+            return prev = data.data.results
+          })
+        }
+      })
+      .catch((err) => {
+        console.error('error while getting product data from server')
+      })
+  }
 
   const renderAllQuestions = () => {
-    console.log('ALL OF THE QUESTIONS', allQuestions);
+    console.log('ALL OF THE QUESTIONS', allQuestions)
     setQuestions((prev) => {
-      return prev = allQuestions;
-    });
+      return prev = allQuestions
+    })
   }
 
   // const getAllAnswers = (question, callback) => {
@@ -69,28 +68,26 @@ const QAList = () => {
   // }
 
   const addQuestion = (e) => {
-    e.preventDefault();
-    console.log('event clicked');
-    setShowQuestionModal(true);
-  };
+    e.preventDefault()
+    console.log('event clicked')
+    setShowQuestionModal(true)
+  }
 
   const addAnswer = () => {
-    console.log('adding answer');
+    console.log('adding answer')
   }
 
   const initialize = (callback) => {
     // e.preventDefault();
     axios.get('/qa/questions' + '?product_id=' + productID)
-    .then((data) => {
+      .then((data) => {
       // console.log('questions received from server for product', data.data.results);
-      callback(null, data.data.results)
-    })
-    .catch ((err) => {
-      console.error ('error while getting product data from server');
-    })
-  };
-
-
+        callback(null, data.data.results)
+      })
+      .catch((err) => {
+        console.error('error while getting product data from server')
+      })
+  }
 
   // const addHelpfulAnswer = () => {
   //   console.log('this question was helpful');
@@ -100,26 +97,23 @@ const QAList = () => {
   //   console.log('Answer Reported');
   // }
 
-
   useEffect(() => {
     initialize((err, data) => {
       if (err) {
-        console.error(err);
+        console.error(err)
       } else {
         setQuestions(prev => {
-          return prev = data.slice(0,2);
+          return prev = data.slice(0, 2)
           // console.log('data', );
-        });
+        })
         setAllQuestions(prev => {
-          return prev = data;
+          return prev = data
           // console.log('data', );
-        });
-
+        })
       }
-    });
-    console.log('questions', questions);
-  }, []);
-
+    })
+    console.log('questions', questions)
+  }, [])
 
   return (
     <>
@@ -127,23 +121,25 @@ const QAList = () => {
       {/* <Question /> */}
       {/* <Question firstRender={firstRender}/> */}
       <form>
-        <input id="search-bar" type="text" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS"></input>
+        <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' />
       </form>
       {/* {console.log('questions?', questions)} */}
       {questions.map(question => {
         // console.log('questions?????', question);
-        return <Question
-        asker={question.asker_name}
-        question_body={question.question_body}
-        question_helpfulness={question.question_helpfulness}
-        question_id={question.question_id}
+        return (
+          <Question
+            asker={question.asker_name}
+            question_body={question.question_body}
+            question_helpfulness={question.question_helpfulness}
+            question_id={question.question_id}
           />
-        })}
-        <QuestionModal showQuestionModal={showQuestionModal} />
+        )
+      })}
+      <QuestionModal showQuestionModal={showQuestionModal} />
       <button onClick={renderAllQuestions}>More Answered Questions</button>
       <button onClick={addQuestion}>Add A Question</button>
     </>
   )
 }
 
-export default QAList;
+export default QAList

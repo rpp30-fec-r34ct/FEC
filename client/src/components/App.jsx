@@ -11,26 +11,26 @@ const App = (props) => {
     <Router>
       <h1>PROJECT ATLIER</h1>
       <Switch>
-        <Route path="/product/:productId" exact>
+        <Route path='/product/:productId' exact>
           <ProductDetailPage />
           <Carousel />
           <QAList />
           <ReviewSection />
         </Route>
-        <Route path="/product/:productId/carousel/">
+        <Route path='/product/:productId/carousel/'>
           <Carousel />
         </Route>
         <Route path='/404'>
           <FourOhFour />
         </Route>
-        <Route path="/reviewPage/:productId">
+        <Route path='/reviewPage/:productId'>
           <ReviewSection />
         </Route>
-        <Route path="/product/:productId/questions">
+        <Route path='/product/:productId/questions'>
           <QAList />
         </Route>
       </Switch>
-     </Router>
+    </Router>
   )
 }
 

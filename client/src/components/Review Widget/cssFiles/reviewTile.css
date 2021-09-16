@@ -1,0 +1,26 @@
+.reviewTile{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.reviewTile {
+  border-style: none none solid none;
+  margin-left: 70px;
+}
+
+.tile_user_date_rating {
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tile_user_date {
+  justify-content: flex-end;
+  display: block
+}
+
+.tile_summary {
+  font-weight: bold;
+}
+
+

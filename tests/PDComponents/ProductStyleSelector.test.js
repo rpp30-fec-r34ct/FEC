@@ -7,7 +7,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 
-import ProductStyleSelector from '../../client/src/components/ProductStyleSelector.jsx'
+import ProductStyleSelector from '../../client/src/PDComponents/ProductStyleSelector.jsx'
 
 const styleData = [
   {

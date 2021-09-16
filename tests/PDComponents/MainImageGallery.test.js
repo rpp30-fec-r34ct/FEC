@@ -7,7 +7,7 @@ import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import { render } from '@testing-library/react'
 
-import MainImageGallery from '../../client/src/components/MainImageGallery.jsx'
+import MainImageGallery from '../../client/src/PDComponents/MainImageGallery.jsx'
 
 const styleData = {
   style_id: 286894,

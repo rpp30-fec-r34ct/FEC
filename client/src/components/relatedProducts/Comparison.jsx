@@ -10,7 +10,7 @@ export default function Comparison(props) {
           <table>
             <tbody>
               <tr>
-                <th className='modal-col-1' data-id='current-item'>Current Item</th>
+                <th className='modal-col-1'>Current Item</th>
                 <th className='modal-col-2'>COMPARING</th>
                 <th className='modal-col-3'>Related Item</th>
               </tr>

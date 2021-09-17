@@ -1,4 +1,3 @@
-import './ReviewSection.jsx'
 import './cssFiles/reviewTile.css'
 import ReviewStars from './ReviewStars.jsx'
 import React from 'react'

@@ -4,7 +4,7 @@
 
 import React from 'react'
 import 'regenerator-runtime/runtime'
-import { render, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import { createMemoryHistory } from 'history'
 import { Router, Route, Switch } from 'react-router-dom'
@@ -13,7 +13,7 @@ import { setupServer } from 'msw/node'
 
 import Carousel from '../../../client/src/components/relatedProducts/Carousel.jsx'
 
-const data =
+const relatedProductsData =
 [
   {
     photo: null,
@@ -108,36 +108,25 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('Carousel', () => {
-  test('Should fetch related product items from get API', async function () {
+  test.each(relatedProductsData)('Should fetch related product items from get API', async function () {
     server.use(
       rest.get('/product/47421/related', (req, res, ctx) => {
-        return res(ctx.json(data))
+        return res(ctx.json(relatedProductsData))
       })
     )
     const history = createMemoryHistory()
-    const route = '/product/47421/related'
+    const route = '/product/47421'
     history.push(route)
     render(
       <Router history={history}>
         <Switch>
           <Route path='/product/:productId/carousel/'>
-            <Carousel />
+            <Carousel product={relatedProductsData} />
           </Route>
         </Switch>
       </Router>
     )
 
-    await waitFor(() => expect(data).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          name: 'YEasy 350',
-          rating: {
-            1: '1', 3: '1', 4: '1', 5: '2'
-          },
-          price: '450.00'
-        })
-      ])
-    )
-    )
+    expect(await screen.findByText(relatedProductsData[0].name)).toBeInTheDocument()
   })
 })

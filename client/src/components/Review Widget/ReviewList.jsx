@@ -11,7 +11,7 @@ const ReviewList = (props) => {
   }, [])
 
   const getReviews = () => {
-    axios.get('http://localhost:3000/reviews', {
+    axios.get('/reviews', {
       params: {
         sort: 'newest',
         product_id: props.product_id

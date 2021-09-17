@@ -97,7 +97,7 @@ const relatedProductsData =
 ]
 
 describe('Product Cards', function () {
-  test('Should render the related products on cards', function () {
+  test('Should render the related product details on cards', function () {
     const app = render(<ProductCards product={relatedProductsData} />)
     expect(app.getByText(relatedProductsData[0].category)).toBeInTheDocument()
   })

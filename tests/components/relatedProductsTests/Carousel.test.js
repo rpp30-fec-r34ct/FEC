@@ -115,7 +115,7 @@ describe('Carousel', () => {
       })
     )
     const history = createMemoryHistory()
-    const route = '/product/47421'
+    const route = '/product/47421/carousel'
     history.push(route)
     render(
       <Router history={history}>

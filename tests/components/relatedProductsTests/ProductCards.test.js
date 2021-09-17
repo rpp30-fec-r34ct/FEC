@@ -4,12 +4,12 @@
 
 import React from 'react'
 import 'regenerator-runtime/runtime'
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import ProductCards from '../../../client/src/components/relatedProducts/ProductCards.jsx'
 
-const data =
+const relatedProductsData =
 [
   {
     photo: null,
@@ -97,38 +97,12 @@ const data =
 ]
 
 describe('Product Cards', () => {
-  test('renders data in product cards correctly', () => {
+  test('Should render the related product category on the card', function () {
     render(
       <ProductCards
-        product={data}
+        product={relatedProductsData}
       />
     )
-    expect(data).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          photo: 'https://images.unsplash.com/photo-1561861422-a549073e547a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
-          category: 'Dress Shoes',
-          name: 'Blues Suede Shoes',
-          price: '120.00',
-          rating: {
-            1: '1', 5: '1'
-          },
-          characteristic: {
-            Size: {
-              id: 159180, value: '2.5000000000000000'
-            },
-            Width: {
-              id: 159181, value: '4.5000000000000000'
-            },
-            Comfort: {
-              id: 159182, value: '5.0000000000000000'
-            },
-            Quality: {
-              id: 159183, value: '3.5000000000000000'
-            }
-          }
-        })
-      ])
-    )
+    expect(screen.getByText(relatedProductsData[0].category)).toBeInTheDocument()
   })
 })

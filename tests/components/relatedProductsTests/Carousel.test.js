@@ -108,7 +108,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('Carousel', () => {
-  test.each(relatedProductsData)('Should fetch related product items from get API', async function () {
+  test.each(relatedProductsData)('Should fetch related product item names from get API', async function () {
     server.use(
       rest.get('/product/47421/related', (req, res, ctx) => {
         return res(ctx.json(relatedProductsData))
@@ -127,6 +127,7 @@ describe('Carousel', () => {
       </Router>
     )
 
+    expect(await screen.findByText(relatedProductsData[0].category)).toBeInTheDocument()
     expect(await screen.findByText(relatedProductsData[0].name)).toBeInTheDocument()
   })
 })

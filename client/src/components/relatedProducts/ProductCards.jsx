@@ -27,7 +27,7 @@ export default function ProductCards(props) {
 
         <div className='product-details'>
           <div className='card-category'>{props.product.category}</div>
-          <div className='card-name' data-testid='item-name'>{props.product.name}</div>
+          <div className='card-name'>{props.product.name}</div>
           <div className='card-price'>${props.product.sale ? (props.product.sale && props.product.price) : props.product.price}</div>
           <span className='fa fa-star checked' />
           <span className='fa fa-star checked' />

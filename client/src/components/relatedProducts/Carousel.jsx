@@ -7,7 +7,7 @@ import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
-export default function Carousel (props) {
+export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -45,10 +45,10 @@ export default function Carousel (props) {
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <div className='carousel-content-wrapper'>
-          <div className='carousel-content' data-testid='product-item' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
+          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
             {
-              relatedProducts.map((product) => {
-                return <ProductList key={product.id} product={product} />
+              relatedProducts.map((product, index) => {
+                return <ProductList key={index} product={product} />
               })
             }
           </div>

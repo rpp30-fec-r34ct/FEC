@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
-export default function Carousel (props) {
+export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
+
   const length = relatedProducts.length
   const { productId } = useParams()
 
@@ -16,16 +18,15 @@ export default function Carousel (props) {
     getRelatedProducts()
   }, [])
 
-  const getRelatedProducts = () => {
-    axios.get(`/product/${productId}/related`)
-      .then((data) => {
-        console.log('data received from server for product')
-        setRelatedProducts(data.data)
-      })
-      .catch((err) => {
-        console.error('error while getting product data from server', err)
-      })
+  const getRelatedProducts = async () => {
+    try {
+      const { data } = await axios.get(`/product/${productId}/related`);
+      setRelatedProducts(data);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
+
 
   const nextCard = () => {
     if (currentIndex >= 0 && currentIndex < (length - 1)) {

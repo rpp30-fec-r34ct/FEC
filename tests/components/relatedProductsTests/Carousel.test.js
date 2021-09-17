@@ -127,8 +127,6 @@ describe('Carousel', () => {
       </Router>
     )
 
-    expect.assertions(1)
-
     await waitFor(() => expect(data).toEqual(
       expect.arrayContaining([
         expect.objectContaining({

@@ -9,7 +9,7 @@ import '@testing-library/jest-dom'
 
 import ProductList from '../../../client/src/components/relatedProducts/ProductList.jsx'
 
-const dummyJSON =
+const relatedProductsData =
   [
     {
       photo: null,
@@ -96,9 +96,9 @@ const dummyJSON =
     }
   ]
 
-describe('Product ListComponent', () => {
-  test('should Product List Component', () => {
-    const ProductListComponent = render(<ProductList product={dummyJSON} />)
-    expect(ProductListComponent).toBeTruthy()
+describe('Product List Component', () => {
+  test('should find existing div in Product List Component ', () => {
+    const ProductListComponent = render(<ProductList product={relatedProductsData} />)
+    expect(ProductListComponent.container.querySelector('.product-list')).toBeInTheDocument()
   })
 })

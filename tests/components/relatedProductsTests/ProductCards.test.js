@@ -97,8 +97,21 @@ const relatedProductsData =
 ]
 
 describe('Product Cards', function () {
-  test('Should render the related product details on cards', function () {
-    const app = render(<ProductCards product={relatedProductsData} />)
+  test('Should render the related product categories on cards', function () {
+    const app = render(<ProductCards product={relatedProductsData[0]} />)
     expect(app.getByText(relatedProductsData[0].category)).toBeInTheDocument()
+  })
+  test('Should render the related product names on cards', function () {
+    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    expect(app.getByText(relatedProductsData[0].name)).toBeInTheDocument()
+  })
+  test('Should render the related product prices on cards', function () {
+    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    expect(app.getByText(`$${relatedProductsData[0].price}`)).toBeInTheDocument()
+  })
+
+  test('Should render the related product images on cards', function () {
+    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    expect(app.container.querySelector(`[src='${relatedProductsData[0].photo}']`)).toBeInTheDocument()
   })
 })

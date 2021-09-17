@@ -3,13 +3,26 @@ import ReviewStars from './ReviewStars.jsx'
 import React from 'react'
 
 const ReviewTile = (props) => {
+
+  const translateDate = (date) => {
+    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let day = date.slice(8, 10);
+    let year = date.slice(0,4);
+    let month = months[parseInt(date.slice(5,7))];
+    let returnDate = month + ' ' + day + ', ' + year;
+
+
+    return returnDate;
+  }
+
+
   return (
     <div className='flex-container reviewTile'>
       <div className='tile_user_date_rating flex-container'>
         <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id}/>
         <div className='tile_user_date'>
           <span className='tile_userName'>{props.reviewData.reviewer_name}</span>
-          <span className='tile_date'>{props.reviewData.date}</span>
+          <span className='tile_date'>{translateDate(props.reviewData.date)}</span>
         </div>
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>

@@ -26,7 +26,7 @@ const ReviewList = (props) => {
   }
 
   const reviewListTiles = []
-  reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile reviewData={reviewData} />)) })
+  reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} />)) })
 
   return (
     <div className='reviewList'>{reviewListTiles}</div>

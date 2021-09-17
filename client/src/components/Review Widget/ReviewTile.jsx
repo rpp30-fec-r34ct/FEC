@@ -6,7 +6,7 @@ const ReviewTile = (props) => {
   return (
     <div className='flex-container reviewTile'>
       <div className='tile_user_date_rating flex-container'>
-        <ReviewStars starRating={props.reviewData.rating} />
+        <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id}/>
         <div className='tile_user_date'>
           <span className='tile_userName'>{props.reviewData.reviewer_name}</span>
           <span className='tile_date'>{props.reviewData.date}</span>

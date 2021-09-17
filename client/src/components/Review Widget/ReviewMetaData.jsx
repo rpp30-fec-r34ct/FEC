@@ -5,7 +5,10 @@ import ReviewStars from './ReviewStars.jsx'
 
 const ReviewMetaData = (props) => {
   const [reviewsMeta, setReviewsMeta] = useState({
-    reviewsMeta: [],
+    reviewsMeta:
+    {
+        product_id: 1
+    },
     average: 0
   })
 
@@ -46,7 +49,7 @@ const ReviewMetaData = (props) => {
   return (
     <div className='reviewSummary'>
       <div className='ratingItem'>{reviewsMeta.average}</div>
-      <ReviewStars className='ratingItem' starRating={reviewsMeta.average} />
+      <ReviewStars className='ratingItem' starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id}/>
       {/* <RatingBreakdown ratings={props.ratings}/>
       <ProductCharacteristics characteristics={props.characteristics}/> */}
     </div>

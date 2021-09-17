@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import ProductDetailPage from './ProductDetailPage.jsx'
 import FourOhFour from './FourOhFour.jsx'
-import Carousel from './Carousel.jsx'
+import Carousel from './relatedProducts/Carousel.jsx'
 import ReviewSection from './ReviewSection.jsx'
 import QAList from '../QAComponents/QAList.jsx'
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1631857438542" clover="3.2.0">
-  <project timestamp="1631857438543" name="All files">
-    <metrics statements="305" coveredstatements="89" conditionals="64" coveredconditionals="13" methods="121" coveredmethods="30" elements="490" coveredelements="132" complexity="0" loc="305" ncloc="305" packages="4" files="27" classes="27"/>
+<coverage generated="1631859106104" clover="3.2.0">
+  <project timestamp="1631859106104" name="All files">
+    <metrics statements="305" coveredstatements="89" conditionals="64" coveredconditionals="13" methods="121" coveredmethods="30" elements="490" coveredelements="132" complexity="0" loc="305" ncloc="305" packages="3" files="27" classes="27"/>
     <package name="QAComponents">
       <metrics statements="169" coveredstatements="5" conditionals="34" coveredconditionals="0" methods="64" coveredmethods="0"/>
       <file name="Answer.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/QAComponents/Answer.jsx">
@@ -190,7 +190,7 @@
       </file>
     </package>
     <package name="components">
-      <metrics statements="127" coveredstatements="76" conditionals="24" coveredconditionals="11" methods="50" coveredmethods="24"/>
+      <metrics statements="107" coveredstatements="76" conditionals="12" coveredconditionals="11" methods="40" coveredmethods="24"/>
       <file name="App.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/App.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="9" count="1" type="stmt"/>
@@ -200,29 +200,6 @@
         <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="1" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
-      </file>
-      <file name="Carousel.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/Carousel.jsx">
-        <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="27" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="32" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="37" count="0" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="43" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
       </file>
       <file name="FourOhFour.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/FourOhFour.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
@@ -368,36 +345,56 @@
       </file>
     </package>
     <package name="components.relatedProducts">
-      <metrics statements="6" coveredstatements="5" conditionals="6" coveredconditionals="2" methods="4" coveredmethods="3"/>
+      <metrics statements="29" coveredstatements="8" conditionals="18" coveredconditionals="2" methods="17" coveredmethods="6"/>
+      <file name="AddCard.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/AddCard.jsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="Carousel.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/Carousel.jsx">
+        <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="10" coveredmethods="0"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="32" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="52" count="0" type="stmt"/>
+      </file>
       <file name="Comparison.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/Comparison.jsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+      </file>
+      <file name="OutfitCard.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/OutfitCard.jsx">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="5" count="2" type="stmt"/>
+      </file>
+      <file name="OutfitList.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/OutfitList.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="6" count="1" type="stmt"/>
       </file>
       <file name="ProductCards.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/ProductCards.jsx">
         <metrics statements="4" coveredstatements="3" conditionals="6" coveredconditionals="2" methods="2" coveredmethods="1"/>
-        <line num="8" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
       </file>
       <file name="ProductList.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/relatedProducts/ProductList.jsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="5" count="1" type="stmt"/>
-      </file>
-    </package>
-    <package name="components.userOutfits">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
-      <file name="AddCard.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/userOutfits/AddCard.jsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="2" type="stmt"/>
-      </file>
-      <file name="OutfitCard.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/userOutfits/OutfitCard.jsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="5" count="2" type="stmt"/>
-      </file>
-      <file name="OutfitList.jsx" path="/Users/louisa/HR/HR2021/FEC/client/src/components/userOutfits/OutfitList.jsx">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="6" count="1" type="stmt"/>
       </file>
     </package>
   </project>

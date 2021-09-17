@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import AddCard from '../../../client/src/components/userOutfits/AddCard.jsx'
+import AddCard from '../../../client/src/components/relatedProducts/AddCard.jsx'
 
 describe('Outfit Card', () => {
   test('renders text in add card', () => {

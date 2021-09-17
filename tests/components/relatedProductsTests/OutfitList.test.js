@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import OutfitList from '../../../client/src/components/userOutfits/OutfitList.jsx'
+import OutfitList from '../../../client/src/components/relatedProducts/OutfitList.jsx'
 
 describe('Outfit List', () => {
   test('renders text in Outfit List', () => {

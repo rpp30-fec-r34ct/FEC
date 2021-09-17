@@ -97,7 +97,7 @@ const data =
 ]
 
 describe('Product Cards', () => {
-  test('renders Current Item Header in Comparison Modal', () => {
+  test('renders data in product cards correctly', () => {
     render(
       <ProductCards
         product={data}

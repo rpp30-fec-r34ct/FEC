@@ -4,7 +4,7 @@
 
 import React from 'react'
 import 'regenerator-runtime/runtime'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import ProductCards from '../../../client/src/components/relatedProducts/ProductCards.jsx'
@@ -96,13 +96,9 @@ const relatedProductsData =
   }
 ]
 
-describe('Product Cards', () => {
-  test('Should render the related product category on the card', function () {
-    render(
-      <ProductCards
-        product={relatedProductsData}
-      />
-    )
-    expect(screen.getByText(relatedProductsData[0].category)).toBeInTheDocument()
+describe('Product Cards', function () {
+  test('Should render the related products on cards', function () {
+    const app = render(<ProductCards product={relatedProductsData} />)
+    expect(app.getByText(relatedProductsData[0].category)).toBeInTheDocument()
   })
 })

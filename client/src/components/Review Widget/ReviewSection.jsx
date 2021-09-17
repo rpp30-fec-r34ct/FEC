@@ -11,7 +11,7 @@ const ReviewSection = () => {
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
-        <ReviewMetaData className='metaData' product_id={productId} />
+        <ReviewMetaData product_id={productId} />
         <ReviewList product_id={productId} />
       </div>
     </div>

@@ -2,9 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-.reviewTile {
   border-style: none none solid none;
   margin-left: 70px;
 }

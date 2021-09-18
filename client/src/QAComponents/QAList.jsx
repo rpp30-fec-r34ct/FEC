@@ -7,13 +7,14 @@ import Question from './Question.jsx'
 import QuestionModal from './QuestionModal.jsx'
 // import './Test.jsx';
 
-const QAList = () => {
+const QAList = (props) => {
   const [answerCount, setAnswerCount] = useState(2)
   const [questions, setQuestions] = useState(['test1', 'test2', 'test3'])
   const [allQuestions, setAllQuestions] = useState()
   const [firstRender, setFirstRender] = useState(true)
   const [showQuestionModal, setShowQuestionModal] = useState(false)
   const productID = useParams().productId
+  // console.log('params', useParams())
 
   // const parseAnswers = (answers) => {
   //   let result = [];
@@ -32,7 +33,7 @@ const QAList = () => {
     // return console.log(firstRender);
     axios.get('/qa/questions?product_id=' + productID)
       .then((data) => {
-        console.log('questions received...', data.data.results)
+        // console.log('questions received...', data.data.results)
         if (data.data.results) {
           setQuestions((prev) => {
             return prev = data.data.results
@@ -48,7 +49,7 @@ const QAList = () => {
   }
 
   const renderAllQuestions = () => {
-    console.log('ALL OF THE QUESTIONS', allQuestions)
+    // console.log('ALL OF THE QUESTIONS', allQuestions)
     setQuestions((prev) => {
       return prev = allQuestions
     })
@@ -112,7 +113,7 @@ const QAList = () => {
         })
       }
     })
-    console.log('questions', questions)
+    // console.log('questions', questions)
   }, [])
 
   return (
@@ -132,12 +133,13 @@ const QAList = () => {
             question_body={question.question_body}
             question_helpfulness={question.question_helpfulness}
             question_id={question.question_id}
+
           />
         )
       })}
       <QuestionModal showQuestionModal={showQuestionModal} />
-      <button onClick={renderAllQuestions}>More Answered Questions</button>
-      <button onClick={addQuestion}>Add A Question</button>
+      <button id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button>
+      <button id="add-question" onClick={addQuestion}>Add A Question</button>
     </>
   )
 }

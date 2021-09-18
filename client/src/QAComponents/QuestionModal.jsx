@@ -57,7 +57,7 @@ const QuestionModal = (props) => {
         <div className='add-question-form' id={props.product_id}>
           <h1>Product</h1>
           <form onSubmit={submitNewQuestion}>
-            <input name='answer' type='text' placeholder='Your Answer' />
+            <input name='question' type='text' placeholder='Your Question' />
             <input name='nickname' type='text' placeholder='Your Nickname' />
             <input name='email' type='text' placeholder='Your Email' />
             <button type='submit'>Submit</button>

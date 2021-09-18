@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* eslint-disable */
-=======
->>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
@@ -41,7 +37,7 @@ const Question = (props) => {
   }
 
   const addHelpfulQuestion = (e) => {
-    console.log('this question was helpful', e.target.parentNode.id)
+    // console.log('this question was helpful', e.target.parentNode.id)
     axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.id, {
       question_id: e.target.id
     })

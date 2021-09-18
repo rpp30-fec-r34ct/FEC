@@ -64,7 +64,7 @@ app.get('/reviews/meta', (req, res) => {
 })
 
 app.get('/qa/questions', (req, res) => {
-  // console.log('questions and answers...', req);
+  console.log('questions and answers...', req._parsedUrl.search);
   // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {

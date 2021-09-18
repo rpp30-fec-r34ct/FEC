@@ -37,7 +37,7 @@ const Question = (props) => {
   }
 
   const addHelpfulQuestion = (e) => {
-    console.log('this question was helpful', e.target.parentNode.id)
+    // console.log('this question was helpful', e.target.parentNode.id)
     axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.id, {
       question_id: e.target.id
     })

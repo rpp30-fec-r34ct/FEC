@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const Answer = (props) => {
   const [state, setState] = useState()
-  const [answers, setAnswers] = useState([])
+  const [answers, setAnswers] = useState(['test1, test2'])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
   const [moreQuestions, setMoreQuestions] = useState(['dummy', 'data'])
   const [didMount, setDidMount] = useState(false)
@@ -101,7 +101,7 @@ const Answer = (props) => {
   return (
     <>
       {/* {console.log('these are the answers', answers)} */}
-      <div>{answers.map(answer => {
+      <div>{answers ? answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -120,7 +120,7 @@ const Answer = (props) => {
             {/* <div>{didMount ? answer.photos : null}</div> */}
           </div>
         )
-      })}
+      }) : null}
       </div>
       <div>{renderMoreAnswers}</div>
     </>

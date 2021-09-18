@@ -18,7 +18,7 @@ const Question = (props) => {
     // e.preventDefault();
     axios.get('/qa/questions' + '?product_id=' + productID)
       .then((data) => {
-      // console.log('questions received from server for product', data.data.results);
+        // console.log('questions received from server for product', data.data.results);
         callback(null, data.data.results)
       })
       .catch((err) => {

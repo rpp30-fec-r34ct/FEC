@@ -1,14 +1,24 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
-import { RiCameraOffFill } from 'react-icons/ri'
 
-export default function ProductCards (props) {
+export default function ProductCards(props) {
+  const [viewModal, setViewModal] = useState(false)
+
+  const toggleModal = () => {
+    setViewModal(!viewModal)
+  }
+
   return (
     <div className='product-card'>
       <div className='card-container'>
         <div className='card-visuals'>
-          <div className='favorite-btn'><AiOutlineStar /></div>
+          <div className='favorite-btn'>
+
+            <AiOutlineStar onClick={toggleModal}>
+              {viewModal && <Comparison />}
+            </AiOutlineStar>
+          </div>
           <div className='card-image'>
             <img src={props.product.photo} />
           </div>

@@ -25,17 +25,14 @@ const testResponse = { asker: 'Oje', question_body: 'This test should work', que
 
 const handlers = [
   rest.get('/qa/questions', (req, res, ctx) => {
-    console.log('handled in the test', ctx)
     return res(
       ctx.json(testResponse)
     )
     }),
     rest.get('/qa/answers', (req, res, ctx) => {
-      console.log('handled in the test')
 
       }),
       rest.get('/qa/helpfulquestion', (req, res, ctx) => {
-        console.log('handled in the test')
 
         })
       ]
@@ -47,32 +44,38 @@ afterEach(()=> server.resetHandlers())
 afterAll(()=> server.close())
 
 describe('QA List', () => {
-  xtest('Should render the Q/A List', () => {
+  test('Should render the Q/A List', () => {
     const qalist = render(<QAList key={0}/>)
     expect(qalist.getByText('Questions and Answers')).toBeInTheDocument()
   })
 
-  xtest('Should have a search bar', () => {
+  test('Should have a search bar', () => {
     const qalist = render(<QAList key={1}/>)
     expect(qalist.container.querySelector("input[id='search-bar']")).toBeInTheDocument()
   })
 
-  xtest('Should render a question from the Question component', () => {
+  test('Should render a question from the Question component', () => {
     const qalist = render(<QAList key={2}/>)
     expect(qalist.container.querySelector("div[class='question-body']")).toBeInTheDocument()
   })
 
-  xtest('Should render a button to show more answered questions', () => {
+  test('Should render a question from the Question component', () => {
+    const qalist = render(<QAList key={5}/>)
+    const buttons = qalist.getAllByRole('button')
+    expect(buttons.length).toBe(2)
+  })
+
+  test('Should render a button to show more answered questions', () => {
     const qalist = render(<QAList key={3}/>)
     expect(qalist.container.querySelector("button[id='more-questions']")).toBeInTheDocument()
   })
 
-  xtest('Should render a button to add a question', () => {
+  test('Should render a button to add a question', () => {
     const qalist = render(<QAList key={4}/>)
     expect(qalist.container.querySelector("button[id='add-question']")).toBeInTheDocument()
   })
 
-  test('Should render product details from get request', async function () {
+  test('Should render a question from get request', function () {
     let app;
     act(()=>{
       const history = createMemoryHistory()
@@ -86,7 +89,9 @@ describe('QA List', () => {
         </Router>,
       )
     })
-    expect(await app.container.querySelector("div[id='01501']")).toBeInTheDocument()
+    setTimeout(()=>{
+      expect(app.container.querySelector("div[id='01501']")).toBeInTheDocument()
+    }, 5000)
 
   })
 

@@ -33,7 +33,7 @@ const QAList = (props) => {
     // return console.log(firstRender);
     axios.get('/qa/questions?product_id=' + productID)
       .then((data) => {
-        console.log('questions received...', data.data.results)
+        // console.log('questions received...', data.data.results)
         if (data.data.results) {
           setQuestions((prev) => {
             return prev = data.data.results
@@ -49,7 +49,7 @@ const QAList = (props) => {
   }
 
   const renderAllQuestions = () => {
-    console.log('ALL OF THE QUESTIONS', allQuestions)
+    // console.log('ALL OF THE QUESTIONS', allQuestions)
     setQuestions((prev) => {
       return prev = allQuestions
     })
@@ -113,7 +113,7 @@ const QAList = (props) => {
         })
       }
     })
-    console.log('questions', questions)
+    // console.log('questions', questions)
   }, [])
 
   return (

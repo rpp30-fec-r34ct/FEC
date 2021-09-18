@@ -15,7 +15,7 @@ const App = (props) => {
           <ProductDetailPage />
           <Carousel />
           <QAList />
-          <ReviewSection product_id={47421} />
+          <ReviewSection />
         </Route>
         <Route path='/product/:productId/carousel/'>
           <Carousel />
@@ -23,8 +23,8 @@ const App = (props) => {
         <Route path='/404'>
           <FourOhFour />
         </Route>
-        <Route path='/reviewPage'>
-          <ReviewSection product_id={47421} />
+        <Route path='/reviewPage/:productId'>
+          <ReviewSection />
         </Route>
         <Route path='/product/:productId/questions'>
           <QAList />

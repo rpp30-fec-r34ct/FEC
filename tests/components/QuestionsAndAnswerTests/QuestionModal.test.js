@@ -12,7 +12,7 @@ jest.mock('react-router-dom', () => ({
 }))
 
 // components
-import QuestionModal from '../../client/src/QAComponents/QuestionModal.jsx'
+import QuestionModal from '../../../client/src/QAComponents/QuestionModal.jsx'
 
 describe('Individual Question Component', () => {
   test('Should NOT render by default', function () {

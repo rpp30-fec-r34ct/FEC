@@ -18,7 +18,7 @@ jest.mock('react-router-dom', () => ({
 }))
 
 // components
-import QAList from '../../client/src/QAComponents/QAList.jsx'
+import QAList from '../../../client/src/QAComponents/QAList.jsx'
 
 const testResponse = { asker: 'Oje', question_body: 'This test should work', question_helpfulness: '17', question_id: '01501' }
 

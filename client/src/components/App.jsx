@@ -28,7 +28,7 @@ const App = (props) => {
         </Route>
         <Route path='/product/:productId/questions'>
           <QAList />
-        </Route> */}
+        </Route>
       </Switch>
     </Router>
   )

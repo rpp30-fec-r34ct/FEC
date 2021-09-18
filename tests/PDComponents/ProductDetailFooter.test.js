@@ -6,7 +6,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import ProductDetailFooter from '../../client/src/components/ProductDetailFooter'
+import ProductDetailFooter from '../../client/src/PDComponents/ProductDetailFooter'
 
 const productResponse = {
   id: 47421,

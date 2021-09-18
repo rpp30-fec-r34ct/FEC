@@ -14,33 +14,13 @@ const QAList = (props) => {
   const [firstRender, setFirstRender] = useState(true)
   const [showQuestionModal, setShowQuestionModal] = useState(false)
   const productID = useParams().productId
-  // console.log('params', useParams())
-
-  // const parseAnswers = (answers) => {
-  //   let result = [];
-  //   for (let key in answers) {
-  //     result.push(answers[key]);
-  //     for (let answer in key) {
-
-  //     }
-  //   }
-  //   // console.log('???', result);
-  //   return result;
-  // }
 
   const getAllQuestions = () => {
-    // setFirstRender(prev => { return prev = false; })
-    // return console.log(firstRender);
     axios.get('/qa/questions?product_id=' + productID)
       .then((data) => {
-        // console.log('questions received...', data.data.results)
         if (data.data.results) {
-          setQuestions((prev) => {
-            return prev = data.data.results
-          })
-          setAllQuestions((prev) => {
-            return prev = data.data.results
-          })
+          setQuestions(data.data.results)
+          setAllQuestions(data.data.results)
         }
       })
       .catch((err) => {
@@ -49,24 +29,8 @@ const QAList = (props) => {
   }
 
   const renderAllQuestions = () => {
-    // console.log('ALL OF THE QUESTIONS', allQuestions)
-    setQuestions((prev) => {
-      return prev = allQuestions
-    })
+    setQuestions(allQuestions)
   }
-
-  // const getAllAnswers = (question, callback) => {
-  //   console.log('getting all questions...', question);
-  //   if (question === undefined) {
-  //     return;
-  //   }
-  //   axios.get('/qa/answers?question_id=' + question)
-  //   .then(data => {
-  //     console.log('all answers', data);
-  //     callback(null, data);
-  //   })
-  //   .catch(err => console.log(err));
-  // }
 
   const addQuestion = (e) => {
     e.preventDefault()
@@ -79,10 +43,8 @@ const QAList = (props) => {
   }
 
   const initialize = (callback) => {
-    // e.preventDefault();
     axios.get('/qa/questions' + '?product_id=' + productID)
       .then((data) => {
-        // console.log('questions received from server for product', data.data.results);
         callback(null, data.data.results)
       })
       .catch((err) => {
@@ -90,53 +52,35 @@ const QAList = (props) => {
       })
   }
 
-  // const addHelpfulAnswer = () => {
-  //   console.log('this question was helpful');
-  // }
-
-  // const reportAnswer = () => {
-  //   console.log('Answer Reported');
-  // }
-
   useEffect(() => {
     initialize((err, data) => {
       if (err) {
         console.error(err)
       } else {
-        setQuestions(prev => {
-          return prev = data.slice(0, 2)
-          // console.log('data', );
-        })
-        setAllQuestions(prev => {
-          return prev = data
-          // console.log('data', );
-        })
+        setQuestions(data.slice(0, 2))
+        setAllQuestions(data)
       }
     })
-    // console.log('questions', questions)
   }, [])
 
   return (
     <>
       <h1>Questions and Answers</h1>
-      {/* <Question /> */}
-      {/* <Question firstRender={firstRender}/> */}
       <form>
         <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' />
       </form>
-      {/* {console.log('questions?', questions)} */}
-      {questions.map(question => {
-        // console.log('questions?????', question);
+      {questions ? questions.map((question, i) => {
+        let key = question.question_id + 1
         return (
           <Question
+            key={i}
             asker={question.asker_name}
             question_body={question.question_body}
             question_helpfulness={question.question_helpfulness}
             question_id={question.question_id}
-
           />
         )
-      })}
+      }) : null}
       <QuestionModal showQuestionModal={showQuestionModal} />
       <button id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button>
       <button id="add-question" onClick={addQuestion}>Add A Question</button>

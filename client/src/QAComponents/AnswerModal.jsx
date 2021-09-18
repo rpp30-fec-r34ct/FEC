@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const AnswerModal = (props) => {
-  console.log('props', props.showModal)
   const modalRef = useRef()
   const [showModal, setShowModal] = useState(props.showModal)
   const closeModal = e => {
@@ -30,16 +29,12 @@ const AnswerModal = (props) => {
     const nickname = e.target[1].value
     const email = e.target[2].value
     const id = e.target.parentNode.id
-    console.log('adding answer...', answer, nickname, email, e.target.parentNode.id)
     axios.post('http://localhost:3000/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id, {
       answer: answer,
       nickname: nickname,
       email: email,
       id: id
     })
-      .then(data => {
-        console.log(data)
-      })
       .catch(err => console.error(err))
   }
 

@@ -3,13 +3,13 @@ import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
-const Answer = (props) => {
+const NewAnswer = (props) => {
   const [state, setState] = useState()
   const [answers, setAnswers] = useState(['test1, test2'])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
   const [moreQuestions, setMoreQuestions] = useState(['dummy', 'data'])
   const [didMount, setDidMount] = useState(false)
-  const [helpfulAns, setHelpfulAns] = useState(0)
+  const [helpfulness, setHelpfulness] = useState(0)
   let renderMoreAnswers = <div />
   // const [questionId, setQuestionId] = useState(props.question_id);
 
@@ -43,8 +43,8 @@ const Answer = (props) => {
     e.preventDefault()
     axios.put('/qa/answers/helpful/?answer_id=' + answerId)
       .then(data => {
-        console.log(helpfulAns)
-        return setHelpfulAns(!helpfulAns)
+        // console.log(helpfulAns)
+        return setHelpfulness(helpfulness + 1)
       })
       .catch(err => {
         console.error(err)
@@ -82,28 +82,13 @@ const Answer = (props) => {
 
   return (
     <>
-      <div>{answers ? answers.map(answer => {
-        let date, day, month, year, parse
-        const answerId = 0
-        if (answer.date) {
-          date = new Date(answer.date);
-          [day, year] = [date.getDate(), date.getFullYear()]
-          month = date.toString().slice(4, 7)
-        }
-        if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div onClick={getMoreAnswers}>LOAD MORE ANSWERS</div>
-        }
-        return (
-          <div className='answer-body' id={answer.answer_id} key={answer.answer_id + 1}>
-            <div>A: {answer.body}</div>
-            <div className='answer-panel'><div>by {answer.answerer_name}, {month} {day}, {year} | <div>Helpful?</div><div className='helpful-answer' onClick={helpfulAnswer}>Yes</div><div>({answer.helpfulness})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
+      <div className='answer-body' id={props.id} key={props.id + 1}>
+            <div>A: {props.body}</div>
+            <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><div className='helpful-answer' onClick={helpfulAnswer}>Yes</div><div>({helpfulness})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
           </div>
-        )
-      }) : null}
-      </div>
       <div>{renderMoreAnswers}</div>
     </>
   )
 }
 
-export default Answer
+export default NewAnswer

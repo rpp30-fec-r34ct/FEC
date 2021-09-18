@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import NewAnswer from './NewAnswer.jsx'
 
-const Answer = (props) => {
+const AnswerList = (props) => {
+  console.log('props', props)
   const [state, setState] = useState()
   const [answers, setAnswers] = useState(['test1, test2'])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
@@ -53,10 +55,11 @@ const Answer = (props) => {
 
   // INITIAL RENDER
   const initialize = (questionId, callback) => {
-    getAllAnswers(props.question_id, (err, data) => {
+    getAllAnswers(questionId, (err, data) => {
       if (err) {
         console.error(err)
       } else {
+        console.log(data.data)
         callback(null, data.data)
       }
     })
@@ -70,19 +73,21 @@ const Answer = (props) => {
 
   // INITIAL RENDER INVOCATION
   useEffect(() => {
-    initialize(props.question_id, (err, data) => {
+    initialize(props.id, (err, data) => {
       if (err) {
         console.error(err)
       } else {
+        console.log(data)
         setAnswers(data.slice(0, 2))
         setMoreAnswers(data)
       }
     })
-  }, [props.question_id])
+  }, [props.id])
 
   return (
     <>
       <div>{answers ? answers.map(answer => {
+        console.log('answer', answer)
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -94,10 +99,20 @@ const Answer = (props) => {
           renderMoreAnswers = <div onClick={getMoreAnswers}>LOAD MORE ANSWERS</div>
         }
         return (
-          <div className='answer-body' id={answer.answer_id} key={answer.answer_id + 1}>
-            <div>A: {answer.body}</div>
-            <div className='answer-panel'><div>by {answer.answerer_name}, {month} {day}, {year} | <div>Helpful?</div><div className='helpful-answer' onClick={helpfulAnswer}>Yes</div><div>({answer.helpfulness})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
-          </div>
+          <NewAnswer
+          id={answer.answer_id}
+          key={answer.answer_id + 1}
+          body={answer.body}
+          name={answer.answer_name}
+          month={month}
+          day={day}
+          year={year}
+          helpfulness={answer.helpfulness}
+          />
+          // <div className='answer-body' id={answer.answer_id} key={answer.answer_id + 1}>
+          //   <div>A: {answer.body}</div>
+          //   <div className='answer-panel'><div>by {answer.answerer_name}, {month} {day}, {year} | <div>Helpful?</div><div className='helpful-answer' onClick={helpfulAnswer}>Yes</div><div>({answer.helpfulness})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
+          // </div>
         )
       }) : null}
       </div>
@@ -106,4 +121,4 @@ const Answer = (props) => {
   )
 }
 
-export default Answer
+export default AnswerList

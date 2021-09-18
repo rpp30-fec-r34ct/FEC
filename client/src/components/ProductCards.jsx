@@ -1,11 +1,13 @@
+<<<<<<< HEAD
 /* eslint-disable */
+=======
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 import { RiCameraOffFill } from 'react-icons/ri'
 
-
-export default function ProductCards(props) {
+export default function ProductCards (props) {
   return (
     <div className='product-card'>
       <div className='card-container'>

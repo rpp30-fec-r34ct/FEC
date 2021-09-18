@@ -24,7 +24,10 @@ export default function Carousel (props) {
       })
       .catch((err) => {
         console.error('error while getting product data from server')
+<<<<<<< HEAD
         return err
+=======
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
       })
   }
 

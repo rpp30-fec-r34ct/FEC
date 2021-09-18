@@ -6,7 +6,11 @@ const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 
 app.use('/product/:id', express.static('client/dist'))
+<<<<<<< HEAD
 app.use('/reviewPage', express.static('client/dist'))
+=======
+app.use('/reviewPage/:id', express.static('client/dist'))
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
 app.use('/product/:id/carousel', express.static('client/dist'))
 
 app.get('/productDetail*', (req, res) => {

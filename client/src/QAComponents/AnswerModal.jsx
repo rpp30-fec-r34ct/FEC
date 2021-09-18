@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* eslint-disable */
+=======
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'

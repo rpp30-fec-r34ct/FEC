@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 /* eslint-disable */
+=======
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
@@ -19,7 +22,11 @@ const Question = (props) => {
     // e.preventDefault();
     axios.get('/qa/questions' + '?product_id=' + productID)
       .then((data) => {
+<<<<<<< HEAD
         // console.log('questions received from server for product', data.data.results);
+=======
+      // console.log('questions received from server for product', data.data.results);
+>>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
         callback(null, data.data.results)
       })
       .catch((err) => {

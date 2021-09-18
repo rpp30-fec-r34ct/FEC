@@ -35,7 +35,9 @@ h3 {
   align-items: center;
 }
 
-
+.hidden {
+  visibility: hidden;
+}
 
 .carousel-content-wrapper {
   overflow: hidden;

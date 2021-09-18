@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
@@ -10,6 +8,7 @@ export default function ProductCards(props) {
   const toggleModal = () => {
     setViewModal(!viewModal)
   }
+
   return (
     <div className='product-card'>
       <div className='card-container'>

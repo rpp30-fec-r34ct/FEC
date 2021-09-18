@@ -1,7 +1,6 @@
 import React from 'react'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
-
-export default function AddCard (props) {
+import { AiOutlineCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
+export default function AddCard(props) {
   return (
     <div className='add-card'>
       <div className='add-details'>

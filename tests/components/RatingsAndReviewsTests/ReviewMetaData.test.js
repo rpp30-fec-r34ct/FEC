@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 // component
-import ReviewMetaData from '../../client/src/components/Review Widget/ReviewMetaData.jsx'
+import ReviewMetaData from '../../../client/src/components/Review Widget/ReviewMetaData.jsx'
 const productId = 47421
 
 describe('Review Meta Data Component', () => {

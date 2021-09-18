@@ -12,7 +12,7 @@
  }))
 
  // components
- import Answer from '../../client/src/QAComponents/Answer.jsx'
+ import Answer from '../../../client/src/QAComponents/Answer.jsx'
 
  describe('Individual Answer Component', () => {
   test('Should render an Answer', function () {

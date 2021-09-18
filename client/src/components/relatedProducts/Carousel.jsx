@@ -25,47 +25,48 @@ export default function Carousel(props) {
     } catch (error) {
       console.log(error.message)
     }
+  }
 
-    const nextCard = () => {
-      if (currentIndex >= 0 && currentIndex < (length - 1)) {
-        setCurrentIndex(currentIndex => currentIndex + 1)
-      }
+  const nextCard = () => {
+    if (currentIndex >= 0 && currentIndex < (length - 1)) {
+      setCurrentIndex(currentIndex => currentIndex + 1)
     }
+  }
 
-    const prevCard = () => {
-      if (currentIndex > 0 && currentIndex <= (length - 1)) {
-        setCurrentIndex(currentIndex => currentIndex - 1)
-      }
+  const prevCard = () => {
+    if (currentIndex > 0 && currentIndex <= (length - 1)) {
+      setCurrentIndex(currentIndex => currentIndex - 1)
     }
+  }
 
-    return (
-      <div className='carousels-overview'>
-        <h3>RELATED PRODUCTS</h3>
-        <div className='carousel-container'>
-          {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
-          <div className='carousel-content-wrapper'>
-            <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
-              {
-                relatedProducts.map((product, index) => {
-                  return <ProductList key={index} product={product} />
-                })
-              }
-            </div>
+  return (
+    <div className='carousels-overview'>
+      <h3>RELATED PRODUCTS</h3>
+      <div className='carousel-container'>
+        {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+        <div className='carousel-content-wrapper'>
+          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
+            {
+              relatedProducts.map((product, index) => {
+                return <ProductList key={index} product={product} />
+              })
+            }
           </div>
-          {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
         </div>
-        <div className='outfit-overview'>
-          <h3>YOUR OUTFIT</h3>
-          <div className='outfit-container'>
-            <FaChevronLeft className='left-arrow' />
-            <div className='outfit-carousel-wrapper'>
-              <div className='outfit-content'>
-                <OutfitList />
-              </div>
+        {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+      </div>
+      <div className='outfit-overview'>
+        <h3>YOUR OUTFIT</h3>
+        <div className='outfit-container'>
+          <FaChevronLeft className='left-arrow' />
+          <div className='outfit-carousel-wrapper'>
+            <div className='outfit-content'>
+              <OutfitList />
             </div>
-            <FaChevronRight className='right-arrow' />
           </div>
+          <FaChevronRight className='right-arrow' />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+}

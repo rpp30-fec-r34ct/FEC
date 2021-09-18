@@ -4,11 +4,11 @@ import React from 'react'
 
 const ReviewTile = (props) => {
 
-  const translateDate = (date) => {
+  const translateDate = () => {
     let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let day = date.slice(8, 10);
-    let year = date.slice(0,4);
-    let month = months[parseInt(date.slice(5,7))];
+    let day = props.reviewData.date.slice(8, 10);
+    let year = props.reviewData.date.slice(0,4);
+    let month = months[parseInt(props.reviewData.date.slice(5,7)) - 1];
     let returnDate = month + ' ' + day + ', ' + year;
 
 
@@ -22,7 +22,7 @@ const ReviewTile = (props) => {
         <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id}/>
         <div className='tile_user_date'>
           <span className='tile_userName'>{props.reviewData.reviewer_name}</span>
-          <span className='tile_date'>{translateDate(props.reviewData.date)}</span>
+          <span data-testid="testReviewTileDate" className='tile_date'>{translateDate()}</span>
         </div>
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>

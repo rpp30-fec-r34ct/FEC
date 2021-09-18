@@ -64,12 +64,10 @@ const ReviewMetaData = (props) => {
   return (
     <div>
       <div className='reviewSummary'>
-        <div className='ratingItem'>{reviewsMeta.average}</div>
-        <ReviewStars className='ratingItem' starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id}/>
-        {/* <RatingBreakdown ratings={props.ratings}/>
-        <ProductCharacteristics characteristics={props.characteristics}/> */}
+        <div data-testid="testAverage" className='ratingItem'>{reviewsMeta.average}</div>
+        <ReviewStars data-testid="testAverageStars" starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id}/>
       </div>
-      <span className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
+      <span data-testid="testPercent" className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
     </div>
 
   )

@@ -32,7 +32,7 @@ const ReviewStars = (props) => {
 
 
   return (
-    <div>{starArray}</div>
+    <div data-testid="testReviewStars" className="reviewStars">{starArray}</div>
   )
 }
 

@@ -3,26 +3,23 @@ import ReviewStars from './ReviewStars.jsx'
 import React from 'react'
 
 const ReviewTile = (props) => {
-
   const translateDate = () => {
-    let months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    let day = props.reviewData.date.slice(8, 10);
-    let year = props.reviewData.date.slice(0,4);
-    let month = months[parseInt(props.reviewData.date.slice(5,7)) - 1];
-    let returnDate = month + ' ' + day + ', ' + year;
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const day = props.reviewData.date.slice(8, 10)
+    const year = props.reviewData.date.slice(0, 4)
+    const month = months[parseInt(props.reviewData.date.slice(5, 7)) - 1]
+    const returnDate = month + ' ' + day + ', ' + year
 
-
-    return returnDate;
+    return returnDate
   }
-
 
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
-        <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id}/>
+        <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id} />
         <div className='tile_user_date'>
           <span className='tile_userName'>{props.reviewData.reviewer_name}</span>
-          <span data-testid="testReviewTileDate" className='tile_date'>{translateDate()}</span>
+          <span data-testid='testReviewTileDate' className='tile_date'>{translateDate()}</span>
         </div>
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>

@@ -7,18 +7,18 @@ const ReviewMetaData = (props) => {
   const [reviewsMeta, setReviewsMeta] = useState({
     reviewsMeta:
     {
-        product_id: 1,
-        recommended: {
-          false: "0",
-          true: "0"
-        }
+      product_id: 1,
+      recommended: {
+        false: '0',
+        true: '0'
+      }
     },
     average: 0,
-    percentRecommend: 0,
+    percentRecommend: 0
   })
 
   useEffect(() => {
-    getReviewsMeta ();
+    getReviewsMeta()
   }, [])
 
   const getReviewsMeta = () => {
@@ -36,16 +36,14 @@ const ReviewMetaData = (props) => {
   }
 
   const calculatePercentRecommend = (currentAverage, data) => {
-
-    let noCount = parseInt(data.recommended.false);
-    let yesCount = parseInt(data.recommended.true);
+    const noCount = parseInt(data.recommended.false)
+    const yesCount = parseInt(data.recommended.true)
 
     setReviewsMeta({
       reviewsMeta: data,
       average: currentAverage,
       percentRecommend: Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100)
-    });
-
+    })
   }
 
   const calculateAverage = (data) => {
@@ -58,16 +56,16 @@ const ReviewMetaData = (props) => {
     }
 
     currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
-    calculatePercentRecommend(currentAverage, data);
+    calculatePercentRecommend(currentAverage, data)
   }
 
   return (
     <div>
       <div className='reviewSummary'>
-        <div data-testid="testAverage" className='ratingItem'>{reviewsMeta.average}</div>
-        <ReviewStars data-testid="testAverageStars" starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id}/>
+        <div data-testid='testAverage' className='ratingItem'>{reviewsMeta.average}</div>
+        <ReviewStars data-testid='testAverageStars' starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id} />
       </div>
-      <span data-testid="testPercent" className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
+      <span data-testid='testPercent' className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
     </div>
 
   )

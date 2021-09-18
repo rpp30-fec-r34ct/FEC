@@ -6,9 +6,9 @@ import threeQuarterStar from './icons/star-three-quarter.svg'
 import emptyStar from './icons/empty-star.svg'
 
 const ReviewStars = (props) => {
-  let wholeStars = [...Array(Math.floor(props.starRating))]
-  let decimalStars = []
-  let starArray
+  const wholeStars = [...Array(Math.floor(props.starRating))]
+  const decimalStars = []
+  let starArray = []
   const decimalRating = props.starRating % 1
 
   for (let i = 0; i < wholeStars.length; i++) {
@@ -25,14 +25,13 @@ const ReviewStars = (props) => {
 
   starArray = wholeStars.concat(decimalStars)
   if (starArray.length < 5) {
-    for (var i = starArray.length; i < 5; i++) {
+    for (let i = starArray.length; i < 5; i++) {
       starArray.push(<img key={props.review_id + i} src={emptyStar} />)
     }
   }
 
-
   return (
-    <div data-testid="testReviewStars" className="reviewStars">{starArray}</div>
+    <div data-testid='testReviewStars' className='reviewStars'>{starArray}</div>
   )
 }
 

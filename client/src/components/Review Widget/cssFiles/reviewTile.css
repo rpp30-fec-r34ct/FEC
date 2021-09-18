@@ -1,11 +1,12 @@
-.flex-container {
+.reviewTile{
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  align-items: flex-start;
 }
 
 .reviewTile {
   border-style: none none solid none;
+  margin-left: 70px;
 }
 
 .tile_user_date_rating {

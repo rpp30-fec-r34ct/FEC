@@ -5,8 +5,16 @@ import ReviewStars from './ReviewStars.jsx'
 
 const ReviewMetaData = (props) => {
   const [reviewsMeta, setReviewsMeta] = useState({
-    reviewsMeta: [],
-    average: 0
+    reviewsMeta:
+    {
+      product_id: 1,
+      recommended: {
+        false: '0',
+        true: '0'
+      }
+    },
+    average: 0,
+    percentRecommend: 0
   })
 
   useEffect(() => {
@@ -14,7 +22,7 @@ const ReviewMetaData = (props) => {
   }, [])
 
   const getReviewsMeta = () => {
-    axios.get('http://localhost:3000/reviews/meta', {
+    axios.get('/reviews/meta', {
       params: {
         product_id: props.product_id
       }
@@ -27,6 +35,17 @@ const ReviewMetaData = (props) => {
       })
   }
 
+  const calculatePercentRecommend = (currentAverage, data) => {
+    const noCount = parseInt(data.recommended.false)
+    const yesCount = parseInt(data.recommended.true)
+
+    setReviewsMeta({
+      reviewsMeta: data,
+      average: currentAverage,
+      percentRecommend: Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100)
+    })
+  }
+
   const calculateAverage = (data) => {
     let currentAverage = 0
     let reviewCount = 0
@@ -37,19 +56,18 @@ const ReviewMetaData = (props) => {
     }
 
     currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
-    setReviewsMeta({
-      reviewsMeta: data,
-      average: currentAverage
-    })
+    calculatePercentRecommend(currentAverage, data)
   }
 
   return (
-    <div className='reviewSummary'>
-      <div className='ratingItem'>{reviewsMeta.average}</div>
-      <ReviewStars className='ratingItem' starRating={reviewsMeta.average} />
-      {/* <RatingBreakdown ratings={props.ratings}/>
-      <ProductCharacteristics characteristics={props.characteristics}/> */}
+    <div>
+      <div className='reviewSummary'>
+        <div data-testid='testAverage' className='ratingItem'>{reviewsMeta.average}</div>
+        <ReviewStars data-testid='testAverageStars' starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id} />
+      </div>
+      <span data-testid='testPercent' className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
     </div>
+
   )
 }
 

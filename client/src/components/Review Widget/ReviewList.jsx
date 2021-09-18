@@ -11,7 +11,7 @@ const ReviewList = (props) => {
   }, [])
 
   const getReviews = () => {
-    axios.get('http://localhost:3000/reviews', {
+    axios.get('/reviews', {
       params: {
         sort: 'newest',
         product_id: props.product_id
@@ -26,7 +26,7 @@ const ReviewList = (props) => {
   }
 
   const reviewListTiles = []
-  reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile reviewData={reviewData} />)) })
+  reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} />)) })
 
   return (
     <div className='reviewList'>{reviewListTiles}</div>

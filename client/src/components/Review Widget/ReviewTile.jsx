@@ -17,8 +17,8 @@ const ReviewTile = (props) => {
 
 
   return (
-    <div className='flex-container reviewTile'>
-      <div className='tile_user_date_rating flex-container'>
+    <div className='reviewTile'>
+      <div className='tile_user_date_rating'>
         <ReviewStars starRating={props.reviewData.rating} review_id={props.reviewData.review_id}/>
         <div className='tile_user_date'>
           <span className='tile_userName'>{props.reviewData.reviewer_name}</span>

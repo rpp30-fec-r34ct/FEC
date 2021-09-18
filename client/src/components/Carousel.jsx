@@ -6,7 +6,7 @@ import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './../styles.css'
 
-export default function Carousel (props) {
+export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const length = relatedProducts.length
@@ -24,10 +24,6 @@ export default function Carousel (props) {
       })
       .catch((err) => {
         console.error('error while getting product data from server')
-<<<<<<< HEAD
-        return err
-=======
->>>>>>> c2acb89980fc6c368f0c31d888ee59a530880a86
       })
   }
 

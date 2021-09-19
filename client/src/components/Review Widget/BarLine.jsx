@@ -18,8 +18,9 @@ const BarLine = (props) => {
     left: leftPos + 'px',
     width: emptyBarWidth + 'px',
     height: 5 + 'px',
-    background: 'grey',
+    background: 'lightgrey',
     position: 'absolute'
+
   }
 
   return (

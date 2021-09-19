@@ -12,7 +12,7 @@
  }))
 
  // components
- import AnswerModal from '../../client/src/QAComponents/AnswerModal.jsx'
+ import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
 
  describe('Individual Question Component', () => {
 

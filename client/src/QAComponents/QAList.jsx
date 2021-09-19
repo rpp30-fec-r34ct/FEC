@@ -30,6 +30,7 @@ const QAList = (props) => {
 
   const renderAllQuestions = () => {
     setQuestions(allQuestions)
+    setAllQuestions(0)
   }
 
   const addQuestion = (e) => {
@@ -82,7 +83,7 @@ const QAList = (props) => {
         )
       }) : null}
       <QuestionModal showQuestionModal={showQuestionModal} />
-      <button id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button>
+      {allQuestions && allQuestions.length > 2 ? <button id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
       <button id="add-question" onClick={addQuestion}>Add A Question</button>
     </>
   )

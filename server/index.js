@@ -46,7 +46,6 @@ app.get('/reviews', (req, res) => {
 })
 
 app.get('/reviews/meta', (req, res) => {
-  console.log('got reviews request')
   axios.get(APIurl + 'reviews/meta', {
     headers: {
       Authorization: token.API_KEY
@@ -63,17 +62,14 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
+/////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 app.get('/qa/questions', (req, res) => {
-  console.log('questions and answers...', req._parsedUrl.search);
-  // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('I found the data');
-    // console.log(data.data.results);
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -83,16 +79,12 @@ app.get('/qa/questions', (req, res) => {
 })
 
 app.get('/qa/answers', (req, res) => {
-  // console.log('questions and answers...', req);
-  // let
   axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('I found the answers');
-    // console.log(data.data.results);
       res.status(200).send(data.data.results)
     })
     .catch(err => {
@@ -102,14 +94,12 @@ app.get('/qa/answers', (req, res) => {
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
-  console.log('helpful question', req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('this is what I get from a successful post of helpful question', data);
       res.status(204).send(data)
     })
     .catch(err => {
@@ -119,7 +109,6 @@ app.put('/qa/helpfulquestion/', (req, res) => {
 })
 
 app.put('/qa/answers/report', (req, res) => {
-  console.log('made it this far', req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/report', null, {
     headers: {
       Authorization: token.API_KEY
@@ -135,13 +124,14 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...', req.query.answer_id)
+  console.log('made it this far...helpful question = ', req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
+      console.log('data from helpfulness', data)
       res.status(200).send('ANSWER MARKED AS HELPFUL')
     })
     .catch(err => {
@@ -166,6 +156,7 @@ app.post('/qa/answer', (req, res) => {
     })
     .catch(err => console.error(err))
 })
+/////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]

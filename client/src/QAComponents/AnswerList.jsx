@@ -5,7 +5,6 @@ import axios from 'axios'
 import NewAnswer from './NewAnswer.jsx'
 
 const AnswerList = (props) => {
-  console.log('props', props)
   const [state, setState] = useState()
   const [answers, setAnswers] = useState(['test1, test2'])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
@@ -59,7 +58,6 @@ const AnswerList = (props) => {
       if (err) {
         console.error(err)
       } else {
-        console.log(data.data)
         callback(null, data.data)
       }
     })
@@ -69,6 +67,7 @@ const AnswerList = (props) => {
   const getMoreAnswers = (e) => {
     e.preventDefault()
     setAnswers(moreAnswers)
+    setMoreAnswers(0)
   }
 
   // INITIAL RENDER INVOCATION
@@ -77,7 +76,6 @@ const AnswerList = (props) => {
       if (err) {
         console.error(err)
       } else {
-        console.log(data)
         setAnswers(data.slice(0, 2))
         setMoreAnswers(data)
       }
@@ -87,7 +85,6 @@ const AnswerList = (props) => {
   return (
     <>
       <div>{answers ? answers.map(answer => {
-        console.log('answer', answer)
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -96,7 +93,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div onClick={getMoreAnswers}>LOAD MORE ANSWERS</div>
+          renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>LOAD MORE ANSWERS</a>
         }
         return (
           <NewAnswer
@@ -116,7 +113,7 @@ const AnswerList = (props) => {
         )
       }) : null}
       </div>
-      <div>{renderMoreAnswers}</div>
+      {moreAnswers && moreAnswers.length > 0 ? <div>{renderMoreAnswers}</div> : null}
     </>
   )
 }

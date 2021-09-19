@@ -11,3 +11,11 @@
   margin-top: 5px;
 }
 
+.ratingCategory {
+  text-decoration: underline;
+}
+
+.ratingCategory:hover {
+  color: blue;
+}
+

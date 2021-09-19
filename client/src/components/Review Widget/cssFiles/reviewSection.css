@@ -34,3 +34,12 @@ h3 {
   display: flex;
   margin-bottom: 15px;
 }
+
+.ratingBreakdownTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1em;
+}
+
+.ratingBreakDown {
+  margin-top: 20px;
+}

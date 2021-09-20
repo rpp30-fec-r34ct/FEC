@@ -19,3 +19,9 @@
   color: blue;
 }
 
+.ratingCategoryCount {
+  display: inline-block;
+  position: absolute;
+  left: 268px;
+}
+

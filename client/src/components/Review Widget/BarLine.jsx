@@ -28,6 +28,7 @@ const BarLine = (props) => {
       <span className="ratingCategory">{props.star + ' stars'}</span>
       <div className="emptyBar" style={styleEmptyBar}></div>
       <div className="fullBar" style={styleFullBar}></div>
+      <span className="ratingCategoryCount">{'(' + props.numberOfReviews + ')'}</span>
     </div>
   )
 }

@@ -34,6 +34,7 @@ const QAList = (props) => {
   const renderAllQuestions = () => {
     setQuestions(allQuestions)
     setAllQuestions(0)
+    setFirstRender(false)
   }
 
   const addQuestion = (e) => {
@@ -58,20 +59,21 @@ const QAList = (props) => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    // console.log(e)
     setQuestions([])
-    console.log(questionsCache)
     const query = e.target.value.toLowerCase();
     if (e.target.value.length >= 3) {
-      console.log('searching', e.target.value)
-    }
-    questionsCache.map(question => {
-      // console.log(question.question_body)
-      if (question.question_body.toLowerCase().includes(e.target.value)) {
-        console.log('question', question)
-        setQuestions(prev => [...prev, question])
+      questionsCache.map(question => {
+        if (question.question_body.toLowerCase().includes(e.target.value)) {
+          setQuestions(prev => [...prev, question])
+        }
+      })
+    } else {
+      if (firstRender) {
+        setQuestions(questionsCache.slice(0, 2))
+      } else {
+        setQuestions(questionsCache)
       }
-    })
+    }
   }
 
   useEffect(() => {

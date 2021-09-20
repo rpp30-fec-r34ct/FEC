@@ -11,22 +11,25 @@ const QAList = (props) => {
   const [answerCount, setAnswerCount] = useState(2)
   const [questions, setQuestions] = useState(['test1', 'test2', 'test3'])
   const [allQuestions, setAllQuestions] = useState()
+  const [questionsCache, setQuestionsCache] = useState()
   const [firstRender, setFirstRender] = useState(true)
   const [showQuestionModal, setShowQuestionModal] = useState(false)
   const productID = useParams().productId
 
-  const getAllQuestions = () => {
-    axios.get('/qa/questions?product_id=' + productID)
-      .then((data) => {
-        if (data.data.results) {
-          setQuestions(data.data.results)
-          setAllQuestions(data.data.results)
-        }
-      })
-      .catch((err) => {
-        console.error('error while getting product data from server')
-      })
-  }
+  // const getAllQuestions = () => {
+  //   axios.get('/qa/questions?product_id=' + productID)
+  //     .then((data) => {
+  //       if (data.data.results) {
+  //         setQuestions(data.data.results)
+  //         setAllQuestions(data.data.results)
+
+  //         console.log(questionsCache)
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error('error while getting product data from server')
+  //     })
+  // }
 
   const renderAllQuestions = () => {
     setQuestions(allQuestions)
@@ -53,6 +56,24 @@ const QAList = (props) => {
       })
   }
 
+  const handleSearch = (e) => {
+    e.preventDefault()
+    // console.log(e)
+    setQuestions([])
+    console.log(questionsCache)
+    const query = e.target.value.toLowerCase();
+    if (e.target.value.length >= 3) {
+      console.log('searching', e.target.value)
+    }
+    questionsCache.map(question => {
+      // console.log(question.question_body)
+      if (question.question_body.toLowerCase().includes(e.target.value)) {
+        console.log('question', question)
+        setQuestions(prev => [...prev, question])
+      }
+    })
+  }
+
   useEffect(() => {
     initialize((err, data) => {
       if (err) {
@@ -60,6 +81,7 @@ const QAList = (props) => {
       } else {
         setQuestions(data.slice(0, 2))
         setAllQuestions(data)
+        setQuestionsCache(data)
       }
     })
   }, [])
@@ -68,7 +90,7 @@ const QAList = (props) => {
     <>
       <h1>Questions and Answers</h1>
       <form>
-        <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' />
+        <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch}/>
       </form>
       {questions ? questions.map((question, i) => {
         let key = question.question_id + 1

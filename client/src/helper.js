@@ -1,23 +1,23 @@
 const findTotalReviews = (ratings) => {
-  let result = 0;
+  let total = 0;
   const ratingKeys = Object.keys(ratings);
 
   ratingKeys.forEach((rating) => {
-    result += Number(ratings[rating]);
+    total += Number(ratings[rating]);
   });
 
-  return result;
+  return total;
 }
 
 const findTotalScore = (ratings) => {
-  let result = 0;
+  let total = 0;
   const ratingKeys = Object.keys(ratings);
 
   ratingKeys.forEach((rating) => {
-    result += Number(rating) * Number(ratings[rating]);
+    total += Number(rating) * Number(ratings[rating]);
   });
 
-  return result;
+  return total;
 }
 
 const findAverageRating = (ratings) => (findTotalScore(ratings) / findTotalReviews(ratings));

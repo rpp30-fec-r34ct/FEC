@@ -15,7 +15,7 @@ const BarChart = (props) => {
 
 
   return (
-    <div className="BarChart">{bars}</div>
+    <div data-testid="testBarChart" className="BarChart">{bars}</div>
   )
 }
 

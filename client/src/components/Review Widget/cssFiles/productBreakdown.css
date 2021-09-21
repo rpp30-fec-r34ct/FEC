@@ -1,0 +1,29 @@
+.productBreakDownBar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productBreakDownLimit {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.7em;
+  margin-top: 5px;
+}
+
+.productBreakDownTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.productBreakDownLimitHolder {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.productBreakDownSection {
+  margin-top: 15px;
+}

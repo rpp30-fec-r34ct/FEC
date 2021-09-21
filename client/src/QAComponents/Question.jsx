@@ -13,8 +13,8 @@ const Question = (props) => {
   // const [firstRender, setFirstRender] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [qHelpfulness, setQHelpfulness] = useState(props.question_helpfulness)
-  const productID = useParams().productId
   const [helpful, setHelpful] = useState(true)
+  const productID = useParams().productId
 
   // SERVER REQUESTS
   const initialize = (callback) => {
@@ -43,7 +43,7 @@ const Question = (props) => {
     axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.id, {
       question_id: e.target.id
     })
-      .then(data => setQHelpfulness(qHelpfulness++))
+      .then(data => setQHelpfulness(prev => prev++))
       .catch(err => { console.error(err) })
   }
 
@@ -55,8 +55,9 @@ const Question = (props) => {
 
   return (
     <>
+      {console.log(props.question_helpfulness, qHelpfulness)}
       <div id={props.question_id} className='question-body'>
-        <div>Q: {props.question_body}</div><div>Helpful?</div><a href="" className='helpful-question' onClick={addHelpfulQuestion}>Yes</a> <div>({qHelpfulness || 0})</div>
+        <div>Q: {props.question_body}</div><div>Helpful?</div><a href="" className='helpful-question' onClick={addHelpfulQuestion}>Yes</a> <div>({qHelpfulness ? qHelpfulness : props.question_helpfulness})</div>
         <a href="" id='add-answer' onClick={addAnswer}>ADD ANSWER</a>
       </div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}

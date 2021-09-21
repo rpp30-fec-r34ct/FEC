@@ -94,13 +94,15 @@ app.get('/qa/answers', (req, res) => {
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
+  // console.log(typeof req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-      res.status(204).send(data)
+      console.log('success?')
+      res.sendStatus(200)
     })
     .catch(err => {
       console.error(err)
@@ -115,7 +117,7 @@ app.put('/qa/answers/report', (req, res) => {
     }
   })
     .then(data => {
-      res.status(200).send('ANSWER REPORTED')
+      res.sendStatus(200).send('data')
     })
     .catch(err => {
       console.error(err)
@@ -124,19 +126,18 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...helpful question = ', req.query.answer_id)
+  console.log('made it this far...helpful question = ', typeof req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
-    .then(data => {
-      console.log('data from helpfulness', data)
-      res.status(200).send('ANSWER MARKED AS HELPFUL')
-    })
-    .catch(err => {
-      console.error(err)
-    })
+  .then(data => {
+    res.status(200).send('ANSWER MARKED AS HELPFUL')
+  })
+  .catch(err => {
+    console.error(err)
+  })
 })
 
 app.post('/qa/answer', (req, res) => {

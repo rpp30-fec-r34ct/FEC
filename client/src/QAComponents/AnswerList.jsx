@@ -100,7 +100,7 @@ const AnswerList = (props) => {
           id={answer.answer_id}
           key={answer.answer_id + 1}
           body={answer.body}
-          name={answer.answer_name}
+          name={answer.answerer_name}
           month={month}
           day={day}
           year={year}

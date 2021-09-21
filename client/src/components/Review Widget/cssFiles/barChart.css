@@ -9,9 +9,12 @@
 
 .BarChart {
   margin-top: 5px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
-.ratingCategory {
+.ratingName {
   text-decoration: underline;
 }
 
@@ -19,9 +22,8 @@
   color: blue;
 }
 
-.ratingCategoryCount {
-  display: inline-block;
+.categoryCount {
   position: absolute;
-  left: 268px;
+  left: 253px;
 }
 

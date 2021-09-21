@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
-import helper from '../../helper.js';
+import helper from '../../helpers.js';
 
 export default function ProductCards(props) {
   const [viewModal, setViewModal] = useState(false)

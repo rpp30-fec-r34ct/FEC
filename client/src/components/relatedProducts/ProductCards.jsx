@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
+import helper from '../../helper.js';
 
 export default function ProductCards(props) {
   const [viewModal, setViewModal] = useState(false)
@@ -28,11 +29,12 @@ export default function ProductCards(props) {
           <div className='card-category'>{props.product.category}</div>
           <div className='card-name'>{props.product.name}</div>
           <div className='card-price'>${props.product.sale ? (props.product.sale && props.product.price) : props.product.price}</div>
-          <span className='fa fa-star checked' />
+          <div className='card-rating'>{helper.findStarRating(props.product.rating)}</div>
+          {/* <span className='fa fa-star checked' />
           <span className='fa fa-star checked' />
           <span className='fa fa-star checked' />
           <span className='fa fa-star' />
-          <span className='fa fa-star' />
+          <span className='fa fa-star' /> */}
         </div>
       </div>
     </div>

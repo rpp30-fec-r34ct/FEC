@@ -23,7 +23,7 @@ const BarLine = (props) => {
   }
 
   return (
-    <div className="BarLine" >
+    <div data-testid="testBarLine" className="BarLine" >
       <span className="ratingName">{props.star + ' stars'}</span>
       <div className="emptyBar" style={styleEmptyBar}></div>
       <div className="fullBar" style={styleFullBar}></div>

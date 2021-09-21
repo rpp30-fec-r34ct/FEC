@@ -2,7 +2,6 @@ import React from 'react';
 import BarLine from './BarLine.jsx';
 
 const BarChart = (props) => {
-
   let bars = [];
   let givenStars = Object.keys(props.breakDownRatings);
 
@@ -13,6 +12,8 @@ const BarChart = (props) => {
       bars.push(<BarLine key={i} star={i.toString()} numberOfReviews={props.breakDownRatings[i]} totalReviews={props.totalReviews}/>)
     }
   }
+
+
   return (
     <div className="BarChart">{bars}</div>
   )

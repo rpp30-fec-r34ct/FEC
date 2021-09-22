@@ -72,19 +72,19 @@ const fakeClickHanlder = () => {}
 
 describe('Style Selector Item', function () {
   test('Should render a single img tag', function () {
-    const styleSelectorItem = render(<StyleSelectorItem style={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
+    const styleSelectorItem = render(<StyleSelectorItem productStyle={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
 
     expect(styleSelectorItem.getByRole('img')).toBeInTheDocument()
   })
 
   test('Should have a data-index attribute on returned img tag', function () {
-    const styleSelectorItem = render(<StyleSelectorItem style={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
+    const styleSelectorItem = render(<StyleSelectorItem productStyle={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
 
     expect(styleSelectorItem.getByRole('img').getAttribute('data-index')).not.toBe(undefined)
   })
 
   test('Should have a src attribute matching the first photo on the passed in data', function () {
-    const styleSelectorItem = render(<StyleSelectorItem style={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
+    const styleSelectorItem = render(<StyleSelectorItem productStyle={styleData} index={0} selectorClickHandler={fakeClickHanlder} />)
 
     expect(styleSelectorItem.getByRole('img').getAttribute('src')).toBe(styleData.photos[0].thumbnail_url)
   })

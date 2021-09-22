@@ -368,7 +368,7 @@ const styleData = [
 
 describe('Product Style Selector Component', function () {
   test('Should render a container of img components equal to the number of styles', function () {
-    const app = render(<ProductStyleSelector selectedStyle={styleData[0]} styles={styleData} />)
+    const app = render(<ProductStyleSelector selectedStyle={styleData[0]} productStyles={styleData} />)
     const imgTags = app.getAllByRole('img')
     expect(imgTags.length).toBe(styleData.length)
   })
@@ -378,7 +378,7 @@ describe('Product Style Selector Component', function () {
       app.rerender(
         <ProductStyleSelector
           selectedStyle={styleData[index]}
-          styles={styleData}
+          productStyles={styleData}
           updateSelectedStyle={simulatedUpdateSelectedStyle}
         />
       )
@@ -387,7 +387,7 @@ describe('Product Style Selector Component', function () {
     const app = render(
       <ProductStyleSelector
         selectedStyle={styleData[0]}
-        styles={styleData}
+        productStyles={styleData}
         updateSelectedStyle={simulatedUpdateSelectedStyle}
       />
     )

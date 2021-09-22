@@ -9,7 +9,7 @@ import ProductDetailFooter from './ProductDetailFooter.jsx'
 const ProductDetailPageComponent = (props) => {
   const { productId } = useParams()
   const [productDetails, setProductDetails] = useState(false)
-  const [styles, setStyles] = useState([])
+  const [productStyles, setProductStyles] = useState([])
   const [selectedStyle, setSelectedStyle] = useState(false)
   const [redirect, setRedirect] = useState(false)
 
@@ -27,7 +27,7 @@ const ProductDetailPageComponent = (props) => {
   const getStyles = () => {
     axios.get(`/api/products/${productId}/styles`)
       .then(res => {
-        setStyles(res.data.results)
+        setProductStyles(res.data.results)
         setSelectedStyle(res.data.results[0])
       })
       .catch(err => {
@@ -36,7 +36,7 @@ const ProductDetailPageComponent = (props) => {
   }
 
   const updateSelectedStyle = (index) => {
-    setSelectedStyle(styles[index])
+    setSelectedStyle(productStyles[index])
   }
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ProductDetailPageComponent = (props) => {
   }
 
   return (
-    <div>
+    <>
       {redirect
         ? <Redirect to={{
           pathname: '/404',
@@ -58,10 +58,10 @@ const ProductDetailPageComponent = (props) => {
         : null}
       <div style={productDetailStyles}>
         <MainImageGallery selectedStyle={selectedStyle} />
-        <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
+        <ProductDescription productDetails={productDetails} productId={productId} productStyles={productStyles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       </div>
       {productDetails ? <ProductDetailFooter productDetails={productDetails} /> : <div />}
-    </div>
+    </>
   )
 }
 

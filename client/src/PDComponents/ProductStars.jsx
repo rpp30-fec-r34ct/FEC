@@ -1,14 +1,14 @@
 import React from 'react'
 
-const ProductStarsComponent = (props) => {
+const ProductStarsComponent = ({ rating }) => {
   const totalStars = 5
-  const roundedRating = Math.round(((props.rating || 5) * 4) / 4).toFixed(2)
+  const roundedRating = Math.round(((rating || 0) * 4) / 4).toFixed(2)
   const fillPercentage = ((roundedRating / totalStars) * 100)
 
   const stylesOuter = {
     fontFamily: 'Font Awesome Free',
     fontWeight: 900,
-    color: 'grey',
+    color: '#ddd',
     position: 'relative',
     display: 'inline-block'
   }

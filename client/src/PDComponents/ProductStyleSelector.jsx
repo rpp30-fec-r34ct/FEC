@@ -1,25 +1,31 @@
 import React from 'react'
 import StyleSelectorItem from './StyleSelectorItem.jsx'
 
-const ProductStyleComponent = (props) => {
+const ProductStyleComponent = ({ selectedStyle, productStyles, updateSelectedStyle }) => {
   const handleSelectorClick = (e) => {
     const index = e.target.getAttribute('data-index')
-    props.updateSelectedStyle(index)
+    updateSelectedStyle(index)
   }
 
-  let styleSelectors = []
-
-  if (props.styles.length > 0) {
-    styleSelectors = props.styles.map((style, index) => (
-      <StyleSelectorItem key={index} index={index} style={style} handleSelectorClick={handleSelectorClick} />
-    ))
+  const skeletonStyles = {
+    height: '50px',
+    width: '50px',
+    borderRadius: '50%',
+    border: 'solid, 1px, black',
+    backgroundColor: 'grey'
   }
 
   return (
-    <div>
-      <h2> <b>style {'>'} </b>{props.selectedStyle.name}</h2>
-      {styleSelectors}
-    </div>
+    <>
+      <h2> <b>style {'>'} </b>{selectedStyle.name}</h2>
+      {productStyles
+        ? productStyles.map((productStyle, index) => (
+          <StyleSelectorItem key={index} index={index} productStyle={productStyle} handleSelectorClick={handleSelectorClick} />
+          ))
+        : [1, 2, 3, 4, 5].map((n, index) => {
+            return <img style={skeletonStyles} key={index} />
+          })}
+    </>
   )
 }
 

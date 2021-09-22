@@ -9,13 +9,15 @@ import './Carousel.css'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
+  const [selectedProducts, setSelectedProducts] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-
+  const [viewModal, setModal] = useState(false);
   const length = relatedProducts.length
   const { productId } = useParams()
 
   useEffect(() => {
     getRelatedProducts()
+    getSelectedProducts()
   }, [])
 
   const getRelatedProducts = async () => {
@@ -25,6 +27,19 @@ export default function Carousel(props) {
     } catch (error) {
       console.log(error.message)
     }
+  }
+
+  const getSelectedProducts = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/${productId}`)
+      setSelectedProducts(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  const toggleModal = () => {
+    setViewModal(prevState => !prevState)
   }
 
   const nextCard = () => {
@@ -48,7 +63,7 @@ export default function Carousel(props) {
           <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
             {
               relatedProducts.map((product, index) => {
-                return <ProductList key={index} product={product} />
+                return <ProductList key={index} product={product} toggleModal={toggleModal} />
               })
             }
           </div>

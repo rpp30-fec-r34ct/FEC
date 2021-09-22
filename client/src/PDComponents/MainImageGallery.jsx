@@ -8,7 +8,7 @@ const MainImageGalleryComponent = (props) => {
   // const [topIndex, setTopIndex] = useState(0)
 
   useEffect(() => {
-    if (props.selectedStyle !== false) {
+    if (props.selectedStyle) {
       setSelectedStyle(props.selectedStyle)
       setSelectedImage(props.selectedStyle.photos[0].url)
     }

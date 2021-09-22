@@ -8,9 +8,9 @@ import ProductDetailFooter from './ProductDetailFooter.jsx'
 
 const ProductDetailPageComponent = (props) => {
   const { productId } = useParams()
-  const [productDetails, setProductDetails] = useState(false)
-  const [productStyles, setProductStyles] = useState([])
-  const [selectedStyle, setSelectedStyle] = useState(false)
+  const [productDetails, setProductDetails] = useState(null)
+  const [productStyles, setProductStyles] = useState(null)
+  const [selectedStyle, setSelectedStyle] = useState(null)
   const [redirect, setRedirect] = useState(false)
 
   const getProductDetails = () => {

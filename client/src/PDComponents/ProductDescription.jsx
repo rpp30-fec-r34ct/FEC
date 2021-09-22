@@ -3,7 +3,7 @@ import ProductCheckout from './ProductCheckout.jsx'
 import ProductStars from './ProductStars.jsx'
 import ProductStyleSelector from './ProductStyleSelector.jsx'
 
-const ProductDescriptionComponent = (props) => {
+const ProductDescriptionComponent = ({ productDetails, selectedStyle, updateSelectedStyle, productStyles }) => {
   const styles = {
     display: 'flex',
     flexDirection: 'column',
@@ -12,10 +12,10 @@ const ProductDescriptionComponent = (props) => {
   return (
     <div style={styles}>
       <ProductStars />
-      <h4>{props.productDetails.category}</h4>
-      <h2>{props.productDetails.name}</h2>
-      <p>${props.productDetails.default_price}</p>
-      <ProductStyleSelector styles={props.styles} selectedStyle={props.selectedStyle} updateSelectedStyle={props.updateSelectedStyle} />
+      <h4>{productDetails.category}</h4>
+      <h2>{productDetails.name}</h2>
+      <p>${productDetails.default_price}</p>
+      <ProductStyleSelector productStyles={productStyles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       <ProductCheckout />
     </div>
   )

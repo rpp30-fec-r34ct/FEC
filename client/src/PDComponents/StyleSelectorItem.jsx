@@ -1,6 +1,6 @@
 import React from 'react'
 
-const StylesSelectorItemComponent = (props) => {
+const StylesSelectorItemComponent = ({ productStyle, index, handleSelectorClick }) => {
   const styles = {
     height: '50px',
     width: '50px',
@@ -8,7 +8,7 @@ const StylesSelectorItemComponent = (props) => {
     border: 'solid, 1px, black'
   }
   return (
-    <img style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.handleSelectorClick} />
+    <img style={styles} src={productStyle.photos[0].thumbnail_url} data-index={index} onClick={handleSelectorClick} />
   )
 }
 

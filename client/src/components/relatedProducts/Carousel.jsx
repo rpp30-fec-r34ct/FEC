@@ -3,21 +3,22 @@ import { useParams } from 'react-router-dom'
 import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
+import Comparison from './Comparison.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
-  const [selectedProducts, setSelectedProducts] = useState([])
+  const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [viewModal, setModal] = useState(false);
-  const length = relatedProducts.length
+  const [viewModal, setViewModal] = useState(false);
+
+  const related = relatedProducts.length
   const { productId } = useParams()
 
   useEffect(() => {
     getRelatedProducts()
-    getSelectedProducts()
   }, [])
 
   const getRelatedProducts = async () => {
@@ -29,13 +30,21 @@ export default function Carousel(props) {
     }
   }
 
-  const getSelectedProducts = async () => {
+  const getProductDetails = async () => {
     try {
       const { data } = await axios.get(`/api/products/${productId}`)
-      setSelectedProducts(data)
+      setProductDetails(data)
     } catch (error) {
       console.log(error.message)
     }
+  }
+
+  const resetState = () => {
+    setCurrentIndex(0)
+  }
+
+  const modalDetails = () => {
+    setViewModal(true)
   }
 
   const toggleModal = () => {
@@ -43,13 +52,13 @@ export default function Carousel(props) {
   }
 
   const nextCard = () => {
-    if (currentIndex >= 0 && currentIndex < (length - 1)) {
+    if (currentIndex >= 0 && currentIndex < (related - 1)) {
       setCurrentIndex(currentIndex => currentIndex + 1)
     }
   }
 
   const prevCard = () => {
-    if (currentIndex > 0 && currentIndex <= (length - 1)) {
+    if (currentIndex > 0 && currentIndex <= (related - 1)) {
       setCurrentIndex(currentIndex => currentIndex - 1)
     }
   }
@@ -60,15 +69,20 @@ export default function Carousel(props) {
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <div className='carousel-content-wrapper'>
-          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
+          <div className='carousel-content' style={{ transform: `translateX(${currentIndex * 2}%)` }}>
             {
               relatedProducts.map((product, index) => {
-                return <ProductList key={index} product={product} toggleModal={toggleModal} />
+                return <ProductList
+                  key={index}
+                  product={product}
+                  toggleModal={toggleModal}
+                  getProductDetails={getProductDetails}
+                />
               })
             }
           </div>
         </div>
-        {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        {currentIndex < (related - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>

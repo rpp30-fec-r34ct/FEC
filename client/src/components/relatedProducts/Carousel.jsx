@@ -78,7 +78,6 @@ export default function Carousel(props) {
           getProductDetails={getProductDetails}
           currentIndex={currentIndex}
           resetState={resetState} />
-
         {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
         <Comparison
           relatedProducts={relatedProducts}

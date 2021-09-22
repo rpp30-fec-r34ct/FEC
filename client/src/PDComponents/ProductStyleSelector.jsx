@@ -12,20 +12,24 @@ const ProductStyleComponent = ({ selectedStyle, productStyles, updateSelectedSty
     width: '50px',
     borderRadius: '50%',
     border: 'solid, 1px, black',
-    backgroundColor: 'grey'
+    backgroundColor: '#ddd'
   }
 
   return (
-    <>
-      <h2> <b>style {'>'} </b>{selectedStyle.name}</h2>
-      {productStyles
-        ? productStyles.map((productStyle, index) => (
-          <StyleSelectorItem key={index} index={index} productStyle={productStyle} handleSelectorClick={handleSelectorClick} />
-          ))
+    <div>
+      {(selectedStyle)
+        ? (
+          <>
+            <h2> <b>style {'>'} </b>{selectedStyle.name}</h2>
+            {productStyles.map((productStyle, index) => (
+              <StyleSelectorItem key={index} index={index} productStyle={productStyle} handleSelectorClick={handleSelectorClick} />
+            ))}
+          </>
+          )
         : [1, 2, 3, 4, 5].map((n, index) => {
             return <img style={skeletonStyles} key={index} />
           })}
-    </>
+    </div>
   )
 }
 

@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
 
 export default function ProductCards(props) {
+
+
+
+
   return (
     <div className='product-card'>
       <div className='card-container'>
         <div className='card-visuals'>
           <div className='favorite-btn'>
 
-            <AiOutlineStar>
+            <AiOutlineStar onClick={props.toggleModal}>
             </AiOutlineStar>
           </div>
           <div className='card-image'>

@@ -71,22 +71,20 @@ export default function Carousel(props) {
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
-        <div className='carousel-content-wrapper'>
-          <div className='carousel-content' style={{ transform: `translateX(${currentIndex * 2}%)` }}>
-            <ProductList
-              relatedProducts={relatedProducts}
-              toggleModal={toggleModal}
-              getProductDetails={getProductDetails}
-              currentIndex={currentIndex}
-              resetState={resetState} />
-            <Comparison
-              relatedProducts={relatedProducts}
-              getProductDetails={getProductDetails}
-              showModal={showModal}
-            />
-          </div>
-          {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
-        </div>
+        <ProductList
+          relatedProducts={relatedProducts}
+          toggleModal={toggleModal}
+          showModal={showModal}
+          getProductDetails={getProductDetails}
+          currentIndex={currentIndex}
+          resetState={resetState} />
+
+        {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        <Comparison
+          relatedProducts={relatedProducts}
+          getProductDetails={getProductDetails}
+          toggleModal={toggleModal}
+        />
       </div>
       <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>

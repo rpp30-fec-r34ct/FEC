@@ -4,12 +4,6 @@ import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
 
 export default function ProductCards(props) {
-  // const [viewModal, setViewModal] = useState(false)
-
-  // const toggleModal = () => {
-  //   setViewModal(previous => !previous)
-  // }
-
   return (
     <div className='product-card'>
       <div className='card-container'>

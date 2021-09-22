@@ -13,6 +13,7 @@ export default function Carousel(props) {
   const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [viewModal, setViewModal] = useState(false);
+  const [modalFeatures, setModalFeatures] = useState([])
 
   const currentRelated = relatedProducts.length
   const { productId } = useParams()
@@ -48,6 +49,11 @@ export default function Carousel(props) {
     setViewModal(prevState => !prevState)
   }
 
+  const showModal = (currentProduct, relatedProduct) => {
+    setViewModal(true) && setModalFeatures([currentProduct, relatedProduct])
+  }
+
+
   const nextCard = () => {
     if (currentIndex >= 0 && currentIndex < (currentRelated - 1)) {
       setCurrentIndex(currentIndex => currentIndex + 1)
@@ -73,6 +79,11 @@ export default function Carousel(props) {
               getProductDetails={getProductDetails}
               currentIndex={currentIndex}
               resetState={resetState} />
+            <Comparison
+              relatedProducts={relatedProducts}
+              getProductDetails={getProductDetails}
+              showModal={showModal}
+            />
           </div>
           {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
         </div>

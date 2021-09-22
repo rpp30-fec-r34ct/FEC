@@ -13,7 +13,7 @@ export default function Carousel(props) {
   const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [viewModal, setViewModal] = useState(false);
-  const [modalFeatures, setModalFeatures] = useState([])
+
 
   const currentRelated = relatedProducts.length
   const { productId } = useParams()
@@ -45,13 +45,11 @@ export default function Carousel(props) {
   }
 
 
-  const toggleModal = () => {
-    setViewModal(prevState => !prevState)
-  }
+  // const toggleModal = () => {
+  //   setViewModal(prevState => !prevState)
+  // }
 
-  const showModal = (currentProduct, relatedProduct) => {
-    setViewModal(true) && setModalFeatures([currentProduct, relatedProduct])
-  }
+
 
 
   const nextCard = () => {
@@ -73,8 +71,7 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <ProductList
           relatedProducts={relatedProducts}
-          toggleModal={toggleModal}
-          showModal={showModal}
+          // toggleModal={toggleModal}
           getProductDetails={getProductDetails}
           currentIndex={currentIndex}
           resetState={resetState} />
@@ -82,7 +79,7 @@ export default function Carousel(props) {
         <Comparison
           relatedProducts={relatedProducts}
           getProductDetails={getProductDetails}
-          toggleModal={toggleModal}
+        // toggleModal={toggleModal}
         />
       </div>
       <div className='outfit-overview'>

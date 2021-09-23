@@ -93,7 +93,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>LOAD MORE ANSWERS</a>
+          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>LOAD MORE ANSWERS</a></div>
         }
         return (
           <NewAnswer
@@ -106,10 +106,6 @@ const AnswerList = (props) => {
           year={year}
           helpfulness={answer.helpfulness}
           />
-          // <div className='answer-body' id={answer.answer_id} key={answer.answer_id + 1}>
-          //   <div>A: {answer.body}</div>
-          //   <div className='answer-panel'><div>by {answer.answerer_name}, {month} {day}, {year} | <div>Helpful?</div><div className='helpful-answer' onClick={helpfulAnswer}>Yes</div><div>({answer.helpfulness})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
-          // </div>
         )
       }) : null}
       </div>

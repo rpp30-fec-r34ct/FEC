@@ -52,14 +52,16 @@ const AnswerModal = (props) => {
   return (
     <>
       {props.showModal ? (
-        <div className='add-answer-form' id={props.question_id}>
-          <h1>Product, Question Body</h1>
-          <form onSubmit={submitNewAnswer}>
-            <input name='answer' type='text' placeholder='Your Answer' />
-            <input name='nickname' type='text' placeholder='Your Nickname' />
-            <input name='email' type='text' placeholder='Your Email' />
-            <button type='submit'>Submit</button>
-          </form>
+        <div id="answer-modal">
+          <div className='add-answer-form' id={props.question_id}>
+            <h1>Product: {props.question_body}</h1>
+            <form onSubmit={submitNewAnswer}>
+              <input name='answer' type='text' placeholder='Your Answer' />
+              <input name='nickname' type='text' placeholder='Your Nickname' />
+              <input name='email' type='text' placeholder='Your Email' />
+              <button type='submit'>Submit</button>
+            </form>
+          </div>
         </div>
 
       ) : null}

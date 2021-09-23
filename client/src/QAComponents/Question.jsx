@@ -59,7 +59,7 @@ const Question = (props) => {
         <a href="" id='add-answer' onClick={addAnswer}>ADD ANSWER</a>
       </div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}
-      <AnswerModal showModal={showModal} question_id={props.question_id}/>
+      <AnswerModal showModal={showModal} question_id={props.question_id} body={props.question_body}/>
     </>
   )
 }

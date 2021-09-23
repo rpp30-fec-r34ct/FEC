@@ -49,7 +49,7 @@ const QuestionModal = (props) => {
   )
 
   return (
-    <>
+    <div id="question-modal">
       {props.showQuestionModal ? (
         <div className='add-question-form' id={props.product_id}>
           <h1>Product</h1>
@@ -62,7 +62,7 @@ const QuestionModal = (props) => {
         </div>
 
       ) : null}
-    </>
+    </div>
   )
 }
 

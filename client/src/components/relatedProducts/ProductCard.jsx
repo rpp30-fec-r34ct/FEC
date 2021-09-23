@@ -4,12 +4,11 @@ import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
 
 const ProductCard = ({ product }) => (
+
   <div className='product-card'>
     <div className='card-container'>
       <div className='card-visuals'>
-        <div className='favorite-btn'>
-          <Comparison name={name} />
-        </div>
+        <Comparison />
         <div className='card-image'>
           <img src={product.photo} />
         </div>

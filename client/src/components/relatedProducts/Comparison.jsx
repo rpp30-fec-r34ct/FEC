@@ -5,22 +5,21 @@ import ReactDOM from 'react-dom';
 import { AiOutlineStar } from 'react-icons/ai'
 import { createPortal } from 'react-dom'
 
-const Comparison = ({ name }) => {
+const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = () => setOpen(!isOpen);
 
   return (
     <React.Fragment>
-      <button className="fav-btn" onClick={() => toggleModal()}>
-        <AiOutlineStar>
-        </AiOutlineStar>
-      </button>
+      <div className="favorite-btn" onClick={() => toggleModal()}>
+        <AiOutlineStar />
+      </div>
 
       {isOpen
         ? createPortal(
           <React.Fragment>
             <div className="modal">
-              <h4>{name}</h4>
+              <h4>TEST</h4>
               <button className="close" onClick={toggleModal}>
                 Close
               </button>

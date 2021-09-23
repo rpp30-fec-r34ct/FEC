@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import ProductCards from '../../../client/src/components/relatedProducts/ProductCards.jsx'
+import ProductCard from '../../../client/src/components/relatedProducts/ProductCard.jsx'
 
 const relatedProductsData =
 [
@@ -98,20 +98,20 @@ const relatedProductsData =
 
 describe('Product Cards', function () {
   test('Should render the related product categories on cards', function () {
-    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    const app = render(<ProductCard product={relatedProductsData[0]} />)
     expect(app.getByText(relatedProductsData[0].category)).toBeInTheDocument()
   })
   test('Should render the related product names on cards', function () {
-    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    const app = render(<ProductCard product={relatedProductsData[0]} />)
     expect(app.getByText(relatedProductsData[0].name)).toBeInTheDocument()
   })
   test('Should render the related product prices on cards', function () {
-    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    const app = render(<ProductCard product={relatedProductsData[0]} />)
     expect(app.getByText(`$${relatedProductsData[0].price}`)).toBeInTheDocument()
   })
 
   test('Should render the related product images on cards', function () {
-    const app = render(<ProductCards product={relatedProductsData[0]} />)
+    const app = render(<ProductCard product={relatedProductsData[0]} />)
     expect(app.container.querySelector(`[src='${relatedProductsData[0].photo}']`)).toBeInTheDocument()
   })
 })

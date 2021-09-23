@@ -9,9 +9,12 @@ import './Carousel.css'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
+  const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const length = relatedProducts.length
+
+
+  const currentRelated = relatedProducts.length
   const { productId } = useParams()
 
   useEffect(() => {
@@ -27,14 +30,25 @@ export default function Carousel(props) {
     }
   }
 
+  const getProductDetails = async () => {
+    try {
+      const { data } = await axios.get(`/api/products/${productId}`)
+      setProductDetails(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+
+
   const nextCard = () => {
-    if (currentIndex >= 0 && currentIndex < (length - 1)) {
+    if (currentIndex >= 0 && currentIndex < (currentRelated - 1)) {
       setCurrentIndex(currentIndex => currentIndex + 1)
     }
   }
 
   const prevCard = () => {
-    if (currentIndex > 0 && currentIndex <= (length - 1)) {
+    if (currentIndex > 0 && currentIndex <= (currentRelated - 1)) {
       setCurrentIndex(currentIndex => currentIndex - 1)
     }
   }
@@ -44,16 +58,12 @@ export default function Carousel(props) {
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
-        <div className='carousel-content-wrapper'>
-          <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
-            {
-              relatedProducts.map((product, index) => {
-                return <ProductList key={index} product={product} />
-              })
-            }
-          </div>
-        </div>
-        {currentIndex < (length - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        <ProductList
+          relatedProducts={relatedProducts}
+          getProductDetails={getProductDetails}
+          currentIndex={currentIndex}
+        />
+        {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>
@@ -67,6 +77,6 @@ export default function Carousel(props) {
           <FaChevronRight className='right-arrow' />
         </div>
       </div>
-    </div>
+    </div >
   )
 }

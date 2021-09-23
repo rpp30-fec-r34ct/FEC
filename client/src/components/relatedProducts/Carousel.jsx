@@ -6,6 +6,7 @@ import OutfitList from './OutfitList.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
+import MouseTracker from './../MouseTracker.jsx'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])

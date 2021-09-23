@@ -5,12 +5,11 @@ const ClickTrackerComponent = (props) => {
   const submitTrackedInfo = (e, widget) => {
     console.log(e.target)
     axios.post('/api/interactions', {
-      element: `${e.target}`,
-      time: Date.now(),
+      element: `${e.target.outerHTML}`,
+      time: `${Date.now()}`,
       widget: widget
-      // TODO: Update to a dynamic widget
     })
-      .then(response => console.log(response))
+      .then(response => console.log(response.data))
       .catch(err => console.log(err))
   }
 

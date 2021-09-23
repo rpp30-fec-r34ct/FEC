@@ -6,6 +6,7 @@ import axios from 'axios'
 const QuestionModal = (props) => {
   const modalRef = useRef()
   const [showQuestionModal, setShowQuestionModal] = useState(props.showQuestionModal)
+  const productID = useParams().productId
   const closeModal = e => {
     if (modalRef.current === e.target) {
       setShowQuestionModal(false)
@@ -24,11 +25,19 @@ const QuestionModal = (props) => {
 
   const submitNewQuestion = (e) => {
     e.preventDefault()
-    // console.log(props.question_id);
-    const answer = e.target[0].value
-    const nickname = e.target[1].value
+    console.log(e);
+    const body = e.target[0].value
+    const name = e.target[1].value
     const email = e.target[2].value
-    const id = e.target.parentNode.id
+    const id = productID
+    axios.post('/qa/newquestion?' + 'body=' + body + '&name=' + name + '&email=' + email + '&product_id=' + id, {
+      body: body,
+      name: name,
+      email: email,
+      id: id
+    })
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
   }
 
   useEffect(

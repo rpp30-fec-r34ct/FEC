@@ -33,8 +33,7 @@ const Question = (props) => {
   }
 
   // SHOW MODAL
-  const openModal = (e) => {
-    e.preventDefault()
+  const openModal = () => {
     setShowModal(!showModal)
   }
 
@@ -55,7 +54,6 @@ const Question = (props) => {
 
   return (
     <>
-      {console.log(props.question_helpfulness, qHelpfulness)}
       <div id={props.question_id} className='question-body'>
         <div>Q: {props.question_body}</div><div>Helpful?</div><a href="" className='helpful-question' onClick={addHelpfulQuestion}>Yes</a> <div>({qHelpfulness ? qHelpfulness : props.question_helpfulness})</div>
         <a href="" id='add-answer' onClick={addAnswer}>ADD ANSWER</a>

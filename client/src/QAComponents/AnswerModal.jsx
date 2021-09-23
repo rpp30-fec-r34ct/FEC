@@ -29,12 +29,15 @@ const AnswerModal = (props) => {
     const nickname = e.target[1].value
     const email = e.target[2].value
     const id = e.target.parentNode.id
-    axios.post('http://localhost:3000/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id, {
+    const photos = []
+    axios.post('/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id, {
       answer: answer,
       nickname: nickname,
       email: email,
-      id: id
+      id: id,
+      photos: photos
     })
+      .then(data => console.log(data))
       .catch(err => console.error(err))
   }
 

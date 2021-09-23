@@ -84,7 +84,7 @@ const NewAnswer = (props) => {
     <>
       <div className='answer-body' id={props.id} key={props.id + 1}>
             <div>A: {props.body}</div>
-            <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : null})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
+            <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div>
           </div>
       <div>{renderMoreAnswers}</div>
     </>

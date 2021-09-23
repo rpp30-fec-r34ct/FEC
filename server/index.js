@@ -140,16 +140,38 @@ app.put('/qa/answers/helpful', (req, res) => {
   })
 })
 
-app.post('/qa/answer', (req, res) => {
-  // console.log(req);
-  axios.post('/qa/questions/' + req.query.id + '/answers', {
-    body: req.query.answer,
-    name: req.query.nickname,
-    email: req.query.email,
-    photos: req.query.photos
-  }, {
+app.post('/qa/newquestion', (req, res) => {
+  axios({
+    method: 'post',
+    url: APIurl + 'qa/questions/',
     headers: {
       Authorization: token.API_KEY
+    },
+    data: {
+      body: req.query.body,
+      name: req.query.name,
+      email: req.query.email,
+      product_id: Number(req.query.product_id)
+    }
+  })
+    .then(data => {
+      res.status(200).send('new question added')
+    })
+    .catch(err => console.error(err))
+})
+
+app.post('/qa/answer', (req, res) => {
+  axios({
+    method: 'post',
+    url: APIurl + 'qa/questions/' + req.query.id + '/answers',
+    headers: {
+      Authorization: token.API_KEY
+    },
+    data: {
+      body: req.query.answer,
+      name: req.query.nickname,
+      email: req.query.email,
+      photos: req.query.photos
     }
   })
     .then(data => {

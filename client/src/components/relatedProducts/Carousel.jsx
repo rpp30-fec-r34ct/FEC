@@ -12,7 +12,6 @@ export default function Carousel(props) {
   const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
 
-  const [viewModal, setModal] = useState(false);
 
 
   const currentRelated = relatedProducts.length
@@ -40,9 +39,6 @@ export default function Carousel(props) {
     }
   }
 
-  const toggleModal = () => {
-    setModal(!viewModal)
-  }
 
 
   const nextCard = () => {
@@ -66,7 +62,7 @@ export default function Carousel(props) {
           relatedProducts={relatedProducts}
           getProductDetails={getProductDetails}
           currentIndex={currentIndex}
-          toggleModal={toggleModal} />
+        />
         {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <div className='outfit-overview'>

@@ -29,7 +29,7 @@ const ProductBreakdown = (props) => {
 
   for (var key in props.characteristicsData) {
     breakDownComponents.push(
-      <div className="productBreakDownSection" key={key}>
+      <div data-testid='testProductBreakdown' className="productBreakDownSection" key={key}>
         <span className="productBreakDownTitle">{key}</span><br></br>
         <ProductBreakDownBar rating={props.characteristicsData[key].value}/>
         <div className="productBreakDownLimitHolder">

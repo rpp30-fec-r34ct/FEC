@@ -7,17 +7,25 @@
  import '@testing-library/jest-dom'
 
  // component
- import productBreakDown from '../../../client/src/components/Review Widget/productBreakDown.jsx'
- const characteristicsData = {
-  {Fit: 2.4 }
+ import ProductBreakdown from '../../../client/src/components/Review Widget/ProductBreakdown.jsx'
+
+ const data = {
+  Fit: 2.4
  }
 
+ describe('Product Breakdown Component', () => {
 
- describe('Bar Line Component', () => {
    test('Should be on the DOM', function () {
-     render(<productBreakDown numberOfReviews={data.numberOfReviews} star={data.star} />)
+     render(<ProductBreakdown characteristicsData={data} />)
 
-     const barLineElement = screen.getByTestId('testBarLine')
-     expect(barLineElement).toHaveClass('BarLine');
+     const productBreakDownElem = screen.getByTestId('testProductBreakdown')
+     expect(productBreakDownElem).toBeInTheDocument();
    })
+
+   test('Should have a product breakdown bar', function () {
+    render(<ProductBreakdown characteristicsData={data} />)
+
+    const productBreakDownBar = screen.getByTestId('testProductBreakdownBar')
+    expect(productBreakDownBar).toHaveClass('productBreakDownBar');
+  })
  })

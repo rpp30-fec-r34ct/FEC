@@ -18,7 +18,7 @@ const ProductBreakDownBar = (props) => {
 
   return (
     <>
-      <div className="productBreakDownBar">
+      <div data-testid="testProductBreakdownBar" className="productBreakDownBar">
         <div className="breakDownRect" style={charBar}></div>
         <div className="breakDownRect" style={charBar}></div>
         <div className="breakDownRect" style={charBar}></div>

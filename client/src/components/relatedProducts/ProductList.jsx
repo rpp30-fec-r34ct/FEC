@@ -11,9 +11,8 @@ export default function ProductList(props) {
               return <ProductCards
                 key={index}
                 product={product}
-                toggleModal={props.toggleModal}
                 getProductDetails={props.getProductDetails}
-                resetState={props.resetState}
+                toggleModal={props.toggleModal}
               />
             })
           }

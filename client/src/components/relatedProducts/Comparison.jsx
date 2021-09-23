@@ -1,23 +1,16 @@
 /* eslint-disable */
 import React from 'react'
 import ReactDOM from 'react-dom';
-import { GiCheckMark } from 'react-icons/gi'
+// import { GiCheckMark } from 'react-icons/gi'
+import { createPortal } from 'react-dom'
 
-const Comparison = ({ message, onShow, onClose, children }) => showModal ? ReactDOM.createPortal(
-  < React.Fragment >
-    <div className="modal-overview">
-      <div className="modal-wrapper">
-        <div className="modal">
-          <div className="modal-header">
-            <button onClick={onClose} className="modal-close">
-              Close
-            </button>
-          </div>
-          <p>{message}</p>
-        </div>
+export default function Comparison(props) {
+  return (
+    < React.Fragment >
+      <div className="modal">
+        <h4>Test</h4>
       </div>
-    </div>
-  </React.Fragment >, document.body
-) : null;
+    </React.Fragment >
+  )
+}
 
-export default Comparison;

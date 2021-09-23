@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
-import Comparison from './Comparison.jsx'
 import axios from 'axios'
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
@@ -12,7 +11,8 @@ export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [productDetails, setProductDetails] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [viewModal, setViewModal] = useState(false);
+
+  const [viewModal, setModal] = useState(false);
 
 
   const currentRelated = relatedProducts.length
@@ -40,16 +40,9 @@ export default function Carousel(props) {
     }
   }
 
-  const resetState = () => {
-    setCurrentIndex(0)
+  const toggleModal = () => {
+    setModal(!viewModal)
   }
-
-
-  // const toggleModal = () => {
-  //   setViewModal(prevState => !prevState)
-  // }
-
-
 
 
   const nextCard = () => {
@@ -71,16 +64,10 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <ProductList
           relatedProducts={relatedProducts}
-          // toggleModal={toggleModal}
           getProductDetails={getProductDetails}
           currentIndex={currentIndex}
-          resetState={resetState} />
+          toggleModal={toggleModal} />
         {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
-        <Comparison
-          relatedProducts={relatedProducts}
-          getProductDetails={getProductDetails}
-        // toggleModal={toggleModal}
-        />
       </div>
       <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>

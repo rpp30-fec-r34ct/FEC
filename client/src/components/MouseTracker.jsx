@@ -1,28 +1,29 @@
 import { useState, useEffect } from 'react';
 
-const useMouse = () => {
+const useMouse = (ref, componentName) => {
   const [mouseLocation, setMouseLocation] = useState({ x: 0, y: 0 });
   const [element, setElement] = useState(null);
 
+  const node = ref.current;
+
   useEffect(() => {
-    const moveListener =
-      window.addEventListener('mousemove', (e) =>
-        setMouseLocation({ x: e.clientX, y: e.clientY })
+    const moveListener = node?.addEventListener('mousemove', (e) =>
+      setMouseLocation({ x: e.clientX, y: e.clientY });
+    );
+
+  const clickListener = node?.addEventListener('click', (e) =>
+    setElement(e.target.toString());
+  alert(`clicked ${componentName}`);
       );
 
-    const clickListener =
-      window.addEventListener('click', (e) =>
-        setElement(e.target.toString())
-      );
 
+return () => {
+  node.removeEventListener('mousemove', listener);
+  node.removeEventListener('click', clickListener);
+};
+}, [ref, componentName]);
 
-    return () => {
-      window.removeEventListener('mousemove', listener);
-      window.removeEventListener('click', clickListener);
-    };
-  }, []);
-
-  return { ...mouseLocation, element };
+return { ...mouseLocation, element, componentName };
 };
 
 export default useMouse;

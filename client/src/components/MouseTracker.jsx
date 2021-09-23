@@ -8,22 +8,23 @@ const useMouse = (ref, componentName) => {
 
   useEffect(() => {
     const moveListener = node?.addEventListener('mousemove', (e) =>
-      setMouseLocation({ x: e.clientX, y: e.clientY });
+      setMouseLocation({ x: e.clientX, y: e.clientY })
     );
 
-  const clickListener = node?.addEventListener('click', (e) =>
-    setElement(e.target.toString());
-  alert(`clicked ${componentName}`);
-      );
+    const clickListener = node?.addEventListener('click', (e) => {
+      setElement(e.target.toString())
+      alert(`clicked ${componentName}`)
+    });
 
+    return () => {
+      if (node) {
+        node.removeEventListener('mousemove', listener);
+        node.removeEventListener('click', clickListener);
+      }
+    };
+  }, [ref, componentName]);
 
-return () => {
-  node.removeEventListener('mousemove', listener);
-  node.removeEventListener('click', clickListener);
-};
-}, [ref, componentName]);
-
-return { ...mouseLocation, element, componentName };
+  return { ...mouseLocation, element, componentName };
 };
 
 export default useMouse;

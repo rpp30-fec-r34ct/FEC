@@ -78,7 +78,6 @@ export default function Carousel(props) {
           <FaChevronRight className='right-arrow' />
         </div>
       </div>
-      <MouseTracker />
     </div >
   )
 }

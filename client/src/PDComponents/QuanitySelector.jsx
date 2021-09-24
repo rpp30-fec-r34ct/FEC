@@ -9,16 +9,23 @@ const QuanitiySelectorComponent = ({ selectedSize }) => {
     }
   }
 
+  const selectStyles = {
+    height: '3em',
+    width: '8em',
+    borderRadius: 0,
+    textAlign: 'center'
+  }
+
   return (
     <>
       {selectedSize
         ? (
-          <select defaultValue='1' disabled={false}>
+          <select style={selectStyles} defaultValue='1' disabled={false}>
             {selections}
           </select>
           )
         : (
-          <select defaultValue='-' disabled>
+          <select style={selectStyles} defaultValue='-' disabled>
             <option value='-' disabled>-</option>
           </select>
           )}

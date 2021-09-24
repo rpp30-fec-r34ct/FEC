@@ -9,18 +9,25 @@ const SizeSelectorComponent = ({ selectedStyle, updateSelectedSize }) => {
     }
   }
 
+  const selectStyles = {
+    height: '3em',
+    width: '8em',
+    borderRadius: 0,
+    textAlign: 'center'
+  }
+
   return (
     <>
       {selectedStyle
         ? (
-          <select onChange={updateSelectedSize} defaultValue='0'>
+          <select style={selectStyles} onChange={updateSelectedSize} defaultValue='0'>
             <option value='0' disabled>Select Size</option>
             {skus}
           </select>
           )
 
         : (
-          <select disabled defaultValue='OUT OF STOCK'>
+          <select style={selectStyles} disabled defaultValue='OUT OF STOCK'>
             <option value='OUT OF STOCK' disabled='disabled'>OUT OF STOCK</option>
           </select>
           )}

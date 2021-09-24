@@ -1,11 +1,10 @@
 import React from 'react'
+import SizeSelector from './SizeSelector.jsx'
 
-const ProductCheckoutComponent = (props) => {
+const ProductCheckoutComponent = ({ selectedStyle }) => {
   return (
     <div>
-      <select defaultValue='none'>
-        <option value='none' disabled hidden>Select an Option</option>
-      </select>
+      <SizeSelector selectedStyle={selectedStyle} />
 
       <select>
         <option value='1'>1</option>

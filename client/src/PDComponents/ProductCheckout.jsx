@@ -20,8 +20,9 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
     flexDirection: 'column'
   }
 
-  const containerStyles = { display: 'flex', justifyContent: 'space-evenly' }
+  const containerStyles = { display: 'flex', justifyContent: 'space-evenly', marginTop: '2em' }
 
+  const buttonStyles = {height: '2em', width: '10em', borderRaidus: 0, textAlign: 'center', backgroundColor: 'transparent', border: 'solid 1px black'}
   return (
     <div style={checkoutStyles}>
       <div style={containerStyles}>
@@ -31,8 +32,8 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
       </div>
 
       <div style={containerStyles}>
-        <button>Add to bag    +</button>
-        <button>Favorite</button>
+        <button style={buttonStyles}>Add to bag    +</button>
+        <button style={buttonStyles}>Favorite</button>
       </div>
 
     </div>

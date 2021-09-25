@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useRef } from 'react'
+import React from 'react'
 
 
 const ClickTrackerComponent = (props) => {

@@ -39,7 +39,6 @@ const QAList = (props) => {
 
   const addQuestion = (e) => {
     e.preventDefault()
-    console.log('event clicked')
     setShowQuestionModal(true)
   }
 

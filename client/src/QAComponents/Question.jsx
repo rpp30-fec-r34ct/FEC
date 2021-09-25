@@ -17,24 +17,41 @@ const Question = (props) => {
   const productID = useParams().productId
 
   // SERVER REQUESTS
-  const initialize = (callback) => {
-    axios.get('/qa/questions' + '?product_id=' + productID)
-      .then((data) => {
-        callback(null, data.data.results)
-      })
-      .catch((err) => {
-        console.error('error while getting product data from server')
-      })
-  }
+  // const initialize = (callback) => {
+  //   axios.get('/qa/questions' + '?product_id=' + productID)
+  //     .then((data) => {
+  //       callback(null, data.data.results)
+  //     })
+  //     .catch((err) => {
+  //       console.error('error while getting product data from server')
+  //     })
+  // }
 
   const addAnswer = (e) => {
     e.preventDefault()
-    openModal()
+    console.log('current modal:', showModal)
+    return setShowModal(true)
+    // if (!document.getElementById('answer-modal')) {
+    //   console.log('modal is not shown')
+    //   setShowModal(true)
+    // }
   }
 
-  // SHOW MODAL
-  const openModal = () => {
-    setShowModal(!showModal)
+  const keyPress = (e) => {
+    console.log('does this work too?')
+    if (e.key === 'Escape') {
+      setShowModal(false)
+    }
+  }
+
+  const handleClickOutside = (e) => {
+    if (e.target.id === 'answer-modal' && e.target.className !== 'add-answer-form') {
+      console.log('did not click the modal')
+      setShowModal(false)
+    }
+    if (e.target.className === "close-button") {
+      setShowModal(false)
+    }
   }
 
   const addHelpfulQuestion = (e) => {
@@ -46,20 +63,51 @@ const Question = (props) => {
       .catch(err => { console.error(err) })
   }
 
-  // useEffect(() => {
-  //   initialize((err, data) => {
-  //     setQuestion(firstRender ? data.slice(0, 2) : data)
-  //   })
-  // }, [])
+  useEffect(
+    () => {
+      document.addEventListener('keydown', keyPress)
+      document.addEventListener('click', handleClickOutside)
+      return () => {
+        document.removeEventListener('keydown', keyPress)
+        document.removeEventListener('click', handleClickOutside)
+      }
+    },
+    [showModal]
+  )
 
   return (
     <>
       <div id={props.question_id} className='question-body'>
-        <div>Q: {props.question_body}</div><div>Helpful?</div><a href="" className='helpful-question' onClick={addHelpfulQuestion}>Yes</a> <div>({qHelpfulness ? qHelpfulness : props.question_helpfulness})</div>
-        <a href="" id='add-answer' onClick={addAnswer}>ADD ANSWER</a>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                Q: {props.question_body}
+              </th>
+            </tr>
+            <tr>
+              <td>
+                Helpful?
+              </td>
+              <td>
+                <a className="panel-element" href="" className='helpful' onClick={addHelpfulQuestion}>Yes</a>
+              </td>
+              <td className="panel-element">
+                ({qHelpfulness ? qHelpfulness : props.question_helpfulness})
+              </td>
+              <td>
+                <a href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="question-panel">
+        </div>
       </div>
+      <div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}
-      <AnswerModal showModal={showModal} question_id={props.question_id} body={props.question_body}/>
+      </div>
+      {<AnswerModal showModal={showModal} question_id={props.question_id} body={props.question_body}/>}
     </>
   )
 }

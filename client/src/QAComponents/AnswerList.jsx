@@ -5,14 +5,10 @@ import axios from 'axios'
 import NewAnswer from './NewAnswer.jsx'
 
 const AnswerList = (props) => {
-  const [state, setState] = useState()
   const [answers, setAnswers] = useState(['test1, test2'])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
-  const [moreQuestions, setMoreQuestions] = useState(['dummy', 'data'])
-  const [didMount, setDidMount] = useState(false)
   const [helpfulAns, setHelpfulAns] = useState(0)
   let renderMoreAnswers = <div />
-  // const [questionId, setQuestionId] = useState(props.question_id);
 
   // SERVER REQUESTS
   const getAllAnswers = (question, callback) => {
@@ -24,32 +20,6 @@ const AnswerList = (props) => {
         callback(null, data)
       })
       .catch(err => console.log(err))
-  }
-
-  const reportAnswer = (e) => {
-    const answerId = e.target.parentNode.parentNode.parentNode.id
-    e.preventDefault()
-    axios.put('/qa/answers/report/?answer_id=' + answerId)
-      .then(data => {
-        console.log(data)
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
-
-  const helpfulAnswer = (e) => {
-    const answerId = e.target.parentNode.parentNode.parentNode.id
-    console.log('clicked')
-    e.preventDefault()
-    axios.put('/qa/answers/helpful/?answer_id=' + answerId)
-      .then(data => {
-        console.log(helpfulAns)
-        return setHelpfulAns(!helpfulAns)
-      })
-      .catch(err => {
-        console.error(err)
-      })
   }
 
   // INITIAL RENDER
@@ -84,7 +54,7 @@ const AnswerList = (props) => {
 
   return (
     <>
-      <div>{answers ? answers.map(answer => {
+      <div>{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -101,13 +71,14 @@ const AnswerList = (props) => {
           key={answer.answer_id + 1}
           body={answer.body}
           name={answer.answerer_name}
+          photos={answer.photos}
           month={month}
           day={day}
           year={year}
           helpfulness={answer.helpfulness}
           />
         )
-      }) : null}
+      })}
       </div>
       {moreAnswers && moreAnswers.length > 0 ? <div>{renderMoreAnswers}</div> : null}
     </>

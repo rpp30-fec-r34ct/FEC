@@ -118,7 +118,7 @@ app.put('/qa/answers/report', (req, res) => {
     }
   })
     .then(data => {
-      res.sendStatus(200).send('data')
+      res.sendStatus(200)
     })
     .catch(err => {
       console.error(err)
@@ -156,12 +156,13 @@ app.post('/qa/newquestion', (req, res) => {
     }
   })
     .then(data => {
-      res.status(200).send('new question added')
+      res.send('new question added')
     })
-    .catch(err => console.error(err))
+    .catch(err => res.send(err))
 })
 
 app.post('/qa/answer', (req, res) => {
+  console.log(req)
   axios({
     method: 'post',
     url: APIurl + 'qa/questions/' + req.query.id + '/answers',
@@ -176,9 +177,9 @@ app.post('/qa/answer', (req, res) => {
     }
   })
     .then(data => {
-      res.status(200).send('new answer added')
+      res.send('new answer added')
     })
-    .catch(err => console.error(err))
+    .catch(err => res.send(err))
 })
 /////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 

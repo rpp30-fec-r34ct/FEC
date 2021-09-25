@@ -34,10 +34,10 @@ const ReviewList = (props) => {
   const moreReviews = () => {
     if (reviewDisplayCount < props.totalReviews) {
       setDisplayCount(reviewDisplayCount + 2)
-      getReviews(reviewDisplayCount + 2);
+      getReviews(reviewDisplayCount + 2, props.product_id);
     } else {
       setDisplayCount(props.totalReviews);
-      getReviews(props.totalReviews);
+      getReviews(props.totalReviews, props.product_id);
     }
   }
 

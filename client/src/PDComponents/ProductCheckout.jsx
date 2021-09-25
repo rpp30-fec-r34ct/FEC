@@ -4,15 +4,22 @@ import QuanitiySelector from './QuanitySelector.jsx'
 
 const ProductCheckoutComponent = ({ selectedStyle }) => {
   const [selectedSize, setSelectedSize] = useState(null)
+  const [selectedSku, setSelectedSku] = useState(null)
 
   const handleSizeChange = (e) => {
     e.preventDefault()
     const sizeId = e.target.value
-    updateSelectedSize(selectedStyle.skus[sizeId])
+    updateSelectedSize(selectedStyle.skus[sizeId], sizeId)
   }
 
-  const updateSelectedSize = (newSelection) => {
+  const handleNoSkuClick = (e) => {
+    e.preventDefault()
+    // focus on drop down
+  }
+
+  const updateSelectedSize = (newSelection, sizeId) => {
     setSelectedSize(newSelection)
+    setSelectedSku(sizeId)
   }
 
   const checkoutStyles = {

@@ -13,6 +13,14 @@ const ReviewTile = (props) => {
     return returnDate
   }
 
+  const getIsRecommended = (recommended) => {
+    if (recommended) {
+      return <div className='tile_recommend'>I recommend this product</div>
+    } else {
+      return;
+    }
+  }
+
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
@@ -24,7 +32,7 @@ const ReviewTile = (props) => {
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>
       <div className='tile_body'>{props.reviewData.body}</div>
-      <div className='tile_recommend'>I recommend this product</div>
+      {getIsRecommended(props.reviewData.recommend)}
       <div className='tile_response'>Response: {props.reviewData.response}</div>
       <div className='tile_helpfulSection'>
         <span>Helfpul?</span>

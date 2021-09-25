@@ -21,6 +21,14 @@ const ReviewTile = (props) => {
     }
   }
 
+  const getResponse = (response) => {
+    if (response !== null && response !== '') {
+      return <div className='tile_response'>Response: {response}</div>
+    } else {
+      return;
+    }
+  }
+
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
@@ -33,7 +41,7 @@ const ReviewTile = (props) => {
       <div className='tile_summary'>{props.reviewData.summary}</div>
       <div className='tile_body'>{props.reviewData.body}</div>
       {getIsRecommended(props.reviewData.recommend)}
-      <div className='tile_response'>Response: {props.reviewData.response}</div>
+      {getResponse(props.reviewData.response)}
       <div className='tile_helpfulSection'>
         <span>Helfpul?</span>
         <span className='tile_helpfulVote'>Yes</span>

@@ -8,15 +8,14 @@ const ReviewList = (props) => {
   const [reviewDisplayCount, setDisplayCount] = useState(2)
 
   useEffect(() => {
-    getReviews(reviewDisplayCount)
+    getReviews(reviewDisplayCount, props.product_id)
   }, [])
 
-  const getReviews = (count) => {
+  const getReviews = (count, productId) => {
     axios.get('/reviews', {
       params: {
-        page: 1,
         count: count,
-        product_id: props.product_id
+        product_id: productId
       }
     })
       .then((data) => {

@@ -29,19 +29,33 @@ app.get('/productDetail*', (req, res) => {
 
 app.get('/reviews', (req, res) => {
   req.query.page = Math.ceil(req.query.count/10);
+  // let results = [];
+  // let page = 0;
+  // let count = 0;
+
+  // if (req.query.page !== 1) {
+  //   for (var i = 1; i <= req.query.page; i++) {
+  //     if (i === req.query.page) {
+
+  //     }
+  //   }
+  // }
   req.query.count = req.query.count % 10;
-  axios.get(APIurl + 'reviews', {
-    headers: {
-      Authorization: token.API_KEY
-    },
-    params: req.query,
-  }).then((data) => {
-    res.status(200).send(data.data)
-  })
-    .catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
+  const getReviews = (page, count) => {
+    axios.get(APIurl + 'reviews', {
+      headers: {
+        Authorization: token.API_KEY
+      },
+      params: req.query,
+    }).then((data) => {
+      res.status(200).send(data.data)
     })
+      .catch((err) => {
+        console.error(err)
+        res.sendStatus(500)
+    })
+  }
+
 })
 
 

@@ -2,10 +2,13 @@ import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
+import { BrowserRouter, Route, Link as Router } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 const ProductCard = ({ product }) => (
 
-  <div className='product-card'>
+  // <Link to={'/product/:productId'}>
+  <div className='product-card' >
     <div className='card-container'>
       <div className='card-visuals'>
         <Comparison />
@@ -22,6 +25,7 @@ const ProductCard = ({ product }) => (
       </div>
     </div>
   </div>
+  // </Link>
 );
 
 export default ProductCard;

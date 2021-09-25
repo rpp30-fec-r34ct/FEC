@@ -252,6 +252,7 @@ app.get('/product/:id/related', async (req, res) => {
       const productChar = response.data.characteristics
 
       relatedProducts.push({
+        id: product.id,
         photo: productStyle[0],
         category: product.category,
         name: product.name,

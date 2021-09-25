@@ -27,7 +27,7 @@ const App = (props) => {
         <Route path='/reviewPage/:productId'>
           <ReviewSection />
         </Route>
-        <Route path='/product/:productId/questions'>
+        <Route path='/questions/:productId'>
           <QAList />
         </Route>
       </Switch>

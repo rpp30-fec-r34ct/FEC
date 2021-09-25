@@ -1,34 +1,35 @@
 /* eslint-disable */
-import React from 'react'
-import { GiCheckMark } from 'react-icons/gi'
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom';
+// import { GiCheckMark } from 'react-icons/gi'
+import { AiOutlineStar } from 'react-icons/ai'
+import { createPortal } from 'react-dom'
 
-export default function Comparison(props) {
+const Comparison = (props) => {
+  const [isOpen, setOpen] = useState(false);
+  const toggleModal = () => setOpen(!isOpen);
+
   return (
-    <div className='modal-overview'>
-      <div className='modal-content'>
-        <div className='modal-header'>
-          <table>
-            <tbody>
-              <tr>
-                <th className='modal-col-1'>Current Item</th>
-                <th className='modal-col-2'>COMPARING</th>
-                <th className='modal-col-3'>Related Item</th>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className='modal-body'>
-          <table>
-            <tbody>
-              <tr>
-                <td className='modal-col-1'>Current Item Feature</td>
-                <td className='modal-col-2'>Feature</td>
-                <td className='modal-col-3'>Related Item Feature</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+    <React.Fragment>
+      <div className="favorite-btn" onClick={() => toggleModal()}>
+        <AiOutlineStar />
       </div>
-    </div>
-  )
-}
+
+      {isOpen
+        ? createPortal(
+          <React.Fragment>
+            <div className="modal">
+              <h4>TEST</h4>
+              <button className="close" onClick={toggleModal}>
+                Close
+              </button>
+            </div>
+          </React.Fragment >,
+          document.getElementById('modal')
+        ) :
+        null}
+    </React.Fragment>
+  );
+};
+
+export default Comparison;

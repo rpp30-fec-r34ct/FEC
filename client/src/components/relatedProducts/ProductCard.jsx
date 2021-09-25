@@ -19,7 +19,7 @@ export default function ProductCard(props) {
           <div className='card-category'>{props.product.category}</div>
           <div className='card-name'>{props.product.name}</div>
           <div className='card-price'>${props.product.sale ? (props.product.sale && props.product.price) : props.product.price}</div>
-          <div className='card-rating' style={{ visibility: isNaN(helper.findStarRating(props.product.rating)) ? "hidden" : "" }}>
+          <div className='card-rating' style={{ visibility: isNaN(helper.findStarRating(props.product.rating)) && "hidden" }}>
             {helper.findStarRating(props.product.rating)}
           </div>
         </div>

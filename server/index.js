@@ -4,6 +4,7 @@ const port = 3000
 const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
+const maxAPIReturn = 8
 
 app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
@@ -29,30 +30,25 @@ app.get('/productDetail*', (req, res) => {
 
 app.get('/reviews', (req, res) => {
 
-  // let results = [];
-  // let page = 0;
-  // let count = 0;
+  req.query.page = Math.ceil(req.query.count/maxAPIReturn);
+  const initialCount = req.query.count
+  if (req.query.count % maxAPIReturn === 0) {
+    req.query.count = maxAPIReturn;
+  }
 
-  // if (req.query.page !== 1) {
-  //   for (var i = 1; i <= req.query.page; i++) {
-  //     if (i === req.query.page) {
-
-  //     }
-  //   }
-  // }
-
-  // const getReviews = (page, count) => {
-  // }
-
-  req.query.page = Math.ceil(req.query.count/10);
-  req.query.count = req.query.count % 10;
+  //forcing it to request the max # per page because the sorting changes as the # of reviews returned gets bigger. Doing this here
+  //helps prevent rendering two of the same reviews on the client side
+  req.query.count = maxAPIReturn;
   axios.get(APIurl + 'reviews', {
     headers: {
       Authorization: token.API_KEY
     },
     params: req.query,
   }).then((data) => {
-    res.status(200).send(data.data)
+    let startSlice = initialCount % maxAPIReturn ? initialCount % maxAPIReturn - 2 : maxAPIReturn - 2
+    let endSlice = initialCount % maxAPIReturn ? initialCount % maxAPIReturn : maxAPIReturn
+    let reviewsToSend = data.data.results.slice(startSlice, endSlice)
+    res.status(200).send(reviewsToSend)
   })
     .catch((err) => {
       console.error(err)

@@ -8,6 +8,11 @@ const token = require('./config.js')
 app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
+app.use('/questions/:id', express.static('client/dist'))
+app.use(express.json())
+
+
+
 
 app.get('/productDetail*', (req, res) => {
   // console.log('product details request received', req.url);
@@ -46,7 +51,6 @@ app.get('/reviews', (req, res) => {
 })
 
 app.get('/reviews/meta', (req, res) => {
-  console.log('got reviews request')
   axios.get(APIurl + 'reviews/meta', {
     headers: {
       Authorization: token.API_KEY
@@ -63,17 +67,14 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
+/////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 app.get('/qa/questions', (req, res) => {
-  console.log('questions and answers...', req._parsedUrl.search);
-  // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('I found the data');
-    // console.log(data.data.results);
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -83,16 +84,12 @@ app.get('/qa/questions', (req, res) => {
 })
 
 app.get('/qa/answers', (req, res) => {
-  // console.log('questions and answers...', req);
-  // let
   axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('I found the answers');
-    // console.log(data.data.results);
       res.status(200).send(data.data.results)
     })
     .catch(err => {
@@ -102,15 +99,15 @@ app.get('/qa/answers', (req, res) => {
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
-  console.log('helpful question', req.query.question_id)
+  // console.log(typeof req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-    // console.log('this is what I get from a successful post of helpful question', data);
-      res.status(204).send(data)
+      console.log('success?')
+      res.sendStatus(200)
     })
     .catch(err => {
       console.error(err)
@@ -119,14 +116,13 @@ app.put('/qa/helpfulquestion/', (req, res) => {
 })
 
 app.put('/qa/answers/report', (req, res) => {
-  console.log('made it this far', req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/report', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-      res.status(200).send('ANSWER REPORTED')
+      res.sendStatus(200)
     })
     .catch(err => {
       console.error(err)
@@ -135,37 +131,61 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...', req.query.answer_id)
+  console.log('made it this far...helpful question = ', typeof req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
-    .then(data => {
-      res.status(200).send('ANSWER MARKED AS HELPFUL')
-    })
-    .catch(err => {
-      console.error(err)
-    })
+  .then(data => {
+    res.status(200).send('ANSWER MARKED AS HELPFUL')
+  })
+  .catch(err => {
+    console.error(err)
+  })
 })
 
-app.post('/qa/answer', (req, res) => {
-  // console.log(req);
-  axios.post('/qa/questions/' + req.query.id + '/answers', {
-    body: req.query.answer,
-    name: req.query.nickname,
-    email: req.query.email,
-    photos: req.query.photos
-  }, {
+app.post('/qa/newquestion', (req, res) => {
+  axios({
+    method: 'post',
+    url: APIurl + 'qa/questions/',
     headers: {
       Authorization: token.API_KEY
+    },
+    data: {
+      body: req.query.body,
+      name: req.query.name,
+      email: req.query.email,
+      product_id: Number(req.query.product_id)
     }
   })
     .then(data => {
-      res.status(200).send('new answer added')
+      res.send('new question added')
     })
-    .catch(err => console.error(err))
+    .catch(err => res.send(err))
 })
+
+app.post('/qa/answer', (req, res) => {
+  console.log(req)
+  axios({
+    method: 'post',
+    url: APIurl + 'qa/questions/' + req.query.id + '/answers',
+    headers: {
+      Authorization: token.API_KEY
+    },
+    data: {
+      body: req.query.answer,
+      name: req.query.nickname,
+      email: req.query.email,
+      photos: req.query.photos
+    }
+  })
+    .then(data => {
+      res.send('new answer added')
+    })
+    .catch(err => res.send(err))
+})
+/////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
@@ -179,6 +199,26 @@ app.get('/api/*', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+app.post('/api/*', async (req, res) => {
+  const path = req.url.split('/api/')[1]
+  try {
+    const response = await axios(
+      {
+        method: 'POST',
+        url: APIurl + path,
+        headers: {
+          Authorization: token.API_KEY
+        },
+        data: req.body
+      }
+    )
+    res.status(201).send(response.data)
+  } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 })

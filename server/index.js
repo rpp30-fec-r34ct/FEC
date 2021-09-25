@@ -28,6 +28,8 @@ app.get('/productDetail*', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
+  req.query.page = Math.ceil(req.query.count/10);
+  req.query.count = req.query.count % 10;
   axios.get(APIurl + 'reviews', {
     headers: {
       Authorization: token.API_KEY

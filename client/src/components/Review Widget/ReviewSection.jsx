@@ -9,7 +9,12 @@ const ReviewSection = () => {
   const { productId } = useParams()
 
   const [reviewsMeta, setReviewsMeta] = useState({
-    ratings: null
+    ratings: null,
+    recommended: {
+      false: 0,
+      true: 0
+    },
+    product_id: productId
   })
 
   useEffect(() => {
@@ -46,7 +51,7 @@ const ReviewSection = () => {
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
-        {/* <ReviewMetaData metaData={reviewsMeta} /> */}
+        <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()}/>
         <ReviewList product_id={productId} totalReviews={getTotalReviews()} />
       </div>
     </div>

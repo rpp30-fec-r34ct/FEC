@@ -6,7 +6,7 @@ import helper from '../../helpers.js';
 import { useParams } from 'react-router-dom'
 
 export default function ProductCard(props) {
-  const { productId } = useParams()
+
   return (
     < div className='product-card' >
       <div className='card-container'>

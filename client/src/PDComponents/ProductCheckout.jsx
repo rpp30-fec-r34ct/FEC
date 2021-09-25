@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SizeSelector from './SizeSelector.jsx'
 import QuanitiySelector from './QuanitySelector.jsx'
+import AddToCart from './AddToCart.jsx'
 
 const ProductCheckoutComponent = ({ selectedStyle }) => {
   const [selectedSize, setSelectedSize] = useState(null)
@@ -15,6 +16,7 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
   const handleNoSkuClick = (e) => {
     e.preventDefault()
     // focus on drop down
+    document.querySelector('#style-select').focus()
   }
 
   const updateSelectedSize = (newSelection, sizeId) => {
@@ -39,7 +41,7 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
       </div>
 
       <div style={containerStyles}>
-        <button style={buttonStyles}>Add to bag    +</button>
+        <AddToCart sku={selectedSku} handleNoSkuClick={handleNoSkuClick} />
         <button style={buttonStyles}>Favorite</button>
       </div>
 

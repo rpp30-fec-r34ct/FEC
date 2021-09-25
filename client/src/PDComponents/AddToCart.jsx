@@ -24,3 +24,5 @@ const AddToCartComponent = ({ sku, handleNoSkuClick }) => {
 
   )
 }
+
+export default AddToCartComponent

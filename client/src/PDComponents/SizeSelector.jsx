@@ -20,7 +20,7 @@ const SizeSelectorComponent = ({ selectedStyle, updateSelectedSize }) => {
     <>
       {selectedStyle
         ? (
-          <select style={selectStyles} onChange={updateSelectedSize} defaultValue='0'>
+          <select id="style-select" style={selectStyles} onChange={updateSelectedSize} defaultValue='0'>
             <option value='0' disabled>Select Size</option>
             {skus}
           </select>

@@ -32,10 +32,7 @@ app.get('/reviews', (req, res) => {
     headers: {
       Authorization: token.API_KEY
     },
-    params: {
-      sort: req.query.sort,
-      product_id: req.query.product_id
-    }
+    params: req.query,
   }).then((data) => {
     res.status(200).send(data.data)
   })
@@ -44,6 +41,7 @@ app.get('/reviews', (req, res) => {
       res.sendStatus(500)
     })
 })
+
 
 app.get('/reviews/meta', (req, res) => {
   console.log('got reviews request')

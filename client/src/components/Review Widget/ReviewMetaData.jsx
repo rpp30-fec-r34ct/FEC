@@ -25,6 +25,7 @@ const ReviewMetaData = (props) => {
 
   useEffect(() => {
     getReviewsMeta()
+
   }, [])
 
   const getReviewsMeta = () => {
@@ -34,7 +35,8 @@ const ReviewMetaData = (props) => {
       }
     })
       .then((data) => {
-        calculateAverage(data.data)
+        setReviewsMeta(data.data)
+        // calculateAverage(data.data)
       })
       .catch((error) => {
         console.error(error)
@@ -45,12 +47,12 @@ const ReviewMetaData = (props) => {
     const noCount = parseInt(data.recommended.false)
     const yesCount = parseInt(data.recommended.true)
 
-    setReviewsMeta({
-      reviewsMeta: data,
-      average: currentAverage,
-      percentRecommend: Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100),
-      totalReviews: reviewCount
-    })
+    // setReviewsMeta({
+    //   reviewsMeta: data,
+    //   average: currentAverage,
+    //   percentRecommend: Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100),
+    //   totalReviews: reviewCount
+    // })
   }
 
   const calculateAverage = (data) => {

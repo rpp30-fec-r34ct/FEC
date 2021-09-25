@@ -43,3 +43,9 @@ h3 {
 .ratingBreakDown {
   margin-top: 20px;
 }
+
+.reviewList {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 500px;
+}

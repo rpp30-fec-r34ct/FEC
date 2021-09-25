@@ -5,32 +5,61 @@ import './cssFiles/reviewSection.css'
 
 const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
+  const [reviewDisplayCount, setDisplayCount] = useState(2)
 
   useEffect(() => {
-    getReviews()
+    getReviews(reviewDisplayCount)
   }, [])
 
-  const getReviews = () => {
+  const getReviews = (count) => {
     axios.get('/reviews', {
       params: {
-        sort: 'newest',
+        page: 1,
+        count: count,
         product_id: props.product_id
       }
     })
       .then((data) => {
-        setReviews(data.data.results)
+        // setReviews(data.data.results)
+        let reviews = data.data.results;
+        const reviewListTiles = []
+        reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} />)) })
+        // return reviewListTiles;
+        setReviews(reviewListTiles)
       })
       .catch((error) => {
         console.error(error)
       })
   }
 
-  const reviewListTiles = []
-  reviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} />)) })
+  const moreReviews = () => {
+    if (reviewDisplayCount < props.totalReviews) {
+      setDisplayCount(reviewDisplayCount + 2)
+      getReviews(reviewDisplayCount + 2);
+    } else {
+      setDisplayCount(props.totalReviews);
+      getReviews(props.totalReviews);
+    }
+  }
 
-  return (
-    <div className='reviewList'>{reviewListTiles}</div>
-  )
+
+  //only display the 'more reviews button if there are actually more reviews to display'
+  if (reviewDisplayCount < props.totalReviews) {
+    return (
+      <div>
+        <div className='reviewList'>{reviews}</div>
+        <div>
+          <button onClick={moreReviews}>More Reviews</button>
+        </div>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <div className='reviewList'>{reviews}</div>
+      </div>
+    )
+  }
 }
 
 export default ReviewList

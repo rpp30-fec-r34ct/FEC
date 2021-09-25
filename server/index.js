@@ -9,6 +9,10 @@ app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
+app.use(express.json())
+
+
+
 
 app.get('/productDetail*', (req, res) => {
   // console.log('product details request received', req.url);
@@ -195,6 +199,26 @@ app.get('/api/*', async (req, res) => {
     )
     res.json(response.data)
   } catch (err) {
+    res.status(500).send(err)
+  }
+})
+
+app.post('/api/*', async (req, res) => {
+  const path = req.url.split('/api/')[1]
+  try {
+    const response = await axios(
+      {
+        method: 'POST',
+        url: APIurl + path,
+        headers: {
+          Authorization: token.API_KEY
+        },
+        data: req.body
+      }
+    )
+    res.status(201).send(response.data)
+  } catch (err) {
+    console.log(err)
     res.status(500).send(err)
   }
 })

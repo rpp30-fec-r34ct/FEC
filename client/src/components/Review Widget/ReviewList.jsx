@@ -64,7 +64,7 @@ const ReviewList = (props) => {
       <div>
         <div className='reviewList'>{reviews}</div>
         <div>
-          <button onClick={moreReviews}>More Reviews</button>
+          <button onClick={moreReviews} className="moreReviewsButton">More Reviews</button>
         </div>
       </div>
     )

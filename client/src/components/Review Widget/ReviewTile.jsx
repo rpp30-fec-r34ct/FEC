@@ -1,6 +1,7 @@
 import './cssFiles/reviewTile.css'
 import ReviewStars from './ReviewStars.jsx'
 import React from 'react'
+import PhotoThumbnailRow from './PhotoThumbnailRow.jsx'
 
 const ReviewTile = (props) => {
   const translateDate = () => {
@@ -29,6 +30,14 @@ const ReviewTile = (props) => {
     }
   }
 
+  const getPhotos = (photos) => {
+    if (photos.length === 0) {
+      return;
+    } else {
+      return <PhotoThumbnailRow photos={props.reviewData.photos} />
+    }
+  }
+
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
@@ -40,6 +49,7 @@ const ReviewTile = (props) => {
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>
       <div className='tile_body'>{props.reviewData.body}</div>
+      {getPhotos(props.reviewData.photos)}
       {getIsRecommended(props.reviewData.recommend)}
       {getResponse(props.reviewData.response)}
       <div className='tile_helpfulSection'>

@@ -20,5 +20,16 @@
   font-weight: bold;
 }
 
+.moreReviewsButton {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 20px;
+  margin-left: 50px;
+  font-family: 'Playfair Display', serif;
+}
+
+.moreReviewsButton:hover {
+  color: lightblue;
+}
 
 

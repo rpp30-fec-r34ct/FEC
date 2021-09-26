@@ -3,6 +3,7 @@
 .reviewSection {
   display: flex;
   flex-direction: row;
+  margin: 100px auto;
 }
 
 .averageRating {
@@ -48,4 +49,16 @@ h3 {
   overflow: hidden;
   overflow-y: scroll;
   height: 600px;
+}
+
+.moreReviewsButton {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 20px;
+  margin-left: 50px;
+  font-family: 'Playfair Display', serif;
+}
+
+.moreReviewsButton:hover {
+  color: lightblue;
 }

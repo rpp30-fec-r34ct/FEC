@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import MainImgageCarousel from './MainImageCarousel.jsx'
+import SubImageCarousel from './SubImageCarousel.jsx'
 
 const MainImageGalleryComponent = (props) => {
-  const [selectedStyle, setSelectedStyle] = useState(false)
-  const [selectedImage, setSelectedImage] = useState()
+  const [selectedStyle, setSelectedStyle] = useState(null)
+  const [selectedImage, setSelectedImage] = useState(null)
   const [thumbnails, setThumbnails] = useState([])
   const [topIndex, setTopIndex] = useState(0)
+
+  useEffect(() => {
+    if (selectedStyle) {
+      setThumbnails(selectedStyle.photos.map((image, index) => {
+        return <img key={index} data-index={index} style={thumbnailStyle} src={image.thumbnail_url} onClick={imageClickHandler} />
+      }))
+    }
+  }, [selectedStyle])
 
   useEffect(() => {
     if (props.selectedStyle !== false) {
@@ -14,43 +24,22 @@ const MainImageGalleryComponent = (props) => {
     }
   }, [props])
 
-  useEffect(() => {
-    if (selectedStyle !== false) {
-      setThumbnails(selectedStyle.photos.map((image, index) => {
-        return <img key={index} data-index={index} style={thumbnailStyle} src={image.thumbnail_url} onClick={imageClickHandler} />
-      }))
-    }
-  }, [selectedStyle])
-
   const imageClickHandler = (e) => {
     e.preventDefault()
-    setSelectedImage(selectedStyle.photos[e.target.getAttribute('data-index')].url)
+    setTopIndex(parseInt(e.target.getAttribute('data-index')))
   }
 
-  const handleCarouselUpClick = () => {
+  const handleCarouselLeftClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex - 1
     })
   }
 
-  const handleCarouselDownClick = () => {
+  const handleCarouselRightClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex + 1
     })
-  }
 
-  const containerStyle = {
-    height: '500px',
-    width: '500px',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    overflow: 'hidden'
-  }
-
-  const imgStyle = {
-    height: '100%',
-    width: '100%',
-    objectFit: 'cover'
   }
 
   const thumbnailStyle = {
@@ -61,37 +50,28 @@ const MainImageGalleryComponent = (props) => {
     objectFit: 'cover'
   }
 
-  const listStyles = {
+  const containerStyle = {
+    height: '500px',
+    width: '500px',
     display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    justifyContent: 'space-evenly',
     overflow: 'hidden'
-  }
-
-  const carouselListStyles = {
-    transform: `translateY(-${topIndex * 77}px)`,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly'
   }
 
   return (
     <div>
-      <div style={containerStyle}>
-        <div style={listStyles}>
-          {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
-          <div style={{ maxHeight: '395px', overflow: 'hidden' }}>
-            <div style={carouselListStyles}>
-              {thumbnails}
-            </div>
+      {selectedStyle !== null
+      ? <div style={containerStyle}>
+          <SubImageCarousel thumbnails={thumbnails} />
+            {(topIndex > 0) ? <FaChevronLeft onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden' />}
+          <div style={{ width: '400px', height: '500px', overflow: 'hidden' }}>
+              <MainImgageCarousel selectedImage={selectedStyle.photos[topIndex].url} />
           </div>
-          {(topIndex < thumbnails.length - 5) ? <FaChevronDown className='down-arrow' onClick={handleCarouselDownClick} /> : <FaChevronDown className='hidden' />}
+            {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden' />}
         </div>
-        <div style={{ width: '400px', height: '500px', overflow: 'hidden' }}>
-          <img style={imgStyle} src={selectedImage} />
-        </div>
-      </div>
+      : null
+    }
+
     </div>
   )
 }

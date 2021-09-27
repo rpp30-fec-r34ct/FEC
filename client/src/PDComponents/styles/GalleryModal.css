@@ -1,0 +1,37 @@
+#gallery-modal{
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+#gallery-modal-content{
+  display: flex;
+  justify-content: space-around;
+  background-color: #a3a3a3;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  height: 50%;
+  width: 60%;
+  position: relative;
+  z-index: 100000;
+}
+
+.gallery-modal-arrow {
+  margin: auto
+}
+
+#gallery-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#gallery-modal-close:hover {
+  cursor: pointer;
+}

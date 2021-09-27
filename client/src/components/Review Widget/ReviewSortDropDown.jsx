@@ -10,7 +10,7 @@ const ReviewSortDropDown = (props) => {
 
     for (var i = 0; i < sortOptions.length; i++) {
       if (sortOptions[i] !== sortType) {
-        options.push(<span key={i}>{sortOptions[i]}</span>)
+        options.push(<span onClick={props.onSortTypeChange} key={i}>{sortOptions[i]}</span>)
       }
     }
 

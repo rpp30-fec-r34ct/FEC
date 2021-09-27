@@ -44,7 +44,7 @@ const ReviewMetaData = (props) => {
       </div>
       <div className="ratingBreakDown">
         <span className="ratingBreakdownTitle">Rating Breakdown</span>
-        <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews}/>
+        <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews} handleFilterToggle={props.handleFilterToggle}/>
       </div>
         <ProductBreakdown characteristicsData={props.metaData.characteristics} />
     </div>

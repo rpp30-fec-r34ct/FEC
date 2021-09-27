@@ -27,6 +27,7 @@
 
 h3 {
   font-size: 2em;
+  font-family: 'Playfair Display', serif;
 }
 
 .reviewSummary{
@@ -71,6 +72,7 @@ h3 {
 .dropDownContainer {
   position: relative;
   display: inline-block;
+  margin-bottom: 20px;
 }
 
 .dropDownList {

@@ -4,7 +4,7 @@ const port = 3000
 const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
-const maxAPIReturn = 8
+// const maxAPIReturn = 8
 
 app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
@@ -30,31 +30,53 @@ app.get('/productDetail*', (req, res) => {
 
 app.get('/reviews', (req, res) => {
 
-  req.query.page = Math.ceil(req.query.count/maxAPIReturn);
-  const initialCount = req.query.count
-  if (req.query.count % maxAPIReturn === 0) {
-    req.query.count = maxAPIReturn;
-  }
-
-  //forcing it to request the max # per page because the sorting changes as the # of reviews returned gets bigger. Doing this here
-  //helps prevent rendering two of the same reviews on the client side
-  req.query.count = maxAPIReturn;
-  axios.get(APIurl + 'reviews', {
+  const request = req.query
+  request.activeFilters = JSON.parse(req.query.activeFilters)
+  axios.get(APIurl + 'reviews/meta', {
     headers: {
       Authorization: token.API_KEY
     },
-    params: req.query,
+    params: {
+      product_id: req.query.product_id
+    },
   }).then((data) => {
-    let startSlice = initialCount % maxAPIReturn ? initialCount % maxAPIReturn - 2 : maxAPIReturn - 2
-    let endSlice = initialCount % maxAPIReturn ? initialCount % maxAPIReturn : maxAPIReturn
-    let reviewsToSend = data.data.results.slice(startSlice, endSlice)
-    res.status(200).send(reviewsToSend)
-  })
-    .catch((err) => {
+    ///calculate the count of the reviews
+    let reviewCount = 0;
+
+    if (data.data.ratings !== null) {
+      for (let key in data.data.ratings) {
+        reviewCount = reviewCount + parseInt(data.data.ratings[key])
+      }
+    }
+    return reviewCount
+  }).then((reviewCount) => {
+    axios.get(APIurl + 'reviews', {
+      headers: {
+        Authorization: token.API_KEY
+      },
+      params: {
+        product_id: request.product_id,
+        count: reviewCount,
+        sort: request.sort
+      },
+    }).then((data) => {
+      //check to see if there are any filters in the request
+      let reviewsToSend = [];
+      for (var i = 0; i < data.data.results.length; i++) {
+        if (request.activeFilters[data.data.results[i].rating]) {
+          reviewsToSend.push(data.data.results[i])
+        }
+      }
+      reviewsToSend = reviewsToSend.slice(request.count - 2, request.count)
+      res.status(200).send(reviewsToSend);
+    }).catch((err) => {
+      console.error(err)
+      res.sendStatus(500)
+    })
+  }).catch((err) => {
       console.error(err)
       res.sendStatus(500)
   })
-
 })
 
 

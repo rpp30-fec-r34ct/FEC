@@ -22,6 +22,25 @@
   z-index: 100000;
 }
 
+#modal-main-img {
+  height: 100%;
+  width: 50%;
+  overflow: hidden;
+  object-fit: scale-down
+}
+
+.gallery-modal-image {
+  height: 100%;
+  cursor: zoom-in;
+  transition: transform 0.25s ease;
+}
+
+.zoom-in-img {
+  cursor:zoom-out;
+  transform: scale(2);
+}
+
+
 .gallery-modal-arrow {
   margin: auto
 }

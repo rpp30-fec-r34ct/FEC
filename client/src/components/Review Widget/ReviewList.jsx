@@ -9,11 +9,26 @@ const ReviewList = (props) => {
   const [reviewDisplayCount, setDisplayCount] = useState(2)
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
   const [sortType, setSortType] = useState('relevance')
+  const [filterChange, setFilterChange] = useState(false)
 
 
   useEffect(() => {
-    getReviews(reviewDisplayCount, props.product_id, sortType)
-  }, [sortType])
+    getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
+  }, [sortType, reviewDisplayCount, filterChange])
+
+  useEffect(() => {
+    //whenever the filters get set i need to wipe everything clean and resend the request to the server so the server
+    //can send back only reviews that fit the filter criteria
+    /* I can't hold the filters in this components state, and i think moving this component to the review section would make the review section component too massive/responsible for too much
+    so in order to maintain separation between this component and the review section component AND handle changing active filters, i have introduced a new state called 'filterChange'
+    the actual state of filter change does not matter. It only matters that I can change that state in order to trigger the 'getReviews' after the reset of reviews has occured.
+    */
+    setReviews([]);
+    if (reviewDisplayCount !== 2) {
+      setDisplayCount(2)
+    }
+    filterChange ? setFilterChange(false) : setFilterChange(true)
+  }, [props.activeFilters])
 
 
   //need to clear out all of the reviews so the section doesn't start displaying redundant data. Also, refreshing the display count
@@ -24,12 +39,13 @@ const ReviewList = (props) => {
     setSortType(event.target.innerText);
   }
 
-  const getReviews = (count, productId, sortType) => {
+  const getReviews = (count, productId, sortType, activeFilters) => {
     axios.get('/reviews', {
       params: {
         count: count,
         sort: sortType,
-        product_id: productId
+        product_id: productId,
+        activeFilters: activeFilters
       }
     })
       .then((data) => {
@@ -59,37 +75,34 @@ const ReviewList = (props) => {
   const moreReviews = () => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
       setDisplayCount(reviewDisplayCount + 2)
-      getReviews(reviewDisplayCount + 2, props.product_id);
     } else {
       setDisplayCount(props.totalReviews);
-      getReviews(props.totalReviews, props.product_id);
     }
   }
 
 
-
-
   //only display the 'more reviews button if there are actually more reviews to display'
-  if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
-    return (
-      <div>
-        <div className="sortAndCount">
-          <span>{props.totalReviews + ' reviews, sorted by '}</span>
-          <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType}/>
-        </div>
-        <div className='reviewList'>{reviews}</div>
-        <div>
-          <button onClick={moreReviews} className="moreReviewsButton">More Reviews</button>
-        </div>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <div className='reviewList'>{reviews}</div>
-      </div>
-    )
+  const renderMoreBtn = (totalReviews) => {
+    if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
+      return <button onClick={moreReviews} className="moreReviewsButton">More Reviews</button>
+    } else {
+      return
+    }
   }
+
+  return (
+    <div>
+      <div className="sortAndCount">
+        <span>{props.totalReviews + ' reviews, sorted by '}</span>
+        <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType}/>
+        {/* if there are filters applied, then display them here in a span. Put a 'remove all filters' button next to it. use props.clearAllFilters to clear with onClick */}
+      </div>
+      <div className='reviewList'>{reviews}</div>
+      <div>
+        {renderMoreBtn()}
+      </div>
+    </div>
+  )
 }
 
 export default ReviewList

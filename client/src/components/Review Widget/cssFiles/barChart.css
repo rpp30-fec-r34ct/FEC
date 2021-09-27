@@ -18,7 +18,8 @@
   text-decoration: underline;
 }
 
-.ratingCategory:hover {
+
+.ratingName:hover {
   color: blue;
 }
 

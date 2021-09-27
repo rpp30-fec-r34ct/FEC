@@ -8,12 +8,21 @@ const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
   const [reviewDisplayCount, setDisplayCount] = useState(2)
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
+  const [sortType, setSortType] = useState('relevance')
+
 
   useEffect(() => {
-    getReviews(reviewDisplayCount, props.product_id, props.sortType)
-  }, [])
+    getReviews(reviewDisplayCount, props.product_id, sortType)
+  }, [sortType])
 
 
+  //need to clear out all of the reviews so the section doesn't start displaying redundant data. Also, refreshing the display count
+  //is a nice indicator to the user that their new filter has been applied.
+  const onSortTypeChange = (event) =>  {
+    setReviews([]);
+    setDisplayCount(2);
+    setSortType(event.target.innerText);
+  }
 
   const getReviews = (count, productId, sortType) => {
     axios.get('/reviews', {
@@ -58,13 +67,15 @@ const ReviewList = (props) => {
   }
 
 
+
+
   //only display the 'more reviews button if there are actually more reviews to display'
   if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
     return (
       <div>
         <div className="sortAndCount">
           <span>{props.totalReviews + ' reviews, sorted by '}</span>
-          <ReviewSortDropDown sortType={props.sortType}/>
+          <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType}/>
         </div>
         <div className='reviewList'>{reviews}</div>
         <div>

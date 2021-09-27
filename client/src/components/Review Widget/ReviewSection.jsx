@@ -8,6 +8,7 @@ import axios from 'axios';
 const ReviewSection = () => {
   const { productId } = useParams()
 
+
   const [reviewsMeta, setReviewsMeta] = useState({
     ratings: null,
     recommended: {
@@ -16,7 +17,7 @@ const ReviewSection = () => {
     },
     product_id: productId
   })
-  const [sortType, setSortType] = useState('relevance')
+
 
   useEffect(() => {
     getReviewsMeta()
@@ -49,13 +50,12 @@ const ReviewSection = () => {
   }
 
 
-
   return (
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()}/>
-        <ReviewList product_id={productId} totalReviews={getTotalReviews()} sortType={sortType} />
+        <ReviewList product_id={productId} totalReviews={getTotalReviews()} />
       </div>
     </div>
   )

@@ -16,6 +16,7 @@ const ReviewSection = () => {
     },
     product_id: productId
   })
+  const [sortType, setSortType] = useState('relevance')
 
   useEffect(() => {
     getReviewsMeta()
@@ -47,12 +48,14 @@ const ReviewSection = () => {
     return reviewCount;
   }
 
+
+
   return (
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()}/>
-        <ReviewList product_id={productId} totalReviews={getTotalReviews()} />
+        <ReviewList product_id={productId} totalReviews={getTotalReviews()} sortType={sortType} />
       </div>
     </div>
   )

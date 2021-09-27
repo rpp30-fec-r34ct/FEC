@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react'
 import ReviewTile from './ReviewTile.jsx'
 import axios from 'axios'
 import './cssFiles/reviewSection.css'
+import ReviewSortDropDown from './ReviewSortDropDown.jsx';
 
 const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
   const [reviewDisplayCount, setDisplayCount] = useState(2)
-  const [sortType, setSortType] = useState('relevance')
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
 
   useEffect(() => {
-    getReviews(reviewDisplayCount, props.product_id)
+    getReviews(reviewDisplayCount, props.product_id, props.sortType)
   }, [])
 
 
 
-  const getReviews = (count, productId) => {
+  const getReviews = (count, productId, sortType) => {
     axios.get('/reviews', {
       params: {
         count: count,
@@ -59,9 +59,13 @@ const ReviewList = (props) => {
 
 
   //only display the 'more reviews button if there are actually more reviews to display'
-  if (reviewDisplayCount < props.totalReviews) {
+  if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
     return (
       <div>
+        <div className="sortAndCount">
+          <span>{props.totalReviews + ' reviews, sorted by '}</span>
+          <ReviewSortDropDown sortType={props.sortType}/>
+        </div>
         <div className='reviewList'>{reviews}</div>
         <div>
           <button onClick={moreReviews} className="moreReviewsButton">More Reviews</button>

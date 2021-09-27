@@ -31,6 +31,7 @@
 
 .gallery-modal-image {
   height: 100%;
+  margin: auto;
   cursor: zoom-in;
   transition: transform 0.25s ease;
 }

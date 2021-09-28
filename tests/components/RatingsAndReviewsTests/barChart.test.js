@@ -7,7 +7,7 @@
  import '@testing-library/jest-dom'
 
  // component
- import BarChart from '../../../client/src/components/Review Widget/BarChart.jsx'
+ import BarChart from '../../../client/src/components/ReviewWidget/BarChart.jsx'
  const ratings = {1: '3'}
 
 

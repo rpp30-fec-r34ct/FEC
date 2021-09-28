@@ -7,7 +7,7 @@
  import '@testing-library/jest-dom'
 
  // component
- import BarLine from '../../../client/src/components/Review Widget/BarLine.jsx'
+ import BarLine from '../../../client/src/components/ReviewWidget/BarLine.jsx'
  const data = {
    star: 4,
    numberOfReviews: 6

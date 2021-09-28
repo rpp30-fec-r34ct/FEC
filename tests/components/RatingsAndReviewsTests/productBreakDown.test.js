@@ -7,7 +7,7 @@
  import '@testing-library/jest-dom'
 
  // component
- import ProductBreakdown from '../../../client/src/components/Review Widget/ProductBreakdown.jsx'
+ import ProductBreakdown from '../../../client/src/components/ReviewWidget/ProductBreakdown.jsx'
 
  const data = {
   Fit: 2.4

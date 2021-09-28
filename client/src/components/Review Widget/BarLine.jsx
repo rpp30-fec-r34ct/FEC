@@ -1,10 +1,9 @@
-import React from 'react';
-import './cssFiles/barChart.css';
-
+import React from 'react'
+import './cssFiles/barChart.css'
 
 const BarLine = (props) => {
-  const emptyBarWidth = 197;
-  const leftPos = 53;
+  const emptyBarWidth = 197
+  const leftPos = 53
 
   const BarLine = {
     display: 'flex',
@@ -22,7 +21,7 @@ const BarLine = (props) => {
   }
 
   const styleFullBar = {
-    width: ((props.numberOfReviews/props.totalReviews) * 75) + '%',
+    width: ((props.numberOfReviews / props.totalReviews) * 75) + '%',
     left: leftPos + 'px',
     height: 5 + 'px',
     background: 'green',
@@ -38,11 +37,11 @@ const BarLine = (props) => {
   }
 
   return (
-    <div data-testid="testBarLine" className="BarLine" style={BarLine} >
-      <span onClick={props.handleFilterToggle} className="ratingName">{props.star + ' stars'}</span>
-      <div className="emptyBar" style={styleEmptyBar}></div>
-      <div className="fullBar" style={styleFullBar}></div>
-      <span className="categoryCount" style={categoryCountStyle}>{' (' + props.numberOfReviews + ')'}</span>
+    <div data-testid='testBarLine' className='BarLine' style={BarLine}>
+      <span onClick={props.handleFilterToggle} className='ratingName'>{props.star + ' stars'}</span>
+      <div className='emptyBar' style={styleEmptyBar} />
+      <div className='fullBar' style={styleFullBar} />
+      <span className='categoryCount' style={categoryCountStyle}>{' (' + props.numberOfReviews + ')'}</span>
     </div>
   )
 }

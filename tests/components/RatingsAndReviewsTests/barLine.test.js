@@ -2,23 +2,22 @@
  * @jest-environment jsdom
  */
 
- import React from 'react'
- import { render, screen } from '@testing-library/react'
- import '@testing-library/jest-dom'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
- // component
- import BarLine from '../../../client/src/components/Review Widget/BarLine.jsx'
- const data = {
-   star: 4,
-   numberOfReviews: 6
- }
+// component
+import BarLine from '../../../client/src/components/Review Widget/BarLine.jsx'
+const data = {
+  star: 4,
+  numberOfReviews: 6
+}
 
+describe('Bar Line Component', () => {
+  test('Should be on the DOM', function () {
+    render(<BarLine numberOfReviews={data.numberOfReviews} star={data.star} />)
 
- describe('Bar Line Component', () => {
-   test('Should be on the DOM', function () {
-     render(<BarLine numberOfReviews={data.numberOfReviews} star={data.star} />)
-
-     const barLineElement = screen.getByTestId('testBarLine')
-     expect(barLineElement).toHaveClass('BarLine');
-   })
- })
+    const barLineElement = screen.getByTestId('testBarLine')
+    expect(barLineElement).toHaveClass('BarLine')
+  })
+})

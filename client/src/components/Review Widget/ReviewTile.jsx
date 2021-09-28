@@ -17,14 +17,13 @@ const ReviewTile = (props) => {
   const getIsRecommended = (recommended) => {
     if (recommended) {
       return (
-      <div className='tile_recommend'>
-        <i className="fas fa-check" style={{color: 'green'}}></i>
-        <span> I recommend this product</span>
-      </div>
-    )
-
+        <div className='tile_recommend'>
+          <i className='fas fa-check' style={{ color: 'green' }} />
+          <span> I recommend this product</span>
+        </div>
+      )
     } else {
-      return;
+
     }
   }
 
@@ -32,15 +31,15 @@ const ReviewTile = (props) => {
     if (response !== null && response !== '') {
       return <div className='tile_response'>Response: {response}</div>
     } else {
-      return;
+
     }
   }
 
   const getPhotos = (photos) => {
     if (photos.length === 0) {
-      return;
+
     } else {
-      return <PhotoThumbnailRow photos={props.reviewData.photos} onPhotoClick={props.onPhotoClick}/>
+      return <PhotoThumbnailRow photos={props.reviewData.photos} onPhotoClick={props.onPhotoClick} />
     }
   }
 

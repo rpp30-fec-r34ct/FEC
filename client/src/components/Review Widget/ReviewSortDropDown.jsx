@@ -1,14 +1,12 @@
-import React from 'react';
+import React from 'react'
 import './cssFiles/reviewSection.css'
 
-
 const ReviewSortDropDown = (props) => {
-
   const getSortOptions = (sortType) => {
-    const sortOptions = ['helpful', 'newest', 'relevance'];
-    let options = [];
+    const sortOptions = ['helpful', 'newest', 'relevance']
+    const options = []
 
-    for (var i = 0; i < sortOptions.length; i++) {
+    for (let i = 0; i < sortOptions.length; i++) {
       if (sortOptions[i] !== sortType) {
         options.push(<span onClick={props.onSortTypeChange} key={i}>{sortOptions[i]}</span>)
       }
@@ -18,12 +16,12 @@ const ReviewSortDropDown = (props) => {
   }
 
   return (
-    <div className="dropDownContainer">
-      <button className="dropDownBtn">{props.sortType}</button>
-      <div className="dropDownList">
+    <div className='dropDownContainer'>
+      <button className='dropDownBtn'>{props.sortType}</button>
+      <div className='dropDownList'>
         {getSortOptions(props.sortType)}
       </div>
-      <i className="fas fa-caret-down"></i>
+      <i className='fas fa-caret-down' />
     </div>
   )
 }

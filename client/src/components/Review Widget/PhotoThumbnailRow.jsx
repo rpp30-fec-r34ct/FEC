@@ -1,8 +1,6 @@
-import React from 'react';
-import {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react'
 
 const PhotoThumbnailRow = (props) => {
-
   const photoRowStyle = {
     height: '150px',
     width: '700px',
@@ -18,7 +16,7 @@ const PhotoThumbnailRow = (props) => {
     overflow: 'hidden',
     margin: 'auto 10px',
     border: 'solid 2px grey',
-    objectFit: 'cover',
+    objectFit: 'cover'
   }
 
   const imageStyle = {
@@ -28,23 +26,22 @@ const PhotoThumbnailRow = (props) => {
   }
 
   const getPhotoThumbs = (photos) => {
-    let photosToRender = [];
-    for (var i = 0; i < photos.length; i++) {
+    const photosToRender = []
+    for (let i = 0; i < photos.length; i++) {
       photosToRender.push(
-      <div key={photos[i].id} style={photoThumbnailStyle} >
-        <img src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
-      </div>)
+        <div key={photos[i].id} style={photoThumbnailStyle}>
+          <img src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
+        </div>)
     }
 
-    return photosToRender;
+    return photosToRender
   }
 
-
-  return(
-    <div className="PhotoRow" style={photoRowStyle}>
+  return (
+    <div className='PhotoRow' style={photoRowStyle}>
       {getPhotoThumbs(props.photos)}
     </div>
   )
 }
 
-export default PhotoThumbnailRow;
+export default PhotoThumbnailRow

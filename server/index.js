@@ -29,7 +29,6 @@ app.get('/productDetail*', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-
   const request = req.query
   request.activeFilters = JSON.parse(req.query.activeFilters)
   axios.get(APIurl + 'reviews/meta', {
@@ -38,13 +37,13 @@ app.get('/reviews', (req, res) => {
     },
     params: {
       product_id: req.query.product_id
-    },
+    }
   }).then((data) => {
-    ///calculate the count of the reviews
-    let reviewCount = 0;
+    /// calculate the count of the reviews
+    let reviewCount = 0
 
     if (data.data.ratings !== null) {
-      for (let key in data.data.ratings) {
+      for (const key in data.data.ratings) {
         reviewCount = reviewCount + parseInt(data.data.ratings[key])
       }
     }
@@ -58,27 +57,26 @@ app.get('/reviews', (req, res) => {
         product_id: request.product_id,
         count: reviewCount,
         sort: request.sort
-      },
+      }
     }).then((data) => {
-      //check to see if there are any filters in the request
-      let reviewsToSend = [];
-      for (var i = 0; i < data.data.results.length; i++) {
+      // check to see if there are any filters in the request
+      let reviewsToSend = []
+      for (let i = 0; i < data.data.results.length; i++) {
         if (request.activeFilters[data.data.results[i].rating]) {
           reviewsToSend.push(data.data.results[i])
         }
       }
       reviewsToSend = reviewsToSend.slice(request.count - 2, request.count)
-      res.status(200).send(reviewsToSend);
+      res.status(200).send(reviewsToSend)
     }).catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
   }).catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
+    console.error(err)
+    res.sendStatus(500)
   })
 })
-
 
 app.get('/reviews/meta', (req, res) => {
   console.log('got reviews request')
@@ -99,7 +97,7 @@ app.get('/reviews/meta', (req, res) => {
 })
 
 app.get('/qa/questions', (req, res) => {
-  console.log('questions and answers...', req._parsedUrl.search);
+  console.log('questions and answers...', req._parsedUrl.search)
   // let
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {

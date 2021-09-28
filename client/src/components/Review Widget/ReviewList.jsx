@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ReviewTile from './ReviewTile.jsx'
 import axios from 'axios'
 import './cssFiles/reviewSection.css'
-import ReviewSortDropDown from './ReviewSortDropDown.jsx';
+import ReviewSortDropDown from './ReviewSortDropDown.jsx'
 
 const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
@@ -11,24 +11,23 @@ const ReviewList = (props) => {
   const [sortType, setSortType] = useState('relevance')
   const [filterChange, setFilterChange] = useState(false)
 
-
   useEffect(() => {
     getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
   }, [sortType, reviewDisplayCount, filterChange])
 
   useEffect(() => {
-    setReviews([]);
-    setPullMoreReviews(1);
+    setReviews([])
+    setPullMoreReviews(1)
     if (reviewDisplayCount !== 2) {
       setDisplayCount(2)
     }
     filterChange ? setFilterChange(false) : setFilterChange(true)
   }, [props.activeFilters])
 
-  const onSortTypeChange = (event) =>  {
-    setReviews([]);
-    setDisplayCount(2);
-    setSortType(event.target.innerText);
+  const onSortTypeChange = (event) => {
+    setReviews([])
+    setDisplayCount(2)
+    setSortType(event.target.innerText)
   }
 
   const getReviews = (count, productId, sortType, activeFilters) => {
@@ -42,14 +41,13 @@ const ReviewList = (props) => {
     })
       .then((data) => {
         if (data.data.length < 2) {
-          setPullMoreReviews(0);
+          setPullMoreReviews(0)
         }
 
-        let newReviews = data.data;
+        const newReviews = data.data
         const reviewListTiles = []
-        newReviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} onPhotoClick={props.onPhotoClick}/>)) })
+        newReviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} onPhotoClick={props.onPhotoClick} />)) })
         setReviews(reviews.concat(reviewListTiles))
-
       })
       .catch((error) => {
         console.error(error)
@@ -60,23 +58,23 @@ const ReviewList = (props) => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
       setDisplayCount(reviewDisplayCount + 2)
     } else {
-      setDisplayCount(props.totalReviews);
+      setDisplayCount(props.totalReviews)
     }
   }
 
   const renderMoreBtn = (totalReviews) => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
-      return <button onClick={moreReviews} className="moreReviewsButton">More Reviews</button>
+      return <button onClick={moreReviews} className='moreReviewsButton'>More Reviews</button>
     } else {
-      return
+
     }
   }
 
   return (
     <div>
-      <div className="sortAndCount">
+      <div className='sortAndCount'>
         <span>{props.totalReviews + ' reviews, sorted by '}</span>
-        <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType}/>
+        <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType} />
       </div>
       <div className='reviewList'>{reviews}</div>
       <div>

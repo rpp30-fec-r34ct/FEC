@@ -1,11 +1,10 @@
 import React from 'react'
 
 const ModalContainer = (props) => {
-
   const imgStyle = {
     width: '100%',
     height: '100%',
-    objectFit: 'contain',
+    objectFit: 'contain'
   }
 
   const imgContainerStyle = {
@@ -13,7 +12,7 @@ const ModalContainer = (props) => {
     height: '600px',
     overflow: 'hidden',
     margin: 'auto',
-    objectFit: 'cover',
+    objectFit: 'cover'
   }
 
   const modalContainerStyle = {
@@ -36,25 +35,20 @@ const ModalContainer = (props) => {
   }
 
   if (props.activeModal === '') {
-    return null;
+    return null
   } else {
     return (
       <>
-      <div style={pageCoverStyle}></div>
-      <div style={modalContainerStyle}>
-        <div style={imgContainerStyle}>
-          <img src={props.activeModal} style={imgStyle} />
+        <div style={pageCoverStyle} />
+        <div style={modalContainerStyle}>
+          <div style={imgContainerStyle}>
+            <img src={props.activeModal} style={imgStyle} />
+          </div>
+          <i className='fas fa-times' onClick={props.onClickClose} style={{ color: 'black' }} />
         </div>
-        <i className="fas fa-times" onClick={props.onClickClose} style={{color: 'black'}}></i>
-      </div>
       </>
     )
-
   }
 }
 
-export default ModalContainer;
-
-
-
-
+export default ModalContainer

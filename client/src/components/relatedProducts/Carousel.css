@@ -71,6 +71,12 @@
   border: 1px solid #888;
 }
 
+.product-card:hover {
+  background-color: white;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
 .favorite-btn {
   z-index: 3000;
   color: rgb(255, 255, 255);

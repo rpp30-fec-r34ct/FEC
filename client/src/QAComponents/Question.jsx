@@ -29,7 +29,6 @@ const Question = (props) => {
 
   const addAnswer = (e) => {
     e.preventDefault()
-    console.log('current modal:', showModal)
     return setShowModal(true)
     // if (!document.getElementById('answer-modal')) {
     //   console.log('modal is not shown')
@@ -38,7 +37,6 @@ const Question = (props) => {
   }
 
   const keyPress = (e) => {
-    console.log('does this work too?')
     if (e.key === 'Escape') {
       setShowModal(false)
     }
@@ -46,7 +44,6 @@ const Question = (props) => {
 
   const handleClickOutside = (e) => {
     if (e.target.id === 'answer-modal' && e.target.className !== 'add-answer-form') {
-      console.log('did not click the modal')
       setShowModal(false)
     }
     if (e.target.className === "close-button") {
@@ -107,7 +104,7 @@ const Question = (props) => {
       <div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}
       </div>
-      {<AnswerModal showModal={showModal} question_id={props.question_id} body={props.question_body}/>}
+      {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body}/> : null}
     </>
   )
 }

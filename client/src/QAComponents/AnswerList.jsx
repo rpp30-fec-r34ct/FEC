@@ -54,7 +54,7 @@ const AnswerList = (props) => {
 
   return (
     <>
-      <div>{answers && answers.map(answer => {
+      <div>{answers && answers.sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness).map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -63,7 +63,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>LOAD MORE ANSWERS</a></div>
+          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>See More Answers</a></div>
         }
         return (
           <NewAnswer

@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const AnswerModal = (props) => {
   const modalRef = useRef()
-  const [showModal, setShowModal] = useState(props.showModal)
+  const [showModal, setShowModal] = useState(true)
   const [{alt, src}, setImg] = useState([{
     alt,
     src
@@ -26,8 +26,6 @@ const AnswerModal = (props) => {
     if (e.target.id === 'answer-modal') {
       return setShowModal(false)
     }
-    // setShowModal(false)
-    // console.log(showModal)
   }
 
   const uploadImg = (e) => {
@@ -43,8 +41,6 @@ const AnswerModal = (props) => {
 
   const submitNewAnswer = (e) => {
     e.preventDefault()
-    // console.log(props.question_id);
-    // uploadImg(e.target[3].files[0], e.target[3].value)
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
     }
@@ -69,22 +65,17 @@ const AnswerModal = (props) => {
 
   useEffect(
     () => {
-      if (props.showModal) {
-        setShowModal(prev => !prev)
-      }
       document.addEventListener('keydown', keyPress)
       return () => document.removeEventListener('keydown', keyPress)
     },
-    [props.showModal]
+    []
   )
 
   return (
     <>
-      {console.log(showModal, 'showing modal?')}
-      {showModal ? (
         <div id="answer-modal" onClick={handleClickOutside}>
           <div className='add-answer-form' id={props.question_id}>
-          <button className="close-button" onClick={setShowModal(false)}>X</button>
+          <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
             <h1>{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
             <form onSubmit={submitNewAnswer}>
               <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox"/>
@@ -103,8 +94,6 @@ const AnswerModal = (props) => {
             <img src={src} alt={alt} />
           </div>
         </div>
-
-      ) : null}
     </>
   )
 }

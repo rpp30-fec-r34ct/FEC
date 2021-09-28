@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const QuestionModal = (props) => {
   const modalRef = useRef()
-  const [showQuestionModal, setShowQuestionModal] = useState(props.showQuestionModal)
+  const [showQuestionModal, setShowQuestionModal] = useState(true)
   const productID = useParams().productId
 
   const keyPress = useCallback(
@@ -22,7 +22,6 @@ const QuestionModal = (props) => {
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your question could not be processed. You must enter ALL of the following: \nQuestion, \nYour Name, and \nYour Email Address')
     }
-    console.log(e);
     const body = e.target[0].value
     const name = e.target[1].value
     const email = e.target[2].value
@@ -53,7 +52,7 @@ const QuestionModal = (props) => {
       {showQuestionModal ? (
           <div id="question-modal">
           <div className='add-question-form' id={props.product_id}>
-            <h1>Product: {console.log(document.getElementsByClassName('card-name'))}{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
+            <h1>Product: {document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
             <form onSubmit={submitNewQuestion}>
               <input name='question' type='text' placeholder='Your Question' />
               <input name='nickname' type='text' placeholder='Your Nickname' />

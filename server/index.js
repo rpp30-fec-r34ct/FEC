@@ -75,6 +75,7 @@ app.get('/qa/questions', (req, res) => {
     }
   })
     .then(data => {
+      console.log(data)
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -131,13 +132,14 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...helpful question = ', typeof req.query.answer_id)
+  console.log('made it this far...helpful question = ', req.query)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
   .then(data => {
+    console.log(data)
     res.status(200).send('ANSWER MARKED AS HELPFUL')
   })
   .catch(err => {

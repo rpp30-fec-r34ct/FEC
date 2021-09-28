@@ -63,7 +63,7 @@ const MainImageGalleryComponent = (props) => {
             {(topIndex > 0) ? <FaChevronLeft className='gallery-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden' />}
             <div id='main-product-image' className='collapsed-product-image'>
               <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
-              <MainImgageCarousel selectedImage={selectedStyle.photos[topIndex].url} />
+              <img src={selectedStyle.photos[topIndex].url} />
             </div>
             {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden' />}
           </div>

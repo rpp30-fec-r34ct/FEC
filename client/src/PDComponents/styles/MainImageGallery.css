@@ -8,6 +8,12 @@
   overflow: hidden;
 }
 
+#main-product-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .collapsed-product-image {
   width: 400px;
   height: 500px;

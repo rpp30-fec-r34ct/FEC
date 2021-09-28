@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import 'react-inner-image-zoom/lib/InnerImageZoom/styles.css'
+import './styles/ImageZoomStyles.css'
 import './styles/GalleryModal.css'
 import { FaChevronLeft, FaChevronRight, FaCompress } from 'react-icons/fa'
 import InnerImageZoom from 'react-inner-image-zoom'
@@ -24,7 +24,9 @@ const GalleryModal = ({ selectedStyle, currentIndex, handleCollapseImageClick, h
       <div id='gallery-modal-content'>
         <FaCompress id='gallery-modal-close' onClick={handleCollapseImageClick} />
         {(imgIndex > 0) ? <FaChevronLeft className='gallery-modal-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden gallery-modal-arrow' />}
-        <InnerImageZoom src={selectedStyle.photos[imgIndex].url} zoomScale={2} />
+        <div style={{ height: '100%', width: '40%', overflow: 'hidden'}}>
+          <InnerImageZoom src={selectedStyle.photos[imgIndex].url} zoomScale={2} />
+        </div>
         {(imgIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-modal-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden gallery-modal-arrow' />}
       </div>
     </div>

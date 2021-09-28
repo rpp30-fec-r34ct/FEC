@@ -114,8 +114,8 @@ const ReviewSection = () => {
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
-        <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} handleFilterToggle={handleFilterToggle}/>
-        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} clearAllFilters={clearAllFilters} />
+        <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} handleFilterToggle={handleFilterToggle} activeFilters={activeFilters} clearAllFilters={clearAllFilters} />
+        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} />
       </div>
     </div>
   )

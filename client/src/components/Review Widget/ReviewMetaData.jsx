@@ -29,8 +29,37 @@ const ReviewMetaData = (props) => {
       currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
     }
 
-    // calculatePercentRecommend(currentAverage, data, reviewCount)
     return currentAverage;
+  }
+
+  const getFilterDisplay = (filters) => {
+    let count = 0;
+    let filterList = []
+    for (var key in filters) {
+      if (filters[key] === true) {
+        filterList.push(
+          <span key={count}>{key + ' stars, '}</span>
+        )
+      }
+      count = count + 1;
+    }
+
+    if (filterList.length !== 5) {
+      return (
+      <div>
+        <div className="appliedFilters">
+          <div>
+            <span>{'Applied filters: '}</span>
+            {filterList}
+          </div>
+        </div>
+        <button className="removeFiltersBtn" onClick={props.clearAllFilters}>Remove all filters</button>
+      </div>
+
+      )
+    } else {
+      return;
+    }
   }
 
   return (
@@ -44,6 +73,7 @@ const ReviewMetaData = (props) => {
       </div>
       <div className="ratingBreakDown">
         <span className="ratingBreakdownTitle">Rating Breakdown</span>
+        {getFilterDisplay(props.activeFilters)}
         <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews} handleFilterToggle={props.handleFilterToggle}/>
       </div>
         <ProductBreakdown characteristicsData={props.metaData.characteristics} />

@@ -18,6 +18,7 @@ const ReviewList = (props) => {
 
   useEffect(() => {
     setReviews([]);
+    setPullMoreReviews(1);
     if (reviewDisplayCount !== 2) {
       setDisplayCount(2)
     }
@@ -71,37 +72,11 @@ const ReviewList = (props) => {
     }
   }
 
-  const getFilterDisplay = (filters, clearFunction) => {
-    let count = 0;
-    let filterList = []
-    for (var key in filters) {
-      if (filters[key] === true) {
-        filterList.push(
-          <span key={count}>{key + ' stars'}</span>
-        )
-      }
-      count = count + 1;
-    }
-
-    if (filterList.length !== 5) {
-      return (
-        <div className="appliedFilters">
-          <span>Applied filters: </span>
-          {filterList}
-          <button onClick={clearFunction}>Remove all filters</button>
-        </div>
-      )
-    } else {
-      return;
-    }
-  }
-
   return (
     <div>
       <div className="sortAndCount">
         <span>{props.totalReviews + ' reviews, sorted by '}</span>
         <ReviewSortDropDown onSortTypeChange={onSortTypeChange} sortType={sortType}/>
-        {getFilterDisplay(props.activeFilters, props.clearAllFilters)}
       </div>
       <div className='reviewList'>{reviews}</div>
       <div>

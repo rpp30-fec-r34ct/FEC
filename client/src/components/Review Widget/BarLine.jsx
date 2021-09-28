@@ -22,7 +22,6 @@ const BarLine = (props) => {
   }
 
   const styleFullBar = {
-    // width: ((props.numberOfReviews/props.totalReviews) * emptyBarWidth) + 'px',
     width: ((props.numberOfReviews/props.totalReviews) * 75) + '%',
     left: leftPos + 'px',
     height: 5 + 'px',
@@ -32,7 +31,6 @@ const BarLine = (props) => {
 
   const styleEmptyBar = {
     left: leftPos + 'px',
-    // width: emptyBarWidth + 'px',
     width: '75%',
     height: 5 + 'px',
     background: 'lightgrey',

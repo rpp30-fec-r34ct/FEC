@@ -12,6 +12,7 @@ export default function ProductList(props) {
                 key={index}
                 product={product}
                 getProductDetails={props.getProductDetails}
+                currentProduct={props.currentProduct}
                 toggleModal={props.toggleModal}
               />
             })

@@ -18,7 +18,14 @@ export default function Carousel(props) {
   const { productId } = useParams()
 
   useEffect(() => {
-    getRelatedProducts()
+    let mounted = true;
+    if (mounted) {
+      getRelatedProducts()
+      getProductDetails()
+    }
+    return function cleanup() {
+      mounted = false;
+    }
   }, [])
 
   const getRelatedProducts = async () => {
@@ -61,6 +68,7 @@ export default function Carousel(props) {
         <ProductList
           relatedProducts={relatedProducts}
           getProductDetails={getProductDetails}
+          currentProduct={productDetails}
           currentIndex={currentIndex}
         />
         {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}

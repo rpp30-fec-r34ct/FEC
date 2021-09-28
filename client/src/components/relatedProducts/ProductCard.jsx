@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
+import AverageStars from '../AverageStars.jsx'
 
 export default function ProductCard(props) {
 
@@ -25,7 +26,7 @@ export default function ProductCard(props) {
     < div className='product-card' >
       <div className='card-container'>
         <div className='card-visuals'>
-          <Comparison />
+          <Comparison currentProduct={props.currentProduct} relatedProduct={props.product} />
           <div className='card-image' onClick={() => window.location.pathname = `/product/${props.product.id}/`}>
             <img src={props.product.photo} />
           </div>
@@ -35,9 +36,7 @@ export default function ProductCard(props) {
           <div className='card-category'>{props.product.category}</div>
           <div className='card-name'>{props.product.name}</div>
           {priceElement}
-          <div className='card-rating' style={{ visibility: isNaN(helper.findStarRating(props.product.rating)) && "hidden" }}>
-            {helper.findStarRating(props.product.rating)}
-          </div>
+          <AverageStars rating={props.product.rating} />
         </div>
       </div>
     </div >

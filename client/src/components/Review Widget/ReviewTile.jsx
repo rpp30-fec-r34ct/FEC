@@ -16,7 +16,13 @@ const ReviewTile = (props) => {
 
   const getIsRecommended = (recommended) => {
     if (recommended) {
-      return <div className='tile_recommend'>I recommend this product</div>
+      return (
+      <div className='tile_recommend'>
+        <i class="fas fa-check" style={{color: 'green'}}></i>
+        <span> I recommend this product</span>
+      </div>
+    )
+
     } else {
       return;
     }

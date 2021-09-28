@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import './styles/MainImageGallery.css'
 import { FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa'
-import MainImgageCarousel from './MainImageCarousel.jsx'
 import SubImageCarousel from './SubImageCarousel.jsx'
 import GalleryModal from './GalleryModal.jsx'
 
 const MainImageGalleryComponent = (props) => {
   const [selectedStyle, setSelectedStyle] = useState(null)
-  const [thumbnails, setThumbnails] = useState([])
   const [topIndex, setTopIndex] = useState(0)
   const [showModal, setShowModal] = useState(null)
 
-  useEffect(() => {
-    if (selectedStyle) {
-      setThumbnails(selectedStyle.photos.map((image, index) => {
-        return <img key={index} data-index={index} className='product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
-      }))
-    }
-  }, [selectedStyle])
 
   useEffect(() => {
     if (props.selectedStyle !== false) {
@@ -44,7 +35,6 @@ const MainImageGalleryComponent = (props) => {
 
   const handleExpandImageClick = () => {
     setShowModal(prevState => !prevState)
-    // document.getElementById('main-product-image').classList.toggle('expanded-product-image')
   }
 
   const handleClickOffModal = (e) => {
@@ -59,7 +49,7 @@ const MainImageGalleryComponent = (props) => {
       {selectedStyle !== null
         ? (
           <div id='gallery-container'>
-            <SubImageCarousel thumbnails={thumbnails} />
+            <SubImageCarousel selectedStyle={selectedStyle} imageClickHandler={imageClickHandler} />
             {(topIndex > 0) ? <FaChevronLeft className='gallery-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden' />}
             <div id='main-product-image' className='collapsed-product-image'>
               <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
@@ -69,6 +59,7 @@ const MainImageGalleryComponent = (props) => {
           </div>
           )
         : null}
+        {/* TODO: replace null with no data view */}
 
     </div>
   )

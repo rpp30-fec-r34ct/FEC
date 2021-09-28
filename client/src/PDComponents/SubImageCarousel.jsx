@@ -1,8 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
 
-const SubImageCarouselComponent = ({ thumbnails }) => {
+const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   const [topIndex, setTopIndex] = useState(0)
+  const [thumbnails, setThumbnails] = useState([])
+
+  useEffect(() => {
+    if (selectedStyle) {
+      setThumbnails(selectedStyle.photos.map((image, index) => {
+        return <img key={index} data-index={index} className='product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
+      }))
+    }
+  }, [selectedStyle])
 
   const listStyles = {
     display: 'flex',

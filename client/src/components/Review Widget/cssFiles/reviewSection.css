@@ -54,6 +54,8 @@ h3 {
   background: white;
   font-size: 20px;
   margin-left: 50px;
+  padding: 10px;
+  box-shadow: 2px -2px grey
 }
 
 .moreReviewsButton:hover {
@@ -101,4 +103,24 @@ h3 {
 
 .sortAndCount {
   margin-left: 50px;
+}
+
+.appliedFilters {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+}
+
+.removeFiltersBtn {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 12px;
+  padding: 2px;
+  font-family: 'Playfair Display', serif;
+  margin-top: 5px;
+  box-shadow: 2px -2px grey
+}
+
+.removeFiltersBtn:hover{
+  color: lightblue;
 }

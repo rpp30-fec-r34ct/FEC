@@ -18,7 +18,7 @@ const ReviewTile = (props) => {
     if (recommended) {
       return (
       <div className='tile_recommend'>
-        <i class="fas fa-check" style={{color: 'green'}}></i>
+        <i className="fas fa-check" style={{color: 'green'}}></i>
         <span> I recommend this product</span>
       </div>
     )

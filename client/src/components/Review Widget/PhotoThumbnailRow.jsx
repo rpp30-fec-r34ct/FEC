@@ -1,27 +1,5 @@
 import React from 'react';
-
-const TestPhotos = [
-  {
-      "id": 1476026,
-      "url": "https://images.unsplash.com/photo-1560829675-11dec1d78930?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"
-  },
-  {
-      "id": 1476027,
-      "url": "https://images.unsplash.com/photo-1549812474-c3cbd9a42eb9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-  },
-  {
-      "id": 1476028,
-      "url": "https://images.unsplash.com/photo-1559709319-3ae960cda614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-  },
-  {
-    "id": 1476029,
-    "url": "https://images.unsplash.com/photo-1559709319-3ae960cda614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-  },
-  {
-    "id": 1476030,
-    "url": "https://images.unsplash.com/photo-1559709319-3ae960cda614?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80"
-  }
-]
+import {useEffect, useState} from 'react';
 
 const PhotoThumbnailRow = (props) => {
 
@@ -49,18 +27,18 @@ const PhotoThumbnailRow = (props) => {
     objectFit: 'cover'
   }
 
-
   const getPhotoThumbs = (photos) => {
     let photosToRender = [];
     for (var i = 0; i < photos.length; i++) {
       photosToRender.push(
-      <div key={photos[i].id} style={photoThumbnailStyle}>
-        <img src={photos[i].url} style={imageStyle}/>
+      <div key={photos[i].id} style={photoThumbnailStyle} >
+        <img src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
       </div>)
     }
 
     return photosToRender;
   }
+
 
   return(
     <div className="PhotoRow" style={photoRowStyle}>

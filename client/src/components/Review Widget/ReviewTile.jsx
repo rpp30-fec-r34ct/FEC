@@ -34,7 +34,7 @@ const ReviewTile = (props) => {
     if (photos.length === 0) {
       return;
     } else {
-      return <PhotoThumbnailRow photos={props.reviewData.photos} />
+      return <PhotoThumbnailRow photos={props.reviewData.photos} onPhotoClick={props.onPhotoClick}/>
     }
   }
 

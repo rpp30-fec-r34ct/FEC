@@ -4,6 +4,7 @@ import ReviewList from './ReviewList.jsx'
 import ReviewMetaData from './ReviewMetaData.jsx'
 import './cssFiles/reviewSection.css'
 import axios from 'axios';
+import ModalContainer from './ModalContainer.jsx'
 
 const ReviewSection = () => {
   const { productId } = useParams()
@@ -24,6 +25,8 @@ const ReviewSection = () => {
     4: true,
     5: true
   })
+
+  const [activeModal, setActiveModal] = useState('');
 
 
   useEffect(() => {
@@ -109,16 +112,25 @@ const ReviewSection = () => {
     setActiveFilters(newFilters);
   }
 
+  const onPhotoClick = (event) => {
+    setActiveModal(event.target.src);
+  }
+
+  const onClickClose = (event) => {
+    setActiveModal('');
+  }
 
   return (
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} handleFilterToggle={handleFilterToggle} activeFilters={activeFilters} clearAllFilters={clearAllFilters} />
-        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} />
+        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick}/>
+        <ModalContainer activeModal={activeModal} onClickClose={onClickClose}/>
       </div>
     </div>
   )
+
 }
 
 export default ReviewSection

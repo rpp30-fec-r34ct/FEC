@@ -47,7 +47,7 @@ const ReviewList = (props) => {
 
         let newReviews = data.data;
         const reviewListTiles = []
-        newReviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} />)) })
+        newReviews.map((reviewData) => { return (reviewListTiles.push(<ReviewTile key={reviewData.review_id} reviewData={reviewData} onPhotoClick={props.onPhotoClick}/>)) })
         setReviews(reviews.concat(reviewListTiles))
 
       })

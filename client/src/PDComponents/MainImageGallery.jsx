@@ -9,7 +9,6 @@ const MainImageGalleryComponent = (props) => {
   const [topIndex, setTopIndex] = useState(0)
   const [showModal, setShowModal] = useState(null)
 
-
   useEffect(() => {
     if (props.selectedStyle !== false) {
       setSelectedStyle(props.selectedStyle)
@@ -59,7 +58,7 @@ const MainImageGalleryComponent = (props) => {
           </div>
           )
         : null}
-        {/* TODO: replace null with no data view */}
+      {/* TODO: replace null with no data view */}
 
     </div>
   )

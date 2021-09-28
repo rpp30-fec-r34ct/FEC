@@ -11,7 +11,7 @@
 
 #gallery-modal-content{
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   background-color: #a3a3a3;
   margin: 10% auto; /* 15% from the top and centered */
   padding: 20px;
@@ -22,11 +22,24 @@
   z-index: 100000;
 }
 
+#modal-main-img-container {
+  display: flex;
+  position: relative;
+  height: 80%;
+  width: 80%;
+  margin: auto;
+}
+
 #modal-main-img {
   height: 100%;
-  width: 50%;
   overflow: hidden;
-  object-fit: scale-down
+  object-fit: scale-down;
+  margin: auto
+}
+
+#modal-sub-carousel {
+  width: 30%;
+  margin: auto;
 }
 
 .gallery-modal-image {

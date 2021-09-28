@@ -41,6 +41,7 @@ h3 {
 
 .ratingBreakDown {
   margin-top: 20px;
+  /* position: 'relative' */
 }
 
 .reviewList {

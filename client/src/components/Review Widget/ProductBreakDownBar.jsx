@@ -8,23 +8,26 @@ const ProductBreakDownBar = (props) => {
     background: 'lightgrey',
     width: 32.5  + '%',
   }
-  const charRating = {
-    height: 10 + 'px',
-    width: 3 + 'px',
-    left: ((props.rating/5) * 257) + 'px',
+  const charPointer = {
+    left: ((props.rating/5) * 100) + '%',
+    color: 'green',
     position: 'absolute',
-    background: 'green',
+    bottom: '.9px'
+  }
+
+  const holderStyle = {
+    position: 'relative',
   }
 
   return (
-    <>
+    <div style={holderStyle}>
       <div data-testid="testProductBreakdownBar" className="productBreakDownBar">
-        <div className="breakDownRect" style={charBar}></div>
-        <div className="breakDownRect" style={charBar}></div>
-        <div className="breakDownRect" style={charBar}></div>
-        <div style={charRating}></div>
+          <div className="breakDownRect" style={charBar}></div>
+          <div className="breakDownRect" style={charBar}></div>
+          <div className="breakDownRect" style={charBar}></div>
       </div>
-    </>
+      <i className="fas fa-caret-down" style={charPointer}></i>
+    </div>
   )
 }
 

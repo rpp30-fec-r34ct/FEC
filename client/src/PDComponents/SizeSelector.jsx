@@ -5,7 +5,7 @@ const SizeSelectorComponent = ({ selectedStyle, updateSelectedSize }) => {
   const skus = []
   if (selectedStyle) {
     for (const size in selectedStyle.skus) {
-      skus.push(<SizeSelectorItemComponent item={selectedStyle.skus[size]} name={size} />)
+      skus.push(<SizeSelectorItemComponent key={size} item={selectedStyle.skus[size]} name={size} />)
     }
   }
 

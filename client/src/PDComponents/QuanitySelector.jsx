@@ -5,7 +5,7 @@ const QuanitiySelectorComponent = ({ selectedSize }) => {
 
   if (selectedSize) {
     for (let i = 1; i <= selectedSize.quantity && i <= 10; i++) {
-      selections.push(<option value={i}>{i}</option>)
+      selections.push(<option key={i} value={i}>{i}</option>)
     }
   }
 

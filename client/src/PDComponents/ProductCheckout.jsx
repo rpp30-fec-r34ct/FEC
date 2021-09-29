@@ -52,7 +52,7 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
       </div>
 
       <div style={containerStyles}>
-        <AddToCart sku={selectedSku} handleNoSkuClick={handleNoSkuClick} />
+        <AddToCart sku={selectedSku} handleNoSkuClick={handleNoSkuClick} selectedSize={selectedSize} />
         <button style={buttonStyles} onClick={handleFavoriteButtonClick}>Favorite</button>
       </div>
 

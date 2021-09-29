@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 
-const AddToCartComponent = ({ sku, handleNoSkuClick }) => {
+const AddToCartComponent = ({ sku, selectedSize, handleNoSkuClick }) => {
 
   const handleAddToCartClick = (e) => {
     e.preventDefault()
@@ -17,7 +17,8 @@ const AddToCartComponent = ({ sku, handleNoSkuClick }) => {
   return(
     <>
     {sku
-    ? <button onClick={handleAddToCartClick}> Add to cart +</button>
+    ? <>{selectedSize.quantity > 0 && <button onClick={handleAddToCartClick}> Add to cart +</button>}</>
+
     : <button onClick={handleNoSkuClick}> Add to cart +</button>
     }
     </>

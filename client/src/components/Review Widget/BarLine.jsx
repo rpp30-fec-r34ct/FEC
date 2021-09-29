@@ -2,7 +2,6 @@ import React from 'react'
 import './cssFiles/barChart.css'
 
 const BarLine = (props) => {
-  const emptyBarWidth = 197
   const leftPos = 53
 
   const BarLine = {

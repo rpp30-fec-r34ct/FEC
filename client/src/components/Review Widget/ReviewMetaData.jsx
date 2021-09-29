@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import './cssFiles/reviewSection.css'
 import ReviewStars from './ReviewStars.jsx'
 import BarChart from './BarChart.jsx'
@@ -52,12 +51,9 @@ const ReviewMetaData = (props) => {
               {filterList}
             </div>
           </div>
-          <button className='removeFiltersBtn' onClick={props.clearAllFilters}>Remove all filters</button>
+          <button className='removeFiltersBtn' onClick={props.handleClearFilter}>Remove all filters</button>
         </div>
-
       )
-    } else {
-
     }
   }
 
@@ -73,7 +69,7 @@ const ReviewMetaData = (props) => {
       <div className='ratingBreakDown'>
         <span className='ratingBreakdownTitle'>Rating Breakdown</span>
         {getFilterDisplay(props.activeFilters)}
-        <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews} handleFilterToggle={props.handleFilterToggle} />
+        <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews} onHandleFilterToggle={props.onHandleFilterToggle} />
       </div>
       <ProductBreakdown characteristicsData={props.metaData.characteristics} />
     </div>

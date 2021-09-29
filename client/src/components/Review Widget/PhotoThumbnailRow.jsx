@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 const PhotoThumbnailRow = (props) => {
   const photoRowStyle = {
@@ -38,7 +38,7 @@ const PhotoThumbnailRow = (props) => {
   }
 
   return (
-    <div data-testid="testPhotoThumbnailRow" className='PhotoRow' style={photoRowStyle}>
+    <div data-testid='testPhotoThumbnailRow' className='PhotoRow' style={photoRowStyle}>
       {getPhotoThumbs(props.photos)}
     </div>
   )

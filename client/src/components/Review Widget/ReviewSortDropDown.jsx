@@ -16,7 +16,7 @@ const ReviewSortDropDown = (props) => {
   }
 
   return (
-    <div data-testid="testReviewSortDropDown" className='dropDownContainer'>
+    <div data-testid='testReviewSortDropDown' className='dropDownContainer'>
       <button className='dropDownBtn'>{props.sortType}</button>
       <div className='dropDownList'>
         {getSortOptions(props.sortType)}

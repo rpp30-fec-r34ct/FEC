@@ -22,23 +22,17 @@ const ReviewTile = (props) => {
           <span> I recommend this product</span>
         </div>
       )
-    } else {
-
     }
   }
 
   const getResponse = (response) => {
     if (response !== null && response !== '') {
       return <div className='tile_response'>Response: {response}</div>
-    } else {
-
     }
   }
 
   const getPhotos = (photos) => {
-    if (photos.length === 0) {
-
-    } else {
+    if (photos.length !== 0) {
       return <PhotoThumbnailRow photos={props.reviewData.photos} onPhotoClick={props.onPhotoClick} />
     }
   }
@@ -63,7 +57,6 @@ const ReviewTile = (props) => {
         <span className='tile_helpfulCount'>{'(' + props.reviewData.helpfulness + ')'}</span>
         <span className='tile_report'>{' | ' + 'Report'}</span>
       </div>
-
     </div>
   )
 }

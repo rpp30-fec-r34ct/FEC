@@ -13,9 +13,9 @@ const BarChart = (props) => {
 
     for (let i = 5; i > 0; i--) {
       if (givenStars.indexOf(i.toString()) === -1) {
-        bars.push(<BarLine key={i} star={i.toString()} numberOfReviews={0} handleFilterToggle={props.handleFilterToggle} />)
+        bars.push(<BarLine key={i} star={i.toString()} numberOfReviews={0} onHandleFilterToggle={props.onHandleFilterToggle} />)
       } else {
-        bars.push(<BarLine key={i} star={i.toString()} numberOfReviews={props.breakDownRatings[i]} totalReviews={props.totalReviews} handleFilterToggle={props.handleFilterToggle} />)
+        bars.push(<BarLine key={i} star={i.toString()} numberOfReviews={props.breakDownRatings[i]} totalReviews={props.totalReviews} onHandleFilterToggle={props.onHandleFilterToggle} />)
       }
     }
   }

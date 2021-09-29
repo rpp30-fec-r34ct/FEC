@@ -57,26 +57,26 @@ const ReviewSection = () => {
     return reviewCount
   }
 
-  const handleFilterToggle = (event) => {
+  const onHandleFilterToggle = (event) => {
     const ratingSelected = event.target.innerText[0]
     let newFilters = {}
     let trueCount = 0
     Object.assign(newFilters, activeFilters)
     let allActive = true
 
-    for (var key in newFilters) {
+    for (const key in newFilters) {
       if (newFilters[key] === false) {
         allActive = false
       }
     }
     if (allActive) {
-      for (var key in newFilters) {
+      for (const key in newFilters) {
         if (key !== ratingSelected) {
           newFilters[key] = false
         }
       }
     } else {
-      for (var key in newFilters) {
+      for (const key in newFilters) {
         if (key === ratingSelected) {
           newFilters[key] ? newFilters[key] = false : newFilters[key] = true
         }
@@ -100,7 +100,7 @@ const ReviewSection = () => {
     setActiveFilters(newFilters)
   }
 
-  const clearAllFilters = () => {
+  const handleClearFilter = () => {
     const newFilters = {
       1: true,
       2: true,
@@ -123,7 +123,7 @@ const ReviewSection = () => {
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
-        <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} handleFilterToggle={handleFilterToggle} activeFilters={activeFilters} clearAllFilters={clearAllFilters} />
+        <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} onHandleFilterToggle={onHandleFilterToggle} activeFilters={activeFilters} handleClearFilter={handleClearFilter} />
         <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} />
         <ModalContainer activeModal={activeModal} onClickClose={onClickClose} />
       </div>

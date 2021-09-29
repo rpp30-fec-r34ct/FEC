@@ -65,8 +65,6 @@ const ReviewList = (props) => {
   const renderMoreBtn = (totalReviews) => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
       return <button onClick={moreReviews} className='moreReviewsButton'>More Reviews</button>
-    } else {
-
     }
   }
 

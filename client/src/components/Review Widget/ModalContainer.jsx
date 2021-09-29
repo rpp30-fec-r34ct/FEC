@@ -40,7 +40,7 @@ const ModalContainer = (props) => {
     return (
       <>
         <div style={pageCoverStyle} />
-        <div data-testid="testModalContainer" style={modalContainerStyle}>
+        <div data-testid='testModalContainer' style={modalContainerStyle}>
           <div style={imgContainerStyle}>
             <img src={props.activeModal} style={imgStyle} />
           </div>

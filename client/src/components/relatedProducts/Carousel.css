@@ -1,5 +1,5 @@
 /** RELATED PRODUCTS LIST **/
-h3 {
+.carousels-overview h3 {
   font-family: Arial, Helvetica, sans-serif;
   color: #757575;
   font-weight: 200;
@@ -71,9 +71,15 @@ h3 {
   border: 1px solid #888;
 }
 
+.product-card:hover {
+  background-color: white;
+  opacity: 0.4;
+  transition: 0.3s;
+}
+
 .favorite-btn {
-  z-index: 1001;
-  color: white;
+  z-index: 3000;
+  color: rgb(255, 255, 255);
   stroke-width: 30%;
   position: absolute;
   left: 170px;
@@ -88,7 +94,7 @@ h3 {
   height: 220px;
   width: 200px;
   position: relative;
-  z-index: 1;
+  /* z-index: 50; */
 }
 
 
@@ -116,20 +122,6 @@ h3 {
 
 .checked {
   color: orange;
-}
-
-/***COMPARISON MODAL*****/
-
-.modal-overview {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.25);
-}
-
-.modal_content {
-  background-color: white;
-  position: absolute;
 }
 
 
@@ -268,4 +260,21 @@ h3 {
   position: absolute;
   left: 170px;
   top: 10px;
+}
+
+
+/**MODAL**/
+
+.modal {
+  position: fixed;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  width: 25%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  background: ivory;
+  border: 1px solid;
+  border-radius: 10px;
+  z-index: 9999;
 }

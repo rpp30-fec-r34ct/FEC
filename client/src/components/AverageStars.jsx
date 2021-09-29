@@ -1,53 +1,71 @@
 import React from 'react'
 import helper from '../helpers.js'
-import { ReactComponent as FullStar } from './ReviewWidget/icons/star.svg'
-import { ReactComponent as HalfStar } from './ReviewWidget/icons/star-half.svg'
-import { ReactComponent as QuarterStar } from './ReviewWidget/icons/star-one-quarter.svg'
-import { ReactComponent as ThreeQuarterStar } from './ReviewWidget/icons/star-three-quarter.svg'
-import { ReactComponent as EmptyStar } from './ReviewWidget/icons/empty-star.svg'
+import FullStar from './ReviewWidget/icons/star.svg'
+import HalfStar from './ReviewWidget/icons/star-half.svg'
+import QuarterStar from './ReviewWidget/icons/star-one-quarter.svg'
+import ThreeQuarterStar from './ReviewWidget/icons/star-three-quarter.svg'
+import EmptyStar from './ReviewWidget/icons/empty-star.svg'
 
 const AverageStars = (props) => {
   const averageRating = helper.findStarRating(props.rating)
-  console.log('rating', averageRating)
-  console.log('rating', props.rating)
+  console.log('rating', typeof averageRating, 'value', averageRating)
 
 
   // const ratingElement = (
   //   <>
-  //     {averageRating && typeof averageRating === 'number' ? (
-  //       <>
-  //         <h2>{averageRating}</h2>
-  //         <div style={{ display: 'flex' }}>
-  //           {Array(Math.floor(averageRating)).fill(<FullStar />)}
-  //           {averageRating - Math.floor(averageRating) === 0 ? (
-  //             ""
-  //           ) : (
-  //             <HalfStar />
-  //           )}
-  //         </div>
-  //       </>
-  //     ) : null}
+  //     {
+  //       averageRating ? (
+  //         <>
+  //           <h2>{'' + averageRating}</h2>
+  //           <div style={{ display: 'flex' }}>
+  //             {Array(Math.floor(averageRating)).fill(<FullStar />)}
+  //             {averageRating - Math.floor(averageRating) === 0 ? (
+  //               ""
+  //             ) : (
+  //               <HalfStar />
+  //             )}
+  //           </div>
+  //         </>
+  //       ) : null
+  //     }
   //   </>
   // );
 
-  return (
-    <div className='card-rating' style={{ visibility: isNaN(averageRating) && "hidden" }}>
-      {averageRating}
-      <>
-        {averageRating && typeof averageRating === 'number' ? (
+  const fullStarsArray = Array
+    .from(Array(Math.floor(averageRating)))
+    .map((_, i) => <img key={i} src={FullStar} />)
+
+  const emptyFullStarArray = Array
+    .from(Array(5))
+    .map((_, i) => <img key={i} src={EmptyStar} />)
+
+  const ratingElement = (
+    <>
+      {
+        averageRating ? (
           <>
-            <h2>{averageRating}</h2>
+            <div style={{ display: 'flex' }} >
+              {emptyFullStarArray}
+            </div>
             <div style={{ display: 'flex' }}>
-              {Array(Math.floor(averageRating)).fill(<FullStar />)}
+              {fullStarsArray}
               {averageRating - Math.floor(averageRating) === 0 ? (
                 ""
               ) : (
-                <HalfStar />
+                <img src={HalfStar} />
               )}
             </div>
           </>
-        ) : null}
-      </>
+        ) : null
+      }
+    </>
+  );
+
+
+
+  return (
+    <div className='card-rating' style={{ visibility: !averageRating ? "hidden" : "" }}>
+      {ratingElement}
     </div>
   )
 }

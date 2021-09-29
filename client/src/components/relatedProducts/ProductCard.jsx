@@ -3,6 +3,7 @@ import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
 import helper from '../../helpers.js';
 import AverageStars from '../AverageStars.jsx'
+import ReviewStars from './../ReviewWidget/ReviewStars.jsx'
 
 export default function ProductCard(props) {
 
@@ -37,6 +38,7 @@ export default function ProductCard(props) {
           <div className='card-name'>{props.product.name}</div>
           {priceElement}
           <AverageStars rating={props.product.rating} />
+          {/* <ReviewStars starRating={props.product.rating} review_id={props.product.id} /> */}
         </div>
       </div>
     </div >

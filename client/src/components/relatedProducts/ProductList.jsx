@@ -11,9 +11,7 @@ export default function ProductList(props) {
               return <ProductCard
                 key={index}
                 product={product}
-                getCurrentProduct={props.getCurrentProduct}
                 currentProduct={props.currentProduct}
-                toggleModal={props.toggleModal}
               />
             })
           }

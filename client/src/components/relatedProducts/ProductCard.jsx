@@ -4,7 +4,6 @@ import AverageStars from '../Shared/AverageStars.jsx'
 
 
 export default function ProductCard(props) {
-
   const priceElement =
     <>
       {props.product.sale ?
@@ -19,7 +18,6 @@ export default function ProductCard(props) {
         <div className='card-price'>${props.product.price}</div>
       }
     </>
-
 
   return (
     < div className='product-card' >

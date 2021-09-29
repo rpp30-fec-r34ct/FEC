@@ -11,27 +11,18 @@ export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentProduct, setCurrentProduct] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-
-
   const currentRelated = relatedProducts.length
   const { productId } = useParams()
 
   useEffect(() => {
-    let mounted = true;
-    if (mounted) {
-      getRelatedProducts()
-      getCurrentProduct()
-    }
-    return function cleanup() {
-      mounted = false;
-    }
+    getRelatedProducts()
+    getCurrentProduct()
   }, [])
 
   const getRelatedProducts = async () => {
     try {
       const { data } = await axios.get(`/product/${productId}/related`)
       setRelatedProducts(data)
-      console.log('related', data)
     } catch (error) {
       console.log(error.message)
     }
@@ -39,14 +30,12 @@ export default function Carousel(props) {
 
   const getCurrentProduct = async () => {
     try {
-      const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
+      const { data } = await axios.get(`/api/products/${productId}`)
       setCurrentProduct(data)
-      console.log('current', data)
     } catch (error) {
       console.log(error.message)
     }
   }
-
 
 
   const nextCard = () => {
@@ -68,7 +57,6 @@ export default function Carousel(props) {
         {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <ProductList
           relatedProducts={relatedProducts}
-          getCurrentProduct={getCurrentProduct}
           currentProduct={currentProduct}
           currentIndex={currentIndex}
         />

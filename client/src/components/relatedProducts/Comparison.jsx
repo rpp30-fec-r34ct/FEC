@@ -9,7 +9,19 @@ const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = () => setOpen(!isOpen);
 
-  console.log('product', props.currentProduct)
+  // console.log('product', props.currentProduct)
+  // console.log('related', props.relatedProduct)
+
+
+  const getCharacteristics = async () => {
+    try {
+      const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
+      setCurrentProduct(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
 
   return (
     <React.Fragment>

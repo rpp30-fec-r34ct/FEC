@@ -79,7 +79,7 @@
 
 .favorite-btn {
   z-index: 3000;
-  color: rgb(17, 17, 17);
+  color: rgb(255, 255, 255);
   stroke-width: 30%;
   position: absolute;
   left: 170px;
@@ -87,7 +87,7 @@
 }
 
 .favorite-btn:hover {
-  color: rgb(235, 183, 41);
+  color: rgb(255, 167, 2);
 }
 
 .card-image img {

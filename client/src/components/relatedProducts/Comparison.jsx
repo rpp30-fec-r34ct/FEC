@@ -2,27 +2,62 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 // import { GiCheckMark } from 'react-icons/gi'
-import { AiOutlineStar } from 'react-icons/ai'
+import { RiStarSmileFill } from 'react-icons/Ri'
 import { createPortal } from 'react-dom'
 
 const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false);
   const toggleModal = () => setOpen(!isOpen);
 
+  // console.log('product', props.currentProduct)
+  // console.log('related', props.relatedProduct)
+
+
+  const getCharacteristics = async () => {
+    try {
+      const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
+      setCurrentProduct(data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={() => toggleModal()}>
-        <AiOutlineStar />
+        <RiStarSmileFill />
       </div>
 
       {isOpen
         ? createPortal(
           <React.Fragment>
             <div className="modal">
-              <h4>TEST</h4>
-              <button className="close" onClick={toggleModal}>
-                Close
-              </button>
+              <div className="modal-body">
+                <h1>Comparing</h1>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Current Product Name</th>
+                      <th>Characteristic</th>
+                      <th>Compared Product Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>{
+                      props.currentProduct && props.currentProduct.characteristics && Object.keys(props.currentProduct?.characteristics).map((name, i) => {
+                        return (
+                          <td>{name}</td>
+                        )
+                      })
+                    }
+                    </tr>
+                  </tbody>
+                </table>
+                <button className="close" onClick={toggleModal}>
+                  Close
+                </button>
+              </div>
             </div>
           </React.Fragment >,
           document.getElementById('modal')

@@ -1,10 +1,10 @@
 import React from 'react'
 import helper from './helpers.js'
-import FullStar from './../ReviewWidget/icons/star.svg'
-import HalfStar from './../ReviewWidget/icons/star-half.svg'
-import QuarterStar from './../ReviewWidget/icons/star-one-quarter.svg'
-import ThreeQuarterStar from './../ReviewWidget/icons/star-three-quarter.svg'
-import EmptyStar from './../ReviewWidget/icons/empty-star.svg'
+import FullStar from './../Review Widget/icons/star.svg'
+import HalfStar from './../Review Widget/icons/star-half.svg'
+import QuarterStar from './../Review Widget/icons/star-one-quarter.svg'
+import ThreeQuarterStar from './../Review Widget/icons/star-three-quarter.svg'
+import EmptyStar from './../Review Widget/icons/empty-star.svg'
 
 const AverageStars = (props) => {
   const averageRating = helper.findStarRating(props.rating)

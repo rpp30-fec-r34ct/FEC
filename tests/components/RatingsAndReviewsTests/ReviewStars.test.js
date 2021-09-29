@@ -7,7 +7,7 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 // component
-import ReviewStars from '../../../client/src/components/ReviewWidget/ReviewStars.jsx'
+import ReviewStars from '../../../client/src/components/Review Widget/ReviewStars.jsx'
 const average = 5
 
 describe('Review Stars Component', () => {

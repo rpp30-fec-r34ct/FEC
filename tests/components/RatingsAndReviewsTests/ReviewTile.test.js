@@ -6,7 +6,7 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
-import ReviewTile from '../../../client/src/components/ReviewWidget/ReviewTile.jsx'
+import ReviewTile from '../../../client/src/components/Review Widget/ReviewTile.jsx'
 const reviewData =
   {
     review_id: 781037,

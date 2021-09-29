@@ -30,9 +30,9 @@ const GalleryModal = ({ selectedStyle, currentIndex, handleClickOffModal }) => {
       <div id='gallery-modal-content'>
         <div id='modal-main-img-container'>
           <div id='modal-main-img'>
-            {(imgIndex > 0) ? <FaChevronLeft className='gallery-modal-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden gallery-modal-arrow' />}
+            {(imgIndex > 0) ? <FaChevronLeft id='gallery-modal-left-arrow' className='gallery-modal-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft id='gallery-modal-left-arrow' className='hidden gallery-modal-arrow' />}
             <InnerImageZoom src={selectedStyle.photos[imgIndex].url} zoomScale={2} />
-            {(imgIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-modal-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden gallery-modal-arrow' />}
+            {(imgIndex < selectedStyle.photos.length - 1) ? <FaChevronRight id='gallery-modal-right-arrow' className='gallery-modal-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight id='gallery-modal-right-arrow' className='hidden gallery-modal-arrow' />}
           </div>
         </div>
         <div id='modal-sub-carousel'>

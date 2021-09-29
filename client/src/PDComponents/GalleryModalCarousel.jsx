@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   const [topIndex, setTopIndex] = useState(0)
@@ -41,13 +41,13 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
 
   return (
     <div style={listStyles}>
-      {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
+      {(topIndex > 0) ? <FaChevronLeft id='gallery-modal-carousel-left-arrow' onClick={handleCarouselUpClick} /> : <FaChevronLeft id='gallery-modal-carousel-left-arrow' className='hidden' />}
       <div style={{ maxWidth: '414px', overflow: 'hidden', display: 'flex' }}>
         <div style={carouselListStyles}>
           {thumbnails}
         </div>
       </div>
-      {(topIndex < thumbnails.length - 5) ? <FaChevronDown className='down-arrow' onClick={handleCarouselDownClick} /> : <FaChevronDown className='hidden' />}
+      {(topIndex < thumbnails.length - 5) ? <FaChevronRight id='gallery-modal-carousel-right-arrow' onClick={handleCarouselDownClick} /> : <FaChevronRight id='gallery-modal-carousel-right-arrow' className='hidden' />}
     </div>
   )
 }

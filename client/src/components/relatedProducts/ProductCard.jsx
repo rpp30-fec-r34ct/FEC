@@ -37,7 +37,6 @@ export default function ProductCard(props) {
           <div className='card-name'>{props.product.name}</div>
           {priceElement}
           <AverageStars rating={props.product.rating} />
-          {/* <ReviewStars starRating={props.product.rating} review_id={props.product.id} /> */}
         </div>
       </div>
     </div >

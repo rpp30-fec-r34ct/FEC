@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 // import { GiCheckMark } from 'react-icons/gi'
-import { AiOutlineStar } from 'react-icons/ai'
+import { MdStars } from 'react-icons/Md'
 import { createPortal } from 'react-dom'
 
 const Comparison = (props) => {
@@ -14,7 +14,7 @@ const Comparison = (props) => {
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={() => toggleModal()}>
-        <AiOutlineStar />
+        <MdStars />
       </div>
 
       {isOpen

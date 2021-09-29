@@ -16,7 +16,7 @@ export default function ProductCard(props) {
             {props.product.price}
           </div>
         </div> :
-        <div className='card-price'>{props.product.price}</div>
+        <div className='card-price'>${props.product.price}</div>
       }
     </>
 

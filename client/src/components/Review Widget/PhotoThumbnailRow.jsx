@@ -38,7 +38,7 @@ const PhotoThumbnailRow = (props) => {
   }
 
   return (
-    <div className='PhotoRow' style={photoRowStyle}>
+    <div data-testid="testPhotoThumbnailRow" className='PhotoRow' style={photoRowStyle}>
       {getPhotoThumbs(props.photos)}
     </div>
   )

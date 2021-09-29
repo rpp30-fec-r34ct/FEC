@@ -73,17 +73,21 @@
 
 .product-card:hover {
   background-color: white;
-  opacity: 0.4;
-  transition: 0.3s;
+  opacity: 0.8;
+  transition: 0.1s;
 }
 
 .favorite-btn {
   z-index: 3000;
-  color: rgb(255, 255, 255);
+  color: rgb(17, 17, 17);
   stroke-width: 30%;
   position: absolute;
   left: 170px;
   top: 10px;
+}
+
+.favorite-btn:hover {
+  color: rgb(235, 183, 41);
 }
 
 .card-image img {

@@ -7,7 +7,7 @@
     "start": "nodemon ./server/index.js --watch",
     "react-dev": "clear && webpack --watch",
     "start-inspect": "clear && node --inspect ./server/index.js",
-    "test": "standard && jest",
+    "test": "jest tests",
     "test-reviews": "clear && ./node_modules/.bin/jest ./tests/components/RatingsAndReviewsTests"
   },
   "repository": {

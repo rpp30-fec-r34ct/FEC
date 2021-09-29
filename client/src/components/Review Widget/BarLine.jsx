@@ -37,7 +37,7 @@ const BarLine = (props) => {
 
   return (
     <div data-testid='testBarLine' className='BarLine' style={BarLine}>
-      <span onClick={props.handleFilterToggle} className='ratingName'>{props.star + ' stars'}</span>
+      <span onClick={props.onHandleFilterToggle} className='ratingName'>{props.star + ' stars'}</span>
       <div className='emptyBar' style={styleEmptyBar} />
       <div className='fullBar' style={styleFullBar} />
       <span className='categoryCount' style={categoryCountStyle}>{' (' + props.numberOfReviews + ')'}</span>

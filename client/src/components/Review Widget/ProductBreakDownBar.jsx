@@ -1,31 +1,34 @@
-import React from 'react';
+import React from 'react'
 
 const ProductBreakDownBar = (props) => {
-  //infile styling required to place thing over bars.
+  // infile styling required to place thing over bars.
 
   const charBar = {
     height: 10 + 'px',
     background: 'lightgrey',
-    width: 32.5  + '%',
+    width: 32.5 + '%'
   }
-  const charRating = {
-    height: 10 + 'px',
-    width: 3 + 'px',
-    left: ((props.rating/5) * 257) + 'px',
+  const charPointer = {
+    left: ((props.rating / 5) * 100) + '%',
+    color: 'green',
     position: 'absolute',
-    background: 'green',
+    bottom: '.9px'
+  }
+
+  const holderStyle = {
+    position: 'relative'
   }
 
   return (
-    <>
-      <div data-testid="testProductBreakdownBar" className="productBreakDownBar">
-        <div className="breakDownRect" style={charBar}></div>
-        <div className="breakDownRect" style={charBar}></div>
-        <div className="breakDownRect" style={charBar}></div>
-        <div style={charRating}></div>
+    <div style={holderStyle}>
+      <div data-testid='testProductBreakdownBar' className='productBreakDownBar'>
+        <div className='breakDownRect' style={charBar} />
+        <div className='breakDownRect' style={charBar} />
+        <div className='breakDownRect' style={charBar} />
       </div>
-    </>
+      <i className='fas fa-caret-down' style={charPointer} />
+    </div>
   )
 }
 
-export default ProductBreakDownBar;
+export default ProductBreakDownBar

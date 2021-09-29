@@ -3,20 +3,15 @@
  */
 
 import React from 'react'
-import 'regenerator-runtime/runtime'
-import { render } from '@testing-library/react'
-import '@testing-library/jest-dom'
 import { createMemoryHistory } from 'history'
 import { Router, Route, Switch } from 'react-router-dom'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
+import 'regenerator-runtime/runtime'
+import '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 
-// components
-import ProductDetailPage from '../../client/src/PDComponents/ProductDetailPage.jsx'
-import FourOhFour from '../../client/src/components/FourOhFour.jsx'
+import ProductDescription from '../../../client/src/PDComponents/ProductDescription.jsx'
 
-// setup test data
-const productResponse = {
+const productData = {
   id: 47421,
   campus: 'hr-rpp',
   name: 'Camo Onesie',
@@ -38,7 +33,7 @@ const productResponse = {
   ]
 }
 
-const productStyleResponse = {
+const productStyleData = {
   product_id: '47421',
   results: [
     {
@@ -398,90 +393,80 @@ const productStyleResponse = {
   ]
 }
 
-// setup worker
-const server = setupServer()
-
-beforeAll(() => server.listen())
-afterEach(() => server.resetHandlers())
-afterAll(() => server.close())
-
-describe('Product Detail Page', () => {
-  test('Should render product details from get request', async function () {
-    server.use(
-      rest.get('/api/products/47421/', (req, res, ctx) => {
-        return res(ctx.json(productResponse))
-      }),
-      rest.get('/api/products/47421/styles', (req, res, ctx) => {
-        return res(ctx.json(productStyleResponse))
-      })
-    )
+describe('Product Description Component', function () {
+  test('Should render the product category', function () {
     const history = createMemoryHistory()
-    const route = '/product/47421'
-    history.push(route)
+    history.push('/product/47421')
     const app = render(
       <Router history={history}>
-        <Switch>
-          <Route path='/product/:productId'>
-            <ProductDetailPage />
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
           </Route>
         </Switch>
       </Router>
     )
-    expect(await app.findByText(productResponse.name)).toBeInTheDocument()
-    expect(await app.findByText(productResponse.description)).toBeInTheDocument()
+    expect(app.getByText(productData.category)).toBeInTheDocument()
   })
 
-  test('Should replace the page with a 404 message if the server fails to respond with product', async function () {
-    server.use(
-      rest.get('/api/products/47421/', (req, res, ctx) => {
-        return res(ctx.status(500))
-      }),
-      rest.get('/api/products/47421/styles', (req, res, ctx) => {
-        return res(ctx.status(500))
-      })
-    )
+  test('Should render the product name', function () {
     const history = createMemoryHistory()
-    const route = '/product/47421'
-    history.push(route)
+    history.push('/product/47421')
     const app = render(
       <Router history={history}>
-        <Switch>
-          <Route path='/product/:productId'>
-            <ProductDetailPage />
-          </Route>
-          <Route path='/404'>
-            <FourOhFour />
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
           </Route>
         </Switch>
       </Router>
     )
-    expect(await app.findByText('404')).toBeInTheDocument()
+    expect(app.getByText(productData.name)).toBeInTheDocument()
   })
 
-  test('Should replace the page with a 404 message if the server fails to respond with styles', async function () {
-    server.use(
-      rest.get('/api/products/47421/', (req, res, ctx) => {
-        return res(ctx.json(productResponse))
-      }),
-      rest.get('/api/products/47421/styles', (req, res, ctx) => {
-        return res(ctx.status(500))
-      })
-    )
+  test('Should render the price', function () {
     const history = createMemoryHistory()
-    const route = '/product/47421'
-    history.push(route)
+    history.push('/product/47421')
     const app = render(
       <Router history={history}>
-        <Switch>
-          <Route path='/product/:productId'>
-            <ProductDetailPage />
-          </Route>
-          <Route path='/404'>
-            <FourOhFour />
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
           </Route>
         </Switch>
       </Router>
     )
-    expect(await app.findByText('404')).toBeInTheDocument()
+    expect(app.getByText(`$${productData.default_price}`)).toBeInTheDocument()
+  })
+
+  test('Should render the stars component', function () {
+    const history = createMemoryHistory()
+    history.push('/product/47421')
+    const app = render(
+      <Router history={history}>
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
+          </Route>
+        </Switch>
+      </Router>
+    )
+    expect(app.container.querySelector('#starsOuter')).toBeInTheDocument()
   })
 })

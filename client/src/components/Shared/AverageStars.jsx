@@ -7,16 +7,32 @@ import ThreeQuarterStar from './../Review Widget/icons/star-three-quarter.svg'
 import EmptyStar from './../Review Widget/icons/empty-star.svg'
 
 const AverageStars = (props) => {
-  const averageRating = helper.findStarRating(props.rating)
-  // console.log('rating', typeof averageRating, 'value', averageRating)
+  const averageRating = helper.findStarRating(props.rating);
 
-  const fullStarsArray = Array
-    .from(Array(Math.floor(averageRating)))
-    .map((_, i) => <img key={i} src={FullStar} />)
+  let wholeRating = Math.floor(averageRating) || 0;
 
-  const emptyFullStarArray = Array
-    .from(Array(5))
-    .map((_, i) => <img key={i} src={EmptyStar} />)
+  let wholeStars = Array.from(Array(wholeRating)).map((_, i) => (
+    <img key={i} src={FullStar} />
+  ));
+
+  let emptyStars = Array.from(Array(5)).map((_, i) => <img key={i} src={EmptyStar} />);
+
+  let remaining = Math.round(((averageRating - wholeRating) * 100) % 4); //remaining in quarters
+  let remainingStar;
+
+  switch (remaining) {
+    case 1:
+      remainingStar = <img src={QuarterStar} />
+      break;
+    case 2:
+      remainingStar = <img src={HalfStar} />
+      break;
+    case 3:
+      remainingStar = <img src={ThreeQuarterStar} />
+      break;
+    default:
+      break;
+  }
 
   const ratingElement = (
     <>
@@ -24,15 +40,11 @@ const AverageStars = (props) => {
         averageRating ? (
           <>
             <div style={{ display: 'flex', position: 'absolute' }} >
-              {emptyFullStarArray}
+              {emptyStars}
             </div>
             <div style={{ display: 'flex' }}>
-              {fullStarsArray}
-              {averageRating - Math.floor(averageRating) === 0 ? (
-                ""
-              ) : (
-                <img src={HalfStar} />
-              )}
+              {wholeStars}
+              {remainingStar}
             </div>
           </>
         ) : null

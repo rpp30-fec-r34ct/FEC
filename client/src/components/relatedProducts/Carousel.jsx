@@ -9,9 +9,8 @@ import './Carousel.css'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
-  const [currentProduct, setcurrentProduct] = useState([])
+  const [currentProduct, setCurrentProduct] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0)
-
 
 
   const currentRelated = relatedProducts.length
@@ -21,7 +20,7 @@ export default function Carousel(props) {
     let mounted = true;
     if (mounted) {
       getRelatedProducts()
-      getProductDetails()
+      getCurrentProduct()
     }
     return function cleanup() {
       mounted = false;
@@ -32,6 +31,7 @@ export default function Carousel(props) {
     try {
       const { data } = await axios.get(`/product/${productId}/related`)
       setRelatedProducts(data)
+      console.log('related', data)
     } catch (error) {
       console.log(error.message)
     }
@@ -41,6 +41,7 @@ export default function Carousel(props) {
     try {
       const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
       setCurrentProduct(data)
+      console.log('current', data)
     } catch (error) {
       console.log(error.message)
     }

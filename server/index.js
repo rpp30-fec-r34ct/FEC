@@ -284,8 +284,6 @@ app.get('/product/:id/related', async (req, res) => {
       const productRatings = response.data.ratings
       const productChar = response.data.characteristics
 
-      console.log('characteristic', productChar)
-
       relatedProducts.push({
         id: product.id,
         photo: productStyle[0],

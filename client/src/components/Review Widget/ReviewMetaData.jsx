@@ -2,7 +2,7 @@ import React from 'react'
 import './cssFiles/reviewSection.css'
 import ReviewStars from './ReviewStars.jsx'
 import BarChart from './BarChart.jsx'
-import ProductBreakdown from './productBreakdown.jsx'
+import ProductBreakdown from './ProductBreakdown.jsx'
 
 const ReviewMetaData = (props) => {
   const calculatePercentRecommend = (noStr, yesStr) => {

@@ -8,7 +8,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   useEffect(() => {
     if (selectedStyle) {
       setThumbnails(selectedStyle.photos.map((image, index) => {
-        return <img key={index} data-index={index} className='product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
+        return <img key={index} data-index={index} className='modal-product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
       }))
     }
   }, [selectedStyle])
@@ -21,7 +21,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   }
 
   const carouselListStyles = {
-    transform: `translateY(-${topIndex * 77}px)`,
+    transform: `translateX(-${topIndex * 79}px)`,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-evenly'
@@ -42,7 +42,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   return (
     <div style={listStyles}>
       {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
-      <div style={{ maxHeight: '395px', overflow: 'hidden' }}>
+      <div style={{ maxWidth: '414px', overflow: 'hidden', display: 'flex' }}>
         <div style={carouselListStyles}>
           {thumbnails}
         </div>

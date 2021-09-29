@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
-import { AiOutlineStar } from 'react-icons/ai'
 import AverageStars from '../Shared/AverageStars.jsx'
 
 

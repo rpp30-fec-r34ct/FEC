@@ -44,7 +44,7 @@ const MainImageGalleryComponent = (props) => {
 
   return (
     <div>
-      {showModal && <GalleryModal selectedStyle={selectedStyle} currentIndex={topIndex} handleCollapseImageClick={handleExpandImageClick} handleClickOffModal={handleClickOffModal} />}
+      {showModal && <GalleryModal selectedStyle={selectedStyle} currentIndex={topIndex} handleClickOffModal={handleClickOffModal} />}
       {selectedStyle !== null
         ? (
           <div id='gallery-container'>
@@ -52,7 +52,7 @@ const MainImageGalleryComponent = (props) => {
             {(topIndex > 0) ? <FaChevronLeft className='gallery-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden' />}
             <div id='main-product-image' className='collapsed-product-image'>
               <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
-              <img src={selectedStyle.photos[topIndex].url} />
+              <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
             </div>
             {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden' />}
           </div>

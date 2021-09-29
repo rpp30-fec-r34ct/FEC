@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import { AiOutlineStar } from 'react-icons/ai'
-import helper from '../../helpers.js';
-import AverageStars from '../AverageStars.jsx'
-import ReviewStars from './../ReviewWidget/ReviewStars.jsx'
+import AverageStars from '../Shared/AverageStars.jsx'
+
 
 export default function ProductCard(props) {
 

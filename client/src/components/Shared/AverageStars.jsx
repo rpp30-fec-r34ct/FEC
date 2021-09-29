@@ -23,7 +23,7 @@ const AverageStars = (props) => {
       {
         averageRating ? (
           <>
-            <div style={{ display: 'flex', position: 'relative' }} >
+            <div style={{ display: 'flex', position: 'absolute' }} >
               {emptyFullStarArray}
             </div>
             <div style={{ display: 'flex' }}>

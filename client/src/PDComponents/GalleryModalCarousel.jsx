@@ -27,13 +27,13 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
     justifyContent: 'space-evenly'
   }
 
-  const handleCarouselUpClick = () => {
+  const handleCarouselLeftClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex - 1
     })
   }
 
-  const handleCarouselDownClick = () => {
+  const handleCarouselRightClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex + 1
     })
@@ -41,13 +41,13 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
 
   return (
     <div style={listStyles}>
-      {(topIndex > 0) ? <FaChevronLeft id='gallery-modal-carousel-left-arrow' onClick={handleCarouselUpClick} /> : <FaChevronLeft id='gallery-modal-carousel-left-arrow' className='hidden' />}
+      {(topIndex > 0) ? <FaChevronLeft id='gallery-modal-carousel-left-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft id='gallery-modal-carousel-left-arrow' className='hidden' />}
       <div style={{ maxWidth: '414px', overflow: 'hidden', display: 'flex' }}>
         <div style={carouselListStyles}>
           {thumbnails}
         </div>
       </div>
-      {(topIndex < thumbnails.length - 5) ? <FaChevronRight id='gallery-modal-carousel-right-arrow' onClick={handleCarouselDownClick} /> : <FaChevronRight id='gallery-modal-carousel-right-arrow' className='hidden' />}
+      {(topIndex < thumbnails.length - 5) ? <FaChevronRight id='gallery-modal-carousel-right-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight id='gallery-modal-carousel-right-arrow' className='hidden' />}
     </div>
   )
 }

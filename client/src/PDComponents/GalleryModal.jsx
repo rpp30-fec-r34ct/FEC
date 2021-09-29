@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './styles/ImageZoomStyles.css'
 import './styles/GalleryModal.css'
-import { FaChevronLeft, FaChevronRight, FaCompress } from 'react-icons/fa'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import InnerImageZoom from 'react-inner-image-zoom'
 import SubImageCarousel from './GalleryModalCarousel.jsx'
 
-const GalleryModal = ({ selectedStyle, currentIndex, handleCollapseImageClick, handleClickOffModal }) => {
+const GalleryModal = ({ selectedStyle, currentIndex, handleClickOffModal }) => {
   const [imgIndex, setImgIndex] = useState(currentIndex)
 
   const handleCarouselLeftClick = () => {
@@ -30,9 +30,9 @@ const GalleryModal = ({ selectedStyle, currentIndex, handleCollapseImageClick, h
       <div id='gallery-modal-content'>
         <div id='modal-main-img-container'>
           <div id='modal-main-img'>
-          {(imgIndex > 0) ? <FaChevronLeft className='gallery-modal-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden gallery-modal-arrow' />}
+            {(imgIndex > 0) ? <FaChevronLeft className='gallery-modal-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden gallery-modal-arrow' />}
             <InnerImageZoom src={selectedStyle.photos[imgIndex].url} zoomScale={2} />
-          {(imgIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-modal-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden gallery-modal-arrow' />}
+            {(imgIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-modal-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden gallery-modal-arrow' />}
           </div>
         </div>
         <div id='modal-sub-carousel'>

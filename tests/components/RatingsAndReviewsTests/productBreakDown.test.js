@@ -2,30 +2,29 @@
  * @jest-environment jsdom
  */
 
- import React from 'react'
- import { render, screen } from '@testing-library/react'
- import '@testing-library/jest-dom'
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
- // component
- import ProductBreakdown from '../../../client/src/components/Review Widget/ProductBreakdown.jsx'
+// component
+import ProductBreakdown from '../../../client/src/components/Review Widget/ProductBreakdown.jsx'
 
- const data = {
+const data = {
   Fit: 2.4
- }
+}
 
- describe('Product Breakdown Component', () => {
+describe('Product Breakdown Component', () => {
+  test('Should be on the DOM', function () {
+    render(<ProductBreakdown characteristicsData={data} />)
 
-   test('Should be on the DOM', function () {
-     render(<ProductBreakdown characteristicsData={data} />)
+    const productBreakDownElem = screen.getByTestId('testProductBreakdown')
+    expect(productBreakDownElem).toBeInTheDocument()
+  })
 
-     const productBreakDownElem = screen.getByTestId('testProductBreakdown')
-     expect(productBreakDownElem).toBeInTheDocument();
-   })
-
-   test('Should have a product breakdown bar', function () {
+  test('Should have a product breakdown bar', function () {
     render(<ProductBreakdown characteristicsData={data} />)
 
     const productBreakDownBar = screen.getByTestId('testProductBreakdownBar')
-    expect(productBreakDownBar).toHaveClass('productBreakDownBar');
+    expect(productBreakDownBar).toHaveClass('productBreakDownBar')
   })
- })
+})

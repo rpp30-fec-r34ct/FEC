@@ -6,7 +6,6 @@ import threeQuarterStar from './icons/star-three-quarter.svg'
 import emptyStar from './icons/empty-star.svg'
 
 const ReviewStars = (props) => {
-
   const wholeStars = [...Array(Math.floor(props.starRating))]
   const decimalStars = []
   let starArray = []

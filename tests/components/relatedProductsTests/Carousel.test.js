@@ -24,7 +24,7 @@ const relatedProductsData =
     rating: {
       2: '1', 3: '1', 4: '2', 5: '1'
     },
-    characteristic: {
+    characteristics: {
       Quality: {
         id: 159163, value: '4.2000000000000000'
       }
@@ -37,7 +37,7 @@ const relatedProductsData =
     sale: null,
     price: '40.00',
     rating: {},
-    characteristic: {
+    characteristics: {
       Fit: {
         id: 159164, value: null
       },
@@ -61,7 +61,7 @@ const relatedProductsData =
     rating: {
       1: '1', 3: '1', 4: '1', 5: '2'
     },
-    characteristic: {
+    characteristics: {
       Size: {
         id: 159184, value: '3.4000000000000000'
       },
@@ -83,7 +83,7 @@ const relatedProductsData =
     rating: {
       1: '1', 5: '1'
     },
-    characteristic: {
+    characteristics: {
       Size: {
         id: 159180, value: '2.5000000000000000'
       },

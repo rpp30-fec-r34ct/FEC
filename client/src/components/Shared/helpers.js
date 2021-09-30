@@ -22,7 +22,8 @@ const findTotalScore = (ratings) => {
 
 const findAverageRating = (ratings) => (findTotalScore(ratings) / findTotalReviews(ratings));
 
-const findStarRating = (ratings) => (Math.round(findAverageRating(ratings) * 4) / 4).toFixed(2);
+const findStarRating = (ratings) => (Math.round(findAverageRating(ratings) * 4) / 4).toFixed(2) ? Number((Math.round(findAverageRating(ratings) * 4) / 4).toFixed(2)) : 0;
+
 
 
 module.exports = {

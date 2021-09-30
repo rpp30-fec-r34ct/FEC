@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import SizeSelector from './SizeSelector.jsx'
 import QuanitiySelector from './QuanitySelector.jsx'
 import AddToCart from './AddToCart.jsx'
+import './styles/ProductCheckout.css'
 
 const ProductCheckoutComponent = ({ selectedStyle }) => {
   const [selectedSize, setSelectedSize] = useState(null)
@@ -36,25 +37,17 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
     }
   }
 
-  const checkoutStyles = {
-    display: 'flex',
-    flexDirection: 'column'
-  }
-
-  const containerStyles = { display: 'flex', justifyContent: 'space-evenly', marginTop: '2em' }
-
-  const buttonStyles = { height: '2em', width: '10em', borderRaidus: 0, textAlign: 'center', backgroundColor: 'transparent', border: 'solid 1px black', cursor: 'pointer' }
   return (
-    <div style={checkoutStyles}>
-      <div style={containerStyles}>
+    <div id='checkout-container'>
+      <div className='checkout-sub-top-container'>
         <SizeSelector selectedStyle={selectedStyle} updateSelectedSize={handleSizeChange} />
 
         <QuanitiySelector selectedSize={selectedSize} />
       </div>
 
-      <div style={containerStyles}>
+      <div className='checkout-sub-top-container'>
         <AddToCart sku={selectedSku} handleNoSkuClick={handleNoSkuClick} selectedSize={selectedSize} />
-        <button style={buttonStyles} onClick={handleFavoriteButtonClick}>Favorite</button>
+        <button className='checkout-button' onClick={handleFavoriteButtonClick}>Favorite</button>
       </div>
 
     </div>

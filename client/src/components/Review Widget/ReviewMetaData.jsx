@@ -1,85 +1,77 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
 import './cssFiles/reviewSection.css'
 import ReviewStars from './ReviewStars.jsx'
-import BarChart from './BarChart.jsx';
-import ProductBreakdown from './productBreakdown.jsx';
+import BarChart from './BarChart.jsx'
+import ProductBreakdown from './ProductBreakdown.jsx'
 
 const ReviewMetaData = (props) => {
-  const [reviewsMeta, setReviewsMeta] = useState({
-    reviewsMeta:
-    {
-      product_id: 1,
-      recommended: {
-        false: '0',
-        true: '0'
-      },
-      ratings: {
-        1: '3'
-      }
-    },
-    average: 0,
-    percentRecommend: 0,
-    totalReviews: 0
-  })
+  const calculatePercentRecommend = (noStr, yesStr) => {
+    const noCount = parseInt(noStr)
+    const yesCount = parseInt(yesStr)
 
-  useEffect(() => {
-    getReviewsMeta()
-  }, [])
-
-  const getReviewsMeta = () => {
-    axios.get('/reviews/meta', {
-      params: {
-        product_id: props.product_id
-      }
-    })
-      .then((data) => {
-        calculateAverage(data.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
+    return Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100)
   }
 
-  const calculatePercentRecommend = (currentAverage, data, reviewCount) => {
-    const noCount = parseInt(data.recommended.false)
-    const yesCount = parseInt(data.recommended.true)
-
-    setReviewsMeta({
-      reviewsMeta: data,
-      average: currentAverage,
-      percentRecommend: Math.round((yesCount / (noCount + yesCount === 0 ? 1 : (noCount + yesCount))) * 100),
-      totalReviews: reviewCount
-    })
-  }
-
-  const calculateAverage = (data) => {
+  const calculateAverage = (ratingsObj) => {
     let currentAverage = 0
     let reviewCount = 0
 
-    for (const key in data.ratings) {
-      currentAverage = currentAverage + parseInt(key) * parseInt(data.ratings[key])
-      reviewCount = reviewCount + parseInt(data.ratings[key])
+    if (ratingsObj !== null) {
+      for (const key in ratingsObj) {
+        currentAverage = currentAverage + parseInt(key) * parseInt(ratingsObj[key])
+        reviewCount = reviewCount + parseInt(ratingsObj[key])
+      }
     }
 
-    currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
-    calculatePercentRecommend(currentAverage, data, reviewCount)
+    if (currentAverage !== 0) {
+      currentAverage = Math.round((currentAverage / reviewCount) * 10) / 10
+    }
+
+    return currentAverage
+  }
+
+  const getFilterDisplay = (filters) => {
+    let count = 0
+    const filterList = []
+    for (const key in filters) {
+      if (filters[key] === true) {
+        filterList.push(
+          <span key={count}>{key + ' stars, '}</span>
+        )
+      }
+      count = count + 1
+    }
+
+    if (filterList.length !== 5) {
+      return (
+        <div>
+          <div className='appliedFilters'>
+            <div>
+              <span>{'Applied filters: '}</span>
+              {filterList}
+            </div>
+          </div>
+          <button className='removeFiltersBtn' onClick={props.handleClearFilter}>Remove all filters</button>
+        </div>
+      )
+    }
   }
 
   return (
     <div>
       <div>
         <div className='reviewSummary'>
-          <div data-testid='testAverage' className='ratingItem'>{reviewsMeta.average}</div>
-          <ReviewStars data-testid='testAverageStars' starRating={reviewsMeta.average} review_id={reviewsMeta.reviewsMeta.product_id} />
+          <div data-testid='testAverage' className='ratingItem'>{calculateAverage(props.metaData.ratings)}</div>
+          <ReviewStars data-testid='testAverageStars' starRating={calculateAverage(props.metaData.ratings)} review_id={props.metaData.product_id} />
         </div>
-        <span data-testid='testPercent' className='percentRecommend'>{reviewsMeta.percentRecommend + '% of reviews recommend this product'}</span>
+        <span data-testid='testPercent' className='percentRecommend'>{calculatePercentRecommend(props.metaData.recommended.false, props.metaData.recommended.true) + '% of reviews recommend this product'}</span>
       </div>
-      <div className="ratingBreakDown">
-        <span className="ratingBreakdownTitle">Rating Breakdown</span>
-        <BarChart breakDownRatings={reviewsMeta.reviewsMeta.ratings} totalReviews={reviewsMeta.totalReviews}/>
+      <div className='ratingBreakDown'>
+        <span className='ratingBreakdownTitle'>Rating Breakdown</span>
+        {getFilterDisplay(props.activeFilters)}
+        <BarChart breakDownRatings={props.metaData.ratings} totalReviews={props.totalReviews} onHandleFilterToggle={props.onHandleFilterToggle} />
       </div>
-        <ProductBreakdown characteristicsData={reviewsMeta.reviewsMeta.characteristics} />
+      <ProductBreakdown characteristicsData={props.metaData.characteristics} />
     </div>
   )
 }

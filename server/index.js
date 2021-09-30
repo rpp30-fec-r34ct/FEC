@@ -4,6 +4,7 @@ const port = 3000
 const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
+// const maxAPIReturn = 8
 
 app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
@@ -33,21 +34,53 @@ app.get('/productDetail*', (req, res) => {
 })
 
 app.get('/reviews', (req, res) => {
-  axios.get(APIurl + 'reviews', {
+  const request = req.query
+  request.activeFilters = JSON.parse(req.query.activeFilters)
+  axios.get(APIurl + 'reviews/meta', {
     headers: {
       Authorization: token.API_KEY
     },
     params: {
-      sort: req.query.sort,
       product_id: req.query.product_id
     }
   }).then((data) => {
-    res.status(200).send(data.data)
-  })
-    .catch((err) => {
+    /// calculate the count of the reviews
+    let reviewCount = 0
+
+    if (data.data.ratings !== null) {
+      for (const key in data.data.ratings) {
+        reviewCount = reviewCount + parseInt(data.data.ratings[key])
+      }
+    }
+    return reviewCount
+  }).then((reviewCount) => {
+    axios.get(APIurl + 'reviews', {
+      headers: {
+        Authorization: token.API_KEY
+      },
+      params: {
+        product_id: request.product_id,
+        count: reviewCount,
+        sort: request.sort
+      }
+    }).then((data) => {
+      // check to see if there are any filters in the request
+      let reviewsToSend = []
+      for (let i = 0; i < data.data.results.length; i++) {
+        if (request.activeFilters[data.data.results[i].rating]) {
+          reviewsToSend.push(data.data.results[i])
+        }
+      }
+      reviewsToSend = reviewsToSend.slice(request.count - 2, request.count)
+      res.status(200).send(reviewsToSend)
+    }).catch((err) => {
       console.error(err)
       res.sendStatus(500)
     })
+  }).catch((err) => {
+    console.error(err)
+    res.sendStatus(500)
+  })
 })
 
 app.get('/reviews/meta', (req, res) => {
@@ -252,6 +285,7 @@ app.get('/product/:id/related', async (req, res) => {
       const productChar = response.data.characteristics
 
       relatedProducts.push({
+        id: product.id,
         photo: productStyle[0],
         category: product.category,
         name: product.name,

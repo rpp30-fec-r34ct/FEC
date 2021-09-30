@@ -1,11 +1,3 @@
-.BarLine {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  font-family: 'Playfair Display', serif;
-  font-size: 0.9em;
-}
 
 .BarChart {
   margin-top: 5px;
@@ -16,14 +8,13 @@
 
 .ratingName {
   text-decoration: underline;
+  position: absolute;
 }
 
-.ratingCategory:hover {
+
+.ratingName:hover {
   color: blue;
 }
 
-.categoryCount {
-  position: absolute;
-  left: 253px;
-}
+
 

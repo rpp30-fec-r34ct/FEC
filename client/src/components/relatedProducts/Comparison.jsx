@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom';
 // import { GiCheckMark } from 'react-icons/gi'
-import { RiStarSmileFill } from 'react-icons/Ri'
+import { RiStarSmileFill } from 'react-icons/ri'
 import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'

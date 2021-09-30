@@ -26,13 +26,14 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
   }
 
   const handleFavoriteButtonClick = () => {
-    console.log('click!')
-    let outfitStorage = JSON.parse(localStorage.getItem('FECOutfit'));
+    let outfitStorage = JSON.parse(window.localStorage.getItem('FECOutfit'))
     if (outfitStorage === null) {
       outfitStorage = []
     }
-    outfitStorage.push(productId)
-    localStorage.setItem('FECOutfit', JSON.stringify(outfitStorage))
+    if (!outfitStorage.includes(parseInt(productId))) {
+      outfitStorage.push(parseInt(productId))
+      window.localStorage.setItem('FECOutfit', JSON.stringify(outfitStorage))
+    }
   }
 
   const checkoutStyles = {
@@ -42,7 +43,7 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
 
   const containerStyles = { display: 'flex', justifyContent: 'space-evenly', marginTop: '2em' }
 
-  const buttonStyles = {height: '2em', width: '10em', borderRaidus: 0, textAlign: 'center', backgroundColor: 'transparent', border: 'solid 1px black', cursor: 'pointer'}
+  const buttonStyles = { height: '2em', width: '10em', borderRaidus: 0, textAlign: 'center', backgroundColor: 'transparent', border: 'solid 1px black', cursor: 'pointer' }
   return (
     <div style={checkoutStyles}>
       <div style={containerStyles}>

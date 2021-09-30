@@ -1,0 +1,78 @@
+#gallery-modal{
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  overflow: auto;
+  position: absolute;
+  z-index: 10000;
+  background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+}
+
+#gallery-modal-content{
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  height: 50%;
+  width: 40%;
+  position: relative;
+  z-index: 100000;
+}
+
+#modal-main-img-container {
+  display: flex;
+  position: relative;
+  height: 80%;
+  width: 80%;
+  margin: auto;
+}
+
+#modal-main-img {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  object-fit: scale-down;
+  margin: auto
+}
+
+#modal-sub-carousel {
+  margin: auto;
+}
+
+.gallery-modal-image {
+  height: 100%;
+  margin: auto;
+  cursor: zoom-in;
+  transition: transform 0.25s ease;
+}
+
+.zoom-in-img {
+  cursor:zoom-out;
+  transform: scale(2);
+}
+
+
+.gallery-modal-arrow {
+  margin: auto
+}
+
+.modal-product-thumbnail {
+  height: 75px;
+  width: 75px;
+  margin-right: 4px;
+  border: solid 2px black;
+  object-fit: cover;
+}
+
+#gallery-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+#gallery-modal-close:hover {
+  cursor: pointer;
+}

@@ -1,97 +1,65 @@
 import React, { useState, useEffect } from 'react'
-import { FaChevronUp, FaChevronDown } from 'react-icons/fa'
+import './styles/MainImageGallery.css'
+import { FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa'
+import SubImageCarousel from './SubImageCarousel.jsx'
+import GalleryModal from './GalleryModal.jsx'
 
 const MainImageGalleryComponent = (props) => {
-  const [selectedStyle, setSelectedStyle] = useState(false)
-  const [selectedImage, setSelectedImage] = useState()
-  const [thumbnails, setThumbnails] = useState([])
+  const [selectedStyle, setSelectedStyle] = useState(null)
   const [topIndex, setTopIndex] = useState(0)
+  const [showModal, setShowModal] = useState(null)
 
   useEffect(() => {
     if (props.selectedStyle !== false) {
       setSelectedStyle(props.selectedStyle)
-      setSelectedImage(props.selectedStyle.photos[0].url)
     }
   }, [props])
 
-  useEffect(() => {
-    if (selectedStyle !== false) {
-      setThumbnails(selectedStyle.photos.map((image, index) => {
-        return <img key={index} data-index={index} style={thumbnailStyle} src={image.thumbnail_url} onClick={imageClickHandler} />
-      }))
-    }
-  }, [selectedStyle])
-
   const imageClickHandler = (e) => {
     e.preventDefault()
-    setSelectedImage(selectedStyle.photos[e.target.getAttribute('data-index')].url)
+    setTopIndex(parseInt(e.target.getAttribute('data-index')))
   }
 
-  const handleCarouselUpClick = () => {
+  const handleCarouselLeftClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex - 1
     })
   }
 
-  const handleCarouselDownClick = () => {
+  const handleCarouselRightClick = () => {
     setTopIndex(prevIndex => {
       return prevIndex + 1
     })
   }
 
-  const containerStyle = {
-    height: '500px',
-    width: '500px',
-    display: 'flex',
-    justifyContent: 'space-evenly',
-    overflow: 'hidden'
+  const handleExpandImageClick = () => {
+    setShowModal(prevState => !prevState)
   }
 
-  const imgStyle = {
-    height: '100%',
-    width: '100%',
-    objectFit: 'cover'
-  }
-
-  const thumbnailStyle = {
-    height: '75px',
-    width: '75px',
-    marginBottom: '4px',
-    border: 'solid, 2px, black',
-    objectFit: 'cover'
-  }
-
-  const listStyles = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    overflow: 'hidden'
-  }
-
-  const carouselListStyles = {
-    transform: `translateY(-${topIndex * 77}px)`,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly'
+  const handleClickOffModal = (e) => {
+    if (!e.target.closest('#gallery-modal-content')) {
+      setShowModal(prevState => !prevState)
+    }
   }
 
   return (
     <div>
-      <div style={containerStyle}>
-        <div style={listStyles}>
-          {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
-          <div style={{ maxHeight: '395px', overflow: 'hidden' }}>
-            <div style={carouselListStyles}>
-              {thumbnails}
+      {showModal && <GalleryModal selectedStyle={selectedStyle} currentIndex={topIndex} handleClickOffModal={handleClickOffModal} />}
+      {selectedStyle !== null
+        ? (
+          <div id='gallery-container'>
+            <SubImageCarousel selectedStyle={selectedStyle} imageClickHandler={imageClickHandler} />
+            {(topIndex > 0) ? <FaChevronLeft className='gallery-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='hidden' />}
+            <div id='main-product-image' className='collapsed-product-image'>
+              <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
+              <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
             </div>
+            {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='hidden' />}
           </div>
-          {(topIndex < thumbnails.length - 5) ? <FaChevronDown className='down-arrow' onClick={handleCarouselDownClick} /> : <FaChevronDown className='hidden' />}
-        </div>
-        <div style={{ width: '400px', height: '500px', overflow: 'hidden' }}>
-          <img style={imgStyle} src={selectedImage} />
-        </div>
-      </div>
+          )
+        : null}
+      {/* TODO: replace null with no data view */}
+
     </div>
   )
 }

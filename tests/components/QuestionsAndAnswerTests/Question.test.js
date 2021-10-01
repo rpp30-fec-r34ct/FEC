@@ -33,7 +33,7 @@ import Question from '../../../client/src/QAComponents/Question.jsx'
 // afterEach(()=> server.resetHandlers())
 // afterAll(()=> server.close())
 
-describe('Individual Question Component', () => {
+xdescribe('Individual Question Component', () => {
   test('Should render a Question', function () {
     var app;
     const history = createMemoryHistory()

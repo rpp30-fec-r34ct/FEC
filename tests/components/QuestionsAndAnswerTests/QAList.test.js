@@ -142,7 +142,7 @@ beforeAll(()=> server.listen())
 afterEach(()=> server.resetHandlers())
 afterAll(()=> server.close())
 
-describe('QA List', (done) => {
+xdescribe('QA List', (done) => {
   xtest('Should render the Q/A List', async () => {
     jest.useFakeTimers();
     var app;

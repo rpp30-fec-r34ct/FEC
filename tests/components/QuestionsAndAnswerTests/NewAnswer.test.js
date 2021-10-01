@@ -15,7 +15,7 @@
  // components
  import NewAnswer from '../../../client/src/QAComponents/NewAnswer.jsx'
 
- describe('Individual Answer Component', () => {
+ xdescribe('Individual Answer Component', () => {
   test('Should render an Answer', function () {
     const answer = render(<NewAnswer />)
     expect(answer.container.querySelector("div[class='answer-body']")).toBeInTheDocument()

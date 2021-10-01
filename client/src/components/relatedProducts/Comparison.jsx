@@ -28,29 +28,26 @@ const Comparison = (props) => {
 
     currentProductFeatures.forEach((item) => {
       comparedFeatures[item.feature] = {
-        value1: item.value,
+        value1: item.value || <GiCheckMark />,
         value2: null
-      };
-    });
+      }
+    })
 
     relatedFeatures.forEach((item) => {
       comparedFeatures[item.feature] ? comparedFeatures[item.feature].value2 = item.value
         : comparedFeatures[item.feature] = {
           value1: null,
-          value2: item.value
+          value2: item.value || <GiCheckMark />
         }
       setAllFeatures(comparedFeatures)
-      // console.log(comparedFeatures)
     })
   }
-
 
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={toggleModal}>
         <RiStarSmileFill />
       </div>
-
       {
         isOpen
           ? createPortal(

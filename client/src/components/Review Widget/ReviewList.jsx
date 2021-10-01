@@ -4,12 +4,14 @@ import axios from 'axios'
 import './cssFiles/reviewSection.css'
 import ReviewSortDropDown from './ReviewSortDropDown.jsx'
 
+
 const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
   const [reviewDisplayCount, setDisplayCount] = useState(2)
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
   const [sortType, setSortType] = useState('relevance')
   const [filterChange, setFilterChange] = useState(false)
+  const [isAddReviewActive, setAddReview] = useState(0);
 
   useEffect(() => {
     getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
@@ -64,9 +66,10 @@ const ReviewList = (props) => {
 
   const renderMoreBtn = (totalReviews) => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
-      return <button onClick={moreReviews} className='moreReviewsButton'>More Reviews</button>
+      return <button onClick={moreReviews} className='reviewsBtn'>More Reviews</button>
     }
   }
+
 
   return (
     <div>
@@ -77,6 +80,7 @@ const ReviewList = (props) => {
       <div className='reviewList'>{reviews}</div>
       <div>
         {renderMoreBtn()}
+        <button className="reviewsBtn" onClick={props.onAddReviewClick}>Add Review +</button>
       </div>
     </div>
   )

@@ -1,26 +1,27 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom';
-// import { GiCheckMark } from 'react-icons/gi'
+import { GiCheckMark } from 'react-icons/gi'
 import { RiStarSmileFill } from 'react-icons/ri'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false)
-  const [currentCharacteristics, setCurrentCharacteristics] = useState([])
-  const [allCharacteristics, setAllCharacteristics] = useState([])
+  const [currentFeatures, setCurrentFeatures] = useState([])
+  const [allFeatures, setAllFeatures] = useState([])
   const { productId } = useParams()
 
   const toggleModal = () => {
     if (!isOpen) {
-      getCharacteristics()
+      getFeatures()
     }
     setOpen(!isOpen)
   }
 
-  const getCharacteristics = async () => {
+  const getFeatures = async () => {
     try {
       const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
       setCurrentCharacteristics(data.characteristics)
@@ -36,8 +37,6 @@ const Comparison = (props) => {
   }
 
 
-
-
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={toggleModal}>
@@ -49,8 +48,11 @@ const Comparison = (props) => {
           ? createPortal(
             <React.Fragment>
               <div className="modal">
+                <div className="close-btn" onClick={toggleModal}>
+                  <AiOutlineCloseCircle />
+                </div>
                 <div className="modal-body">
-                  <h1>Comparing</h1>
+                  <h3>Comparing</h3>
                   <table>
                     <thead>
                       <tr>
@@ -64,18 +66,15 @@ const Comparison = (props) => {
                         allCharacteristics.map((char, i) => {
                           return (
                             <tr key={i}>
-                              <td>{currentCharacteristics[char]?.value}</td>
+                              <td>{currentCharacteristics[char]?.value === true && <GiCheckMark /> || Number(currentCharacteristics[char]?.value).toFixed(2)}</td>
                               <td>{char}</td>
-                              <td>{props.relatedProduct.characteristics[char]?.value}</td>
+                              <td>{props.relatedProduct.characteristics[char]?.value === true && <GiCheckMark /> || Number(props.relatedProduct.characteristics[char]?.value).toFixed(2)}</td>
                             </tr>
                           )
                         })
                       }
                     </tbody>
                   </table>
-                  <button className="close" onClick={toggleModal}>
-                    Close
-                  </button>
                 </div>
               </div>
             </React.Fragment >,

@@ -275,6 +275,7 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data
+      const features = response.data.features
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {}
@@ -282,7 +283,6 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
       const productRatings = response.data.ratings
-      const productChar = response.data.characteristics
 
       relatedProducts.push({
         id: product.id,
@@ -292,7 +292,7 @@ app.get('/product/:id/related', async (req, res) => {
         sale: defaultStyle.sale_price,
         price: product.default_price,
         rating: productRatings,
-        characteristics: productChar
+        features: features
       })
     }
     res.status(200).send(relatedProducts)

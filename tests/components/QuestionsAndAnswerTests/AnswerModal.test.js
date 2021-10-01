@@ -14,7 +14,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
  // components
  import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
 
- describe('Individual Question Component', () => {
+ xdescribe('Individual Question Component', () => {
 
 
    test('Should have a heading for the product', function () {

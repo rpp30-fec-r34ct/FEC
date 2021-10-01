@@ -10,7 +10,6 @@ import axios from 'axios'
 
 const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false)
-  // const [currentFeatures, setCurrentFeatures] = useState([])
   const [allFeatures, setAllFeatures] = useState({})
   const { productId } = useParams()
 

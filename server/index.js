@@ -75,7 +75,7 @@ app.get('/qa/questions', (req, res) => {
     }
   })
     .then(data => {
-      console.log(data)
+      // console.log('testResponse', data.data.results[0].answers)
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -91,6 +91,7 @@ app.get('/qa/answers', (req, res) => {
     }
   })
     .then(data => {
+      // console.log('answers', data.data.results)
       res.status(200).send(data.data.results)
     })
     .catch(err => {

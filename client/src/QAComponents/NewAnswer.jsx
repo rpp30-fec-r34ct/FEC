@@ -4,9 +4,10 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const NewAnswer = (props) => {
-  const [answers, setAnswers] = useState(['test1, test2'])
-  const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
+  const [answers, setAnswers] = useState([])
+  const [moreAnswers, setMoreAnswers] = useState([])
   const [helpfulness, setHelpfulness] = useState(props.helpfulness)
+  const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState('Report')
   let renderMoreAnswers = <div />
 
@@ -37,22 +38,27 @@ const NewAnswer = (props) => {
   const helpfulAnswer = (e) => {
     const answerId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id
     e.preventDefault()
-    axios.put('/qa/answers/helpful/?answer_id=' + answerId)
-      .then(data => {
-        // console.log(helpfulAns)
-        return setHelpfulness(helpfulness + 1)
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    if (!helpful) {
+      setHelpful(true)
+      axios.put('/qa/answers/helpful/?answer_id=' + answerId)
+        .then(data => {
+          // console.log(helpfulAns)
+          return setHelpfulness(helpfulness + 1)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } else {
+      alert('This answer has already been marked as "helpful"')
+    }
   }
 
   return (
     <>
-      <div className='answer-body' id={props.id} key={props.id + 1}>
+      <div className='answer-body' id={props.id} key={props.id + 'b'}>
             <div>A: {props.body}</div>
-            <div>{props.photos && Array.isArray(props.photos) ? props.photos.map(image => (
-              <img className="rendered-answer-img" src={image.url} key={image.url}/>
+            <div>{props.photos && Array.isArray(props.photos) ? props.photos.map((image, i) => (
+              <img className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
             )) : null}</div>
             <table>
               <tbody>

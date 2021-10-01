@@ -5,7 +5,7 @@ import axios from 'axios'
 import NewAnswer from './NewAnswer.jsx'
 
 const AnswerList = (props) => {
-  const [answers, setAnswers] = useState(['test1, test2'])
+  const [answers, setAnswers] = useState([])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
   const [helpfulAns, setHelpfulAns] = useState(0)
   let renderMoreAnswers = <div />
@@ -34,27 +34,37 @@ const AnswerList = (props) => {
   }
 
   // LOAD MORE ANSWERS UPON USER CLICK
-  const getMoreAnswers = (e) => {
+  const getMoreAnswers = async (e) => {
     e.preventDefault()
-    setAnswers(moreAnswers)
+    await setAnswers(moreAnswers)
     setMoreAnswers(0)
   }
 
   // INITIAL RENDER INVOCATION
   useEffect(() => {
+    var loadedAnswers = []
     initialize(props.id, (err, data) => {
       if (err) {
         console.error(err)
       } else {
-        setAnswers(data.slice(0, 2))
-        setMoreAnswers(data)
+        setAnswers(prev => {
+          data.map(datum => {
+            if (datum.answerer_name.toLowerCase() === 'seller') {
+              loadedAnswers.unshift(datum)
+            } else {
+              loadedAnswers.push(datum)
+            }
+          }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
+          return loadedAnswers.slice(0, 2)
+        })
+        setMoreAnswers(loadedAnswers)
       }
     })
   }, [props.id])
 
   return (
     <>
-      <div>{answers && answers.sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness).map(answer => {
+      <div>{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {

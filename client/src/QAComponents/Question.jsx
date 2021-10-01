@@ -13,7 +13,7 @@ const Question = (props) => {
   // const [firstRender, setFirstRender] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [qHelpfulness, setQHelpfulness] = useState(props.question_helpfulness)
-  const [helpful, setHelpful] = useState(true)
+  const [helpful, setHelpful] = useState(false)
   const productID = useParams().productId
 
   // SERVER REQUESTS
@@ -53,11 +53,20 @@ const Question = (props) => {
 
   const addHelpfulQuestion = (e) => {
     e.preventDefault()
-    axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.id, {
-      question_id: e.target.id
-    })
-      .then(data => setQHelpfulness(prev => prev++))
-      .catch(err => { console.error(err) })
+    if (!helpful) {
+      setHelpful(true)
+      axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id, {
+        question_id: e.target.id
+      })
+        .then(data => {
+          setQHelpfulness(prev => prev++)
+          return console.log('helpful', helpful)
+
+        })
+        .catch(err => { console.error(err) })
+    } else {
+      return console.log('You have already indicated this question as being helpful')
+    }
   }
 
   useEffect(
@@ -87,7 +96,7 @@ const Question = (props) => {
                 Helpful?
               </td>
               <td>
-                <a className="panel-element" href="" className='helpful' onClick={addHelpfulQuestion}>Yes</a>
+                <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Yes</a>
               </td>
               <td className="panel-element">
                 ({qHelpfulness ? qHelpfulness : props.question_helpfulness})

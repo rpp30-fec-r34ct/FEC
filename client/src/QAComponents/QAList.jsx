@@ -9,7 +9,7 @@ import QuestionModal from './QuestionModal.jsx'
 
 const QAList = (props) => {
   const [answerCount, setAnswerCount] = useState(2)
-  const [questions, setQuestions] = useState(['test1', 'test2', 'test3'])
+  const [questions, setQuestions] = useState([])
   const [allQuestions, setAllQuestions] = useState()
   const [questionsCache, setQuestionsCache] = useState()
   const [firstRender, setFirstRender] = useState(true)
@@ -33,16 +33,6 @@ const QAList = (props) => {
     setShowQuestionModal(true)
   }
 
-  const initialize = (callback) => {
-    axios.get('/qa/questions' + '?product_id=' + productID)
-      .then((data) => {
-        callback(null, data.data.results)
-      })
-      .catch((err) => {
-        console.error('error while getting product data from server')
-      })
-  }
-
   const handleSearch = (e) => {
     e.preventDefault()
     setQuestions([])
@@ -63,15 +53,16 @@ const QAList = (props) => {
   }
 
   useEffect(() => {
-    initialize((err, data) => {
-      if (err) {
-        console.error(err)
-      } else {
-        setQuestions(data.slice(0, 2))
-        setAllQuestions(data)
-        setQuestionsCache(data)
-      }
-    })
+    axios.get('/qa/questions' + '?product_id=' + productID)
+      .then(data => {
+        setQuestions(data.data.results.slice(0, 2))
+        setAllQuestions(data.data.results)
+        setQuestionsCache(data.data.results)
+      })
+      .catch((err) => {
+        console.error('error while getting product-related questions from server', err)
+      })
+
   }, [])
 
   return (

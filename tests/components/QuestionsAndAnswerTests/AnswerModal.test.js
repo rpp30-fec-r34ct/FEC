@@ -17,7 +17,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
  describe('Individual Question Component', () => {
 
 
-   xtest('Should not render by default', function () {
+   test('Should have a heading for the product', function () {
     var app;
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -31,7 +31,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
         </Switch>
       </Router>,
     )
-     expect(app.container.queryByText('Product')).toBeNull()
+     expect(app.container.querySelector("h1[id='answerModal-product'")).toBeInTheDocument()
    })
 
    xtest('Should render if props.showModal is true', function () {
@@ -48,10 +48,10 @@ import { regeneratorRuntime } from 'regenerator-runtime'
         </Switch>
       </Router>,
     )
-     expect(app.container.getByText('Product, Question Body')).toBeInTheDocument()
+     expect(app.container.findByText('Product, Question Body')).toBeInTheDocument()
    })
 
-   test('Should render a form', function () {
+   xtest('Should render a form', function () {
     var app;
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -68,7 +68,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
      expect(app.container.querySelector("div[class='add-answer-form']")).toBeInTheDocument()
    })
 
-   test('Should render a form with an input for the question', function () {
+   xtest('Should render a form with an input for the question', function () {
     var app;
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -85,7 +85,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
      expect(app.container.querySelector("input[name='answer']")).toBeInTheDocument()
    })
 
-   test('Should render a form with an input for the nickname of the asker', function () {
+   xtest('Should render a form with an input for the nickname of the asker', function () {
      var app;
      const history = createMemoryHistory()
      const route = '/product/47421'
@@ -102,7 +102,7 @@ import { regeneratorRuntime } from 'regenerator-runtime'
      expect(app.container.querySelector("input[name='nickname']")).toBeInTheDocument()
    })
 
-   test('Should render a form with an input for the email address of the asker', function () {
+   xtest('Should render a form with an input for the email address of the asker', function () {
     var app;
     const history = createMemoryHistory()
     const route = '/product/47421'

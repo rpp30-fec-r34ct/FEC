@@ -57,7 +57,7 @@ const AnswerModal = (props) => {
       photos: photos
     })
       .then(data => {
-        showModal ? setShowModal(false) : null
+        setShowModal(false)
         return setImages([])
       })
       .catch(err => console.error(err))
@@ -76,7 +76,7 @@ const AnswerModal = (props) => {
         <div id="answer-modal" onClick={handleClickOutside}>
           <div className='add-answer-form' id={props.question_id}>
           <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
-            <h1>{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
+            <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
             <form onSubmit={submitNewAnswer}>
               <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox"/>
               <input name='nickname' type='text' placeholder='Your Nickname' />

@@ -5,7 +5,7 @@ const ProductDetailFooterComponent = ({ productDetails }) => {
   return (
     <div id='product-footer'>
       <div id='product-footer-notes'>
-        {productDetails.slogan && <h4>{productDetails.slogan}</h4>}
+        {productDetails.slogan && <h3>{productDetails.slogan}</h3>}
         {productDetails.description && <p>{productDetails.description}</p>}
       </div>
       <div id='product-features'>

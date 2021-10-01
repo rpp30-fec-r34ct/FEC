@@ -7,7 +7,7 @@ import 'regenerator-runtime/runtime'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import ProductDescription from '../../client/src/PDComponents/ProductDescription.jsx'
+import ProductDescription from '../../../client/src/PDComponents/ProductDescription.jsx'
 
 const productData = {
   id: 47421,

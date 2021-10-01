@@ -6,7 +6,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import StyleSelectorItem from '../../client/src/PDComponents/StyleSelectorItem.jsx'
+import StyleSelectorItem from '../../../client/src/PDComponents/StyleSelectorItem.jsx'
 
 const styleData = {
   style_id: 286895,

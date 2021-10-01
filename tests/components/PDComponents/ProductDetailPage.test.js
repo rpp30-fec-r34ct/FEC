@@ -12,8 +12,8 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
 // components
-import ProductDetailPage from '../../client/src/PDComponents/ProductDetailPage.jsx'
-import FourOhFour from '../../client/src/components/FourOhFour.jsx'
+import ProductDetailPage from '../../../client/src/PDComponents/ProductDetailPage.jsx'
+import FourOhFour from '../../../client/src/components/FourOhFour.jsx'
 
 // setup test data
 const productResponse = {

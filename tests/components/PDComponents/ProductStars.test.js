@@ -6,7 +6,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import ProductStars from '../../client/src/PDComponents/ProductStars.jsx'
+import ProductStars from '../../../client/src/PDComponents/ProductStars.jsx'
 
 describe('Product Stars Component', function () {
   test('Should render the stars', function () {

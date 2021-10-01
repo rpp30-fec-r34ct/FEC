@@ -65,10 +65,16 @@
   align-items: flex-start;
   float: left;
   width: 200px;
-  height: 100%;
+  height: 302px;
   margin: 7px;
   object-fit: cover;
   border: 1px solid #888;
+}
+
+.product-card:hover {
+  background-color: white;
+  opacity: 0.8;
+  transition: 0.1s;
 }
 
 .favorite-btn {
@@ -78,6 +84,10 @@
   position: absolute;
   left: 170px;
   top: 10px;
+}
+
+.favorite-btn:hover {
+  color: rgb(255, 167, 2);
 }
 
 .card-image img {
@@ -264,7 +274,7 @@
   text-align: center;
   left: 50%;
   top: 50%;
-  width: 25%;
+  width: 50%;
   height: 50%;
   transform: translate(-50%, -50%);
   background: ivory;

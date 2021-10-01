@@ -3,6 +3,8 @@
 .reviewSection {
   display: flex;
   flex-direction: row;
+  margin: 100px auto;
+  font-family: 'Playfair Display', serif;
 }
 
 .averageRating {
@@ -12,12 +14,10 @@
 .ratingItem {
   font-size: 4em;
   margin-right: 10px;
-  font-family: 'Playfair Display', serif;
   margin-top: -30px
 }
 
 .percentRecommend {
-  font-family: 'Playfair Display', serif;
   font-size: 0.9em;
 }
 
@@ -26,8 +26,8 @@
 }
 
 h3 {
-  font-family: 'Playfair Display', serif;
   font-size: 2em;
+  font-family: 'Playfair Display', serif;
 }
 
 .reviewSummary{
@@ -36,10 +36,91 @@ h3 {
 }
 
 .ratingBreakdownTitle {
-  font-family: 'Playfair Display', serif;
   font-size: 1.1em;
 }
 
 .ratingBreakDown {
   margin-top: 20px;
+}
+
+.reviewList {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 600px;
+}
+
+.moreReviewsButton {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 20px;
+  margin-left: 50px;
+  padding: 10px;
+  box-shadow: 2px -2px grey
+}
+
+.moreReviewsButton:hover {
+  color: lightblue;
+}
+
+.dropDownBtn {
+  color: black;
+  padding: 2px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.dropDownContainer {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.dropDownList {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 16px;
+}
+
+.dropDownList span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropDownList span:hover {background-color: #f1f1f1}
+
+.dropDownContainer:hover .dropDownList {
+  display: block;
+}
+
+.dropDownContainer:hover .dropDownBtn {
+  background-color: #bbbbbb;
+}
+
+.sortAndCount {
+  margin-left: 50px;
+}
+
+.appliedFilters {
+  display: flex;
+  flex-direction: row;
+  font-size: 13px;
+}
+
+.removeFiltersBtn {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 12px;
+  padding: 2px;
+  font-family: 'Playfair Display', serif;
+  margin-top: 5px;
+  box-shadow: 2px -2px grey
+}
+
+.removeFiltersBtn:hover{
+  color: lightblue;
 }

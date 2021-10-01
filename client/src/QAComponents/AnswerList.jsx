@@ -3,11 +3,13 @@ import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 import NewAnswer from './NewAnswer.jsx'
+import './QA.css'
 
 const AnswerList = (props) => {
   const [answers, setAnswers] = useState([])
   const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
   const [helpfulAns, setHelpfulAns] = useState(0)
+  const [expandCollapse, setExpandCollapse] = useState('See More Answers')
   let renderMoreAnswers = <div />
 
   // SERVER REQUESTS
@@ -36,8 +38,13 @@ const AnswerList = (props) => {
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = async (e) => {
     e.preventDefault()
-    await setAnswers(moreAnswers)
-    setMoreAnswers(0)
+    if (expandCollapse === 'See More Answers') {
+      await setAnswers(moreAnswers)
+      setExpandCollapse('Collapse Answers')
+    } else if (expandCollapse === 'Collapse Answers') {
+      setAnswers(prev => prev.slice(0,2))
+      setExpandCollapse('See More Answers')
+    }
   }
 
   // INITIAL RENDER INVOCATION
@@ -64,7 +71,7 @@ const AnswerList = (props) => {
 
   return (
     <>
-      <div>{answers && answers.map(answer => {
+      <div id="answer-list">{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -73,7 +80,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>See More Answers</a></div>
+          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>{expandCollapse}</a></div>
         }
         return (
           <NewAnswer

@@ -81,6 +81,11 @@
   /* z-index: 1; */
 }
 
+#answer-list {
+  max-height: 400px;
+  overflow: auto;
+}
+
 .add-question-form {
   /* display: none; */
   position: fixed;

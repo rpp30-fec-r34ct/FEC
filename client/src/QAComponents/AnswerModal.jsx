@@ -44,6 +44,9 @@ const AnswerModal = (props) => {
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
     }
+    if (!e.target[2].value.includes('@') && !e.target[1].value.includes('.')) {
+      return alert('ERROR: Incorrect Email Format')
+    }
     const answer = e.target[0].value
     const nickname = e.target[1].value
     const email = e.target[2].value

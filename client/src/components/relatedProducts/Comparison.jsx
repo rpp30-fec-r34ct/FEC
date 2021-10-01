@@ -75,9 +75,9 @@ const Comparison = (props) => {
                         Object.keys(allFeatures).map((info, i) => {
                           return (
                             <tr key={i}>
-                              <td>{allFeatures[info].value1 || ' '}</td>
+                              <td>{allFeatures[info].value1}</td>
                               <td>{info}</td>
-                              <td>{allFeatures[info].value2 || ' '}</td>
+                              <td>{allFeatures[info].value2}</td>
                             </tr>
                           )
                         })

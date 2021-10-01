@@ -10,30 +10,39 @@ import axios from 'axios'
 
 const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false)
-  const [currentFeatures, setCurrentFeatures] = useState([])
-  const [allFeatures, setAllFeatures] = useState([])
+  // const [currentFeatures, setCurrentFeatures] = useState([])
+  const [allFeatures, setAllFeatures] = useState({})
   const { productId } = useParams()
 
   const toggleModal = () => {
     if (!isOpen) {
-      getFeatures()
+      getComparedFeatures()
     }
     setOpen(!isOpen)
   }
 
-  const getFeatures = async () => {
-    try {
-      const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
-      setCurrentCharacteristics(data.characteristics)
+  const getComparedFeatures = () => {
+    let comparedFeatures = {}
 
-      let currentChar = data.characteristics;
-      let relatedChar = props.relatedProduct.characteristics;
-      let allCharWithDupe = [...Object.keys(currentChar), ...Object.keys(relatedChar)]
+    let currentProductFeatures = props.currentProduct.features
+    let relatedFeatures = props.relatedProduct.features
 
-      setAllCharacteristics(Array.from(new Set(allCharWithDupe)))
-    } catch (error) {
-      console.log(error.message)
-    }
+    currentProductFeatures.forEach((item) => {
+      comparedFeatures[item.feature] = {
+        value1: item.value,
+        value2: null
+      };
+    });
+
+    relatedFeatures.forEach((item) => {
+      comparedFeatures[item.feature] ? comparedFeatures[item.feature].value2 = item.value
+        : comparedFeatures[item.feature] = {
+          value1: null,
+          value2: item.value
+        }
+      setAllFeatures(comparedFeatures)
+      // console.log(comparedFeatures)
+    })
   }
 
 
@@ -63,12 +72,12 @@ const Comparison = (props) => {
                     </thead>
                     <tbody>
                       {
-                        allCharacteristics.map((char, i) => {
+                        Object.keys(allFeatures).map((info, i) => {
                           return (
                             <tr key={i}>
-                              <td>{currentCharacteristics[char]?.value === true && <GiCheckMark /> || Number(currentCharacteristics[char]?.value).toFixed(2)}</td>
-                              <td>{char}</td>
-                              <td>{props.relatedProduct.characteristics[char]?.value === true && <GiCheckMark /> || Number(props.relatedProduct.characteristics[char]?.value).toFixed(2)}</td>
+                              <td>{allFeatures[info].value1 || ' '}</td>
+                              <td>{info}</td>
+                              <td>{allFeatures[info].value2 || ' '}</td>
                             </tr>
                           )
                         })

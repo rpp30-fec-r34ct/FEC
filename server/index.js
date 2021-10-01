@@ -295,7 +295,7 @@ app.get('/product/:id/related', async (req, res) => {
         sale: defaultStyle.sale_price,
         price: product.default_price,
         rating: productRatings,
-        features: features
+        features
       })
     }
     res.status(200).send(relatedProducts)

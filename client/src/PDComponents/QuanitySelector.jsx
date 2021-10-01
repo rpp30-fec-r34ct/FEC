@@ -11,7 +11,7 @@ const QuanitiySelectorComponent = ({ selectedSize }) => {
 
   const selectStyles = {
     height: '3em',
-    width: '8em',
+    width: '10em',
     borderRadius: 0,
     textAlign: 'center'
   }

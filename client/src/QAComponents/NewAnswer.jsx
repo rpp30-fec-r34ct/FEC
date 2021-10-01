@@ -4,9 +4,11 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const NewAnswer = (props) => {
-  const [answers, setAnswers] = useState(['test1, test2'])
-  const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
+  const [answers, setAnswers] = useState([])
+  const [moreAnswers, setMoreAnswers] = useState([])
   const [helpfulness, setHelpfulness] = useState(props.helpfulness)
+  const [helpful, setHelpful] = useState(false)
+  const [report, setReport] = useState('Report')
   let renderMoreAnswers = <div />
 
   // SERVER REQUESTS
@@ -22,11 +24,11 @@ const NewAnswer = (props) => {
   }
 
   const reportAnswer = (e) => {
-    const answerId = e.target.parentNode.parentNode.parentNode.id
+    const answerId = e.target.parentNode.parentNode.parentNode.parentNode.id
     e.preventDefault()
     axios.put('/qa/answers/report/?answer_id=' + answerId)
       .then(data => {
-        return alert('This Answer has been reported')
+        return setReport('Reported')
       })
       .catch(err => {
         console.error(err)
@@ -34,52 +36,34 @@ const NewAnswer = (props) => {
   }
 
   const helpfulAnswer = (e) => {
-    const answerId = e.target.parentNode.parentNode.parentNode.id
+    const answerId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id
     e.preventDefault()
-    axios.put('/qa/answers/helpful/?answer_id=' + answerId)
-      .then(data => {
-        // console.log(helpfulAns)
-        return setHelpfulness(helpfulness + 1)
-      })
-      .catch(err => {
-        console.error(err)
-      })
+    if (!helpful) {
+      setHelpful(true)
+      axios.put('/qa/answers/helpful/?answer_id=' + answerId)
+        .then(data => {
+          // console.log(helpfulAns)
+          return setHelpfulness(helpfulness + 1)
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    } else {
+      alert('This answer has already been marked as "helpful"')
+    }
   }
-
-  // // INITIAL RENDER
-  // const initialize = (questionId, callback) => {
-  //   getAllAnswers(props.question_id, (err, data) => {
-  //     if (err) {
-  //       console.error(err)
-  //     } else {
-  //       callback(null, data.data)
-  //     }
-  //   })
-  // }
-
-  // // INITIAL RENDER INVOCATION
-  // useEffect(() => {
-  //   initialize(props.question_id, (err, data) => {
-  //     if (err) {
-  //       console.error(err)
-  //     } else {
-  //       setAnswers(data.slice(0, 2))
-  //       setMoreAnswers(data)
-  //     }
-  //   })
-  // }, [props.question_id])
 
   return (
     <>
-      <div className='answer-body' id={props.id} key={props.id + 1}>
+      <div className='answer-body' id={props.id} key={props.id + 'b'}>
             <div>A: {props.body}</div>
-            <div>{props.photos && Array.isArray(props.photos) ? props.photos.map(image => (
-              <img className="rendered-answer-img" src={image.url} key={image.url}/>
+            <div>{props.photos && Array.isArray(props.photos) ? props.photos.map((image, i) => (
+              <img className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
             )) : null}</div>
             <table>
               <tbody>
                 <tr>
-                  <td className='answer-panel'> by {props.name}, {props.month} {props.day}, {props.year} |
+                  <td className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b>Seller</b> : props.name}, {props.month} {props.day}, {props.year} |
                     {/* <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div> */}
                   </td>
                   <td>
@@ -91,9 +75,11 @@ const NewAnswer = (props) => {
                   <td>
                     ({helpfulness ? helpfulness : 0}) |
                   </td>
-                  <td className='report-answer' onClick={reportAnswer}>
-                    Report
-                  </td>
+                  {report === 'Report' ? <td className='report-answer' onClick={reportAnswer}>
+                    {report}
+                  </td> : <td className='report-answer'>
+                    {report}
+                  </td>}
                 </tr>
               </tbody>
             </table>

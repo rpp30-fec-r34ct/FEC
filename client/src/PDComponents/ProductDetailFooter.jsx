@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductDetailFooterComponent = (props) => {
+const ProductDetailFooterComponent = ({ productDetails }) => {
   const footerStyles = {
     display: 'flex',
     alignItems: 'space-around'
@@ -14,9 +14,12 @@ const ProductDetailFooterComponent = (props) => {
   }
   return (
     <div style={footerStyles}>
-      <p style={descriptionStyles}>{props.productDetails.description}</p>
       <div>
-        {props.productDetails.features.map((entry, index) => {
+        {productDetails.slogan && <h4>{productDetails.slogan}</h4>}
+        {productDetails.description && <p style={descriptionStyles}>{productDetails.description}</p>}
+      </div>
+      <div>
+        {productDetails.features.map((entry, index) => {
           return <p key={index}> {entry.feature} : {entry.value} </p>
         })}
       </div>

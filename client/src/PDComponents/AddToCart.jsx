@@ -4,22 +4,25 @@ import React from 'react'
 const AddToCartComponent = ({ sku, selectedSize, handleNoSkuClick }) => {
   const handleAddToCartClick = (e) => {
     e.preventDefault()
-    console.log('click')
     axios.post('/api/cart', {
       sku_id: sku
     })
       .then(response => {
-        console.log('cart api ', response.data)
+        document.querySelector('#add-to-cart').innerHTML = '✓'
+        document.querySelector('#add-to-cart').setAttribute('disabled', true)
       })
-      .catch(err => console.log(err))
+      .catch(() => {
+        document.querySelector('#add-to-cart').innerHTML = 'Try Again'
+        document.querySelector('#add-to-cart').focus()
+      })
   }
 
   return (
     <>
       {sku
-        ? <>{selectedSize.quantity > 0 && <button className='checkout-button' onClick={handleAddToCartClick}>Cart +</button>}</>
+        ? <>{selectedSize.quantity > 0 && <button id='add-to-cart' className='checkout-button' onClick={handleAddToCartClick}>Cart +</button>}</>
 
-        : <button className='checkout-button' onClick={handleNoSkuClick}>Cart +</button>}
+        : <button id='add-to-cart' className='checkout-button' onClick={handleNoSkuClick}>Cart +</button>}
     </>
 
   )

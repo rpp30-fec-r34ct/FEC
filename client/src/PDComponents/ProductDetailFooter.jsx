@@ -1,24 +1,14 @@
 import React from 'react'
+import './styles/ProductDetailFooter.css'
 
 const ProductDetailFooterComponent = ({ productDetails }) => {
-  const footerStyles = {
-    display: 'flex',
-    alignItems: 'space-around'
-  }
-
-  const descriptionStyles = {
-    borderRight: 'solid',
-    paddingRight: '10px',
-    marginRight: '10px',
-    maxWidth: '500px'
-  }
   return (
-    <div style={footerStyles}>
-      <div>
+    <div id='product-footer'>
+      <div id='product-footer-notes'>
         {productDetails.slogan && <h4>{productDetails.slogan}</h4>}
-        {productDetails.description && <p style={descriptionStyles}>{productDetails.description}</p>}
+        {productDetails.description && <p>{productDetails.description}</p>}
       </div>
-      <div>
+      <div id='product-features'>
         {productDetails.features.map((entry, index) => {
           return <p key={index}> {entry.feature} : {entry.value} </p>
         })}

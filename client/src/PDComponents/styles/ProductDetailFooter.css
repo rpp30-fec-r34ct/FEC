@@ -1,0 +1,25 @@
+#product-footer {
+  margin-top: 20px;
+  display: flex;
+  align-items: flex-end;
+}
+
+#product-footer-notes {
+  border-right: 2px solid #757575;
+  padding-right: 10px;
+  margin-right: 10px;
+  max-width: 500px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  color: #757575
+}
+
+#product-features {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  font-size: 12px;
+  color: #757575
+}

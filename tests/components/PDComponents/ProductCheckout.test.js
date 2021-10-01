@@ -7,7 +7,6 @@ import { Router, Route, Switch } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
-import 'regenerator-runtime/runtime'
 import { render, within } from '@testing-library/react'
 
 import ProductCheckout from '../../../client/src/PDComponents/ProductCheckout.jsx'
@@ -110,7 +109,7 @@ describe('Product Checkout Component', function () {
     expect(sizeSelector).toHaveFocus()
   })
 
-  test('Should change the quantity list when a size is selected', async function () {
+  test('Should change the quantity list when a size is selected', function () {
     const history = createMemoryHistory()
     history.push('/product/47421')
     const app = render(
@@ -123,7 +122,7 @@ describe('Product Checkout Component', function () {
       </Router>
     )
     expect(app.getByText('-')).toBeInTheDocument()
-    expect(await app.findByText('XS')).toBeInTheDocument()
+    expect(app.getByText('XS')).toBeInTheDocument()
     const sizeSelector = app.container.querySelector('#style-select')
     const quantitySelector = app.container.querySelector('#quantity-select')
     userEvent.click(sizeSelector)
@@ -132,7 +131,7 @@ describe('Product Checkout Component', function () {
     expect(within(quantitySelector).queryByText('8')).not.toBeNull()
   })
 
-  test('Should add the product to localStorage favorites when favorite is clicked', function() {
+  test('Should add the product to localStorage favorites when favorite is clicked', function () {
     const history = createMemoryHistory()
     history.push('/product/47421')
     const app = render(

@@ -27,10 +27,8 @@ const ProductCheckoutComponent = ({ selectedStyle }) => {
   }
 
   const handleFavoriteButtonClick = () => {
-    let outfitStorage = JSON.parse(window.localStorage.getItem('FECOutfit'))
-    if (outfitStorage === null) {
-      outfitStorage = []
-    }
+    const outfitStorage = JSON.parse(window.localStorage.getItem('FECOutfit')) || []
+
     if (!outfitStorage.includes(parseInt(productId))) {
       outfitStorage.push(parseInt(productId))
       window.localStorage.setItem('FECOutfit', JSON.stringify(outfitStorage))

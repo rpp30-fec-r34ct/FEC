@@ -20,12 +20,12 @@ const QuanitiySelectorComponent = ({ selectedSize }) => {
     <>
       {selectedSize
         ? (
-          <select style={selectStyles} defaultValue='1' disabled={false}>
+          <select id='quantity-select' style={selectStyles} defaultValue='1' disabled={false}>
             {selections}
           </select>
           )
         : (
-          <select style={selectStyles} defaultValue='-' disabled>
+          <select id='quantity-select' style={selectStyles} defaultValue='-' disabled>
             <option value='-' disabled>-</option>
           </select>
           )}

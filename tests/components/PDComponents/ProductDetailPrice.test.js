@@ -6,7 +6,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import ProductDetailPrice from '../../client/src/PDComponents/ProductDetailPrice'
+import ProductDetailPrice from '../../../client/src/PDComponents/ProductDetailPrice'
 
 describe('Price Component', function () {
   test('Should render the default price if no sale price present', function () {

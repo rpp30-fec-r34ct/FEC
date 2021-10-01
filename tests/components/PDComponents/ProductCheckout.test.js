@@ -6,7 +6,7 @@ import React from 'react'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
 
-import ProductCheckout from '../../client/src/PDComponents/ProductCheckout'
+import ProductCheckout from '../../../client/src/PDComponents/ProductCheckout'
 
 describe('Product Checkout Component', function () {
   test('Should render the checkout buttons', function () {

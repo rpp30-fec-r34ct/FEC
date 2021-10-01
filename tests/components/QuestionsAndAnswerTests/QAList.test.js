@@ -296,15 +296,9 @@ describe('QA List', (done) => {
         </Switch>
       </Router>,
     )
-    // setTimeout(()=>{
-      await act(()=>{
         waitFor(async ()=>{
           expect(await app.container.querySelector("div[class='answer-body']")).toBeInTheDocument()
         })
-      })
-      // done()
-    // }, 5000
-    // )
   })
 
 

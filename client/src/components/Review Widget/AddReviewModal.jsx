@@ -18,7 +18,9 @@ const AddReviewModal = (props) => {
     height: '650px',
     margin: 'auto 15%',
     background: 'white',
-    position: 'absolute'
+    position: 'absolute',
+    overflow: 'hidden',
+    overflowY: 'scroll'
   }
   const pageCoverStyle = {
     left: '0px',
@@ -82,11 +84,18 @@ const AddReviewModal = (props) => {
                 <div>{getCharacteristics(props.reviewsMeta)}</div>
               </label>
             </div>
+            <div>
+              <label> Review Summary
+                <input type="text" style={{color: 'grey', opacity:'0.6'}}/>
+              </label>
+            </div>
+            <div>
+              <label> Review Body
+                <input type="text"/>
+              </label>
+            </div>
 
-            {/* <label> Review Summary
-              <input type="text" />
-            </label>
-            <label> Review Body *
+            {/* <label> Review Body *
               <input type="text" />
             </label>
             <label> Upload your photos
@@ -97,8 +106,8 @@ const AddReviewModal = (props) => {
             </label>
             <label> Your email *
               <input type="text" />
-            </label> */}
-            <input type="submit" value="Submit" />
+            </label>
+            <input type="submit" value="Submit" /> */}
           </form>
           <i className='fas fa-times' onClick={props.onAddReviewClick} style={closeOutIconStyle} />
         </div>

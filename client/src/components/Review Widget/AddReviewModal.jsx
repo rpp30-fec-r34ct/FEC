@@ -14,7 +14,7 @@ const AddReviewModal = (props) => {
     display: 'flex',
     flexDirection: 'column',
     border: 'solid 2px coral',
-    width: '70%',
+    width: '90%',
     height: '650px',
     margin: 'auto 15%',
     background: 'white',

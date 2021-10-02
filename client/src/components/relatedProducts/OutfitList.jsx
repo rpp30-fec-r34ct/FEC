@@ -53,11 +53,11 @@ export default function OutfitList({currentProduct}) {
     <div className='product-list'>
     <div className='carousels-overview'>
       <h3>YOUR OUTFIT</h3>
-        <div className='carousel-container'>
+        <div className='carousel-container' style={{width: '100%', maxWidth: '866px'}}>
             <AddCard addOutfit={addOutfit} />
           {outfitPosition < 0  && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
             <div className='carousel-content-wrapper'>
-              <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 25}%)` }}>
+              <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 31}%)` }}>
                 {
                   userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit}/>)
                 }

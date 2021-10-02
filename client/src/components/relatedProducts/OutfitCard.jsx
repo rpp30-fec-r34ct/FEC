@@ -4,11 +4,6 @@ import AverageStars from '../Shared/AverageStars.jsx'
 
 export default function OutfitCard ({deleteOutfit, outfit}) {
 
-  const handleDelete = (e) => {
-    e.preventDefault()
-    deleteOutfit()
-  }
-
   const priceElement =
     <>
       {outfit.sale ?
@@ -28,7 +23,7 @@ export default function OutfitCard ({deleteOutfit, outfit}) {
     < div className='product-card' >
       <div className='card-container'>
         <div className='card-visuals'>
-        <div className='delete-btn' onClick={handleDelete}>
+        <div className='delete-btn' onClick={() => deleteOutfit(outfit.id)}>
         <AiOutlineCloseCircle />
         </div>
           <div className='card-image' onClick={() => window.location.pathname = `/product/${outfit.id}/`}>

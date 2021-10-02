@@ -35,9 +35,6 @@ const Comparison = (props) => {
     }
   }
 
-
-
-
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={toggleModal}>

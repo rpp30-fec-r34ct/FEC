@@ -3,6 +3,7 @@ import AddCard from './AddCard.jsx'
 import OutfitCard from './OutfitCard.jsx'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { useParams } from 'react-router-dom'
 
 export default function OutfitList({currentProduct, prevCard, nextCard}) {
   const [userOutfits, setUserOutfits] = useState([])
@@ -30,16 +31,12 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
     setUserOutfits(temp)
   }
 
-  const deleteOutfit = () => {
+  const deleteOutfit = (selectedId) => {
     const oldTemp = JSON.parse(window.localStorage.getItem('outfit'))
-
-    const newTemp = oldTemp.filter(outfit => outfit.id === currentProduct.id)
-    window.localStorage.setItem('outfit', JSON.stringify(newTemp))
+    const newTemp = oldTemp.filter(outfit => outfit.id !== selectedId)
 
     setUserOutfits(newTemp)
   }
-
-
 
   return (
     <div className='outfit-carousel-wrapper'>

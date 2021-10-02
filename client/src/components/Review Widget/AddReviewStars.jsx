@@ -32,9 +32,34 @@ const AddReviewStars = () => {
     return stars;
   }
 
+  const getRatingTitle = () => {
+    let starSum = 0;
+
+    for (let i = 0; i < starState.length; i++) {
+      if (starState[i]) {
+        ++starSum;
+      }
+    }
+
+    switch (starSum) {
+      case (1):
+        return 'Poor';
+      case(2):
+        return 'Fair';
+      case(3):
+        return 'Average';
+      case(4):
+        return 'Good';
+      case(5):
+        return 'Great';
+
+    }
+  }
+
   return (
     <div>
       {renderStars()}
+      <span>{getRatingTitle()}</span>
     </div>
   )
 }

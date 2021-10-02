@@ -132,14 +132,15 @@ const CharacteristicsBar = (props) => {
     flexDirection: 'row',
     padding: '10px',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    margin: 'auto'
   }
 
   const characteristicDescriptionStyle = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginRight: '15px'
+    marginRight: '15px',
   }
 
   return (

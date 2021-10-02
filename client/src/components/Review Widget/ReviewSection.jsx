@@ -7,17 +7,58 @@ import axios from 'axios'
 import ModalContainer from './ModalContainer.jsx'
 import AddReviewModal from './AddReviewModal.jsx'
 
+
+
+////TEST DATA BECAUSE THE PLANE DOES NOT HAVE WIFI
+const testReviewsMeta = {
+  "product_id": "47424",
+  "ratings": {
+      "2": "1",
+      "4": "2",
+      "5": "2"
+  },
+  "recommended": {
+      "false": "1",
+      "true": "4"
+  },
+  "characteristics": {
+      "Fit": {
+          "id": 159168,
+          "value": "3.8000000000000000"
+      },
+      "Length": {
+          "id": 159169,
+          "value": "3.8000000000000000"
+      },
+      "Comfort": {
+          "id": 159170,
+          "value": "3.8000000000000000"
+      },
+      "Quality": {
+          "id": 159171,
+          "value": "3.8000000000000000"
+      }
+  }
+}
+
+
+////END TEST DATA
+
 const ReviewSection = () => {
   const { productId } = useParams()
 
-  const [reviewsMeta, setReviewsMeta] = useState({
-    ratings: null,
-    recommended: {
-      false: 0,
-      true: 0
-    },
-    product_id: productId
-  })
+  //without test data
+  // const [reviewsMeta, setReviewsMeta] = useState({
+  //   ratings: null,
+  //   recommended: {
+  //     false: 0,
+  //     true: 0
+  //   },
+  //   product_id: productId
+  // })
+
+  //with test data
+  const [reviewsMeta, setReviewsMeta] = useState(testReviewsMeta)
 
   const [activeFilters, setActiveFilters] = useState({
     1: true,
@@ -30,9 +71,9 @@ const ReviewSection = () => {
   const [activeModal, setActiveModal] = useState('')
   const [isAddReview, setAddReview] = useState(0);
 
-  useEffect(() => {
-    getReviewsMeta()
-  }, [])
+  // useEffect(() => {
+  //   getReviewsMeta()
+  // }, [])
 
   const getReviewsMeta = () => {
     axios.get('/reviews/meta', {

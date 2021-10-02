@@ -6,16 +6,19 @@ import ReviewSortDropDown from './ReviewSortDropDown.jsx'
 
 
 const ReviewList = (props) => {
-  const [reviews, setReviews] = useState([])
+  // const [reviews, setReviews] = useState([])
   const [reviewDisplayCount, setDisplayCount] = useState(2)
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
   const [sortType, setSortType] = useState('relevance')
   const [filterChange, setFilterChange] = useState(false)
   const [isAddReviewActive, setAddReview] = useState(0);
 
-  useEffect(() => {
-    getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
-  }, [sortType, reviewDisplayCount, filterChange])
+//test reviews state only
+const [reviews, setReviews] = useState([])
+
+  // useEffect(() => {
+  //   getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
+  // }, [sortType, reviewDisplayCount, filterChange])
 
   useEffect(() => {
     setReviews([])

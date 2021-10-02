@@ -6,10 +6,12 @@ import AddReviewStars from './AddReviewStars.jsx'
 
 const AddReviewModal = (props) => {
     const [productName, setProductName] = useState('');
+    const [characterCount, setCharCount] = useState(0);
 
     useEffect (() => {
       getProductName(props.productId)
     }, [props.productId])
+
 
   const modalContainerStyle = {
     display: 'flex',
@@ -60,6 +62,18 @@ const AddReviewModal = (props) => {
     return characteristics;
   }
 
+  const onReviewBodyChange = (event) => {
+    setCharCount(event.target.value.length);
+  }
+
+  const getCharCountDisplay = () => {
+    // if (charCount < 50) {
+    //   return `Minimum required characters left: ${characterCount}`;
+    // }
+
+    return characterCount < 50 ? `Minimum required characters left: ${50 - characterCount}` : 'Minimum reached';
+  }
+
   if (props.isAddReview === 0) {
     return null
   } else {
@@ -87,12 +101,16 @@ const AddReviewModal = (props) => {
             </div>
             <div>
               <label> Review Summary
-                <input type="text" style={{color: 'grey', opacity:'0.6'}}/>
+              <br></br>
+                <input type="textarea" maxLength="60" placeholder="Example: Best purhcase ever!" style={{width: '90%', height: '30px'}}/>
               </label>
             </div>
             <div>
               <label> Review Body
-                <input type="text"/>
+                <br></br>
+                <textarea onChange={onReviewBodyChange} maxLength="1000" minLength="50" placeholder="Why did you like the product or not?" style={{width: '90%', height: '100px'}}></textarea>
+                <br></br>
+                <span style={{color: 'grey', opacity: '0.6'}}>{getCharCountDisplay()}</span>
               </label>
             </div>
 

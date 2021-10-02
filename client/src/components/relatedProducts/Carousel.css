@@ -73,7 +73,7 @@
 
 .product-card:hover {
   background-color: white;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: 0.1s;
 }
 
@@ -89,7 +89,7 @@
 .delete-btn {
   z-index: 3000;
   color: rgb(255, 255, 255);
-  stroke-width: 30%;
+  stroke-width: 70%;
   position: absolute;
   left: 170px;
   top: 10px;
@@ -161,13 +161,13 @@
 /**ADD OUTFIT CARD**/
 
 .add-card {
-  /* overflow-x: hidden; */
   display: flex;
-  justify-content: center;
+  align-items: flex-start;
   float: left;
-  width: 202px;
+  justify-content: center;
+  width: 199px;
   height: 300px;
-  margin-top: 7px;
+  margin: 7px 5px 0px 7px; /*top-right-bottom-left*/
   border: 1px solid #888;
 }
 
@@ -188,10 +188,10 @@
   top: 10px;
   display: flex;
   justify-content: center;
-  background-color: white;
   color: black;
   margin-bottom: 5px;
-  opacity: 0.6;
+  stroke-width: 80%;
+  opacity: 0.5;
 }
 
 .add-btn:hover {

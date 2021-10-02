@@ -62,14 +62,9 @@ export default function Carousel(props) {
         />
         {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
-      <div className='outfit-overview'>
-      <h3>YOUR OUTFIT</h3>
-      <div className='outfit-carousel-wrapper'>
       <OutfitList
       currentProduct={currentProduct}
       />
-      </div>
-      </div>
     </div >
   )
 }

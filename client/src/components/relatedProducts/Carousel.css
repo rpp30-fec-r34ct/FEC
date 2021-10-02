@@ -164,9 +164,9 @@
   align-items: flex-start;
   float: left;
   justify-content: center;
-  width: 199px;
-  height: 300px;
-  margin: 7px 5px 0px 7px; /*top-right-bottom-left*/
+  width: 200px;
+  height: 302px;
+  margin: 0px 7px 1px 7px; /*top-right-bottom-left*/
   border: 1px solid #888;
 }
 

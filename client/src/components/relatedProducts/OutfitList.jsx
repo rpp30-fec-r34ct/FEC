@@ -50,19 +50,20 @@ export default function OutfitList({currentProduct}) {
   }
 
   return (
-    <div className='outfit-carousel-wrapper'>
-      {outfitIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
-        <div className='outfit-container'>
-          <div className='outfit-list'>
-              <AddCard addOutfit={addOutfit} />
-            <div className='outfit-content' style={{ transform: `translateX(-${outfitIndex * 25}%)` }}>
-              {
-                userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit}/>)
-              }
-      {userOutfits.length > 3 && outfitIndex < (userOutfits.length - 3) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
+    <div className='outfit-overview'>
+      <h3>YOUR OUTFIT</h3>
+        <div className='carousel-container'>
+            <AddCard addOutfit={addOutfit} />
+          {outfitPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
+            <div className='carousel-content-wrapper'>
+              <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 25}%)` }}>
+                {
+                  userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit}/>)
+                }
         </div>
-      </div>
-      </div>
+       </div>
+      {userOutfits.length > 3 && outfitIndex < (userOutfits.length - 3) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
     </div>
+  </div>
   )
 }

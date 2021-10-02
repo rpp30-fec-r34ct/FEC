@@ -15,7 +15,7 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
     setUserOutfits(JSON.parse(window.localStorage.getItem('outfit')))
   }, [])
 
-  //Edit the local storage array if the outfit list changes
+  //Edit the local storage array if the outfit list changes using dependency array
   useEffect(() => {
     window.localStorage.setItem('outfit', JSON.stringify(userOutfits))
   }, [userOutfits]) //Runs only when userOutfits changes
@@ -23,7 +23,7 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
 
   const addOutfit = () => {
     const temp = JSON.parse(window.localStorage.getItem('outfit')) || []
-    //Prevent readding same product if already in list
+    //Prevent re-adding same product if already in list
     if (!temp.find((outfit) => outfit.id === currentProduct.id)) {
       temp.push(currentProduct)
       window.localStorage.setItem('outfit', JSON.stringify(temp))
@@ -31,12 +31,19 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
     setUserOutfits(temp)
   }
 
-  // const deleteOutfit = () => {
-  //   const temp = userOutfits.filter((outfit) => outfit.id )
+  const deleteOutfit = () => {
+    //get the item from the local storage from userlist
+    const oldTemp = JSON.parse(window.localStorage.getItem('outfit'))
 
+//delete the specific item
+    // const newTemp = oldTemp.filter((outfit) => outfit.id !== )
 
-  //   setUserOutfits()
-  // }
+    //re-serialize to local storage
+    window.localStorage.setItem('outfit', JSON.stringify(newTemp))
+
+    //update the state to reflect
+    //setUserOutfits(newTemp)
+  }
 
 
 

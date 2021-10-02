@@ -28,6 +28,9 @@ export default function OutfitCard ({deleteOutfit, outfit}) {
     < div className='product-card' >
       <div className='card-container'>
         <div className='card-visuals'>
+        <div className='delete-btn' onClick={handleDelete}>
+        <AiOutlineCloseCircle />
+        </div>
           <div className='card-image' onClick={() => window.location.pathname = `/product/${outfit.id}/`}>
             <img src={outfit.photo} />
           </div>

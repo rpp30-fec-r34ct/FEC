@@ -38,11 +38,13 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
 //delete the specific item
     // const newTemp = oldTemp.filter((outfit) => outfit.id !== )
 
+    const newTemp = oldTemp.filter(outfit => outfit.id !== currentProduct.id)
+
     //re-serialize to local storage
-    window.localStorage.setItem('outfit', JSON.stringify(newTemp))
+    window.localStorage.setItem('outfit', JSON.stringify(newTemp)) //save
 
     //update the state to reflect
-    //setUserOutfits(newTemp)
+    setUserOutfits(newTemp)
   }
 
 
@@ -55,7 +57,7 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
             <div className='outfit-content'>
               <AddCard addOutfit={addOutfit} />
               {
-                userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit}/>)
+                userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit}/>)
               }
         </div>
       </div>

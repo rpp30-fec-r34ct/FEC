@@ -38,7 +38,7 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
 //delete the specific item
     // const newTemp = oldTemp.filter((outfit) => outfit.id !== )
 
-    const newTemp = oldTemp.filter(outfit => outfit.id !== currentProduct.id)
+    const newTemp = oldTemp.filter(outfit => outfit.id === currentProduct.id)
 
     //re-serialize to local storage
     window.localStorage.setItem('outfit', JSON.stringify(newTemp)) //save

@@ -1,7 +1,8 @@
 import React, { useState, useEffect }  from 'react';
 import './cssFiles/reviewSection.css';
 import axios from 'axios'
-import CharacteristicsBar from './CharacteristicsBar.jsx'
+import CharacteristicsBar from './CharacteristicsBar.jsx';
+import AddReviewStars from './AddReviewStars.jsx'
 
 const AddReviewModal = (props) => {
     const [productName, setProductName] = useState('');
@@ -14,7 +15,7 @@ const AddReviewModal = (props) => {
     display: 'flex',
     flexDirection: 'column',
     border: 'solid 2px coral',
-    width: '90%',
+    width: '80%',
     height: '650px',
     margin: 'auto 15%',
     background: 'white',
@@ -70,7 +71,7 @@ const AddReviewModal = (props) => {
         <span>{'About the ' + productName}</span>
           <form style={reviewFormStyle}>
             <label> Overall Rating*
-              <input type="text" />
+              <AddReviewStars />
             </label>
             <div>
               <p>Do you recommend this product?</p>

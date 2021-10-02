@@ -12,6 +12,7 @@ export default function Carousel(props) {
   const [currentProduct, setCurrentProduct] = useState([])
   const [currentPosition, setCurrentPosition] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [userOutfits, setUserOutfits] = useState([])
   const { productId } = useParams()
 
 
@@ -62,18 +63,7 @@ export default function Carousel(props) {
         />
         {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <RiArrowRightSLine className='right-arrow' onClick={nextCard} />}
       </div>
-      <div className='outfit-overview'>
-        <h3>YOUR OUTFIT</h3>
-        <div className='outfit-container'>
-          <RiArrowLeftSLine className='left-arrow' />
-          <div className='outfit-carousel-wrapper'>
-            <div className='outfit-content'>
-              <OutfitList />
-            </div>
-          </div>
-          <RiArrowRightSLine className='right-arrow' />
-        </div>
-      </div>
+      <OutfitList currentProduct={currentProduct} />
     </div >
   )
 }

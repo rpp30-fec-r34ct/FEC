@@ -4,15 +4,16 @@ import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import axios from 'axios'
-import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
+import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/Ri'
 import './Carousel.css'
 
 export default function Carousel(props) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentProduct, setCurrentProduct] = useState([])
+  const [currentPosition, setCurrentPosition] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const currentRelated = relatedProducts.length
   const { productId } = useParams()
+
 
   useEffect(() => {
     getRelatedProducts()
@@ -39,39 +40,38 @@ export default function Carousel(props) {
 
 
   const nextCard = () => {
-    if (currentIndex >= 0 && currentIndex < (currentRelated - 1)) {
-      setCurrentIndex(currentIndex => currentIndex + 1)
-    }
+    setCurrentIndex(currentIndex => currentIndex + 1)
+    setCurrentPosition(currentPosition - 220)
   }
 
   const prevCard = () => {
-    if (currentIndex > 0 && currentIndex <= (currentRelated - 1)) {
-      setCurrentIndex(currentIndex => currentIndex - 1)
-    }
+    setCurrentIndex(currentIndex => currentIndex - 1)
+    setCurrentPosition(currentPosition + 220)
   }
 
   return (
     <div className='carousels-overview'>
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
-        {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+        {currentPosition > 0 && <RiArrowLeftSLine className='left-arrow' onClick={prevCard} />}
         <ProductList
           relatedProducts={relatedProducts}
           currentProduct={currentProduct}
           currentIndex={currentIndex}
+          currentPosition={currentPosition}
         />
-        {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <RiArrowRightSLine className='right-arrow' onClick={nextCard} />}
       </div>
       <div className='outfit-overview'>
         <h3>YOUR OUTFIT</h3>
         <div className='outfit-container'>
-          <FaChevronLeft className='left-arrow' />
+          <RiArrowLeftSLine className='left-arrow' />
           <div className='outfit-carousel-wrapper'>
             <div className='outfit-content'>
               <OutfitList />
             </div>
           </div>
-          <FaChevronRight className='right-arrow' />
+          <RiArrowRightSLine className='right-arrow' />
         </div>
       </div>
     </div >

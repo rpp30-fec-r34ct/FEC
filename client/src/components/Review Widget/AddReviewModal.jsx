@@ -1,6 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import './cssFiles/reviewSection.css';
 import axios from 'axios'
+import CharacteristicsBar from './CharacteristicsBar.jsx'
 
 const AddReviewModal = (props) => {
     const [productName, setProductName] = useState('');
@@ -11,6 +12,7 @@ const AddReviewModal = (props) => {
 
   const modalContainerStyle = {
     display: 'flex',
+    flexDirection: 'column',
     border: 'solid 2px coral',
     width: '70%',
     height: '650px',
@@ -28,6 +30,15 @@ const AddReviewModal = (props) => {
     position: 'fixed'
   }
 
+  const reviewFormStyle = {
+    width: '95%',
+    margin: 'auto'
+  }
+
+  const closeOutIconStyle = {
+    color: 'black'
+  }
+
   const getProductName = async (id) => {
     try {
       const { data } = await axios.get('/productDetail' + id)
@@ -36,6 +47,14 @@ const AddReviewModal = (props) => {
     catch (error) {
       console.error(error);
     }
+  }
+
+  const getCharacteristics = (reviewsMeta) => {
+    let characteristics = [];
+    for (let key in reviewsMeta.characteristics) {
+      characteristics.push(<CharacteristicsBar key={key} characteristic={key}/>)
+    }
+    return characteristics;
   }
 
   if (props.isAddReview === 0) {
@@ -47,13 +66,41 @@ const AddReviewModal = (props) => {
         <div data-testid='testModalContainer' style={modalContainerStyle}>
         <span>{'Write Your Review'}</span><br/>
         <span>{'About the ' + productName}</span>
-          <form >
-            <label>
+          <form style={reviewFormStyle}>
+            <label> Overall Rating*
               <input type="text" />
             </label>
+            <div>
+              <p>Do you recommend this product?</p>
+              <input type="radio" id="yesRecommend" name="yesRecommend" value="Yes"/>
+              <label htmlFor="yesRecommend">Yes</label><br></br>
+              <input type="radio" id="noRecommend" name="noRecommend" value="No"/>
+              <label htmlFor="noRecommend"> No</label><br></br>
+            </div>
+            <div>
+              <label> Characteristics*
+                <div>{getCharacteristics(props.reviewsMeta)}</div>
+              </label>
+            </div>
+
+            {/* <label> Review Summary
+              <input type="text" />
+            </label>
+            <label> Review Body *
+              <input type="text" />
+            </label>
+            <label> Upload your photos
+              <input type="text" />
+            </label>
+            <label> What is your nickname? *
+              <input type="text" />
+            </label>
+            <label> Your email *
+              <input type="text" />
+            </label> */}
             <input type="submit" value="Submit" />
           </form>
-          <i className='fas fa-times' onClick={props.onAddReviewClick} style={{ color: 'black' }} />
+          <i className='fas fa-times' onClick={props.onAddReviewClick} style={closeOutIconStyle} />
         </div>
       </>
     )

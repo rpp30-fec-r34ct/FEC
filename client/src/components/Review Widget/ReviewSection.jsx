@@ -133,7 +133,7 @@ const ReviewSection = () => {
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} onHandleFilterToggle={onHandleFilterToggle} activeFilters={activeFilters} handleClearFilter={handleClearFilter} />
         <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick}/>
         <ModalContainer activeModal={activeModal} onClickClose={onClickClose} />
-        <AddReviewModal productId={productId} isAddReview={isAddReview} onAddReviewClick={onAddReviewClick}/>
+        <AddReviewModal productId={productId} isAddReview={isAddReview} onAddReviewClick={onAddReviewClick} reviewsMeta={reviewsMeta}/>
       </div>
     </div>
   )

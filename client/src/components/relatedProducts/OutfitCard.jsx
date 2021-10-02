@@ -37,7 +37,7 @@ export default function OutfitCard ({deleteOutfit, outfit}) {
           <div className='card-category'>{outfit.category}</div>
           <div className='card-name'>{outfit.name}</div>
           {priceElement}
-          <AverageStars rating={outfit.rating} />
+          <AverageStars rating={outfit.ratings} />
         </div>
       </div>
     </div >

@@ -21,17 +21,19 @@ export default function OutfitList({currentProduct}) {
 
 
   const addOutfit = () => {
-    const userOutfits = JSON.parse(window.localStorage.getItem('outfit')) || []
+    const temp = JSON.parse(window.localStorage.getItem('outfit')) || []
     //Prevent readding same product if already in list
-    if (!userOutfits.find((outfit) => outfit.id === currentProduct.id)) {
-      userOutfits.push(currentProduct)
-      window.localStorage.setItem('outfit', JSON.stringify(userOutfits))
+    if (!temp.find((outfit) => outfit.id === currentProduct.id)) {
+      temp.push(currentProduct)
+      window.localStorage.setItem('outfit', JSON.stringify(temp))
     }
-    setUserOutfits(userOutfits)
+    setUserOutfits(temp)
   }
 
   // const deleteOutfit = () => {
-  //   let deleteItem = window.localStorage.removeItem(parseInt(productId))
+  //   const temp = userOutfits.filter((outfit) => outfit.id )
+
+
   //   setUserOutfits()
   // }
 

@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import AddCard from './AddCard.jsx'
 import OutfitCard from './OutfitCard.jsx'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { useParams } from 'react-router-dom'
-import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/Ri'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
-export default function OutfitList({currentProduct}) {
+export default function OutfitList({currentProduct, prevCard, nextCard}) {
   const [userOutfits, setUserOutfits] = useState([])
-  const { productId } = useParams()
+  const [currentPosition, setCurrentPosition] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
+
 
 //Initialize outfit list array based on local storage data
   useEffect(() => {
@@ -40,10 +41,8 @@ export default function OutfitList({currentProduct}) {
 
 
   return (
-    <div className='outfit-overview'>
-      <h3>YOUR OUTFIT</h3>
-      <div className='outfit-carousel-wrapper'>
-        <RiArrowLeftSLine className='left-arrow' />
+    <div className='outfit-carousel-wrapper'>
+      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <div className='outfit-container'>
           <div className='outfit-list'>
             <div className='outfit-content'>
@@ -51,10 +50,9 @@ export default function OutfitList({currentProduct}) {
               {
                 userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit}/>)
               }
-              <RiArrowRightSLine className='right-arrow' />
-            </div>
-          </div>
         </div>
+      </div>
+      {userOutfits.length > 4 && currentIndex < (userOutfits.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
     </div>
   )

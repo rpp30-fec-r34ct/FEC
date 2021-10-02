@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import axios from 'axios'
-import { RiArrowLeftSLine, RiArrowRightSLine } from 'react-icons/Ri'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import './Carousel.css'
 
 export default function Carousel(props) {
@@ -53,16 +53,25 @@ export default function Carousel(props) {
     <div className='carousels-overview'>
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
-        {currentPosition > 0 && <RiArrowLeftSLine className='left-arrow' onClick={prevCard} />}
+        {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         <ProductList
           relatedProducts={relatedProducts}
           currentProduct={currentProduct}
           currentIndex={currentIndex}
           currentPosition={currentPosition}
         />
-        {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <RiArrowRightSLine className='right-arrow' onClick={nextCard} />}
+        {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
-      <OutfitList currentProduct={currentProduct} />
+      <div className='outfit-overview'>
+      <h3>YOUR OUTFIT</h3>
+      <div className='outfit-carousel-wrapper'>
+      <OutfitList
+      currentProduct={currentProduct}
+      prevCard={prevCard}
+      nextCard={nextCard}
+      />
+      </div>
+      </div>
     </div >
   )
 }

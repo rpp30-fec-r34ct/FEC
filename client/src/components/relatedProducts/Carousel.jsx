@@ -12,7 +12,6 @@ export default function Carousel(props) {
   const [currentProduct, setCurrentProduct] = useState([])
   const [currentPosition, setCurrentPosition] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [userOutfits, setUserOutfits] = useState([])
   const { productId } = useParams()
 
 

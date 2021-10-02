@@ -1,12 +1,17 @@
 import React from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
-export default function OutfitCard (props) {
+export default function OutfitCard ({deleteOutfit}) {
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    deleteOutfit()
+  }
   return (
     <div className='outfit-card'>
       <div className='outfit-container'>
         <div className='outfit-visuals'>
-          <div className='delete-btn'><AiOutlineCloseCircle /></div>
+          <div className='delete-btn' onKeyPress={handleDelete} onClick={handleDelete}><AiOutlineCloseCircle /></div>
           <div className='outfit-image' />
           <img src='https://via.placeholder.com/200' />
         </div>

@@ -2,12 +2,12 @@ import React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 
-const AddCard = (props) => {
+const AddCard = ({addOutfit}) => {
   const { productId } = useParams()
 
   const handleAdd = (e) => {
     e.preventDefault()
-    props.addOutfit(productId)
+    addOutfit()
   }
   return (
     <div className='add-card'>

@@ -12,7 +12,7 @@ const AddCard = ({addOutfit}) => {
   return (
     <div className='add-card'>
       <div className='add-details'>
-        <div className='add-btn' onKeyPress={handleAdd} onClick={handleAdd}><AiOutlinePlusCircle /></div>
+        <div className='add-btn' onClick={handleAdd}><AiOutlinePlusCircle /></div>
         Add to Outfit
       </div>
     </div>

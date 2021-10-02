@@ -24,7 +24,7 @@ export default function OutfitList({currentProduct}) {
     const userOutfits = JSON.parse(window.localStorage.getItem('outfit')) || []
     //Prevent readding same product if already in list
     if (!userOutfits.find((outfit) => outfit.id === currentProduct.id)) {
-      userOutfits.push(parseInt(productId))
+      userOutfits.push(currentProduct)
       window.localStorage.setItem('outfit', JSON.stringify(userOutfits))
     }
     setUserOutfits(userOutfits)
@@ -47,8 +47,7 @@ export default function OutfitList({currentProduct}) {
             <div className='outfit-content'>
               <AddCard addOutfit={addOutfit} />
               {
-                <OutfitCard deleteOutfit={deleteOutfit}/>
-
+                userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit}/>)
               }
               <RiArrowRightSLine className='right-arrow' />
             </div>

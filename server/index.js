@@ -25,7 +25,14 @@ app.get('/productDetail*', (req, res) => {
   })
     .then((data) => {
       console.log('[GET][PRODUCT DETAILS] data successfully retrieved from API, sending back to client')
-      res.status(200).send(data.data)
+      axios.get(`${APIurl}reviews/meta?product_id=${productId}`, {
+        headers: {
+          Authorization: token.API_KEY
+        }
+      })
+      .then((reviews) => {
+        res.status(200).send({...data.data, ratings: reviews.data.ratings})
+      })
     })
     .catch((err) => {
       console.error(err)

@@ -42,8 +42,7 @@
 .carousel-content-wrapper {
   overflow: hidden;
   height: 320px;
-  width: 860px;
-  background-color: #fafafa;
+  width: 865px;
 
 }
 
@@ -134,6 +133,7 @@
   color: #757575;
 }
 
+
 /**ADD OUTFIT CARD**/
 .add-card {
   display: flex;
@@ -142,7 +142,7 @@
   justify-content: center;
   width: 200px;
   height: 302px;
-  margin: 0px 7px 1px 7px; /*top-right-bottom-left*/
+  margin: 7px 7px 1px 7px; /*top-right-bottom-left*/
   border: 1px solid #888;
 }
 

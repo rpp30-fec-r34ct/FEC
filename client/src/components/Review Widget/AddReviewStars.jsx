@@ -52,7 +52,8 @@ const AddReviewStars = () => {
         return 'Good';
       case(5):
         return 'Great';
-
+      default:
+        return '';
     }
   }
 

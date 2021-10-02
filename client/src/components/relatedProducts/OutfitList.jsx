@@ -5,10 +5,10 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 
-export default function OutfitList({currentProduct, prevCard, nextCard}) {
+export default function OutfitList({currentProduct}) {
   const [userOutfits, setUserOutfits] = useState([])
-  const [currentPosition, setCurrentPosition] = useState(0)
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [outfitPosition, setOutfitPosition] = useState(0)
+  const [outfitIndex, setOutfitIndex] = useState(0)
 
 
   useEffect(() => {
@@ -38,19 +38,30 @@ export default function OutfitList({currentProduct, prevCard, nextCard}) {
     setUserOutfits(newTemp)
   }
 
+
+  const nextOutfit = () => {
+    setOutfitIndex(outfitIndex => outfitIndex + 1)
+    setOutfitPosition(outfitPosition - 220)
+  }
+
+  const prevOutfit = () => {
+    setOutfitIndex(outfitIndex => outfitIndex - 1)
+    setOutfitPosition(outfitPosition + 220)
+  }
+
   return (
     <div className='outfit-carousel-wrapper'>
-      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+      {outfitIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
         <div className='outfit-container'>
           <div className='outfit-list'>
-            <div className='outfit-content'>
               <AddCard addOutfit={addOutfit} />
+            <div className='outfit-content' style={{ transform: `translateX(-${outfitIndex * 25}%)` }}>
               {
                 userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit}/>)
               }
+      {userOutfits.length > 3 && outfitIndex < (userOutfits.length - 3) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
         </div>
       </div>
-      {userOutfits.length > 4 && currentIndex < (userOutfits.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
     </div>
   )

@@ -67,8 +67,6 @@ export default function Carousel(props) {
       <div className='outfit-carousel-wrapper'>
       <OutfitList
       currentProduct={currentProduct}
-      prevCard={prevCard}
-      nextCard={nextCard}
       />
       </div>
       </div>

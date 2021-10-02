@@ -50,11 +50,12 @@ export default function OutfitList({currentProduct}) {
   }
 
   return (
-    <div className='outfit-overview'>
+    <div className='product-list'>
+    <div className='carousels-overview'>
       <h3>YOUR OUTFIT</h3>
         <div className='carousel-container'>
             <AddCard addOutfit={addOutfit} />
-          {outfitPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
+          {outfitPosition < 0  && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
             <div className='carousel-content-wrapper'>
               <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 25}%)` }}>
                 {
@@ -64,6 +65,7 @@ export default function OutfitList({currentProduct}) {
        </div>
       {userOutfits.length > 3 && outfitIndex < (userOutfits.length - 3) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
     </div>
+  </div>
   </div>
   )
 }

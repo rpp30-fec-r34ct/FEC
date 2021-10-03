@@ -5,6 +5,7 @@ import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import axios from 'axios'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import {CardSkeleton} from '../StyledComponents/CardSkeleton.jsx'
 import './Carousel.css'
 
 export default function Carousel(props) {
@@ -12,12 +13,20 @@ export default function Carousel(props) {
   const [currentProduct, setCurrentProduct] = useState([])
   const [currentPosition, setCurrentPosition] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isLoading, setLoading] = useState(false)
   const { productId } = useParams()
 
 
   useEffect(() => {
-    getRelatedProducts()
-    getCurrentProduct()
+    setLoading(true);
+
+    const timer = setTimeout(async () => {
+      await getRelatedProducts()
+      await getCurrentProduct()
+      setLoading(false)
+    }, 5000)
+
+    return () =>clearTimeout(timer)
   }, [])
 
   const getRelatedProducts = async () => {
@@ -49,17 +58,23 @@ export default function Carousel(props) {
     setCurrentPosition(currentPosition + 220)
   }
 
+  const loadingList = new Array(4).fill(<CardSkeleton/>)
+
   return (
     <div className='carousels-overview'>
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+        {isLoading ?
+        loadingList
+        :
         <ProductList
           relatedProducts={relatedProducts}
           currentProduct={currentProduct}
           currentIndex={currentIndex}
           currentPosition={currentPosition}
         />
+        }
         {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <OutfitList

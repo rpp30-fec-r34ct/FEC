@@ -20,7 +20,7 @@ export default function Carousel(props) {
   useEffect(() => {
     setLoading(true);
 
-    const timer = setTimeout(async () => {
+    const timer = setTimeout(async() => {
       await getRelatedProducts()
       await getCurrentProduct()
       setLoading(false)
@@ -58,7 +58,8 @@ export default function Carousel(props) {
     setCurrentPosition(currentPosition + 220)
   }
 
-  const loadingList = new Array(4).fill(<CardSkeleton/>)
+  let placeHolder = Array(4).fill(<CardSkeleton/>)
+
 
   return (
     <div className='carousels-overview'>
@@ -66,7 +67,7 @@ export default function Carousel(props) {
       <div className='carousel-container'>
         {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         {isLoading ?
-        loadingList
+        placeHolder
         :
         <ProductList
           relatedProducts={relatedProducts}

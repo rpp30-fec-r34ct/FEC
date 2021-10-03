@@ -1,13 +1,22 @@
 import React from 'react'
-import { AiOutlineCloseCircle, AiOutlinePlusCircle } from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { useParams } from 'react-router-dom'
 
-export default function AddCard(props) {
+const AddCard = ({addOutfit}) => {
+  const { productId } = useParams()
+
+  const handleAdd = (e) => {
+    e.preventDefault()
+    addOutfit()
+  }
   return (
     <div className='add-card'>
       <div className='add-details'>
-        <div className='add-btn'><AiOutlinePlusCircle /></div>
+        <div className='add-btn' onClick={handleAdd}><AiOutlinePlusCircle /></div>
         Add to Outfit
       </div>
     </div>
   )
 }
+
+export default AddCard

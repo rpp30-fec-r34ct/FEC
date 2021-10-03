@@ -59,6 +59,7 @@ export default function Carousel(props) {
           relatedProducts={relatedProducts}
           currentProduct={currentProduct}
           currentIndex={currentIndex}
+          getCurrentProduct={getCurrentProduct}
         />
         {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>

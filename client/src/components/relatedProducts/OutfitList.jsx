@@ -12,7 +12,7 @@ export default function OutfitList({currentProduct}) {
 
 
   useEffect(() => {
-    setUserOutfits(JSON.parse(window.localStorage.getItem('outfit')))
+  setUserOutfits(JSON.parse(window.localStorage.getItem('outfit' )) || [])
   }, [])
 
   //Edit the local storage array ONLY the outfit list changes using dependency array
@@ -22,7 +22,7 @@ export default function OutfitList({currentProduct}) {
 
 
   const addOutfit = () => {
-    const temp = JSON.parse(window.localStorage.getItem('outfit')) || []
+    const temp = JSON.parse(window.localStorage.getItem('outfit'))
 
     if (!temp.find((outfit) => outfit.id === currentProduct.id)) {
       temp.push(currentProduct)

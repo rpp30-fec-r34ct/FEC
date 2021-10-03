@@ -22,7 +22,6 @@ const Comparison = (props) => {
 
   const getComparedFeatures = () => {
     let comparedFeatures = {}
-
     let currentProductFeatures = props.currentProduct.features
     let relatedFeatures = props.relatedProduct.features
 

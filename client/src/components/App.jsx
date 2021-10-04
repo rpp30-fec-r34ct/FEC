@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import './App.css'
 import ProductDetailPage from '../PDComponents/ProductDetailPage.jsx'
 import FourOhFour from './FourOhFour.jsx'
 import Carousel from './relatedProducts/Carousel.jsx'

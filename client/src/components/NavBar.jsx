@@ -1,12 +1,12 @@
 import React from 'react'
-import { IoLogoReact, FaSearch } from 'react-icons'
+import { FaSearch, FaReact } from 'react-icons/fa'
 import './NavBar.css'
 
 const NavBarComponent = (props) => {
   return (
     <div id='nav-bar'>
       <div id='logo'>
-        <IoLogoReact />
+        <FaReact />
         PROJECT ATLIER
       </div>
       <div id='search'>

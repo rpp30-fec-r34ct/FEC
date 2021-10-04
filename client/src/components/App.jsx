@@ -18,23 +18,17 @@ const App = (props) => {
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'QAList') }}><QAList /> </div>} />
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'ReviewSection') }}> <ReviewSection /> </div>} />
         </Route>
-        <Route path='/product/:productId' exact>
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Carousel') }}><Carousel /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'QAList') }}><QAList /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'ReviewSection') }}> <ReviewSection /> </div>} />
-        </Route>
         <Route path='/product/:productId/carousel/'>
           <Carousel />
-        </Route>
-        <Route path='/404'>
-          <FourOhFour />
         </Route>
         <Route path='/reviewPage/:productId'>
           <ReviewSection />
         </Route>
         <Route path='/questions/:productId'>
           <QAList />
+        </Route>
+        <Route path='/404'>
+          <FourOhFour />
         </Route>
       </Switch>
     </Router>

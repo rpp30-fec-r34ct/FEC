@@ -8,7 +8,6 @@ const token = require('./config.js')
 
 app.use('/:id(\\d{5})', express.static('client/dist'))
 
-app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))

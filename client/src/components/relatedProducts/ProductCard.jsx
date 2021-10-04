@@ -24,7 +24,7 @@ export default function ProductCard(props) {
       <div className='card-container'>
         <div className='card-visuals'>
           <Comparison currentProduct={props.currentProduct} relatedProduct={props.product} />
-          <div className='card-image' onClick={() => window.location.pathname = `/product/${props.product.id}/`}>
+          <div className='card-image' onClick={() => window.location.pathname = `/${props.product.id}/`}>
             <img src={props.product.photo} />
           </div>
         </div>

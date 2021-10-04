@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
+import NavBar from './NavBar.jsx'
 import ProductDetailPage from '../PDComponents/ProductDetailPage.jsx'
 import FourOhFour from './FourOhFour.jsx'
 import Carousel from './relatedProducts/Carousel.jsx'
@@ -11,7 +12,7 @@ import ClickTracker from './ClickTracker.jsx'
 const App = (props) => {
   return (
     <Router>
-      <h1>PROJECT ATLIER</h1>
+      <NavBar />
       <Switch>
         <Route path='/product/:productId' exact>
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />

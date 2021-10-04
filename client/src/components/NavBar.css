@@ -1,0 +1,14 @@
+#nav-bar {
+  background-color: rgb(90, 90, 90);
+  position: relative;
+}
+
+#logo {
+  position: absolute;
+  left: 2em;
+}
+
+#search {
+  position: absolute;
+  right: 2em;
+}

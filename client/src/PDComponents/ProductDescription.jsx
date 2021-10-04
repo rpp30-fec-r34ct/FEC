@@ -49,7 +49,7 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
       <div style={{ display: 'block' }}>
         {ratings && <AverageStars rating={ratings} />}
         {totalReviews > 0 &&
-          <a href='' id='overview-review-count' onClick={handleReviewCountClick}> {totalReviews} Reviews</a>}
+          <a href='' id='overview-review-count' onClick={handleReviewCountClick}> Read All {totalReviews} Reviews</a>}
       </div>
       <h4>{productDetails.category}</h4>
       <h2>{productDetails.name}</h2>

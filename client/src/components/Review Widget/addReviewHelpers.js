@@ -1,5 +1,5 @@
 
-const getOverviewStarRating = () => {
+const getFormStarRating = () => {
   let rating = document.getElementById('addReviewStarsOutput').innerText;
 
   switch (rating) {
@@ -18,9 +18,22 @@ const getOverviewStarRating = () => {
   }
 }
 
-const getRecommended = () => {
+const getFormRecommended = () => {
   let recommended = document.getElementById('yesRecommend').checked;
   return recommended;
+}
+
+const getFormCharacteristics = () => {
+  let allRadios = document.getElementsByClassName("characteristicRadio")
+  let checkedRadios = {};
+
+  for (let i = 0; i < allRadios.length; i++) {
+    if (allRadios[i].checked) {
+      checkedRadios[allRadios[i].name] = allRadios[i].id
+    }
+  }
+
+  return checkedRadios;
 }
 
 
@@ -29,6 +42,7 @@ const getRecommended = () => {
 
 
 module.exports = {
-  getOverviewStarRating,
-  getRecommended
+  getFormStarRating,
+  getFormRecommended,
+  getFormCharacteristics
 }

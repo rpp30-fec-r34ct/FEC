@@ -78,7 +78,7 @@ const AddReviewModal = (props) => {
   const getCharacteristics = (reviewsMeta) => {
     let characteristics = [];
     for (let key in reviewsMeta.characteristics) {
-      characteristics.push(<CharacteristicsBar key={key} characteristic={key}/>)
+      characteristics.push(<CharacteristicsBar key={key} characteristic={key} characteristic_id={reviewsMeta.characteristics[key].id}/>)
     }
     return characteristics;
   }
@@ -107,9 +107,11 @@ const AddReviewModal = (props) => {
       */
 
 
-    let starRating = addReviewHelpers.getOverviewStarRating();
-    let recommended = addReviewHelpers.getRecommended();
 
+    let formRating = addReviewHelpers.getFormStarRating();
+    let formRecommended = addReviewHelpers.getFormRecommended();
+    let formCharacteristics = addReviewHelpers.getFormCharacteristics();
+    console.log('forms');
 
 
     // let starRating = getOverviewStarRating();
@@ -153,7 +155,7 @@ const AddReviewModal = (props) => {
               <span style={addReviewTitleStyle}>2. Do you recommend this product?: *</span>
               <br></br>
               <div style={addReviewItemStyle}>
-                <input type="radio" id="yesRecommend" name="yesRecommend" value="Yes"/>
+                <input type="radio" id="yesRecommend" name="yesRecommend" value="Yes" defaultChecked/>
                 <label htmlFor="yesRecommend">Yes</label><br></br>
                 <input type="radio" id="noRecommend" name="yesRecommend" value="No"/>
                 <label htmlFor="noRecommend"> No</label>
@@ -162,7 +164,7 @@ const AddReviewModal = (props) => {
             </div>
             <div>
               <label style={addReviewTitleStyle}>3. Characteristics: *</label>
-              <div style={{width: '50%', margin: 'auto'}}>{getCharacteristics(props.reviewsMeta)}</div>
+              <div id="addReviewCharacteristics" style={{width: '50%', margin: 'auto'}}>{getCharacteristics(props.reviewsMeta)}</div>
             </div>
             <div>
               <label style={addReviewTitleStyle}>4. Review Summary:</label><br></br>

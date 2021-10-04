@@ -2,6 +2,7 @@ import React from 'react'
 import ProductCheckout from './ProductCheckout.jsx'
 import ProductStars from './ProductStars.jsx'
 import ProductStyleSelector from './ProductStyleSelector.jsx'
+import ProductDetailPrice from './ProductDetailPrice.jsx'
 
 const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle }) => {
   const descriptionStyles = {
@@ -14,7 +15,7 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
       <ProductStars />
       <h4>{productDetails.category}</h4>
       <h2>{productDetails.name}</h2>
-      <p>${productDetails.default_price}</p>
+      <ProductDetailPrice selectedStyle={selectedStyle} />
       <ProductStyleSelector styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       <ProductCheckout selectedStyle={selectedStyle} />
     </div>

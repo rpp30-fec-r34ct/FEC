@@ -58,9 +58,9 @@ const AddReviewStars = () => {
   }
 
   return (
-    <div>
+    <div style={{marginLeft: '20px'}}>
       {renderStars()}
-      <span>{getRatingTitle()}</span>
+      <span style={{marginLeft: '10px', color: 'grey', opacity: '0.8'}}>{getRatingTitle()}</span>
     </div>
   )
 }

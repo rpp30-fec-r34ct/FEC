@@ -4,7 +4,9 @@ import { findTotalReviews } from '../components/Shared/helpers.js'
 import ProductCheckout from './ProductCheckout.jsx'
 import AverageStars from '../components/Shared/AverageStars.jsx'
 import ProductStyleSelector from './ProductStyleSelector.jsx'
+import ProductDetailPrice from './ProductDetailPrice.jsx'
 import axios from 'axios'
+
 
 const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle }) => {
   const { productId } = useParams()
@@ -53,7 +55,7 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
       </div>
       <h4>{productDetails.category}</h4>
       <h2>{productDetails.name}</h2>
-      <p>${productDetails.default_price}</p>
+      <ProductDetailPrice selectedStyle={selectedStyle} />
       <ProductStyleSelector styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       <ProductCheckout selectedStyle={selectedStyle} />
     </div>

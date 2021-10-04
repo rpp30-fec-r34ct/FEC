@@ -8,9 +8,13 @@ const AddReviewStars = () => {
 
   const onAddReviewClick = (event) => {
     // console.log(event);
-    let newStarState = [...starState];
-    for (let j = 0; j <= parseInt(event.target.id); j++) {
-      newStarState[j] = 1;
+    let newStarState = [0,0,0,0,0]
+    for (let j = 0; j < newStarState.length; j++) {
+      if (j <= parseInt(event.target.id)) {
+        newStarState[j] = 1;
+      } else {
+        newStarState[j] = 0;
+      }
     }
 
     setStarState(newStarState)
@@ -26,10 +30,14 @@ const AddReviewStars = () => {
       if (starState[i] === 0) {
         stars.push(<img id={i} onClick={onAddReviewClick} key={i} src={emptyStar} />)
       } else {
-        stars.push(<img key={i} src={fullStar} />)
+        stars.push(<img id={i} key={i} onClick={onAddReviewClick} src={fullStar} />)
       }
     }
     return stars;
+  }
+
+  const getOverviewStarRating = () => {
+    return starState;
   }
 
   const getRatingTitle = () => {
@@ -60,7 +68,7 @@ const AddReviewStars = () => {
   return (
     <div style={{marginLeft: '20px'}}>
       {renderStars()}
-      <span style={{marginLeft: '10px', color: 'grey', opacity: '0.8'}}>{getRatingTitle()}</span>
+      <span id="addReviewStarsOutput" style={{marginLeft: '10px', color: 'grey', opacity: '0.8'}}>{getRatingTitle()}</span>
     </div>
   )
 }

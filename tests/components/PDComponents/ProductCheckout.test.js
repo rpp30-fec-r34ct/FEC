@@ -130,27 +130,4 @@ describe('Product Checkout Component', function () {
     expect(within(quantitySelector).queryByText('-')).toBeNull()
     expect(within(quantitySelector).queryByText('8')).not.toBeNull()
   })
-
-  test('Should add the product to localStorage favorites when favorite is clicked', function () {
-    const history = createMemoryHistory()
-    history.push('/product/47421')
-    const app = render(
-      <Router history={history}>
-        <Switch>
-          <Route path='/product/:productId' exact>
-            <ProductCheckout selectedStyle={productStyleData} />
-          </Route>
-        </Switch>
-      </Router>
-    )
-    const favoriteButton = app.getByText('Favorite')
-    expect(window.localStorage.getItem('FECOutfit')).toBeNull()
-    userEvent.click(favoriteButton)
-    expect(window.localStorage.getItem('FECOutfit')).toBe('[47421]')
-    // should not add it more than once
-    userEvent.click(favoriteButton)
-    userEvent.click(favoriteButton)
-    userEvent.click(favoriteButton)
-    expect(window.localStorage.getItem('FECOutfit')).toBe('[47421]')
-  })
 })

@@ -5,6 +5,7 @@
   flex-direction: row;
   margin: 100px auto;
   font-family: 'Playfair Display', serif;
+  justify-content: 'center';
 }
 
 .averageRating {

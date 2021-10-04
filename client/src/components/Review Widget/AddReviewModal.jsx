@@ -2,7 +2,8 @@ import React, { useState, useEffect }  from 'react';
 import './cssFiles/reviewSection.css';
 import axios from 'axios'
 import CharacteristicsBar from './CharacteristicsBar.jsx';
-import AddReviewStars from './AddReviewStars.jsx'
+import AddReviewStars from './AddReviewStars.jsx';
+import addReviewHelpers from './addReviewHelpers.js';
 
 const AddReviewModal = (props) => {
     const [productName, setProductName] = useState('');
@@ -86,6 +87,46 @@ const AddReviewModal = (props) => {
     setCharCount(event.target.value.length);
   }
 
+  const onAddReviwSubmit = (event) => {
+    event.preventDefault();
+
+    // let invalidEntries = addReviewHelpers.checkForValidEntries();
+      //check for invalid entries by running through the mandatory fields and determining
+      //if any of the entries do not meet the required mandatory criteria.
+      //you check all of them. if any of them do not meet the required criteria,
+      //then we write an alert to the user that says "You must enter the following:
+      /*
+      product recommendation
+      review body that is at least 50 characters
+      email
+      nickname
+      overall rating
+
+
+      and then in the radio buttons i need to make sure they can only select one of the radio buttons- > do this by keeping the name the same for the radios
+      */
+
+
+    let starRating = addReviewHelpers.getOverviewStarRating();
+    let recommended = addReviewHelpers.getRecommended();
+
+
+
+    // let starRating = getOverviewStarRating();
+    // axios.post('/addReview', {
+    //   params:{
+    //     starOverviewRating: 0,
+    //     recommended: false,
+    //     characteristics: [],
+    //     reviewSummary: '',
+    //     reviewBody: '',
+    //     photos: [],
+    //     nickName: '',
+    //     email: ''
+    //   }
+    // })
+  }
+
   const getCharCountDisplay = () => {
     // if (charCount < 50) {
     //   return `Minimum required characters left: ${characterCount}`;
@@ -105,16 +146,16 @@ const AddReviewModal = (props) => {
           <span style={{fontSize:'25px', fontWeight: 'bold', margin: 'auto'}}>{'Write Your Review'}</span>
           <br></br>
           <span style={{fontSize:'20px', margin: '-25px auto'}}>{'About the ' + productName}</span>
-          <form style={reviewFormStyle}>
+          <form id="addReviewForm" style={reviewFormStyle}>
             <label style={addReviewTitleStyle}>1. Overall Rating: *</label>
               <AddReviewStars />
-            <div>
+            <div id="addReviewRecommend">
               <span style={addReviewTitleStyle}>2. Do you recommend this product?: *</span>
               <br></br>
               <div style={addReviewItemStyle}>
                 <input type="radio" id="yesRecommend" name="yesRecommend" value="Yes"/>
                 <label htmlFor="yesRecommend">Yes</label><br></br>
-                <input type="radio" id="noRecommend" name="noRecommend" value="No"/>
+                <input type="radio" id="noRecommend" name="yesRecommend" value="No"/>
                 <label htmlFor="noRecommend"> No</label>
                 <br></br>
               </div>
@@ -153,7 +194,7 @@ const AddReviewModal = (props) => {
                 <span style={subTextStyle}>{'For authentication reasons, you will not be not be emailed'}</span>
               </div>
             </div>
-            <input className="removeFiltersBtn" type="submit" value="Submit" />
+            <input className="removeFiltersBtn" type="submit" onClick={onAddReviwSubmit} value="Submit" />
           </form>
         </div>
       </>

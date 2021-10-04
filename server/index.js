@@ -13,12 +13,14 @@ app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.redirect('/47421')
+})
 
-
-
-app.get('/productDetails/:id', async (req, res) => {
-  const productId = req.params.id
-  const options = {
+app.get('/productDetail*', (req, res) => {
+  // console.log('product details request received', req.url);
+  const productId = req.url.slice(14, req.url.length)
+  axios.get(APIurl + `products/${productId}`, {
     headers: {
       Authorization: token.API_KEY
     }

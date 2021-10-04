@@ -6,7 +6,8 @@ const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
 
-app.use('/product/:id', express.static('client/dist'))
+app.use('/:id(\\d{5})', express.static('client/dist'))
+
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
@@ -288,6 +289,7 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data
+      const features = response.data.features
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {}
@@ -295,7 +297,6 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
       const productRatings = response.data.ratings
-      const productChar = response.data.characteristics
 
       relatedProducts.push({
         id: product.id,
@@ -305,7 +306,7 @@ app.get('/product/:id/related', async (req, res) => {
         sale: defaultStyle.sale_price,
         price: product.default_price,
         rating: productRatings,
-        characteristics: productChar
+        features
       })
     }
     res.status(200).send(relatedProducts)

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../cssFiles/addReview.css';
 
 const CharacteristicsBar = (props) => {
 
@@ -155,23 +156,23 @@ const CharacteristicsBar = (props) => {
       <br></br>
       <div id={props.characteristic} style={characteristicBarStyle}>
         <div style={characteristicDescriptionStyle}>
-          <input className="characteristicRadio" type="radio" id="1" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 1)}/>
+          <input onChange={props.handleCharacteristicChange} className="characteristicRadio" type="radio" id="1" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 1)}/>
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{getRatingTitle(props.characteristic, 1)}</label><br></br>
         </div>
         <div style={characteristicDescriptionStyle}>
-          <input className="characteristicRadio" type="radio" id="2" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 2)}/>
+          <input onChange={props.handleCharacteristicChange} className="characteristicRadio" type="radio" id="2" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 2)}/>
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{getRatingTitle(props.characteristic, 2)}</label><br></br>
         </div>
         <div style={characteristicDescriptionStyle}>
-          <input className="characteristicRadio" type="radio" id="3" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 3)}/>
+          <input onChange={props.handleCharacteristicChange} className="characteristicRadio" type="radio" id="3" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 3)}/>
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{getRatingTitle(props.characteristic, 3)}</label><br></br>
         </div>
         <div style={characteristicDescriptionStyle}>
-          <input className="characteristicRadio" type="radio" id="4" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 4)}/>
+          <input onChange={props.handleCharacteristicChange} className="characteristicRadio" type="radio" id="4" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 4)}/>
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{getRatingTitle(props.characteristic, 4)}</label><br></br>
         </div>
         <div style={characteristicDescriptionStyle}>
-          <input className="characteristicRadio" type="radio" id="5" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 5)}/>
+          <input onChange={props.handleCharacteristicChange} className="characteristicRadio" type="radio" id="5" name={props.characteristic_id} value={getRatingTitle(props.characteristic, 5)}/>
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{getRatingTitle(props.characteristic, 5)}</label><br></br>
         </div>
       </div>

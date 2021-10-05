@@ -17,14 +17,14 @@ app.get('/', (req, res) => {
   res.redirect('/47421')
 })
 
-app.get('/productDetail*', (req, res) => {
+app.get('/productDetail*', async (req, res) => {
   // console.log('product details request received', req.url);
   const productId = req.url.slice(14, req.url.length)
   axios.get(APIurl + `products/${productId}`, {
     headers: {
       Authorization: token.API_KEY
     }
-  }
+  })
   try {
     let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
     let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
@@ -44,6 +44,7 @@ app.get('/productDetail*', (req, res) => {
     res.status(500).send(err)
   }
 })
+
 
 app.get('/reviews', (req, res) => {
   const request = req.query

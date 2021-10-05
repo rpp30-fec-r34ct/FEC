@@ -45,6 +45,7 @@ app.get('/productDetail*', async (req, res) => {
   }
 })
 
+
 app.get('/reviews', (req, res) => {
   const request = req.query
   request.activeFilters = JSON.parse(req.query.activeFilters)

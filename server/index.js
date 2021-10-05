@@ -13,7 +13,11 @@ app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
-app.get('/productDetail*', (req, res) => {
+app.get('/', (req, res) => {
+  res.redirect('/47421')
+})
+
+app.get('/productDetail*', async (req, res) => {
   // console.log('product details request received', req.url);
   const productId = req.url.slice(14, req.url.length)
   axios.get(APIurl + `products/${productId}`, {
@@ -21,15 +25,26 @@ app.get('/productDetail*', (req, res) => {
       Authorization: token.API_KEY
     }
   })
-    .then((data) => {
-      console.log('[GET][PRODUCT DETAILS] data successfully retrieved from API, sending back to client')
-      res.status(200).send(data.data)
+  try {
+    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+
+    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+
+    res.status(200).send({
+      ...productResponse.data,
+      price: productResponse.data.default_price,
+      ratings: reviewResponse.data.ratings,
+      sale: defaultStyle.sale_price,
+      photo: productStyle[0]
     })
-    .catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
-    })
+  } catch(err) {
+    res.status(500).send(err)
+  }
 })
+
 
 app.get('/reviews', (req, res) => {
   const request = req.query
@@ -223,6 +238,7 @@ app.post('/qa/answer', (req, res) => {
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
+  console.log('path', path)
   try {
     const response = await axios.get(APIurl + path,
       {

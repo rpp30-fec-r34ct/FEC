@@ -3,6 +3,8 @@
  */
 
 import React from 'react'
+import { createMemoryHistory } from 'history'
+import { Router, Route, Switch } from 'react-router-dom'
 import 'regenerator-runtime/runtime'
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/react'
@@ -393,45 +395,77 @@ const productStyleData = {
 
 describe('Product Description Component', function () {
   test('Should render the product category', function () {
+    const history = createMemoryHistory()
+    history.push('/product/47421')
     const app = render(
-      <ProductDescription
-        productDetails={productData}
-        styles={productStyleData}
-        selectedStyle={productStyleData.results[0]}
-      />
+      <Router history={history}>
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
+          </Route>
+        </Switch>
+      </Router>
     )
     expect(app.getByText(productData.category)).toBeInTheDocument()
   })
 
   test('Should render the product name', function () {
+    const history = createMemoryHistory()
+    history.push('/product/47421')
     const app = render(
-      <ProductDescription
-        productDetails={productData}
-        styles={productStyleData}
-        selectedStyle={productStyleData.results[0]}
-      />
+      <Router history={history}>
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
+          </Route>
+        </Switch>
+      </Router>
     )
     expect(app.getByText(productData.name)).toBeInTheDocument()
   })
 
   test('Should render the price', function () {
+    const history = createMemoryHistory()
+    history.push('/product/47421')
     const app = render(
-      <ProductDescription
-        productDetails={productData}
-        styles={productStyleData}
-        selectedStyle={productStyleData.results[0]}
-      />
+      <Router history={history}>
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
+          </Route>
+        </Switch>
+      </Router>
     )
     expect(app.getByText(`$${productData.default_price}`)).toBeInTheDocument()
   })
 
   test('Should render the stars component', function () {
+    const history = createMemoryHistory()
+    history.push('/product/47421')
     const app = render(
-      <ProductDescription
-        productDetails={productData}
-        styles={productStyleData}
-        selectedStyle={productStyleData.results[0]}
-      />
+      <Router history={history}>
+          <Switch>
+          <Route path='/product/:productId' exact>
+          <ProductDescription
+              productDetails={productData}
+              styles={productStyleData}
+              selectedStyle={productStyleData.results[0]}
+            />
+          </Route>
+        </Switch>
+      </Router>
     )
     expect(app.container.querySelector('#starsOuter')).toBeInTheDocument()
   })

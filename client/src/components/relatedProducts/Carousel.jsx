@@ -21,12 +21,11 @@ export default function Carousel(props) {
     setLoading(true);
 
     const timer = setTimeout(async() => {
-      await getRelatedProducts()
       await getCurrentProduct()
+      await getRelatedProducts()
       setLoading(false)
-    }, 5000)
-
-    return () =>clearTimeout(timer)
+    }, 2500)
+    return () => clearTimeout(timer)
   }, [])
 
   const getRelatedProducts = async () => {
@@ -58,7 +57,7 @@ export default function Carousel(props) {
     setCurrentPosition(currentPosition + 220)
   }
 
-  let placeHolder = Array(4).fill(<CardSkeleton/>)
+  let placeHolder = Array(4).fill(<CardSkeleton />)
 
 
   return (

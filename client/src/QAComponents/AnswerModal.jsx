@@ -12,6 +12,10 @@ const AnswerModal = (props) => {
   }])
   const [images, setImages] = useState([])
   const [uploads, setUploads] = useState([])
+  const imgStyle = {
+    height: '25%',
+    width: '25%',
+  }
 
   const keyPress = useCallback(
     e => {
@@ -36,9 +40,6 @@ const AnswerModal = (props) => {
       setImages(prev => {
         return [...prev, e.target.files[0]]
       })
-
-
-
     }
   }
 
@@ -55,27 +56,12 @@ const AnswerModal = (props) => {
     data.append('email', e.target[2].value)
     data.append('id', e.target.parentNode.id)
     images.map(image => data.append(image.name, image))
-
-    console.log('', data)
-    const answer = e.target[0].value
-    const nickname = e.target[1].value
-    const email = e.target[2].value
-    const id = e.target.parentNode.id
-    const photos = images
     axios.post('/qa/answer', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
-    // axios.post('/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id + '&photos=' + photos, {
-    //   answer: answer,
-    //   nickname: nickname,
-    //   email: email,
-    //   id: id,
-    //   photos: photos
-    // })
       .then(data => {
-        console.log('the object file: ', data)
         return setImages([])
       })
       .catch(err => console.error(err))
@@ -95,18 +81,18 @@ const AnswerModal = (props) => {
           <div className='add-answer-form' id={props.question_id}>
           <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
             <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
-            <form action="/test" method="post" enctype="multipart/form-data" onSubmit={submitNewAnswer}>
-              <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox"/>
-              <input name='nickname' type='text' size="30" placeholder='Your Nickname' />
-              <input name='email' type='text' size="30" placeholder='Example: jack@email.com' />
+            <form action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>
+              <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox" style={{gridRow: '4/4'}}/>
+              <input name='nickname' type='text' size="30" placeholder='Your Nickname' style={{gridRow: '4/4'}}/>
+              <input name='email' type='text' size="30" placeholder='Example: jack@email.com' style={{gridRow: '4/4'}}/>
               {images.length < 5 ? (
-                <input type="file" className="file" accept="image/*" id="files" name="myFile" onChange={uploadImg}/>
+                <input type="file" className="file" accept="image/*" id="files" name="myFile" onChange={uploadImg} style={{gridRow: '4/4'}}/>
               ) : null}
-              <button type='submit' id='submit-answer'>Submit</button>
+              <button type='submit' id='submit-answer' style={{gridRow: '4/4'}}>Submit</button>
             </form>
             {images ? (
               images.map(image => (
-                <img src={URL.createObjectURL(image)} className="answer-image" key={image}/>
+                <img style={imgStyle} src={URL.createObjectURL(image)} className="answer-image" key={image}/>
               ))
             ) : null}
             <img src={src} alt={alt} />

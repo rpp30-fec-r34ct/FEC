@@ -10,6 +10,10 @@ const AnswerList = (props) => {
   const [helpfulAns, setHelpfulAns] = useState(0)
   const [expandCollapse, setExpandCollapse] = useState('See More Answers')
   let renderMoreAnswers = <div />
+  const answerListStyle = {
+    overflow: 'scroll',
+    height: '50%',
+  }
 
   // SERVER REQUESTS
   const getAllAnswers = (question, callback) => {
@@ -70,7 +74,7 @@ const AnswerList = (props) => {
 
   return (
     <>
-      <div id="answer-list">{answers && answers.map(answer => {
+      <div style={answerListStyle} id="answer-list">{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -96,7 +100,7 @@ const AnswerList = (props) => {
         )
       })}
       </div>
-      {moreAnswers && moreAnswers.length > 0 ? <div>{renderMoreAnswers}</div> : null}
+      {moreAnswers && moreAnswers.length > 0 ? renderMoreAnswers : null}
     </>
   )
 }

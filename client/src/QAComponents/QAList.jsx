@@ -16,6 +16,23 @@ const QAList = (props) => {
   const [showQuestionModal, setShowQuestionModal] = useState(false)
   const productID = useParams().productId
 
+  const qListStyle = {
+    border: '1px solid black',
+    alignItems: 'center',
+  }
+  const searchStyle = {
+    width: '99%',
+    margin: 'auto',
+  }
+  const moreQuestionsStyle = {
+    backgroundColor: 'blue',
+    color: 'white',
+  }
+  const addQuestionStyle = {
+    backgroundColor: 'green',
+    color: 'white',
+  }
+
   const renderAllQuestions = () => {
     setQuestions(allQuestions)
     setAllQuestions(0)
@@ -83,24 +100,26 @@ const QAList = (props) => {
   return (
     <>
       <h1 id="QA-heading">Questions and Answers</h1>
-      <form>
-        <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch}/>
-      </form>
-      {questions ? questions.sort((question1, question2) => question2.question_helpfulness - question1.question_helpfulness).map((question, i) => {
-        let key = question.question_id + 1
-        return (
-          <Question
-            key={i}
-            asker={question.asker_name}
-            question_body={question.question_body}
-            question_helpfulness={question.question_helpfulness}
-            question_id={question.question_id}
-          />
-        )
-      }) : null}
-      {showQuestionModal ? <QuestionModal />: null}
-      {allQuestions && allQuestions.length > 2 ? <button id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
-      <button id="add-question" onClick={addQuestion}>Add A Question</button>
+      <div style={qListStyle}>
+        <form>
+          <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch} style={searchStyle} />
+        </form>
+        {questions ? questions.sort((question1, question2) => question2.question_helpfulness - question1.question_helpfulness).map((question, i) => {
+          let key = question.question_id + 1
+          return (
+            <Question
+              key={i}
+              asker={question.asker_name}
+              question_body={question.question_body}
+              question_helpfulness={question.question_helpfulness}
+              question_id={question.question_id}
+            />
+          )
+        }) : null}
+        {showQuestionModal ? <QuestionModal />: null}
+        {allQuestions && allQuestions.length > 2 ? <button style={moreQuestionsStyle} id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
+        <button style={addQuestionStyle} id="add-question" onClick={addQuestion}>Add A Question</button>
+      </div>
     </>
   )
 }

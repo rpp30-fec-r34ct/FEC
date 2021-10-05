@@ -16,24 +16,37 @@ const Question = (props) => {
   const [helpful, setHelpful] = useState(false)
   const productID = useParams().productId
 
-  // SERVER REQUESTS
-  // const initialize = (callback) => {
-  //   axios.get('/qa/questions' + '?product_id=' + productID)
-  //     .then((data) => {
-  //       callback(null, data.data.results)
-  //     })
-  //     .catch((err) => {
-  //       console.error('error while getting product data from server')
-  //     })
-  // }
+  const questionBodyStyle = {
+    border: '1px solid black',
+    width: '100%',
+    display: 'grid',
+    justifyContent: 'left',
+  }
+
+  const questionStyle = {
+    width: 'auto',
+    display: 'grid',
+    justifyContent: 'left',
+  }
+
+  const tableRowStyle = {
+    textAalign: 'right',
+  }
+
+  const addAnswerStyle = {
+    marginLeft: '250px',
+  }
+
+  const helpfulStyle = {
+    color: 'green',
+    textAlign: 'left',
+    width: '375px',
+  }
+
 
   const addAnswer = (e) => {
     e.preventDefault()
     return setShowModal(true)
-    // if (!document.getElementById('answer-modal')) {
-    //   console.log('modal is not shown')
-    //   setShowModal(true)
-    // }
   }
 
   const keyPress = (e) => {
@@ -59,9 +72,8 @@ const Question = (props) => {
         question_id: e.target.id
       })
         .then(data => {
-          setQHelpfulness(prev => prev++)
-          return console.log('helpful', helpful)
-
+          console.log(data)
+          setQHelpfulness(qHelpfulness + 1)
         })
         .catch(err => { console.error(err) })
     } else {
@@ -82,39 +94,32 @@ const Question = (props) => {
   )
 
   return (
-    <>
-      <div id={props.question_id} className='question-body'>
+    <div style={questionBodyStyle}>
+      <div id={props.question_id} className='question-body' style={questionStyle}>
         <table>
           <tbody>
             <tr>
-              <th>
+              <th style={questionStyle}>
                 Q: {props.question_body}
               </th>
             </tr>
             <tr>
-              <td>
-                Helpful?
-              </td>
-              <td>
-                <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Yes</a>
-              </td>
-              <td className="panel-element">
+              <td style={helpfulStyle} className="helpful">
+                <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Helpful?</a> | Yes
                 ({qHelpfulness ? qHelpfulness : props.question_helpfulness})
               </td>
               <td>
-                <a href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</a>
+                <a style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</a>
               </td>
             </tr>
           </tbody>
         </table>
-        <div className="question-panel">
-        </div>
       </div>
       <div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}
       </div>
       {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body}/> : null}
-    </>
+    </div>
   )
 }
 

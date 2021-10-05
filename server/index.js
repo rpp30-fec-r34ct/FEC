@@ -144,7 +144,6 @@ app.get('/qa/questions', (req, res) => {
     }
   })
     .then(data => {
-      // console.log('testResponse', data.data.results[0].answers)
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -174,7 +173,8 @@ app.put('/qa/helpfulquestion/', (req, res) => {
     }
   })
     .then(data => {
-      res.sendStatus(200)
+      console.log(data)
+      res.send('Helpful')
     })
     .catch(err => {
       console.error(err)
@@ -189,7 +189,7 @@ app.put('/qa/answers/report', (req, res) => {
     }
   })
     .then(data => {
-      res.sendStatus(200)
+      res.send('Reported')
     })
     .catch(err => {
       console.error(err)
@@ -226,6 +226,7 @@ app.post('/qa/newquestion', (req, res) => {
     }
   })
     .then(data => {
+      console.log(data)
       res.send('new question added')
     })
     .catch(err => res.send(err))
@@ -277,7 +278,7 @@ console.log(photoURLs)
     }
   })
     .then(data => {
-      console.log('success')
+      console.log('success', data)
       fs.unlink('c:/' + photo.filename, (err) => {
         if (err) {
           res.send(err)

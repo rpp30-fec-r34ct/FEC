@@ -10,6 +10,15 @@ const NewAnswer = (props) => {
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState('Report')
   let renderMoreAnswers = <div />
+  const imgStyle = {
+    height: '25%',
+    width: '25%',
+  }
+  const answerStyle = {
+    borderBottom: '1px solid black',
+    width: '500px',
+    margin: '2%',
+  }
 
   // SERVER REQUESTS
   const getAllAnswers = (question, callback) => {
@@ -28,7 +37,8 @@ const NewAnswer = (props) => {
     e.preventDefault()
     axios.put('/qa/answers/report/?answer_id=' + answerId)
       .then(data => {
-        return setReport('Reported')
+        console.log(data)
+        return setReport(data.data)
       })
       .catch(err => {
         console.error(err)
@@ -42,23 +52,22 @@ const NewAnswer = (props) => {
       setHelpful(true)
       axios.put('/qa/answers/helpful/?answer_id=' + answerId)
         .then(data => {
-          // console.log(helpfulAns)
           return setHelpfulness(helpfulness + 1)
         })
         .catch(err => {
           console.error(err)
         })
     } else {
-      alert('This answer has already been marked as "helpful"')
+      console.log('This answer has already been marked as "helpful"')
     }
   }
 
   return (
-    <>
+    <div style={answerStyle}>
       <div className='answer-body' id={props.id} key={props.id + 'b'}>
             <div>A: {props.body}</div>
             <div>{props.photos && Array.isArray(props.photos) ? props.photos.map((image, i) => (
-              <img className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
+              <img style={imgStyle} className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
             )) : null}</div>
             <table>
               <tbody>
@@ -85,7 +94,7 @@ const NewAnswer = (props) => {
             </table>
           </div>
       <div>{renderMoreAnswers}</div>
-    </>
+    </div>
   )
 }
 

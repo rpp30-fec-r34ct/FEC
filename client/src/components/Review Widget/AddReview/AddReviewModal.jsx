@@ -13,6 +13,35 @@ const AddReviewModal = (props) => {
   //states for the form. everything but stars will have a state here:
   const [characteristicsToSend, setCharacteristicsToSend] = useState({});
 
+  const [reviewSummary, setReviewSummary] = useState('');
+  const [reviewBody, setReviewBody] = useState('');
+  const [reviewNickName, setReviewNickName] = useState('');
+  const [reviewEmail, setReviewEmail] = useState('');
+
+  const handleReviewChange = (event) => {
+
+    switch (event.target.id) {
+      case ('reviewSummary'):
+        setReviewSummary(event.target.value);
+        break;
+
+      case('reviewBody'):
+        setCharCount(event.target.value.length);
+        setReviewBody(event.target.value);
+        break;
+
+      case ('reviewNickName'):
+        setReviewNickName(event.target.value);
+        break;
+
+      case ('reviewEmail'):
+        setReviewEmail(event.target.value);
+        break;
+
+      default:
+        return;
+    }
+  }
 
   //onChange/onClick functions
   const handleCharacteristicChange = (event) => {
@@ -50,7 +79,6 @@ const AddReviewModal = (props) => {
   }
 
   const onReviewBodyChange = (event) => {
-    setCharCount(event.target.value.length);
   }
 
   const onAddReviwSubmit = (event) => {
@@ -130,13 +158,13 @@ const AddReviewModal = (props) => {
             <div>
               <label className="addReviewTitleStyle">4. Review Summary:</label><br></br>
               <div className="addReviewItemStyle">
-                <input id="reviewSummary" type="textarea" maxLength="60" placeholder="Example: Best purhcase ever!" style={{width: '90%', height: '30px', fontFamily: 'Playfair Display serif'}}/>
+                <input id="reviewSummary" onChange={handleReviewChange} type="textarea" maxLength="60" placeholder="Example: Best purhcase ever!" style={{width: '90%', height: '30px', fontFamily: 'Playfair Display serif'}}/>
               </div>
             </div>
             <div>
               <label className="addReviewTitleStyle">5. Review Body: *</label><br></br>
               <div className="addReviewItemStyle">
-                <textarea id="reviewBody" onChange={onReviewBodyChange} maxLength="1000" minLength="50" placeholder="Why did you like the product or not?" style={{width: '90%', height: '100px', fontFamily: 'Playfair Display serif'}}></textarea>
+                <textarea id="reviewBody" onChange={handleReviewChange} maxLength="1000" minLength="50" placeholder="Why did you like the product or not?" style={{width: '90%', height: '100px', fontFamily: 'Playfair Display serif'}}></textarea>
                 <br></br>
                 <span className="subTextStyle">{getCharCountDisplay()}</span>
               </div>
@@ -144,7 +172,7 @@ const AddReviewModal = (props) => {
             <div>
               <label className="addReviewTitleStyle">6. What is your nickname?: *</label><br></br>
               <div className="addReviewItemStyle">
-                <input id="nickName" type="text" maxLength="60" placeholder="Example: jackson11!" style={{width: '70%', fontFamily: 'Playfair Display serif'}}/>
+                <input id="reviewNickName" onChange={handleReviewChange} type="text" maxLength="60" placeholder="Example: jackson11!" style={{width: '70%', fontFamily: 'Playfair Display serif'}}/>
                 <br></br>
                 <span className="subTextStyle">{'For privacy reasons, do not use your full name or email address'}</span>
               </div>
@@ -152,7 +180,7 @@ const AddReviewModal = (props) => {
             <div>
               <label className="addReviewTitleStyle">7. Your email: *</label><br></br>
               <div className="addReviewItemStyle">
-                <input id="email" type="text" maxLength="60" style={{width: '70%', fontFamily: 'Playfair Display serif'}} placeholder="Example: jackson11@email.com"/>
+                <input id="reviewEmail" onChange={handleReviewChange} type="text" maxLength="60" style={{width: '70%', fontFamily: 'Playfair Display serif'}} placeholder="Example: jackson11@email.com"/>
                 <br></br>
                 <span className="subTextStyle">{'For authentication reasons, you will not be not be emailed'}</span>
               </div>

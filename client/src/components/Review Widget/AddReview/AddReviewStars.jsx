@@ -7,7 +7,6 @@ const AddReviewStars = () => {
 
 
   const onAddReviewClick = (event) => {
-    // console.log(event);
     let newStarState = [0,0,0,0,0]
     for (let j = 0; j < newStarState.length; j++) {
       if (j <= parseInt(event.target.id)) {
@@ -16,7 +15,6 @@ const AddReviewStars = () => {
         newStarState[j] = 0;
       }
     }
-
     setStarState(newStarState)
   }
 
@@ -34,10 +32,6 @@ const AddReviewStars = () => {
       }
     }
     return stars;
-  }
-
-  const getOverviewStarRating = () => {
-    return starState;
   }
 
   const getRatingTitle = () => {

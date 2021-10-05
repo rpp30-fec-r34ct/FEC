@@ -152,6 +152,7 @@ const AddReviewModal = (props) => {
       })
       .then((data) => {
         console.log('submitted');
+        props.onAddReviewClick();
       })
       .catch((err) => {
         console.log('add review did not work!');

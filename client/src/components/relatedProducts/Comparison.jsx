@@ -1,56 +1,63 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom';
-// import { GiCheckMark } from 'react-icons/gi'
-import { RiStarSmileFill } from 'react-icons/Ri'
+import { GiCheckMark } from 'react-icons/gi'
+import { RiStarSmileFill } from 'react-icons/ri'
+import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 const Comparison = (props) => {
   const [isOpen, setOpen] = useState(false)
-  const [currentCharacteristics, setCurrentCharacteristics] = useState([])
-  const [allCharacteristics, setAllCharacteristics] = useState([])
+  const [allFeatures, setAllFeatures] = useState({})
   const { productId } = useParams()
 
   const toggleModal = () => {
     if (!isOpen) {
-      getCharacteristics()
+      getComparedFeatures()
     }
     setOpen(!isOpen)
   }
 
-  const getCharacteristics = async () => {
-    try {
-      const { data } = await axios.get(`/reviews/meta?product_id=${productId}`)
-      setCurrentCharacteristics(data.characteristics)
+  const getComparedFeatures = () => {
+    let comparedFeatures = {}
 
-      let currentChar = data.characteristics;
-      let relatedChar = props.relatedProduct.characteristics;
-      let allCharWithDupe = [...Object.keys(currentChar), ...Object.keys(relatedChar)]
+    let currentProductFeatures = props.currentProduct.features
+    let relatedFeatures = props.relatedProduct.features
 
-      setAllCharacteristics(Array.from(new Set(allCharWithDupe)))
-    } catch (error) {
-      console.log(error.message)
-    }
+    currentProductFeatures.forEach((item) => {
+      comparedFeatures[item.feature] = {
+        value1: item.value || <GiCheckMark />,
+        value2: null
+      }
+    })
+
+    relatedFeatures.forEach((item) => {
+      comparedFeatures[item.feature] ? comparedFeatures[item.feature].value2 = item.value
+        : comparedFeatures[item.feature] = {
+          value1: null,
+          value2: item.value || <GiCheckMark />
+        }
+      setAllFeatures(comparedFeatures)
+    })
   }
-
-
-
 
   return (
     <React.Fragment>
       <div className="favorite-btn" onClick={toggleModal}>
         <RiStarSmileFill />
       </div>
-
       {
         isOpen
           ? createPortal(
             <React.Fragment>
               <div className="modal">
+                <div className="close-btn" onClick={toggleModal}>
+                  <AiOutlineCloseCircle />
+                </div>
                 <div className="modal-body">
-                  <h1>Comparing</h1>
+                  <h3>Comparing</h3>
                   <table>
                     <thead>
                       <tr>
@@ -61,21 +68,18 @@ const Comparison = (props) => {
                     </thead>
                     <tbody>
                       {
-                        allCharacteristics.map((char, i) => {
+                        Object.keys(allFeatures).map((info, i) => {
                           return (
                             <tr key={i}>
-                              <td>{currentCharacteristics[char]?.value}</td>
-                              <td>{char}</td>
-                              <td>{props.relatedProduct.characteristics[char]?.value}</td>
+                              <td>{allFeatures[info].value1}</td>
+                              <td>{info}</td>
+                              <td>{allFeatures[info].value2}</td>
                             </tr>
                           )
                         })
                       }
                     </tbody>
                   </table>
-                  <button className="close" onClick={toggleModal}>
-                    Close
-                  </button>
                 </div>
               </div>
             </React.Fragment >,

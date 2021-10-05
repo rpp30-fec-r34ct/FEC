@@ -6,16 +6,18 @@ const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
 
-app.use('/product/:id', express.static('client/dist'))
+app.use('/:id(\\d{5})', express.static('client/dist'))
+
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
+app.get('/', (req, res) => {
+  res.redirect('/47421')
+})
 
-
-
-app.get('/productDetail*', (req, res) => {
+app.get('/productDetail*', async (req, res) => {
   // console.log('product details request received', req.url);
   const productId = req.url.slice(14, req.url.length)
   axios.get(APIurl + `products/${productId}`, {
@@ -23,15 +25,26 @@ app.get('/productDetail*', (req, res) => {
       Authorization: token.API_KEY
     }
   })
-    .then((data) => {
-      console.log('[GET][PRODUCT DETAILS] data successfully retrieved from API, sending back to client')
-      res.status(200).send(data.data)
+  try {
+    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+
+    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+
+    res.status(200).send({
+      ...productResponse.data,
+      price: productResponse.data.default_price,
+      ratings: reviewResponse.data.ratings,
+      sale: defaultStyle.sale_price,
+      photo: productStyle[0]
     })
-    .catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
-    })
+  } catch(err) {
+    res.status(500).send(err)
+  }
 })
+
 
 app.get('/reviews', (req, res) => {
   const request = req.query
@@ -225,6 +238,7 @@ app.post('/qa/answer', (req, res) => {
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
+  console.log('path', path)
   try {
     const response = await axios.get(APIurl + path,
       {
@@ -278,6 +292,7 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data
+      const features = response.data.features
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {}
@@ -285,7 +300,6 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
       const productRatings = response.data.ratings
-      const productChar = response.data.characteristics
 
       relatedProducts.push({
         id: product.id,
@@ -295,7 +309,7 @@ app.get('/product/:id/related', async (req, res) => {
         sale: defaultStyle.sale_price,
         price: product.default_price,
         rating: productRatings,
-        characteristics: productChar
+        features
       })
     }
     res.status(200).send(relatedProducts)

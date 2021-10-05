@@ -60,7 +60,7 @@ const ProductDetailPageComponent = (props) => {
         <MainImageGallery selectedStyle={selectedStyle} />
         <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       </div>
-      {productDetails ? <ProductDetailFooter productDetails={productDetails} /> : <div />}
+      {(productDetails.description || productDetails.slogan) && <ProductDetailFooter productDetails={productDetails} />}
     </div>
   )
 }

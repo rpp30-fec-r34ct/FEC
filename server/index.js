@@ -14,9 +14,9 @@ const token = require('./config.js')
 // app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.redirect('/47421')
-})
+// app.get('/', (req, res) => {
+//   res.redirect('/47421')
+// })
 
 app.get('/productDetail*', async (req, res) => {
   // console.log('product details request received', req.url);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Comparison from './Comparison.jsx'
 import AverageStars from '../Shared/AverageStars.jsx'
-
+import {CardSkeleton} from '../StyledComponents/CardSkeleton.jsx'
 
 export default function ProductCard(props) {
   const priceElement =

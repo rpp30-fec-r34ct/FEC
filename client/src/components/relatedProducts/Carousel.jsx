@@ -31,7 +31,7 @@ export default function Carousel(props) {
 
   const getCurrentProduct = async () => {
     try {
-      const { data } = await axios.get(`/productDetails/${productId}`)
+      const { data } = await axios.get(`/productDetail/${productId}`)
       setCurrentProduct(data)
     } catch (error) {
       console.log(error.message)

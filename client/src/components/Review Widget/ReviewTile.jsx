@@ -1,9 +1,50 @@
 import './cssFiles/reviewTile.css'
 import ReviewStars from './ReviewStars.jsx'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import PhotoThumbnailRow from './PhotoThumbnailRow.jsx'
+import axios from 'axios';
+import useLocalStorage from '../Shared/useLocalStorage.jsx'
 
 const ReviewTile = (props) => {
+  const [helpfulCount, setHelpfulCount] = useState(0)
+  const [isMarkedReported, setIsMarkedReported] = useState(0)
+  const [helpfulList, setHelpfulList] = useLocalStorage('helpfulReviews',[])
+
+
+  const onHelpfulClick = (event) => {
+    let newHelpfulList = [...helpfulList];
+    console.log(event);
+
+    if (newHelpfulList.indexOf(event.target.id) === -1) {
+      newHelpfulList.push(event.target.id)
+      setHelpfulCount(helpfulCount + 1);
+      sendHelpfulReviewToServer(event.target.id);
+      setHelpfulList(newHelpfulList);
+    } else {
+      console.log('already marked as helpful');
+    }
+
+  }
+
+  useEffect (() => {
+    setHelpfulCount(props.reviewData.helpfulness);
+  },[props.reviewData.helpfulness])
+
+  const sendHelpfulReviewToServer = (id) => {
+    axios.put('/reviewHelpful', {
+      params: {
+        review_id: id
+      }
+    })
+    .then ((data) => {
+      console.log('succssfully sent helpful post to server ');
+    })
+    .catch ((err) => {
+      console.log('errored out while sending helpful post');
+    });
+  }
+
+
   const translateDate = () => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const day = props.reviewData.date.slice(8, 10)
@@ -53,8 +94,8 @@ const ReviewTile = (props) => {
       {getResponse(props.reviewData.response)}
       <div className='tile_helpfulSection'>
         <span>Helfpul?</span>
-        <span className='tile_helpfulVote'>Yes</span>
-        <span className='tile_helpfulCount'>{'(' + props.reviewData.helpfulness + ')'}</span>
+        <span className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>Yes</span>
+        <span className='tile_helpfulCount'>{'(' + helpfulCount + ')'}</span>
         <span className='tile_report'>{' | ' + 'Report'}</span>
       </div>
     </div>

@@ -128,6 +128,23 @@ app.post('/reviews', (req, res) => {
   })
 })
 
+app.put('/reviewHelpful', (req, res) => {
+  console.log('placeholder');
+  axios({
+    method: 'put',
+    url: APIurl + `reviews/${req.body.params.review_id}/helpful`,
+    headers: {
+      Authorization: token.API_KEY
+    }
+  })
+  .then((data) => {
+    res.sendStatus(204);
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  })
+})
+
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 app.get('/qa/questions', (req, res) => {
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {

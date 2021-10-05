@@ -5,6 +5,7 @@ import './cssFiles/reviewSection.css'
 import ReviewSortDropDown from './ReviewSortDropDown.jsx'
 
 
+
 const ReviewList = (props) => {
   const [reviews, setReviews] = useState([])
   const [reviewDisplayCount, setDisplayCount] = useState(2)
@@ -12,6 +13,8 @@ const ReviewList = (props) => {
   const [sortType, setSortType] = useState('relevance')
   const [filterChange, setFilterChange] = useState(false)
   const [isAddReviewActive, setAddReview] = useState(0);
+
+  // const [reportedList, setReportedList]
 
 
 

@@ -20,33 +20,33 @@ app.get('/', (req, res) => {
   res.redirect('/47421')
 })
 
-// app.get('/productDetail*', (req, res) => {
-//   // console.log('product details request received', req.url);
-//   const productId = req.url.slice(14, req.url.length)
-//   axios.get(APIurl + `products/${productId}`, {
-//     headers: {
-//       Authorization: token.API_KEY
-//     }
-//   })
-//   try {
-//     let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
-//     let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
-//     let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+app.get('/productDetail*', (req, res) => {
+  // console.log('product details request received', req.url);
+  const productId = req.url.slice(14, req.url.length)
+  axios.get(APIurl + `products/${productId}`, {
+    headers: {
+      Authorization: token.API_KEY
+    }
+  })
+  try {
+    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
 
-//     const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
-//     const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
 
-//     res.status(200).send({
-//       ...productResponse.data,
-//       price: productResponse.data.default_price,
-//       ratings: reviewResponse.data.ratings,
-//       sale: defaultStyle.sale_price,
-//       photo: productStyle[0]
-//     })
-//   } catch(err) {
-//     res.status(500).send(err)
-//   }
-// })
+    res.status(200).send({
+      ...productResponse.data,
+      price: productResponse.data.default_price,
+      ratings: reviewResponse.data.ratings,
+      sale: defaultStyle.sale_price,
+      photo: productStyle[0]
+    })
+  } catch(err) {
+    res.status(500).send(err)
+  }
+})
 
 app.get('/reviews', (req, res) => {
   const request = req.query
@@ -274,6 +274,11 @@ console.log(photoURLs)
   })
     .then(data => {
       console.log('success')
+      fs.unlink('c:/' + photo.filename, (err) => {
+        if (err) {
+          res.send(err)
+        }
+      })
       res.sendStatus(200)
     })
     .catch(err => {

@@ -20,33 +20,37 @@ app.get('/', (req, res) => {
   res.redirect('/47421')
 })
 
-app.get('/productDetail*', (req, res) => {
-  // console.log('product details request received', req.url);
-  const productId = req.url.slice(14, req.url.length)
-  axios.get(APIurl + `products/${productId}`, {
-    headers: {
-      Authorization: token.API_KEY
-    }
-  })
-  try {
-    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
-    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
-    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+  // ********* OJE NOTE --- I COMMENTED OUT THE FOLLOWING BECAUSE I KEPT GETTING ERRORS. DO NOT ACCEPT THIS CHANGE **************** //
 
-    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
-    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+  // app.get('/productDetail/:id', async (req, res) => {
+    //   const options = {
+      //     headers: {
+        //       Authorization: token.API_KEY
+        //     }
+        //   }
+        //   const productId: req.params.id
+        //   try {
+          //     let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+          //     let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+          //     let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
 
-    res.status(200).send({
-      ...productResponse.data,
-      price: productResponse.data.default_price,
-      ratings: reviewResponse.data.ratings,
-      sale: defaultStyle.sale_price,
-      photo: productStyle[0]
-    })
-  } catch(err) {
-    res.status(500).send(err)
-  }
-})
+          //     const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+          //     const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+
+          //     res.status(200).send({
+            //       ...productResponse.data,
+            //       price: productResponse.data.default_price,
+            //       ratings: reviewResponse.data.ratings,
+            //       sale: defaultStyle.sale_price,
+            //       photo: productStyle[0]
+            //     })
+            //   } catch(err) {
+              //     res.status(500).send(err)
+              //   }
+              // })
+
+// ********* OJE NOTE --- I COMMENTED OUT THE ABOVE BECAUSE I KEPT GETTING ERRORS. DO NOT ACCEPT THE FOREGOING CHANGE **************** //
+
 
 app.get('/reviews', (req, res) => {
   const request = req.query

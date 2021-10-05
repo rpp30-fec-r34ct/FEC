@@ -12,7 +12,6 @@ export default function ProductList(props) {
                 key={index}
                 product={product}
                 currentProduct={props.currentProduct}
-                currentPosition={props.currentPosition}
               />
             })
           }

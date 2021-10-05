@@ -18,7 +18,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/productDetail/:id', async (req, res) => {
-  // console.log('product details request received', req.url);
   const options = {
     headers: {
       Authorization: token.API_KEY

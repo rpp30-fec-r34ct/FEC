@@ -5,7 +5,7 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useParams } from 'react-router-dom'
 
-export default function OutfitList({currentProduct}) {
+export default function OutfitList({currentOverview}) {
   const [userOutfits, setUserOutfits] = useState([])
   const [outfitPosition, setOutfitPosition] = useState(0)
   const [outfitIndex, setOutfitIndex] = useState(0)
@@ -23,9 +23,8 @@ export default function OutfitList({currentProduct}) {
 
   const addOutfit = () => {
     const temp = JSON.parse(window.localStorage.getItem('outfit'))
-
-    if (!temp.find((outfit) => outfit.id === currentProduct.id)) {
-      temp.push(currentProduct)
+    if (!temp.find((outfit) => outfit.id === currentOverview.id)) {
+      temp.push(currentOverview)
       window.localStorage.setItem('outfit', JSON.stringify(temp))
     }
     setUserOutfits(temp)
@@ -34,7 +33,6 @@ export default function OutfitList({currentProduct}) {
   const deleteOutfit = (selectedId) => {
     const oldTemp = JSON.parse(window.localStorage.getItem('outfit'))
     const newTemp = oldTemp.filter(outfit => outfit.id !== selectedId)
-
     setUserOutfits(newTemp)
   }
 

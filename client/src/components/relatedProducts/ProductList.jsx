@@ -7,10 +7,10 @@ export default function ProductList({currentIndex, relatedProducts, currentOverv
       <div className='carousel-content-wrapper'>
         <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
           {
-            relatedProducts.map((relatedProduct, index) => {
+            relatedProducts.map((relatedItem, index) => {
               return <ProductCard
                 key={index}
-                relatedProduct={relatedProduct}
+                relatedItem={relatedItem}
                 currentOverview={currentOverview}
               />
             })

@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const Comparison = ({relatedProduct, currentOverview}) => {
+const Comparison = ({relatedItem, currentOverview}) => {
   const [isOpen, setOpen] = useState(false)
   const [allFeatures, setAllFeatures] = useState({})
   const { productId } = useParams()
@@ -22,10 +22,10 @@ const Comparison = ({relatedProduct, currentOverview}) => {
 
   const getComparedFeatures = () => {
     let comparedFeatures = {}
-    let currentOverviewFeatures = currentOverview.features
-    let relatedFeatures = relatedProduct.features
+    let overviewFeatures = currentOverview.features
+    let relatedFeatures = relatedItem.features
 
-    currentOverviewFeatures.forEach((item) => {
+    overviewFeatures.forEach((item) => {
       comparedFeatures[item.feature] = {
         value1: item.value || <GiCheckMark />,
         value2: null
@@ -62,7 +62,7 @@ const Comparison = ({relatedProduct, currentOverview}) => {
                       <tr>
                         <th>{currentOverview.name}</th>
                         <th>Characteristic</th>
-                        <th>{relatedProduct.name}</th>
+                        <th>{relatedItem.name}</th>
                       </tr>
                     </thead>
                     <tbody>

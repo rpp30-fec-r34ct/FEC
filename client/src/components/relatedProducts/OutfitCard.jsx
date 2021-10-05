@@ -27,7 +27,9 @@ export default function OutfitCard ({deleteOutfit, outfit}) {
         <AiOutlineCloseCircle />
         </div>
           <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
-            <img src={outfit.photo} />
+            <img
+            src={outfit.photo}
+            alt={outfit.name} />
           </div>
         </div>
 

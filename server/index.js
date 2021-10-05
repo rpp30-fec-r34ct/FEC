@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+const compression = require('compression')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -7,16 +8,18 @@ const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
 
-// app.use('/:id(\\d{5})', express.static('client/dist'))
+app.use(compression())
 
-// app.use('/reviewPage/:id', express.static('client/dist'))
-// app.use('/product/:id/carousel', express.static('client/dist'))
-// app.use('/questions/:id', express.static('client/dist'))
+app.use('/:id(\\d{5})', express.static('client/dist'))
+
+app.use('/reviewPage/:id', express.static('client/dist'))
+app.use('/product/:id/carousel', express.static('client/dist'))
+app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
-// app.get('/', (req, res) => {
-//   res.redirect('/47421')
-// })
+app.get('/', (req, res) => {
+  res.redirect('/47421')
+})
 
 app.get('/productDetail*', async (req, res) => {
   // console.log('product details request received', req.url);

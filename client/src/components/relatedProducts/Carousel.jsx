@@ -28,6 +28,7 @@ export default function Carousel(props) {
     return () => clearTimeout(timer)
   }, [])
 
+
   const getRelatedProducts = async () => {
     try {
       const { data } = await axios.get(`/product/${productId}/related`)
@@ -36,6 +37,7 @@ export default function Carousel(props) {
       console.log(error.message)
     }
   }
+
 
   const getOverviewProduct = async () => {
     try {
@@ -56,15 +58,18 @@ export default function Carousel(props) {
     setCurrentPosition(currentPosition + 220)
   }
 
-  const placeHolder = Array(4).fill(<CardSkeleton />)
+  const placeHolder = Array(4).fill('')
 
   return (
     <div className='carousels-overview'>
       <h3>RELATED PRODUCTS</h3>
       <div className='carousel-container'>
         {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
-          {isLoading ?
-            placeHolder
+          {isLoading
+          ?
+            placeHolder.map((card, index) => (
+              <CardSkeleton key={index}/>
+            ))
               :
             <ProductList
               relatedProducts={relatedProducts}

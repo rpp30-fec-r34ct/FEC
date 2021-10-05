@@ -8,11 +8,12 @@ import AddReviewsRecommended from './AddReviewsRecommended.jsx';
 
 const AddReviewModal = (props) => {
   const [productName, setProductName] = useState('');
+  const [productId, setProductId] = useState(0);
   const [characterCount, setCharCount] = useState(0);
 
   //states for the form. everything but stars will have a state here:
   const [characteristicsToSend, setCharacteristicsToSend] = useState({});
-
+  const [reviewRecommend, setReviewRecommend] = useState(true);
   const [reviewSummary, setReviewSummary] = useState('');
   const [reviewBody, setReviewBody] = useState('');
   const [reviewNickName, setReviewNickName] = useState('');
@@ -24,8 +25,16 @@ const AddReviewModal = (props) => {
     console.log(event);
     let newState = {};
     Object.assign(newState, characteristicsToSend);
-    newState[event.target.name] = event.target.id;
+    newState[event.target.name.toString()] = parseInt(event.target.id);
     setCharacteristicsToSend(newState);
+  }
+
+  const handleReviewRecommendChange = (event) => {
+    if (event.target.id === 'yesRecommend' && event.target.checked) {
+      setReviewRecommend(true);
+    } else if (event.target.id === 'noRecommend' && event.target.checked) {
+      setReviewRecommend(false);
+    }
   }
 
   const handleReviewChange = (event) => {
@@ -56,6 +65,7 @@ const AddReviewModal = (props) => {
   //for re-rednering when the name changes
   useEffect (() => {
     getProductName(props.productId)
+    setProductId(props.productId);
   }, [props.productId])
 
   //for getting information needed from the server that isn't passed in via props
@@ -127,8 +137,27 @@ const AddReviewModal = (props) => {
       alert(invalidString);
     } else {
       console.log('forms');
+      axios.post('/reviews', {
+        params: {
+          product_id: productId,
+          rating: helpers.getFormStarRating(),
+          summary: reviewSummary,
+          body: reviewBody,
+          recommend: reviewRecommend,
+          name: reviewNickName,
+          email: reviewEmail,
+          photos: [],
+          characteristics: characteristicsToSend
+        }
+      })
+      .then((data) => {
+        console.log('submitted');
+      })
+      .catch((err) => {
+        console.log('add review did not work!');
+        console.error(err);
+      })
     }
-
   }
 
   const getCharCountDisplay = () => {
@@ -152,7 +181,7 @@ const AddReviewModal = (props) => {
             <div id="addReviewRecommend">
               <span className="addReviewTitleStyle">2. Do you recommend this product?: *</span>
               <br></br>
-              <AddReviewsRecommended />
+              <AddReviewsRecommended handleReviewRecommendChange={handleReviewRecommendChange}/>
             </div>
             <div>
               <label className="addReviewTitleStyle">3. Characteristics: *</label>

@@ -12,9 +12,6 @@ app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
-
-
-
 app.get('/productDetail*', (req, res) => {
   // console.log('product details request received', req.url);
   const productId = req.url.slice(14, req.url.length)
@@ -98,6 +95,35 @@ app.get('/reviews/meta', (req, res) => {
       console.error(err)
       res.sendStatus(500)
     })
+})
+
+app.post('/reviews', (req, res) => {
+  console.log('placeholder');
+
+  axios({
+    method: 'post',
+    url: APIurl + 'reviews',
+    headers: {
+      Authorization: token.API_KEY
+    },
+    data: {
+      product_id: parseInt(req.body.params.product_id),
+      rating: req.body.params.rating,
+      summary: req.body.params.summary,
+      body: req.body.params.body,
+      recommend: req.body.params.recommend,
+      name: req.body.params.name,
+      email: req.body.params.email,
+      photos: [],
+      characteristics: req.body.params.characteristics
+    }
+  })
+  .then((data) => {
+    console.log('SUCCESFFUL REVIEW POST');
+  })
+  .catch ((err) => {
+    console.log('very unssuccesful review post');
+  })
 })
 
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////

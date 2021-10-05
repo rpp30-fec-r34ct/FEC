@@ -37,6 +37,11 @@
   width: 150px;
 }
 
+#answer-list {
+  max-height: 200px;
+  overflow: auto;
+}
+
 #answer-modal {
   position: fixed;
   z-index: 999999999999;

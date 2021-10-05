@@ -33,7 +33,7 @@ const QuestionModal = (props) => {
       id: id
     })
     .then(data => showQuestionModal ? setShowQuestionModal(false) : null)
-    .catch(err => console.log(err))
+    .catch(err => console.error(err))
   }
 
   useEffect(
@@ -52,11 +52,12 @@ const QuestionModal = (props) => {
       {showQuestionModal ? (
           <div id="question-modal">
           <div className='add-question-form' id={props.product_id}>
+            <button className="close-button" onClick={()=> setShowQuestionModal(false)}>X</button>
             <h1>Product: {document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
             <form onSubmit={submitNewQuestion}>
-              <input name='question' type='text' placeholder='Your Question' />
-              <input name='nickname' type='text' placeholder='Your Nickname' />
-              <input name='email' type='text' placeholder='Your Email' />
+              <input name='question' maxLength="1000" size="100" type='text' className="modal-textbox" placeholder='Your Question' />
+              <input name='nickname' size="30" type='text' placeholder='Your Nickname' />
+              <input name='email' size="30" type='text' placeholder='Example: jack@email.com' />
               <button type='submit'>Submit</button>
             </form>
           </div>

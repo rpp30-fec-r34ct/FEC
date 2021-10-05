@@ -10,7 +10,7 @@ app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
-app.use(express.json())
+app.use(express.json({limit: '50mb'}))
 
 
 
@@ -124,24 +124,20 @@ app.get('/qa/answers', (req, res) => {
     }
   })
     .then(data => {
-      // console.log('answers', data.data.results)
       res.status(200).send(data.data.results)
     })
     .catch(err => {
-      console.error(err)
       res.status(500).send(err)
     })
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
-  // console.log(typeof req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-      console.log('success?')
       res.sendStatus(200)
     })
     .catch(err => {
@@ -166,14 +162,12 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...helpful question = ', req.query)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
   .then(data => {
-    console.log(data)
     res.status(200).send('ANSWER MARKED AS HELPFUL')
   })
   .catch(err => {
@@ -202,24 +196,28 @@ app.post('/qa/newquestion', (req, res) => {
 })
 
 app.post('/qa/answer', (req, res) => {
-  console.log(req)
+  // console.log('sending answer', req.body)
   axios({
     method: 'post',
-    url: APIurl + 'qa/questions/' + req.query.id + '/answers',
+    url: APIurl + 'qa/questions/' + req.body.id + '/answers',
     headers: {
       Authorization: token.API_KEY
     },
     data: {
-      body: req.query.answer,
-      name: req.query.nickname,
-      email: req.query.email,
-      photos: req.query.photos
+      body: req.body.answer,
+      name: req.body.nickname,
+      email: req.body.email,
+      photos: req.body.photos
     }
   })
     .then(data => {
-      res.send('new answer added')
+      console.log('success')
+      res.sendStatus(200)
     })
-    .catch(err => res.send(err))
+    .catch(err => {
+      console.log(err.response)
+      res.send(err)
+    })
 })
 /////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 

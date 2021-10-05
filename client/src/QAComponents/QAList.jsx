@@ -28,6 +28,15 @@ const QAList = (props) => {
     }
   }
 
+  const handleClickOutside = (e) => {
+    if (e.target.id === 'question-modal' && e.target.className !== 'add-question-form') {
+      setShowQuestionModal(false)
+    }
+    if (e.target.className === "close-button") {
+      setShowQuestionModal(false)
+    }
+  }
+
   const addQuestion = (e) => {
     e.preventDefault()
     setShowQuestionModal(true)
@@ -62,6 +71,12 @@ const QAList = (props) => {
       .catch((err) => {
         console.error('error while getting product-related questions from server', err)
       })
+      document.addEventListener('keydown', keyPress)
+      document.addEventListener('click', handleClickOutside)
+      return () => {
+        document.removeEventListener('keydown', keyPress)
+        document.removeEventListener('click', handleClickOutside)
+      }
 
   }, [])
 

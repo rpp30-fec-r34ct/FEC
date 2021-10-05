@@ -5,45 +5,48 @@ const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
+const AWS = require('aws-sdk')
+const multer = require('multer')
+const fs = require('fs')
 
 app.use('/:id(\\d{5})', express.static('client/dist'))
 
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
-app.use(express.json({limit: '50mb'}))
+app.use(express.json())
 
 app.get('/', (req, res) => {
   res.redirect('/47421')
 })
 
-app.get('/productDetail*', (req, res) => {
-  // console.log('product details request received', req.url);
-  const productId = req.url.slice(14, req.url.length)
-  axios.get(APIurl + `products/${productId}`, {
-    headers: {
-      Authorization: token.API_KEY
-    }
-  }
-  try {
-    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
-    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
-    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+// app.get('/productDetail*', (req, res) => {
+//   // console.log('product details request received', req.url);
+//   const productId = req.url.slice(14, req.url.length)
+//   axios.get(APIurl + `products/${productId}`, {
+//     headers: {
+//       Authorization: token.API_KEY
+//     }
+//   })
+//   try {
+//     let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+//     let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+//     let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
 
-    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
-    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+//     const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+//     const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
 
-    res.status(200).send({
-      ...productResponse.data,
-      price: productResponse.data.default_price,
-      ratings: reviewResponse.data.ratings,
-      sale: defaultStyle.sale_price,
-      photo: productStyle[0]
-    })
-  } catch(err) {
-    res.status(500).send(err)
-  }
-})
+//     res.status(200).send({
+//       ...productResponse.data,
+//       price: productResponse.data.default_price,
+//       ratings: reviewResponse.data.ratings,
+//       sale: defaultStyle.sale_price,
+//       photo: productStyle[0]
+//     })
+//   } catch(err) {
+//     res.status(500).send(err)
+//   }
+// })
 
 app.get('/reviews', (req, res) => {
   const request = req.query
@@ -113,6 +116,23 @@ app.get('/reviews/meta', (req, res) => {
 })
 
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'c:/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+AWS.config.update({
+  apiVersion: '2012-10-17',
+  accessKeyId: token.accessKeyId,
+  secretAccessKey: token.secretAccessKey,
+  region: 'us-east-1'
+})
+
 app.get('/qa/questions', (req, res) => {
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -207,8 +227,38 @@ app.post('/qa/newquestion', (req, res) => {
     .catch(err => res.send(err))
 })
 
-app.post('/qa/answer', (req, res) => {
-  // console.log('sending answer', req.body)
+app.post('/qa/answer', upload.any(), (req, res) => {
+  console.log('sending answer', req.files)
+
+  const s3 = new AWS.S3({
+    params: {
+      Bucket: 'fec-r34ct',
+      accessKeyId: token.accessKeyId,
+      secretAccessKey: token.secretAccessKey
+    }
+  })
+
+  let params;
+
+  let photoURLs = req.files.map(photo => {
+    console.log('photo', photo)
+    const fileContent = fs.readFileSync('c:/uploads/' + photo.filename)
+    // console.log('file content', fileContent)
+    params = {
+      Bucket: 'fec-r34ct',
+      Key: photo.filename,
+      Body: fileContent
+    }
+    s3.upload(params, (err, data) => {
+      if (err) {
+        console.error(err)
+      } else {
+        console.log('link created', data)
+      }
+    })
+    return 'https://fec-r34ct.s3.amazonaws.com/' + photo.filename
+  })
+console.log(photoURLs)
   axios({
     method: 'post',
     url: APIurl + 'qa/questions/' + req.body.id + '/answers',
@@ -219,7 +269,7 @@ app.post('/qa/answer', (req, res) => {
       body: req.body.answer,
       name: req.body.nickname,
       email: req.body.email,
-      photos: req.body.photos
+      photos: photoURLs
     }
   })
     .then(data => {

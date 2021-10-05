@@ -11,6 +11,7 @@ const AnswerModal = (props) => {
     src
   }])
   const [images, setImages] = useState([])
+  const [uploads, setUploads] = useState([])
 
   const keyPress = useCallback(
     e => {
@@ -29,50 +30,41 @@ const AnswerModal = (props) => {
   }
 
   const uploadImg = (e) => {
-    var base64Data;
     if (e.target.files[0]) {
-      var formData = new FormData()
-      formData.append(
-        'file',
-        e.target.files[0]
-      )
-      console.log('this is the form data', formData)
-      var reader = new FileReader()
-      reader.readAsDataURL(e.target.files[0])
-      reader.onloadend = () => { base64Data = reader.result}
-    }
-    console.log('test1', reader, reader.result)
-    setTimeout( ()=>{
-      console.log('test2', reader, reader.result)
+      let image = new FormData()
+      image.append('file', e.target.files[0])
       setImages(prev => {
-        return [...prev, base64Data]
+        return [...prev, e.target.files[0]]
       })
-    }, 1000
 
-    )
+
+
+    }
   }
 
   const submitNewAnswer = (e) => {
     e.preventDefault()
-    // return console.log('images: ', images)
+    console.log('images: ', images)
+    setShowModal(false)
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
     }
-    setShowModal(false)
+    const data = new FormData()
+    data.append('answer', e.target[0].value)
+    data.append('nickname', e.target[1].value)
+    data.append('email', e.target[2].value)
+    data.append('id', e.target.parentNode.id)
+    images.map(image => data.append(image.name, image))
+
+    console.log('', data)
     const answer = e.target[0].value
     const nickname = e.target[1].value
     const email = e.target[2].value
     const id = e.target.parentNode.id
     const photos = images
-    axios({
-      method: 'post',
-      url: '/qa/answer',
-      data: {
-        answer: answer,
-        nickname: nickname,
-        email: email,
-        id: id,
-        photos: photos
+    axios.post('/qa/answer', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
     })
     // axios.post('/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id + '&photos=' + photos, {
@@ -83,6 +75,7 @@ const AnswerModal = (props) => {
     //   photos: photos
     // })
       .then(data => {
+        console.log('the object file: ', data)
         return setImages([])
       })
       .catch(err => console.error(err))
@@ -102,18 +95,18 @@ const AnswerModal = (props) => {
           <div className='add-answer-form' id={props.question_id}>
           <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
             <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
-            <form onSubmit={submitNewAnswer}>
+            <form action="/test" method="post" enctype="multipart/form-data" onSubmit={submitNewAnswer}>
               <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox"/>
               <input name='nickname' type='text' size="30" placeholder='Your Nickname' />
               <input name='email' type='text' size="30" placeholder='Example: jack@email.com' />
               {images.length < 5 ? (
-                <input type="file" className="file" accept="image/*" id="files" onChange={uploadImg}/>
+                <input type="file" className="file" accept="image/*" id="files" name="myFile" onChange={uploadImg}/>
               ) : null}
               <button type='submit' id='submit-answer'>Submit</button>
             </form>
             {images ? (
               images.map(image => (
-                <img src={image} className="answer-image" key={image}/>
+                <img src={URL.createObjectURL(image)} className="answer-image" key={image}/>
               ))
             ) : null}
             <img src={src} alt={alt} />

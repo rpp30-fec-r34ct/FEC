@@ -3,7 +3,7 @@ import '../cssFiles/addReview.css';
 import axios from 'axios'
 import CharacteristicsBar from './CharacteristicsBar.jsx';
 import AddReviewStars from './AddReviewStars.jsx';
-import addReviewHelpers from './addReviewHelpers.js';
+import helpers from '../../Shared/helpers.js';
 import AddReviewsRecommended from './AddReviewsRecommended.jsx';
 
 const AddReviewModal = (props) => {
@@ -17,6 +17,16 @@ const AddReviewModal = (props) => {
   const [reviewBody, setReviewBody] = useState('');
   const [reviewNickName, setReviewNickName] = useState('');
   const [reviewEmail, setReviewEmail] = useState('');
+
+
+  //onChange/onClick functions
+  const handleCharacteristicChange = (event) => {
+    console.log(event);
+    let newState = {};
+    Object.assign(newState, characteristicsToSend);
+    newState[event.target.name] = event.target.id;
+    setCharacteristicsToSend(newState);
+  }
 
   const handleReviewChange = (event) => {
 
@@ -43,23 +53,12 @@ const AddReviewModal = (props) => {
     }
   }
 
-  //onChange/onClick functions
-  const handleCharacteristicChange = (event) => {
-    console.log(event);
-    let newState = {};
-    Object.assign(newState, characteristicsToSend);
-    newState[event.target.name] = event.target.id;
-    setCharacteristicsToSend(newState);
-  }
-
+  //for re-rednering when the name changes
   useEffect (() => {
     getProductName(props.productId)
   }, [props.productId])
 
-  const onStarRatingChange = (rating) => {
-    setStarRating(rating)
-  }
-
+  //for getting information needed from the server that isn't passed in via props
   const getProductName = async (id) => {
     try {
       const { data } = await axios.get('/productDetail' + id)
@@ -70,6 +69,8 @@ const AddReviewModal = (props) => {
     }
   }
 
+
+  //for putting the characteristics together
   const getCharacteristics = (reviewsMeta) => {
     let characteristics = [];
     for (let key in reviewsMeta.characteristics) {
@@ -78,54 +79,56 @@ const AddReviewModal = (props) => {
     return characteristics;
   }
 
-  const onReviewBodyChange = (event) => {
+  //for validating the form entries
+  const checkForValidEntries = () => {
+    /*criteria:
+      star rating: filled in
+      recommended: filled in (defaulted so no need to check)
+      characteristics: filled in
+      review body: > 50 characters
+      email: filled in
+      nickname: filled in
+    */
+    let invalidEntries = [];
+
+    if (helpers.getFormStarRating() === '') {
+      invalidEntries.push('Overall Rating')
+    }
+    if (Object.keys(characteristicsToSend).length === 0) {
+      invalidEntries.push('Characteristics');
+    }
+    if (reviewBody.length < 50) {
+      invalidEntries.push('Review Body (must be at least 50 characters)');
+    }
+    if (reviewEmail === '' || reviewEmail.indexOf('@') === -1) {
+      invalidEntries.push('Email (must contain an @)')
+    }
+    if (reviewNickName === '') {
+      invalidEntries.push('Nickname');
+    }
+
+    return invalidEntries;
   }
 
   const onAddReviwSubmit = (event) => {
     event.preventDefault();
 
-    // let invalidEntries = addReviewHelpers.checkForValidEntries();
-      //check for invalid entries by running through the mandatory fields and determining
-      //if any of the entries do not meet the required mandatory criteria.
-      //you check all of them. if any of them do not meet the required criteria,
-      //then we write an alert to the user that says "You must enter the following:
-      /*
-      product recommendation
-      review body that is at least 50 characters
-      email
-      nickname
-      overall rating
+    let invalidEntries = checkForValidEntries();
+    let invalidString = 'Please fill in the follwing: '
 
+    if (invalidEntries.length !== 0) {
+      for (let i = 0; i < invalidEntries.length; i++) {
+        if (i + 1 !== invalidEntries.length) {
+          invalidString = invalidString + invalidEntries[i] + ' , ';
+        } else {
+          invalidString = invalidString + ' and ' + invalidEntries[i];
+        }
+      }
+      alert(invalidString);
+    } else {
+      console.log('forms');
+    }
 
-      and then in the radio buttons i need to make sure they can only select one of the radio buttons- > do this by keeping the name the same for the radios
-      */
-
-
-
-    let formRating = addReviewHelpers.getFormStarRating();
-    let formRecommended = addReviewHelpers.getFormRecommended();
-    let formCharacteristics = addReviewHelpers.getFormCharacteristics();
-    let formReviewSummary = addReviewHelpers.getFormReviewSummary();
-    let formReviewBody = addReviewHelpers.getFormReviewBody();
-    let formReviewNickName = addReviewHelpers.getFormReviewNickName();
-    let formReviewEmail = addReviewHelpers.getFormReviewEmail();
-
-    console.log('forms');
-
-
-    // let starRating = getOverviewStarRating();
-    // axios.post('/addReview', {
-    //   params:{
-    //     starOverviewRating: 0,
-    //     recommended: false,
-    //     characteristics: [],
-    //     reviewSummary: '',
-    //     reviewBody: '',
-    //     photos: [],
-    //     nickName: '',
-    //     email: ''
-    //   }
-    // })
   }
 
   const getCharCountDisplay = () => {
@@ -145,7 +148,7 @@ const AddReviewModal = (props) => {
           <span style={{fontSize:'20px', margin: '-25px auto'}}>{'About the ' + productName}</span>
           <form id="addReviewForm" className="reviewFormStyle">
             <label className="addReviewTitleStyle">1. Overall Rating: *</label>
-              <AddReviewStars onStarRatingChange={onStarRatingChange}/>
+              <AddReviewStars />
             <div id="addReviewRecommend">
               <span className="addReviewTitleStyle">2. Do you recommend this product?: *</span>
               <br></br>

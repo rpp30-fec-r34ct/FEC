@@ -52,10 +52,10 @@ export default function OutfitList({currentProduct}) {
   return (
     <>
       <h3 style={{marginTop: '5px'}}>YOUR OUTFIT</h3>
-            <div className='product-list'>
+        <div className='product-list'>
           <div className='carousels-overview'>
-              <div className='carousel-container' style={{width: '100%', maxWidth: '675px'}}>
-        <AddCard addOutfit={addOutfit} style={{display: 'inline'}}/>
+            <div className='carousel-container' style={{width: '100%', maxWidth: '675px'}}>
+             <AddCard addOutfit={addOutfit} style={{display: 'inline'}}/>
               {outfitPosition < 0  && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
                 <div className='carousel-content-wrapper'>
                   <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 31}%)` }}>

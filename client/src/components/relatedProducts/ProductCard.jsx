@@ -3,19 +3,19 @@ import Comparison from './Comparison.jsx'
 import AverageStars from '../Shared/AverageStars.jsx'
 import {CardSkeleton} from '../StyledComponents/CardSkeleton.jsx'
 
-export default function ProductCard(props) {
+export default function ProductCard({relatedProduct, currentOverview}) {
   const priceElement =
     <>
-      {props.product.sale ?
+      {relatedProduct.sale ?
         <div className='card-price'>
           <div style={{ color: 'red' }}>
-            {props.product.sale}
+            {relatedProduct.sale}
           </div>
           <div style={{ textDecoration: 'line-through', opacity: '50%' }}>
-            {props.product.price}
+            {relatedProduct.price}
           </div>
         </div> :
-        <div className='card-price'>${props.product.price}</div>
+        <div className='card-price'>${relatedProduct.price}</div>
       }
     </>
 
@@ -23,17 +23,17 @@ export default function ProductCard(props) {
     < div className='product-card' >
       <div className='card-container'>
         <div className='card-visuals'>
-          <Comparison currentProduct={props.currentProduct} relatedProduct={props.product} />
-          <div className='card-image' onClick={() => window.location.pathname = `/${props.product.id}/`}>
-            <img src={props.product.photo} />
+          <Comparison currentOverview={currentOverview} relatedProduct={relatedProduct} />
+          <div className='card-image' onClick={() => window.location.pathname = `/${relatedProduct.id}/`}>
+            <img src={relatedProduct.photo} />
           </div>
         </div>
 
         <div className='product-details'>
-          <div className='card-category'>{props.product.category}</div>
-          <div className='card-name'>{props.product.name}</div>
+          <div className='card-category'>{relatedProduct.category}</div>
+          <div className='card-name'>{relatedProduct.name}</div>
           {priceElement}
-          <AverageStars rating={props.product.rating} />
+          <AverageStars rating={relatedProduct.rating} />
         </div>
       </div>
     </div >

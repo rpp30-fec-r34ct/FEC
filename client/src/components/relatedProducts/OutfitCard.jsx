@@ -20,7 +20,7 @@ export default function OutfitCard ({deleteOutfit, outfit}) {
     </>
 
   return (
-    < div className='product-card' >
+    <div className='product-card' >
       <div className='card-container'>
         <div className='card-visuals'>
         <div className='delete-btn' onClick={() => deleteOutfit(outfit.id)}>

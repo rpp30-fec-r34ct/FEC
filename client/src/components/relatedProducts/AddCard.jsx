@@ -3,8 +3,6 @@ import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { useParams } from 'react-router-dom'
 
 const AddCard = ({addOutfit}) => {
-  const { productId } = useParams()
-
   const handleAdd = (e) => {
     e.preventDefault()
     addOutfit()

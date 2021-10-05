@@ -36,6 +36,22 @@ const getFormCharacteristics = () => {
   return checkedRadios;
 }
 
+const getFormReviewSummary = () => {
+  return document.getElementById("reviewSummary").value;
+}
+
+const getFormReviewBody = () => {
+  return document.getElementById("reviewBody").value;
+}
+
+const getFormReviewNickName = () => {
+  return document.getElementById("nickName").value;
+}
+
+const getFormReviewEmail = () => {
+  return document.getElementById("email").value;
+}
+
 
 
 
@@ -44,5 +60,6 @@ const getFormCharacteristics = () => {
 module.exports = {
   getFormStarRating,
   getFormRecommended,
-  getFormCharacteristics
+  getFormCharacteristics,
+  getFormReviewSummary
 }

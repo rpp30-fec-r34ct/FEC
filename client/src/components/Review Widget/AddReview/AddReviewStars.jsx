@@ -1,6 +1,6 @@
 import React,  { useState, useEffect} from 'react';
-import emptyStar from './icons/empty-star.svg'
-import fullStar from './icons/star.svg'
+import emptyStar from '../icons/empty-star.svg'
+import fullStar from '../icons/star.svg'
 
 const AddReviewStars = () => {
   const [starState, setStarState] = useState([0,0,0,0,0]);

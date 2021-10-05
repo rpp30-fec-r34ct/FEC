@@ -5,7 +5,7 @@ import ReviewMetaData from './ReviewMetaData.jsx'
 import './cssFiles/reviewSection.css'
 import axios from 'axios'
 import ModalContainer from './ModalContainer.jsx'
-import AddReviewModal from './AddReviewModal.jsx'
+import AddReviewModal from './AddReview/AddReviewModal.jsx'
 
 const ReviewSection = () => {
   const { productId } = useParams()

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './styles/MainImageGallery.css'
 import { FaChevronLeft, FaChevronRight, FaExpand } from 'react-icons/fa'
+import { SkeletonDiv } from '../components/Shared/SSkeleton.jsx'
 import SubImageCarousel from './SubImageCarousel.jsx'
 import GalleryModal from './GalleryModal.jsx'
 
@@ -52,14 +53,22 @@ const MainImageGalleryComponent = (props) => {
             {(topIndex > 0) ? <FaChevronLeft className='gallery-arrow' onClick={handleCarouselLeftClick} /> : <FaChevronLeft className='gallery-arrow hidden' />}
             <div id='main-product-image' className='collapsed-product-image'>
               <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
+              {selectedStyle.photos[topIndex].url
+                ? <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
+                : <SkeletonDiv />}
               <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
             </div>
             {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='gallery-arrow hidden' />}
           </div>
           )
-        : null}
-      {/* TODO: replace null with no data view */}
-
+        : (
+          <div id='gallery-container'>
+            <SubImageCarousel selectedStyle={selectedStyle} imageClickHandler={imageClickHandler} />
+            <div id='main-product-image' className='collapsed-product-image'>
+              <SkeletonDiv />
+            </div>
+          </div>
+          )}
     </div>
   )
 }

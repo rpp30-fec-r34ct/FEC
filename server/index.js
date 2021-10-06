@@ -23,7 +23,7 @@ app.get('/productDetail/:id', async (req, res) => {
       Authorization: token.API_KEY
     }
   }
-  const productId: req.params.id
+  const productId = req.params.id
   try {
     let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
     let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)

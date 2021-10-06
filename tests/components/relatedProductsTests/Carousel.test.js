@@ -45,4 +45,25 @@ describe('Carousel', () => {
     expect(await screen.getByRole('heading', { name: 'RELATED PRODUCTS' })).toBeInTheDocument()
     expect(await screen.findByTestId('carousel')).toBeInTheDocument()
   })
+  test.each(testRelatedProducts)('Renders Carousel Correctly', async function () {
+    server.use(
+      rest.get('/product/47421/related', (req, res, ctx) => {
+        return res(ctx.json(testRelatedProducts))
+      })
+    )
+    const history = createMemoryHistory()
+    const route = '/product/47421/carousel'
+    history.push(route)
+    render(
+      <Router history={history}>
+        <Switch>
+          <Route path='/product/:productId/carousel/'>
+            <Carousel product={testRelatedProducts} />
+          </Route>
+        </Switch>
+      </Router>
+    )
+    expect(await screen.getByRole('heading', { name: 'RELATED PRODUCTS' })).toBeInTheDocument()
+    expect(await screen.findByTestId('carousel')).toBeInTheDocument()
+  })
 })

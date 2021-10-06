@@ -1,8 +1,7 @@
 import React from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
-import { useParams } from 'react-router-dom'
 
-const AddCard = ({addOutfit}) => {
+const AddCard = ({ addOutfit }) => {
   const handleAdd = (e) => {
     e.preventDefault()
     addOutfit()

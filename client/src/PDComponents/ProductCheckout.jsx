@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router'
+// import { useParams } from 'react-router'
 import SizeSelector from './SizeSelector.jsx'
 import QuanitiySelector from './QuanitySelector.jsx'
 import AddToCart from './AddToCart.jsx'

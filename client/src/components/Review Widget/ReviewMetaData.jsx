@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import './cssFiles/reviewSection.css'
 import ReviewStars from './ReviewStars.jsx'

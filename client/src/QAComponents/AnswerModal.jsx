@@ -16,6 +16,31 @@ const AnswerModal = (props) => {
     height: '25%',
     width: '25%',
   }
+  const modalStyle = {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: 'auto auto auto auto auto',
+    gridTemplateRows: 'auto auto auto auto auto',
+    position: 'fixed',
+    zIndex: '999999999999',
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+    backgroundColor: 'rgb(0,0,0)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  }
+  const formStyle = {
+    gridColumn: '1 / span 4',
+    gridRow: '1',
+    position: 'fixed',
+    margin: '15% auto',
+    padding: '20px',
+    backgroundColor: 'whitesmoke',
+    border: '3px solid grey',
+    width: '80%',
+  }
 
   const keyPress = useCallback(
     e => {
@@ -77,8 +102,8 @@ const AnswerModal = (props) => {
 
   return (
     <>
-        <div id="answer-modal" onClick={handleClickOutside}>
-          <div className='add-answer-form' id={props.question_id}>
+        <div style = {modalStyle} id="answer-modal" onClick={handleClickOutside}>
+          <div style={formStyle} className='add-answer-form' id={props.question_id}>
           <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
             <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
             <form action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>

@@ -18,24 +18,34 @@ const QAList = (props) => {
 
   const qListStyle = {
     border: '1px solid black',
+    padding: '5%',
+    height: '400px',
+    overflow: 'scroll',
     alignItems: 'center',
   }
   const searchStyle = {
-    width: '99%',
+    width: '99.1%',
     margin: 'auto',
   }
   const moreQuestionsStyle = {
+    width: '50%',
     backgroundColor: 'blue',
     color: 'white',
   }
   const addQuestionStyle = {
+    width: '50%',
+    backgroundColor: 'green',
+    color: 'white',
+  }
+  const fullQuestionButtonStyle = {
+    width: '100%',
     backgroundColor: 'green',
     color: 'white',
   }
 
   const renderAllQuestions = () => {
-    setQuestions(allQuestions)
-    setAllQuestions(0)
+    setQuestions(allQuestions.slice(0, questions.length + 2))
+    // setAllQuestions(0)
     setFirstRender(false)
   }
 
@@ -117,9 +127,9 @@ const QAList = (props) => {
           )
         }) : null}
         {showQuestionModal ? <QuestionModal />: null}
-        {allQuestions && allQuestions.length > 2 ? <button style={moreQuestionsStyle} id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
-        <button style={addQuestionStyle} id="add-question" onClick={addQuestion}>Add A Question</button>
       </div>
+        {allQuestions && allQuestions.length > questions.length ? <button style={moreQuestionsStyle} id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
+        <button style={allQuestions && allQuestions.length > questions.length ? addQuestionStyle : fullQuestionButtonStyle} id="add-question" onClick={addQuestion}>Add A Question</button>
     </>
   )
 }

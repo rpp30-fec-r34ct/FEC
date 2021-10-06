@@ -18,6 +18,8 @@ const Question = (props) => {
 
   const questionBodyStyle = {
     border: '1px solid black',
+    marginTop: '5%',
+    // padding: '2%',
     width: '100%',
     display: 'grid',
     justifyContent: 'left',
@@ -34,7 +36,7 @@ const Question = (props) => {
   }
 
   const addAnswerStyle = {
-    marginLeft: '250px',
+    // marginLeft: '50%',
   }
 
   const helpfulStyle = {
@@ -94,8 +96,8 @@ const Question = (props) => {
   )
 
   return (
-    <div style={questionBodyStyle}>
-      <div id={props.question_id} className='question-body' style={questionStyle}>
+    <>
+      <div style={questionBodyStyle} id={props.question_id} className='question-body'>
         <table>
           <tbody>
             <tr>
@@ -114,12 +116,12 @@ const Question = (props) => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div>
       {props.question_id ? <AnswerList id={props.question_id}/> : null}
       </div>
+      <div>
+      </div>
       {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body}/> : null}
-    </div>
+    </>
   )
 }
 

@@ -9,14 +9,46 @@ const NewAnswer = (props) => {
   const [helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState('Report')
-  let renderMoreAnswers = <div />
+  // let renderMoreAnswers = <div />
+
+  const tableStyle = {
+    tableLayout: 'fixed',
+    width: '100%',
+  }
   const imgStyle = {
+    // display: 'block',
+    align: 'left',
+    margin: 'auto',
     height: '25%',
     width: '25%',
   }
+  const answerBorderStyle = {
+    width: '90%',
+    margin: '5%',
+    // borderBottom: '2px solid black',
+  }
   const answerStyle = {
-    borderBottom: '1px solid black',
-    width: '500px',
+    width: '95%',
+    border: '1px solid black',
+    margin: '2%',
+    // borderBottom: '3px solid black',
+    maxHeight: '100%',
+    // width: '500px',
+    // margin: '2%',
+  }
+  const answerInfoStyle = {
+    // border: '1px solid black',
+    textAlign: 'left',
+    margin: '2%',
+  }
+  const answerHelpfulStyle = {
+    // border: '1px solid black',
+    textAlign: 'left',
+    margin: '2%',
+  }
+  const answerReportStyle = {
+    // border: '1px solid black',
+    textAlign: 'left',
     margin: '2%',
   }
 
@@ -69,31 +101,31 @@ const NewAnswer = (props) => {
             <div>{props.photos && Array.isArray(props.photos) ? props.photos.map((image, i) => (
               <img style={imgStyle} className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
             )) : null}</div>
-            <table>
+            <table style={tableStyle}>
               <tbody>
                 <tr>
-                  <td className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b>Seller</b> : props.name}, {props.month} {props.day}, {props.year} |
+                  <td style={answerInfoStyle} className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b>Seller</b> : props.name}, {props.month} {props.day}, {props.year}
                     {/* <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div> */}
                   </td>
-                  <td>
+                  <td style={answerHelpfulStyle}>
                     Helpful?
-                  </td>
-                  <td>
                     <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a>
+                    ({helpfulness ? helpfulness : 0})
+                  </td>
+                  {/* <td>
                   </td>
                   <td>
-                    ({helpfulness ? helpfulness : 0}) |
-                  </td>
-                  {report === 'Report' ? <td className='report-answer' onClick={reportAnswer}>
+                  </td> */}
+                  {report === 'Report' ? <td style={answerReportStyle} className='report-answer' onClick={reportAnswer}>
                     {report}
-                  </td> : <td className='report-answer'>
+                  </td> : <td style={answerReportStyle} className='report-answer'>
                     {report}
                   </td>}
                 </tr>
               </tbody>
             </table>
           </div>
-      <div>{renderMoreAnswers}</div>
+      {/* <div>{renderMoreAnswers}</div> */}
     </div>
   )
 }

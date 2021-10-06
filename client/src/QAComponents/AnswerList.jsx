@@ -6,13 +6,15 @@ import NewAnswer from './NewAnswer.jsx'
 
 const AnswerList = (props) => {
   const [answers, setAnswers] = useState([])
-  const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
+  const [moreAnswers, setMoreAnswers] = useState([])
   const [helpfulAns, setHelpfulAns] = useState(0)
   const [expandCollapse, setExpandCollapse] = useState('See More Answers')
-  let renderMoreAnswers = <div />
+  const [moreClicked, setMoreClicked] = useState(false)
+  const [shouldHandleScroll, setShouldHandleScroll] = useState(false)
+  let renderMoreAnswers
   const answerListStyle = {
+    maxHeight: '250px',
     overflow: 'scroll',
-    height: '50%',
   }
 
   // SERVER REQUESTS
@@ -38,15 +40,48 @@ const AnswerList = (props) => {
     })
   }
 
+  const collapseAnswers = (e) => {
+    e.preventDefault()
+    setShouldHandleScroll(false)
+    if (moreClicked) {
+      setAnswers(moreAnswers.slice(0, 2))
+      return new Promise((resolve, reject)=>{
+        resolve()})
+        .then(data => {
+          if (e.target.scrollTop === 0) {
+          setAnswers(moreAnswers.slice(0, 2))
+          setTimeout(()=>{
+            setExpandCollapse('See More Answers')
+            return setAnswers(moreAnswers.slice(0, 2))
+          }, 150)
+        }})
+    }
+  }
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = (e) => {
+    setMoreClicked(true)
+    setShouldHandleScroll(true)
     e.preventDefault()
-    if (expandCollapse === 'See More Answers') {
-      setAnswers(moreAnswers)
-      return setExpandCollapse('Collapse Answers')
-    } else {
-      setAnswers(answers.slice(0, 2))
-      return setExpandCollapse('See More Answers')
+    return new Promise(async (resolve, reject)=>{
+      resolve()})
+    .then(data => {
+      if (moreAnswers.length > answers.length) {
+        setAnswers(moreAnswers.slice(0, answers.length + 2))
+        return answers.length + 2
+      }})
+    .then(data => {
+      console.log('answers', data)
+      if (moreAnswers.length <= data) {
+        setExpandCollapse('Collapse Answers')
+      }})
+  }
+
+  const handleScroll = (e) => {
+    if (shouldHandleScroll) {
+      const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight
+      if (bottom) {
+        getMoreAnswers(e)
+      }
     }
   }
 
@@ -74,7 +109,7 @@ const AnswerList = (props) => {
 
   return (
     <>
-      <div style={answerListStyle} id="answer-list">{answers && answers.map(answer => {
+      <div style={answerListStyle} id="answer-list" onScroll={handleScroll}>{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -83,7 +118,10 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>{expandCollapse}</a></div>
+          renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>{expandCollapse}</a>
+        }
+        if (expandCollapse === 'Collapse Answers') {
+          renderMoreAnswers = <a href="#" onClick={collapseAnswers}>{expandCollapse}</a>
         }
         return (
           <NewAnswer
@@ -100,7 +138,7 @@ const AnswerList = (props) => {
         )
       })}
       </div>
-      {moreAnswers && moreAnswers.length > 0 ? renderMoreAnswers : null}
+      {moreAnswers.length > 0 ? renderMoreAnswers : null}
     </>
   )
 }

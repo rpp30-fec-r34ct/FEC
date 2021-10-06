@@ -7,6 +7,31 @@ const QuestionModal = (props) => {
   const modalRef = useRef()
   const [showQuestionModal, setShowQuestionModal] = useState(true)
   const productID = useParams().productId
+  const modalStyle = {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: 'auto auto auto auto auto',
+    gridTemplateRows: 'auto auto auto auto auto',
+    position: 'fixed',
+    zIndex: '999999999999',
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+    backgroundColor: 'rgb(0,0,0)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  }
+  const formStyle = {
+    gridColumn: '1 / span 4',
+    gridRow: '1',
+    position: 'fixed',
+    margin: '15% auto',
+    padding: '20px',
+    backgroundColor: 'whitesmoke',
+    border: '3px solid grey',
+    width: '80%',
+  }
 
   const keyPress = useCallback(
     e => {
@@ -50,8 +75,8 @@ const QuestionModal = (props) => {
   return (
     <>
       {showQuestionModal ? (
-          <div id="question-modal">
-          <div className='add-question-form' id={props.product_id}>
+          <div style={modalStyle} id="question-modal">
+          <div style={formStyle} className='add-question-form' id={props.product_id}>
             <button className="close-button" onClick={()=> setShowQuestionModal(false)}>X</button>
             <h1>Product: {document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
             <form onSubmit={submitNewQuestion}>

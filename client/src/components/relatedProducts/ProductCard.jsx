@@ -4,6 +4,7 @@ import AverageStars from '../Shared/AverageStars.jsx'
 import {CardSkeleton} from '../StyledComponents/CardSkeleton.jsx'
 
 export default function ProductCard({relatedItem, currentOverview}) {
+
   const priceElement =
     <>
       {relatedItem.sale ?

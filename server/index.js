@@ -30,7 +30,7 @@ app.get('/productDetail/:id', async (req, res) => {
     let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
 
     const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
-    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url) || {}
+    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
 
     res.status(200).send({
       ...productResponse.data,

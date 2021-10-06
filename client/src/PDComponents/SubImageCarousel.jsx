@@ -22,7 +22,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   }
 
   const carouselListStyles = {
-    transform: `translateY(-${topIndex * 77}px)`,
+    transform: `translateY(-${topIndex * 79}px)`,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -41,16 +41,16 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
     })
   }
 
-  return(
+  return (
     <div style={listStyles}>
-    {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
-    <div style={{ maxHeight: '395px', overflow: 'hidden' }}>
-      <div style={carouselListStyles}>
-        {thumbnails}
+      {(topIndex > 0) ? <FaChevronUp className='up-arrow' onClick={handleCarouselUpClick} /> : <FaChevronUp className='hidden' />}
+      <div style={{ maxHeight: '414px', overflow: 'hidden' }}>
+        <div style={carouselListStyles}>
+          {thumbnails}
+        </div>
       </div>
+      {(topIndex < thumbnails.length - 5) ? <FaChevronDown className='down-arrow' onClick={handleCarouselDownClick} /> : <FaChevronDown className='hidden' />}
     </div>
-    {(topIndex < thumbnails.length - 5) ? <FaChevronDown className='down-arrow' onClick={handleCarouselDownClick} /> : <FaChevronDown className='hidden' />}
-  </div>
   )
 }
 

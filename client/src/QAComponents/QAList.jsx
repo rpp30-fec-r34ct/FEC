@@ -42,7 +42,9 @@ const QAList = (props) => {
     backgroundColor: 'green',
     color: 'white',
   }
-
+  const headingStyle = {
+    fontFamily: 'Playfair Display, serif',
+  }
   const renderAllQuestions = () => {
     setQuestions(allQuestions.slice(0, questions.length + 2))
     // setAllQuestions(0)
@@ -109,7 +111,7 @@ const QAList = (props) => {
 
   return (
     <>
-      <h1 id="QA-heading">Questions and Answers</h1>
+      <h1 style={headingStyle} id="QA-heading">Questions and Answers</h1>
       <div style={qListStyle}>
         <form>
           <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch} style={searchStyle} />
@@ -129,7 +131,7 @@ const QAList = (props) => {
         {showQuestionModal ? <QuestionModal />: null}
       </div>
         {allQuestions && allQuestions.length > questions.length ? <button style={moreQuestionsStyle} id="more-questions" onClick={renderAllQuestions}>More Answered Questions</button> : null}
-        <button style={allQuestions && allQuestions.length > questions.length ? addQuestionStyle : fullQuestionButtonStyle} id="add-question" onClick={addQuestion}>Add A Question</button>
+        <button style={allQuestions && allQuestions.length > questions.length ? addQuestionStyle : fullQuestionButtonStyle} id="add-question" onClick={addQuestion}>Add A Question + </button>
     </>
   )
 }

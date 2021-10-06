@@ -18,9 +18,9 @@ const NewAnswer = (props) => {
   const imgStyle = {
     // display: 'block',
     align: 'left',
-    margin: 'auto',
-    height: '25%',
-    width: '25%',
+    margin: '1%',
+    height: '20%',
+    width: '20%',
   }
   const answerBorderStyle = {
     width: '90%',
@@ -29,9 +29,9 @@ const NewAnswer = (props) => {
   }
   const answerStyle = {
     width: '95%',
-    border: '1px solid black',
-    margin: '2%',
-    // borderBottom: '3px solid black',
+    // border: '1px solid black',
+    margin: '5%',
+    borderBottom: '1px solid black',
     maxHeight: '100%',
     // width: '500px',
     // margin: '2%',
@@ -40,16 +40,31 @@ const NewAnswer = (props) => {
     // border: '1px solid black',
     textAlign: 'left',
     margin: '2%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontSize: '80%',
   }
   const answerHelpfulStyle = {
     // border: '1px solid black',
     textAlign: 'left',
     margin: '2%',
+    fontSize: '80%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    color: 'green',
   }
   const answerReportStyle = {
     // border: '1px solid black',
+    color: 'red',
     textAlign: 'left',
     margin: '2%',
+    fontSize: '80%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  }
+  const sellerStyle = {
+    color: 'blue',
+    textAlign: 'left',
+    margin: '2%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    fontSize: '100%',
   }
 
   // SERVER REQUESTS
@@ -65,7 +80,9 @@ const NewAnswer = (props) => {
   }
 
   const reportAnswer = (e) => {
-    const answerId = e.target.parentNode.parentNode.parentNode.parentNode.id
+    const answerId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id
+    console.log(answerId)
+    console.log('reporting')
     e.preventDefault()
     axios.put('/qa/answers/report/?answer_id=' + answerId)
       .then(data => {
@@ -104,20 +121,20 @@ const NewAnswer = (props) => {
             <table style={tableStyle}>
               <tbody>
                 <tr>
-                  <td style={answerInfoStyle} className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b>Seller</b> : props.name}, {props.month} {props.day}, {props.year}
+                  <td style={answerInfoStyle} className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b style={sellerStyle}>Seller,</b> : props.name + ','} {props.month} {props.day}, {props.year}
                     {/* <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div> */}
                   </td>
                   <td style={answerHelpfulStyle}>
                     Helpful?
-                    <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a>
+                    {!helpful ? <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a> : 'Yes'}
                     ({helpfulness ? helpfulness : 0})
                   </td>
                   {/* <td>
                   </td>
                   <td>
                   </td> */}
-                  {report === 'Report' ? <td style={answerReportStyle} className='report-answer' onClick={reportAnswer}>
-                    {report}
+                  {report === 'Report' ? <td style={answerReportStyle} className='report-answer'>
+                    <a href='' onClick={reportAnswer}>{report}</a>
                   </td> : <td style={answerReportStyle} className='report-answer'>
                     {report}
                   </td>}

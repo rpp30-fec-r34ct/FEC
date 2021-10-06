@@ -42,38 +42,45 @@ const AnswerList = (props) => {
 
   const collapseAnswers = (e) => {
     e.preventDefault()
-    setShouldHandleScroll(false)
-    if (moreClicked) {
-      setAnswers(moreAnswers.slice(0, 2))
-      return new Promise((resolve, reject)=>{
-        resolve()})
-        .then(data => {
-          if (e.target.scrollTop === 0) {
-          setAnswers(moreAnswers.slice(0, 2))
-          setTimeout(()=>{
-            setExpandCollapse('See More Answers')
+    // setShouldHandleScroll(false)
+    // if (moreClicked) {
+    //   setAnswers(moreAnswers.slice(0, 2))
+    //   return new Promise((resolve, reject)=>{
+    //     resolve()})
+    //     .then(data => {
+    //       if (e.target.scrollTop === 0) {
+    //       setAnswers(moreAnswers.slice(0, 2))
+    //       setTimeout(()=>{
+    //         setExpandCollapse('See More Answers')
             return setAnswers(moreAnswers.slice(0, 2))
-          }, 150)
-        }})
-    }
+    //       }, 150)
+    //     }})
+    // }
   }
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = (e) => {
-    setMoreClicked(true)
-    setShouldHandleScroll(true)
+    // setMoreClicked(true)
+    // setShouldHandleScroll(true)
     e.preventDefault()
-    return new Promise(async (resolve, reject)=>{
-      resolve()})
-    .then(data => {
-      if (moreAnswers.length > answers.length) {
-        setAnswers(moreAnswers.slice(0, answers.length + 2))
-        return answers.length + 2
-      }})
-    .then(data => {
-      console.log('answers', data)
-      if (moreAnswers.length <= data) {
-        setExpandCollapse('Collapse Answers')
-      }})
+    if (expandCollapse === 'Collapse Answers') {
+      setExpandCollapse('See More Answers')
+      setAnswers(prev => prev.slice(0,2))
+    } else {
+      setAnswers(moreAnswers)
+      setExpandCollapse('Collapse Answers')
+    }
+    // return new Promise(async (resolve, reject)=>{
+    //   resolve()})
+    // .then(data => {
+    //   if (moreAnswers.length > answers.length) {
+    //     setAnswers(moreAnswers.slice(0, answers.length + 2))
+    //     return answers.length + 2
+    //   }})
+    // .then(data => {
+    //   console.log('answers', data)
+    //   if (moreAnswers.length <= data) {
+    //     setExpandCollapse('Collapse Answers')
+    //   }})
   }
 
   const handleScroll = (e) => {
@@ -119,9 +126,6 @@ const AnswerList = (props) => {
         }
         if (moreAnswers.length > 2) {
           renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>{expandCollapse}</a>
-        }
-        if (expandCollapse === 'Collapse Answers') {
-          renderMoreAnswers = <a href="#" onClick={collapseAnswers}>{expandCollapse}</a>
         }
         return (
           <NewAnswer

@@ -17,16 +17,20 @@ const Question = (props) => {
   const productID = useParams().productId
 
   const questionBodyStyle = {
-    border: '1px solid black',
+    // border: '1px solid blue',
     marginTop: '5%',
     // padding: '2%',
     width: '100%',
     display: 'grid',
-    justifyContent: 'left',
+    // justifyContent: 'left',
+    // textAlign: 'left',
   }
 
   const questionStyle = {
-    width: 'auto',
+    // border: '1px solid black',
+    align: 'left',
+    // marginRight: '500px',
+    width: '100%',
     display: 'grid',
     justifyContent: 'left',
   }
@@ -36,6 +40,10 @@ const Question = (props) => {
   }
 
   const addAnswerStyle = {
+    height: '100%',
+    width: '100%',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
     // marginLeft: '50%',
   }
 
@@ -43,6 +51,14 @@ const Question = (props) => {
     color: 'green',
     textAlign: 'left',
     width: '375px',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  }
+  const tableStyle = {
+    tableLayout: 'fixed',
+    width: '100%',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
   }
 
 
@@ -98,7 +114,7 @@ const Question = (props) => {
   return (
     <>
       <div style={questionBodyStyle} id={props.question_id} className='question-body'>
-        <table>
+        <table style={tableStyle}>
           <tbody>
             <tr>
               <th style={questionStyle}>
@@ -111,7 +127,7 @@ const Question = (props) => {
                 ({qHelpfulness ? qHelpfulness : props.question_helpfulness})
               </td>
               <td>
-                <a style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</a>
+                <button style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</button>
               </td>
             </tr>
           </tbody>

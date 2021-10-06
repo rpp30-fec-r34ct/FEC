@@ -5,6 +5,7 @@ import CharacteristicsBar from './CharacteristicsBar.jsx';
 import AddReviewStars from './AddReviewStars.jsx';
 import helpers from '../../Shared/helpers.js';
 import AddReviewsRecommended from './AddReviewsRecommended.jsx';
+import UploadPhotoBar from './UploadPhotoBar.jsx';
 
 const AddReviewModal = (props) => {
   const [productName, setProductName] = useState('');
@@ -19,6 +20,13 @@ const AddReviewModal = (props) => {
   const [reviewNickName, setReviewNickName] = useState('');
   const [reviewEmail, setReviewEmail] = useState('');
 
+  const [photoFiles, setPhotoFiles] = useState([]);
+
+  const addNewUploadedPhoto = (file) => {
+    let newFiles = [...photoFiles];
+    newFiles.push(file);
+    setPhotoFiles(newFiles)
+  }
 
   //onChange/onClick functions
   const handleCharacteristicChange = (event) => {
@@ -98,6 +106,7 @@ const AddReviewModal = (props) => {
       review body: > 50 characters
       email: filled in
       nickname: filled in
+      photos: valid type -> taken care of by html  (jpg and png only)
     */
     let invalidEntries = [];
 
@@ -136,20 +145,24 @@ const AddReviewModal = (props) => {
       }
       alert(invalidString);
     } else {
-      console.log('forms');
-      axios.post('/reviews', {
-        params: {
-          product_id: productId,
-          rating: helpers.getFormStarRating(),
-          summary: reviewSummary,
-          body: reviewBody,
-          recommend: reviewRecommend,
-          name: reviewNickName,
-          email: reviewEmail,
-          photos: [],
-          characteristics: characteristicsToSend
-        }
-      })
+      const formData = new FormData();
+
+      if (photoFiles.length !== 0) {
+        photoFiles.forEach((uploadedImage) => {formData.append('uploadedImage', uploadedImage)});
+      }
+
+      let otherFormEntries = {
+        product_id: productId,
+        rating: helpers.getFormStarRating(),
+        summary: reviewSummary,
+        body: reviewBody,
+        recommend: reviewRecommend,
+        name: reviewNickName,
+        email: reviewEmail,
+        characteristics: characteristicsToSend
+      };
+      formData.append('otherFormEntries', JSON.stringify(otherFormEntries))
+      axios.post('/reviews', formData)
       .then((data) => {
         console.log('submitted');
         props.onAddReviewClick();
@@ -217,6 +230,10 @@ const AddReviewModal = (props) => {
                 <br></br>
                 <span className="subTextStyle">{'For authentication reasons, you will not be not be emailed'}</span>
               </div>
+            </div>
+            <div>
+              <label className="addReviewTitleStyle">8. Upload Photos (optional, up to five)</label><br></br>
+              <UploadPhotoBar addNewUploadedPhoto={addNewUploadedPhoto} />
             </div>
             <input className="removeFiltersBtn" type="submit" onClick={onAddReviwSubmit} value="Submit" />
           </form>

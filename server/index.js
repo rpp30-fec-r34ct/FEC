@@ -138,9 +138,30 @@ app.put('/reviewHelpful', (req, res) => {
     }
   })
   .then((data) => {
+    console.log('successful while adding helpful review')
     res.sendStatus(204);
   })
   .catch((err) => {
+    console.log('issue while adding helpful review')
+    res.status(500).send(err);
+  })
+})
+
+app.put('/reviewReport', (req, res) => {
+  console.log('placeholder');
+  axios({
+    method: 'put',
+    url: APIurl + `reviews/${req.body.params.review_id}/report`,
+    headers: {
+      Authorization: token.API_KEY
+    }
+  })
+  .then((data) => {
+    console.log('success reporting review')
+    res.sendStatus(204);
+  })
+  .catch((err) => {
+    console.log('issue while reporting review')
     res.status(500).send(err);
   })
 })

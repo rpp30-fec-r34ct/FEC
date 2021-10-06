@@ -7,8 +7,13 @@ import useLocalStorage from '../Shared/useLocalStorage.jsx'
 
 const ReviewTile = (props) => {
   const [helpfulCount, setHelpfulCount] = useState(0)
+  const [reportedState, setReportedState] = useState(0);
   const [isMarkedReported, setIsMarkedReported] = useState(0)
   const [helpfulList, setHelpfulList] = useLocalStorage('helpfulReviews',[])
+  //having the reported reviews in localstorage is a backfall. Technically the reported reviews should be taken out of the REVIEWS
+  //sent from the API to us once we report them, but just in case the user does a refresh before the Atlier backend can take care
+  //of it, we have it saved inlocal storage.
+  const [reportedList, setReportedList] = useLocalStorage('reportedReviews',[])
 
 
   const onHelpfulClick = (event) => {
@@ -23,7 +28,18 @@ const ReviewTile = (props) => {
     } else {
       console.log('already marked as helpful');
     }
+  }
 
+  const onReportedClick = (event) => {
+    let newReportedList = [...reportedList];
+    if (newReportedList.indexOf(event.target.id) === -1) {
+      newReportedList.push(event.target.id);
+      setReportedState(1);
+      sendReportedReviewToServer(event.target.id);
+      setReportedList(newReportedList);
+    } else {
+      console.log('already marked as reported');
+    }
   }
 
   useEffect (() => {
@@ -41,6 +57,20 @@ const ReviewTile = (props) => {
     })
     .catch ((err) => {
       console.log('errored out while sending helpful post');
+    });
+  }
+
+  const sendReportedReviewToServer = (id) => {
+    axios.put('/reviewReport', {
+      params: {
+        review_id: id
+      }
+    })
+    .then ((data) => {
+      console.log('succssfully sent reported post to server ');
+    })
+    .catch ((err) => {
+      console.log('errored out while sending reported post');
     });
   }
 
@@ -78,6 +108,14 @@ const ReviewTile = (props) => {
     }
   }
 
+  const getReportRender = () => {
+    if (reportedState) {
+      return <span onClick={onReportedClick} id={props.reviewData.review_id} className='tile_report'>{' | ' + 'Reported'}</span>
+    } else {
+      return <span onClick={onReportedClick} id={props.reviewData.review_id} className='tile_report'>{' | ' + 'Report'}</span>
+    }
+  }
+
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
@@ -96,7 +134,7 @@ const ReviewTile = (props) => {
         <span>Helfpul?</span>
         <span className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>Yes</span>
         <span className='tile_helpfulCount'>{'(' + helpfulCount + ')'}</span>
-        <span className='tile_report'>{' | ' + 'Report'}</span>
+        {getReportRender()}
       </div>
     </div>
   )

@@ -4,7 +4,9 @@ const port = 3000
 const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
-// const maxAPIReturn = 8
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'})
+const uploadToS3 = require('./s3.js');
 
 app.use('/product/:id', express.static('client/dist'))
 app.use('/reviewPage/:id', express.static('client/dist'))
@@ -97,35 +99,59 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
-app.post('/reviews', (req, res) => {
+app.post('/reviews', upload.any('uploadedImage'),  (req, res) => {
   console.log('placeholder');
 
-  axios({
-    method: 'post',
-    url: APIurl + 'reviews',
-    headers: {
-      Authorization: token.API_KEY
-    },
-    data: {
-      product_id: parseInt(req.body.params.product_id),
-      rating: req.body.params.rating,
-      summary: req.body.params.summary,
-      body: req.body.params.body,
-      recommend: req.body.params.recommend,
-      name: req.body.params.name,
-      email: req.body.params.email,
-      photos: [],
-      characteristics: req.body.params.characteristics
+  let otherEntries = JSON.parse(req.body.otherFormEntries);
+  let photos = req.files;
+  let s3Promises = [];
+
+  for (let i = 0; i < photos.length; i++) {
+    s3Promises.push(uploadToS3.uploadToS3(photos[i]))
+  }
+
+
+  Promise.all(s3Promises)
+  .then((values) => {
+    let photoURLs = [];
+
+    for (let j = 0; j < values.length; j++) {
+      photoURLs.push(values[j].Location)
     }
+
+    console.log('breath');
+    axios({
+      method: 'post',
+      url: APIurl + 'reviews',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        product_id: parseInt(otherEntries.product_id),
+        rating: otherEntries.rating,
+        summary: otherEntries.summary,
+        body: otherEntries.body,
+        recommend: otherEntries.recommend,
+        name: otherEntries.name,
+        email: otherEntries.email,
+        photos: photoURLs,
+        characteristics: otherEntries.characteristics
+      }
+    })
+    .then((data) => {
+      console.log('SUCCESFFUL REVIEW POST');
+      res.sendStatus(201);
+    })
+    .catch ((err) => {
+      console.log('very unssuccesful review post');
+      res.status(500).send(err);
+    })
   })
-  .then((data) => {
-    console.log('SUCCESFFUL REVIEW POST');
-    res.sendStatus(201);
-  })
-  .catch ((err) => {
-    console.log('very unssuccesful review post');
+  .catch((err) => {
+    console.error(err);
     res.status(500).send(err);
   })
+
 })
 
 app.put('/reviewHelpful', (req, res) => {

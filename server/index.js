@@ -17,18 +17,17 @@ app.get('/', (req, res) => {
   res.redirect('/47421')
 })
 
-app.get('/productDetail*', async (req, res) => {
-  // console.log('product details request received', req.url);
-  const productId = req.url.slice(14, req.url.length)
-  axios.get(APIurl + `products/${productId}`, {
+app.get('/productDetail/:id', async (req, res) => {
+  const options = {
     headers: {
       Authorization: token.API_KEY
     }
-  })
+  }
+  const productId = req.params.id
   try {
-    let productResponse = await axios.get(`${APIurl}products/${productId}`, options)
-    let reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
-    let stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+    const productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+    const reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+    const stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
 
     const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
     const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
@@ -40,11 +39,10 @@ app.get('/productDetail*', async (req, res) => {
       sale: defaultStyle.sale_price,
       photo: productStyle[0]
     })
-  } catch(err) {
+  } catch (err) {
     res.status(500).send(err)
   }
 })
-
 
 app.get('/reviews', (req, res) => {
   const request = req.query
@@ -113,7 +111,7 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
-/////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
+/// //////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 app.get('/qa/questions', (req, res) => {
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -185,13 +183,13 @@ app.put('/qa/answers/helpful', (req, res) => {
       Authorization: token.API_KEY
     }
   })
-  .then(data => {
-    console.log(data)
-    res.status(200).send('ANSWER MARKED AS HELPFUL')
-  })
-  .catch(err => {
-    console.error(err)
-  })
+    .then(data => {
+      console.log(data)
+      res.status(200).send('ANSWER MARKED AS HELPFUL')
+    })
+    .catch(err => {
+      console.error(err)
+    })
 })
 
 app.post('/qa/newquestion', (req, res) => {
@@ -234,7 +232,7 @@ app.post('/qa/answer', (req, res) => {
     })
     .catch(err => res.send(err))
 })
-/////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
+/// //////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]

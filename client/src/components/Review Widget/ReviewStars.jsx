@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import quarterStar from './icons/star-one-quarter.svg'
 import fullStar from './icons/star.svg'

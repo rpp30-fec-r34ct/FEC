@@ -11,7 +11,6 @@ const uploadToS3 = require('./s3.js');
 // const maxAPIReturn = 8
 app.use(compression())
 const AWS = require('aws-sdk')
-const multer = require('multer')
 const fs = require('fs')
 
 app.use('/:id(\\d{5})', express.static('client/dist'))
@@ -218,7 +217,6 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
 AWS.config.update({
   apiVersion: '2012-10-17',
   accessKeyId: token.accessKeyId,

@@ -160,14 +160,14 @@ xdescribe('QA List', (done) => {
         </Router>,
       )
     // })
-    // setTimeout(()=>{
-      act(()=>{
-        jest.advanceTimersByTime(1000);
-      })
+    setTimeout(()=>{
+      // act(()=>{
+      //   jest.advanceTimersByTime(1000);
+      // })
     // await waitFor(()=>{
       expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
-    // })
-  // }, 5000)
+    })
+  }, 5000)
   })
 
   xtest('Should have a search bar', () => {

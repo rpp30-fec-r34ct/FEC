@@ -4,8 +4,8 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const AnswerModal = (props) => {
+  // console.log('handlemodalchange', props.handleModalChange)
   const modalRef = useRef()
-  const [showModal, setShowModal] = useState(true)
   const [{alt, src}, setImg] = useState([{
     alt,
     src
@@ -15,6 +15,11 @@ const AnswerModal = (props) => {
   const imgStyle = {
     height: '25%',
     width: '25%',
+  }
+
+  const imgModalStyle = {
+    height: '200px',
+    weight: '200px',
   }
   const modalStyle = {
     display: 'grid',
@@ -42,22 +47,6 @@ const AnswerModal = (props) => {
     width: '80%',
   }
 
-  const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape') {
-        setShowModal(false)
-      }
-    },
-    [setShowModal, showModal]
-  )
-
-  const handleClickOutside = (e) => {
-    // e.preventDefault()
-    if (e.target.id === 'answer-modal' || e.target.id === 'submit-answer') {
-      return setShowModal(false)
-    }
-  }
-
   const uploadImg = (e) => {
     if (e.target.files[0]) {
       let image = new FormData()
@@ -70,41 +59,35 @@ const AnswerModal = (props) => {
 
   const submitNewAnswer = (e) => {
     e.preventDefault()
-    console.log('images: ', images)
-    setShowModal(false)
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
+    }
+    if (!e.target[2].value.includes('@')) {
+      return alert('Please enter a valid email address')
     }
     const data = new FormData()
     data.append('answer', e.target[0].value)
     data.append('nickname', e.target[1].value)
     data.append('email', e.target[2].value)
     data.append('id', e.target.parentNode.id)
-    images.map(image => data.append(image.name, image))
+    if (images.length > 0) {images.map(image => data.append(image.name, image))} else {data.append('photos', [])}
     axios.post('/qa/answer', data, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
       .then(data => {
-        return setImages([])
+        setImages([])
+        // return props.handleModalChange(e)
       })
       .catch(err => console.error(err))
   }
 
-  useEffect(
-    () => {
-      document.addEventListener('keydown', keyPress)
-      return () => document.removeEventListener('keydown', keyPress)
-    },
-    []
-  )
-
   return (
     <>
-        <div style = {modalStyle} id="answer-modal" onClick={handleClickOutside}>
+        <div style = {modalStyle} id="answer-modal">
           <div style={formStyle} className='add-answer-form' id={props.question_id}>
-          <button className="close-button" onClick={() => { return setShowModal(false)}}>X</button>
+          <button className="close-button">X</button>
             <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
             <form action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>
               <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox" style={{gridRow: '4/4'}}/>
@@ -117,7 +100,8 @@ const AnswerModal = (props) => {
             </form>
             {images ? (
               images.map(image => (
-                <img style={imgStyle} src={URL.createObjectURL(image)} className="answer-image" key={image}/>
+                console.log(images),
+                <img style={imgModalStyle} src={URL.createObjectURL(image)} alt={image.alt} className="answer-image" key={image.src + 1}/>
               ))
             ) : null}
             <img src={src} alt={alt} />

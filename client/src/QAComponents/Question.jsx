@@ -14,6 +14,7 @@ const Question = (props) => {
   const [showModal, setShowModal] = useState(false)
   const [qHelpfulness, setQHelpfulness] = useState(props.question_helpfulness)
   const [helpful, setHelpful] = useState(false)
+  const [updateAnswers, setUpdateAnswers] = useState(false)
   const productID = useParams().productId
 
   const questionBodyStyle = {
@@ -61,6 +62,7 @@ const Question = (props) => {
     fontFamily: 'Arial, Helvetica, sans-serif',
   }
 
+  // const handleModalChange = () => props.handleModalChange()
 
   const addAnswer = (e) => {
     e.preventDefault()
@@ -80,6 +82,14 @@ const Question = (props) => {
     if (e.target.className === "close-button") {
       setShowModal(false)
     }
+  }
+
+  const handleModalChange = (e) => {
+    console.log('answer submitted', e.target[4].id)
+    if (e.target[4].id === "submit-answer") {
+      setShowModal(false)
+    }
+    setUpdateAnswers(true)
   }
 
   const addHelpfulQuestion = (e) => {
@@ -132,11 +142,11 @@ const Question = (props) => {
             </tr>
           </tbody>
         </table>
-      {props.question_id ? <AnswerList id={props.question_id}/> : null}
+      {props.question_id ? <AnswerList id={props.question_id} updateAnswers={updateAnswers}/> : null}
       </div>
       <div>
       </div>
-      {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body}/> : null}
+      {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body} /*handleModalChange={(e)=>{handleModalChange(e)}}*//> : null}
     </>
   )
 }

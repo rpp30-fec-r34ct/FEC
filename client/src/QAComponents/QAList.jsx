@@ -90,6 +90,20 @@ const QAList = (props) => {
     }
   }
 
+  const handleModalChange = (e) => {
+    console.log('answer submitted', e.target[4].button.id)
+    axios.get('/qa/questions' + '?product_id=' + productID)
+    .then(data => {
+      console.log('axios worked')
+      setQuestions(data.data.results.slice(0, 2))
+      setAllQuestions(data.data.results)
+      setQuestionsCache(data.data.results)
+    })
+    .catch((err) => {
+      console.error('error while getting product-related questions from server', err)
+    })
+  }
+
   useEffect(() => {
     axios.get('/qa/questions' + '?product_id=' + productID)
       .then(data => {
@@ -125,6 +139,7 @@ const QAList = (props) => {
               question_body={question.question_body}
               question_helpfulness={question.question_helpfulness}
               question_id={question.question_id}
+              // handleModalChange={(e) => { handleModalChange(e) }}
             />
           )
         }) : null}

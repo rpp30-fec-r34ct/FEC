@@ -39,28 +39,8 @@ const AnswerList = (props) => {
       }
     })
   }
-
-  const collapseAnswers = (e) => {
-    e.preventDefault()
-    // setShouldHandleScroll(false)
-    // if (moreClicked) {
-    //   setAnswers(moreAnswers.slice(0, 2))
-    //   return new Promise((resolve, reject)=>{
-    //     resolve()})
-    //     .then(data => {
-    //       if (e.target.scrollTop === 0) {
-    //       setAnswers(moreAnswers.slice(0, 2))
-    //       setTimeout(()=>{
-    //         setExpandCollapse('See More Answers')
-            return setAnswers(moreAnswers.slice(0, 2))
-    //       }, 150)
-    //     }})
-    // }
-  }
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = (e) => {
-    // setMoreClicked(true)
-    // setShouldHandleScroll(true)
     e.preventDefault()
     if (expandCollapse === 'Collapse Answers') {
       setExpandCollapse('See More Answers')
@@ -68,27 +48,6 @@ const AnswerList = (props) => {
     } else {
       setAnswers(moreAnswers)
       setExpandCollapse('Collapse Answers')
-    }
-    // return new Promise(async (resolve, reject)=>{
-    //   resolve()})
-    // .then(data => {
-    //   if (moreAnswers.length > answers.length) {
-    //     setAnswers(moreAnswers.slice(0, answers.length + 2))
-    //     return answers.length + 2
-    //   }})
-    // .then(data => {
-    //   console.log('answers', data)
-    //   if (moreAnswers.length <= data) {
-    //     setExpandCollapse('Collapse Answers')
-    //   }})
-  }
-
-  const handleScroll = (e) => {
-    if (shouldHandleScroll) {
-      const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight
-      if (bottom) {
-        getMoreAnswers(e)
-      }
     }
   }
 
@@ -112,11 +71,32 @@ const AnswerList = (props) => {
         setMoreAnswers(loadedAnswers)
       }
     })
-  }, [props.id])
+    // if (props.updateAnswers) {
+    //   initialize(props.id, (err, data) => {
+    //     if (err) {
+    //       console.error(err)
+    //     } else {
+    //       console.log('data', data)
+    //       setAnswers(prev => {
+    //         console.log('prev', prev)
+    //         data.map(datum => {
+    //           if (datum.answerer_name.toLowerCase() === 'seller') {
+    //             loadedAnswers.unshift(datum)
+    //           } else {
+    //             loadedAnswers.push(datum)
+    //           }
+    //         }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
+    //         return loadedAnswers.slice(0, 2)
+    //       })
+    //       setMoreAnswers(loadedAnswers)
+    //     }
+    //   })
+    // }
+  }, [props.id, props.updateAnswers])
 
   return (
     <>
-      <div style={answerListStyle} id="answer-list" onScroll={handleScroll}>{answers && answers.map(answer => {
+      <div style={answerListStyle} id="answer-list">{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {

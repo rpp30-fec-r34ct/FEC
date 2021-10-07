@@ -117,7 +117,7 @@ app.get('/reviews/meta', (req, res) => {
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'c:/uploads')
+    cb(null, 'uploads')
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + '-' + Date.now())
@@ -242,8 +242,7 @@ app.post('/qa/answer', upload.any(), (req, res) => {
     let params;
 
     let photoURLs = req.files.map(photo => {
-      const fileContent = fs.readFileSync('c:/uploads/' + photo.filename)
-      // console.log('file content', fileContent)
+      const fileContent = fs.readFileSync('uploads/' + photo.filename)
       params = {
         Bucket: 'fec-r34ct',
         Key: photo.filename,
@@ -271,7 +270,7 @@ app.post('/qa/answer', upload.any(), (req, res) => {
       }
     })
       .then(data => {
-        fs.unlink('c:/' + photo.filename, (err) => {
+        fs.unlink('uploads/' + photo.filename, (err) => {
           if (err) {
             res.send(err)
           }

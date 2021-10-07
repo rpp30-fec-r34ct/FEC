@@ -44,14 +44,9 @@
     "aws-sdk": "^2.1000.0",
     "axios": "^0.21.1",
     "express": "^4.17.1",
-<<<<<<< HEAD
     "multer": "^1.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-=======
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     "react-icons": "^4.2.0",
     "react-inner-image-zoom": "^2.1.0",
     "react-is": "^16.13.1",

@@ -233,69 +233,88 @@ app.post('/qa/newquestion', (req, res) => {
 })
 
 app.post('/qa/answer', upload.any(), (req, res) => {
-  console.log('sending answer', req.files)
-
-  const s3 = new AWS.S3({
-    params: {
-      Bucket: 'fec-r34ct',
-      accessKeyId: token.accessKeyId,
-      secretAccessKey: token.secretAccessKey
-    }
-  })
-
-  let params;
-
-  let photoURLs = req.files.map(photo => {
-    console.log('photo', photo)
-    const fileContent = fs.readFileSync('c:/uploads/' + photo.filename)
-    // console.log('file content', fileContent)
-    params = {
-      Bucket: 'fec-r34ct',
-      Key: photo.filename,
-      Body: fileContent
-    }
-    s3.upload(params, (err, data) => {
-      if (err) {
-        console.error(err)
-      } else {
-        console.log('link created', data)
+  console.log('sending answer', req.files, req.body)
+  if (req.files) {
+    const s3 = new AWS.S3({
+      params: {
+        Bucket: 'fec-r34ct',
+        accessKeyId: token.accessKeyId,
+        secretAccessKey: token.secretAccessKey
       }
     })
-    return 'https://fec-r34ct.s3.amazonaws.com/' + photo.filename
-  })
-console.log(photoURLs)
-  axios({
-    method: 'post',
-    url: APIurl + 'qa/questions/' + req.body.id + '/answers',
-    headers: {
-      Authorization: token.API_KEY
-    },
-    data: {
-      body: req.body.answer,
-      name: req.body.nickname,
-      email: req.body.email,
-      photos: photoURLs
-    }
-  })
-    .then(data => {
-      console.log('success', data)
-      fs.unlink('c:/' + photo.filename, (err) => {
+
+    let params;
+
+    let photoURLs = req.files.map(photo => {
+      const fileContent = fs.readFileSync('c:/uploads/' + photo.filename)
+      // console.log('file content', fileContent)
+      params = {
+        Bucket: 'fec-r34ct',
+        Key: photo.filename,
+        Body: fileContent
+      }
+      s3.upload(params, (err, data) => {
         if (err) {
-          res.send(err)
+          console.error(err)
+        } else {
         }
       })
-      res.sendStatus(200)
+      return 'https://fec-r34ct.s3.amazonaws.com/' + photo.filename
     })
-    .catch(err => {
-      console.log(err.response)
-      res.send(err)
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: photoURLs
+      }
     })
+      .then(data => {
+        fs.unlink('c:/' + photo.filename, (err) => {
+          if (err) {
+            res.send(err)
+          }
+        })
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  } else {
+    console.log('no photos')
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: []
+      }
+    })
+      .then(data => {
+        console.log('it should have worked')
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  }
 })
 /////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
-  console.log('path', path)
   try {
     const response = await axios.get(APIurl + path,
       {

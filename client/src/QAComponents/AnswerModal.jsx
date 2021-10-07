@@ -65,22 +65,48 @@ const AnswerModal = (props) => {
     if (!e.target[2].value.includes('@')) {
       return alert('Please enter a valid email address')
     }
-    const data = new FormData()
-    data.append('answer', e.target[0].value)
-    data.append('nickname', e.target[1].value)
-    data.append('email', e.target[2].value)
-    data.append('id', e.target.parentNode.id)
-    if (images.length > 0) {images.map(image => data.append(image.name, image))} else {data.append('photos', [])}
-    axios.post('/qa/answer', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      }
-    })
-      .then(data => {
-        setImages([])
-        // return props.handleModalChange(e)
+    if (images.length > 0) {
+      console.log('1')
+      const data = new FormData()
+      data.append('answer', e.target[0].value)
+      data.append('nickname', e.target[1].value)
+      data.append('email', e.target[2].value)
+      data.append('id', e.target.parentNode.id)
+      if (images.length > 0) {images.map(image => data.append(image.name, image))}
+      console.log('data', data)
+      axios.post('/qa/answer', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
-      .catch(err => console.error(err))
+        .then(data => {
+          setImages([])
+          // return props.handleModalChange(e)
+        })
+        .catch(err => console.error(err))
+    } else {
+      console.log('2')
+      const data = {
+      answer: e.target[0].value,
+      nickname: e.target[1].value,
+      email: e.target[2].value,
+      id: e.target.parentNode.id,
+      photos: []
+      }
+      axios.post('/qa/answer', {
+        answer: e.target[0].value,
+        nickname: e.target[1].value,
+        email: e.target[2].value,
+        id: e.target.parentNode.id,
+        photos: []
+        }
+      )
+        .then(data => {
+          setImages([])
+          // return props.handleModalChange(e)
+        })
+        .catch(err => console.error(err))
+    }
   }
 
   return (

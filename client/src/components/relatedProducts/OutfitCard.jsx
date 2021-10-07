@@ -26,10 +26,18 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
             <AiOutlineCloseCircle />
           </div>
           <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
+          {outfit.photo
+            ? (
             <img
               src={outfit.photo}
               alt={outfit.name}
             />
+            )
+          : <img
+          src={`https://via.placeholder.com/220x200?text=Image+Not+Available`}
+          alt='no-image'
+          />
+          }
           </div>
         </div>
 

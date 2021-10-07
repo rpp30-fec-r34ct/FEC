@@ -10,13 +10,6 @@ bundle.js
 config.js
 .DS_Store
 .DS_Store?
-<<<<<<< HEAD
-bundle.js.LICENSE.txt
-
-
-
-=======
 .env
 env
 bundle.js.LICENSE.txt
->>>>>>> main

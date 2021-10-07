@@ -6,6 +6,7 @@ import AddReviewStars from './AddReviewStars.jsx'
 import helpers from '../../Shared/helpers.js'
 import AddReviewsRecommended from './AddReviewsRecommended.jsx'
 import UploadPhotoBar from './UploadPhotoBar.jsx'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const AddReviewModal = (props) => {
   const [productName, setProductName] = useState('')
@@ -181,7 +182,9 @@ const AddReviewModal = (props) => {
       <>
         <div className='addReviewPageCover' />
         <div data-testid='testModalContainer' className='addReviewModalContainer'>
-          <i className='fas fa-times' onClick={props.onAddReviewClick} style={{ color: 'black', marginLeft: '97%' }} />
+          <div>
+            <AiOutlineClose onClick={props.onAddReviewClick} style={{marginLeft: '97%'}}/>
+          </div>
           <span style={{ fontSize: '25px', fontWeight: 'bold', margin: 'auto' }}>Write Your Review</span>
           <br />
           <span style={{ fontSize: '20px', margin: '-25px auto' }}>{'About the ' + productName}</span>
@@ -191,19 +194,19 @@ const AddReviewModal = (props) => {
             <div id='addReviewRecommend'>
               <span className='addReviewTitleStyle'>2. Do you recommend this product?: *</span>
               <br />
-              <AddReviewsRecommended handleReviewRecommendChange={handleReviewRecommendChange} />
+              <AddReviewsRecommended handleReviewRecommendChange={handleReviewRecommendChange} style={{marginLeft: '97%', marginBottom: '10px'}}/>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>3. Characteristics: *</label>
               <div className='addReviewCharacteristics'>{getCharacteristics(props.reviewsMeta)}</div>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>4. Review Summary:</label><br />
               <div className='addReviewItemStyle'>
                 <input id='reviewSummary' onChange={handleReviewChange} type='textarea' maxLength='60' placeholder='Example: Best purhcase ever!' style={{ width: '90%', height: '30px', fontFamily: 'Playfair Display serif' }} />
               </div>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>5. Review Body: *</label><br />
               <div className='addReviewItemStyle'>
                 <textarea id='reviewBody' onChange={handleReviewChange} maxLength='1000' minLength='50' placeholder='Why did you like the product or not?' style={{ width: '90%', height: '100px', fontFamily: 'Playfair Display serif' }} />
@@ -211,7 +214,7 @@ const AddReviewModal = (props) => {
                 <span className='subTextStyle'>{getCharCountDisplay()}</span>
               </div>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>6. What is your nickname?: *</label><br />
               <div className='addReviewItemStyle'>
                 <input id='reviewNickName' onChange={handleReviewChange} type='text' maxLength='60' placeholder='Example: jackson11!' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} />
@@ -219,7 +222,7 @@ const AddReviewModal = (props) => {
                 <span className='subTextStyle'>For privacy reasons, do not use your full name or email address</span>
               </div>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>7. Your email: *</label><br />
               <div className='addReviewItemStyle'>
                 <input id='reviewEmail' onChange={handleReviewChange} type='text' maxLength='60' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} placeholder='Example: jackson11@email.com' />
@@ -227,11 +230,11 @@ const AddReviewModal = (props) => {
                 <span className='subTextStyle'>For authentication reasons, you will not be not be emailed</span>
               </div>
             </div>
-            <div>
+            <div style={{marginTop: '10px'}}>
               <label className='addReviewTitleStyle'>8. Upload Photos (optional, up to five)</label><br />
               <UploadPhotoBar addNewUploadedPhoto={addNewUploadedPhoto} />
             </div>
-            <input className='removeFiltersBtn' type='submit' onClick={onAddReviwSubmit} value='Submit' />
+            <input className='submitReviewBtn' type='submit' onClick={onAddReviwSubmit} value='Submit' />
           </form>
         </div>
       </>

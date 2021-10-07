@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import PhotoThumbnailRow from './PhotoThumbnailRow.jsx'
 import axios from 'axios'
 import useLocalStorage from '../Shared/useLocalStorage.jsx'
+import { AiOutlineCheck } from 'react-icons/ai';
 
 const ReviewTile = (props) => {
   const [helpfulCount, setHelpfulCount] = useState(0)
@@ -83,7 +84,7 @@ const ReviewTile = (props) => {
     if (recommended) {
       return (
         <div className='tile_recommend'>
-          <i className='fas fa-check' style={{ color: 'green' }} />
+          <AiOutlineCheck style={{ color: 'green' }}/>
           <span> I recommend this product</span>
         </div>
       )
@@ -116,7 +117,7 @@ const ReviewTile = (props) => {
         return (
           <div className='tile_body'>
             <span>{reviewBody.slice(0, 250)}</span>
-            <button onClick={onSeeMore}>See More</button>
+            <button className="seeMoreBtn" onClick={onSeeMore}>See More</button>
           </div>
         )
       } else {
@@ -155,8 +156,7 @@ const ReviewTile = (props) => {
       {getResponse(props.reviewData.response)}
       <div className='tile_helpfulSection'>
         <span>Helfpul?</span>
-        <span className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>Yes</span>
-        <span className='tile_helpfulCount'>{'(' + helpfulCount + ')'}</span>
+        <span className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>{`Yes (${helpfulCount})`}</span>
         {getReportRender()}
       </div>
     </div>

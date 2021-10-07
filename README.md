@@ -47,3 +47,17 @@ Front End Capstone Project
 14) Open your browser and enter 'localhost:3000/47421' into your search bar
 15) The client index page will be served by the express server with initial data retrieved from the Atlier API.
 
+# Development Tools
+React 17.0.2
+webpack.config + webpack-cli
+ - style-loader
+ - css loader
+ -babel
+multer
+compression
+axios
+aws-sdk
+“react-inner-image-zoom”
+“react-router”
+“styled-components”
+“jest”

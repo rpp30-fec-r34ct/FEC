@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { findTotalReviews } from '../components/Shared/helpers.js'
+import './styles/ProductDescription.css'
 import ProductCheckout from './ProductCheckout.jsx'
 import AverageStars from '../components/Shared/AverageStars.jsx'
 import ProductStyleSelector from './ProductStyleSelector.jsx'
 import ProductDetailPrice from './ProductDetailPrice.jsx'
 import axios from 'axios'
-
 
 const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle }) => {
   const { productId } = useParams()
@@ -53,8 +53,10 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
         {totalReviews > 0 &&
           <a href='' id='overview-review-count' onClick={handleReviewCountClick}> Read All {totalReviews} Reviews</a>}
       </div>
-      <h4>{productDetails.category}</h4>
-      <h2>{productDetails.name}</h2>
+      <div>
+        <h4 id='category-title'>{`${productDetails.category}`.toUpperCase()}</h4>
+        <h1 id='product-title'>{productDetails.name}</h1>
+      </div>
       <ProductDetailPrice selectedStyle={selectedStyle} />
       <ProductStyleSelector styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       <ProductCheckout selectedStyle={selectedStyle} />

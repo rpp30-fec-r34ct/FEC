@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * @jest-environment jsdom
  */
@@ -11,6 +12,7 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { regeneratorRuntime } from 'regenerator-runtime'
 
+<<<<<<< HEAD
  // components
  import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
  import QAList from '../../../client/src/QAComponents/QAList.jsx'
@@ -144,18 +146,27 @@ afterAll(()=> server.close())
 
    test('Should have a heading for the product', function () {
     var app;
+=======
+// components
+import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
+
+xdescribe('Individual Question Component', () => {
+  test('Should have a heading for the product', function () {
+    let app
+>>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <AnswerModal />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
+<<<<<<< HEAD
      expect(app.container.querySelector("h1[id='answerModal-product']")).toBeInTheDocument()
    })
 
@@ -235,18 +246,26 @@ afterAll(()=> server.close())
 
    test('Should allow a user to input a name of the answerer', function () {
     var app;
+=======
+    expect(app.container.querySelector("h1[id='answerModal-product'")).toBeInTheDocument()
+  })
+
+  xtest('Should render if props.showModal is true', function () {
+    let app
+>>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <AnswerModal />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
+<<<<<<< HEAD
     const form = app.container.querySelector("input[name='nickname']")
     fireEvent.change(form, {target: {value: 'Tester'}})
     expect(form.value).toBe('Tester')
@@ -254,38 +273,51 @@ afterAll(()=> server.close())
 
    test('Should render a form', function () {
     var app;
+=======
+    expect(app.container.findByText('Product, Question Body')).toBeInTheDocument()
+  })
+
+  xtest('Should render a form', function () {
+    let app
+>>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <AnswerModal />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
-     expect(app.container.querySelector("div[class='add-answer-form']")).toBeInTheDocument()
-   })
+    expect(app.container.querySelector("div[class='add-answer-form']")).toBeInTheDocument()
+  })
 
+<<<<<<< HEAD
    test('Should render a form with an input for the answer', function () {
     var app;
+=======
+  xtest('Should render a form with an input for the question', function () {
+    let app
+>>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <AnswerModal />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
-     expect(app.container.querySelector("input[name='answer']")).toBeInTheDocument()
-   })
+    expect(app.container.querySelector("input[name='answer']")).toBeInTheDocument()
+  })
 
+<<<<<<< HEAD
    test('Should render a form with an input for the nickname of the answerer', function () {
      var app;
      const history = createMemoryHistory()
@@ -305,18 +337,39 @@ afterAll(()=> server.close())
 
    test('Should render a form with an input for the email address of the answerer', function () {
     var app;
+=======
+  xtest('Should render a form with an input for the nickname of the asker', function () {
+    let app
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <AnswerModal />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
-     expect(app.container.querySelector("input[name='email']")).toBeInTheDocument()
-   })
- })
+    expect(app.container.querySelector("input[name='nickname']")).toBeInTheDocument()
+  })
+
+  xtest('Should render a form with an input for the email address of the asker', function () {
+    let app
+>>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
+    const history = createMemoryHistory()
+    const route = '/product/47421'
+    history.push(route)
+    app = render(
+      <Router history={history}>
+        <Switch>
+          <Route path='/product/:id'>
+            <AnswerModal />
+          </Route>
+        </Switch>
+      </Router>
+    )
+    expect(app.container.querySelector("input[name='email']")).toBeInTheDocument()
+  })
+})

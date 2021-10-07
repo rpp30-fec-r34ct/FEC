@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { CardSkeleton } from '../StyledComponents/CardSkeleton.jsx'
+import CardSkeleton from '../StyledComponents/CardSkeleton.jsx'
 import axios from 'axios'
 import './Carousel.css'
 
@@ -64,7 +64,7 @@ export default function Carousel (props) {
         {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} data-testid='left-arrow-1'/>}
         {isLoading
           ? placeHolder.map((card, index) => (
-            <CardSkeleton key={index} />
+            <CardSkeleton key={index}/>
             ))
           : <ProductList
               relatedProducts={relatedProducts}

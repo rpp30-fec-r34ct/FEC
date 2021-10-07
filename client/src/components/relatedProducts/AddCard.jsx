@@ -7,7 +7,7 @@ const AddCard = ({ addOutfit }) => {
     addOutfit()
   }
   return (
-    <div className='add-card'>
+    <div className='add-card' style={{width: '100%', maxWidth: '200px'}}>
       <div className='add-details'>
         <div className='add-btn' onClick={handleAdd}><AiOutlinePlusCircle /></div>
         Add to Outfit

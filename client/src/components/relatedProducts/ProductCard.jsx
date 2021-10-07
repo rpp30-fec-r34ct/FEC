@@ -25,17 +25,25 @@ export default function ProductCard ({ relatedItem, currentOverview }) {
         <div className='card-visuals'>
           <Comparison currentOverview={currentOverview} relatedItem={relatedItem} />
           <div className='card-image' onClick={() => window.location.pathname = `/${relatedItem.id}/`}>
+          {relatedItem.photo
+            ? (
             <img
               src={relatedItem.photo}
               alt={relatedItem.name}
             />
+            )
+          : <img
+          src={`https://via.placeholder.com/220x200?text=Image+Not+Available`}
+          alt='no-image'
+          />
+          }
           </div>
         </div>
 
         <div className='product-details'>
           <div className='card-category'>{relatedItem.category}</div>
           <div className='card-name'>{relatedItem.name}</div>
-          {relatedItem.price}
+          {priceElement}
           <AverageStars rating={relatedItem.rating} />
         </div>
       </div>

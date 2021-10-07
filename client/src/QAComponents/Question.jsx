@@ -94,7 +94,6 @@ const Question = (props) => {
   }
 
   const addHelpfulQuestion = (e) => {
-
     e.preventDefault()
     if (!helpful) {
       setHelpful(true)

@@ -2,7 +2,7 @@
 
 #gallery-container {
   height: 500px;
-  width: 500px;
+  width: 550px;
   display: flex;
   justify-content: space-evenly;
   overflow: hidden;
@@ -42,6 +42,10 @@
   margin-bottom: 4px;
   border: solid 2px black;
   object-fit: cover;
+}
+
+.gallery-arrow {
+  margin: auto;
 }
 
 .gallery-arrow:hover {

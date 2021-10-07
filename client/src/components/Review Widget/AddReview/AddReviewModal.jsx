@@ -77,7 +77,7 @@ const AddReviewModal = (props) => {
   // for getting information needed from the server that isn't passed in via props
   const getProductName = async (id) => {
     try {
-      const { data } = await axios.get('/productDetail' + id)
+      const { data } = await axios.get('/productDetail/' + id)
       setProductName(data.name)
     } catch (error) {
       console.error(error)

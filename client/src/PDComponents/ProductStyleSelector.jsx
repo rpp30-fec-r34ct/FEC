@@ -1,5 +1,6 @@
 import React from 'react'
 import StyleSelectorItem from './StyleSelectorItem.jsx'
+import './styles/ProductStyleSelector.css'
 
 const ProductStyleComponent = (props) => {
   const handleSelectorClick = (e) => {
@@ -17,7 +18,7 @@ const ProductStyleComponent = (props) => {
 
   return (
     <div>
-      <h2> <b>style {'>'} </b>{props.selectedStyle.name}</h2>
+      <h4 id='style-selector-title'> <b>STYLE {'>'} </b>{props.selectedStyle.name}</h4>
       {styleSelectors}
     </div>
   )

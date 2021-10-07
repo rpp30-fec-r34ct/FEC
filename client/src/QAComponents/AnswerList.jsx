@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
@@ -5,10 +6,17 @@ import axios from 'axios'
 import NewAnswer from './NewAnswer.jsx'
 
 const AnswerList = (props) => {
-  const [answers, setAnswers] = useState(['test1, test2'])
-  const [moreAnswers, setMoreAnswers] = useState(['dummy', 'data'])
+  const [answers, setAnswers] = useState([])
+  const [moreAnswers, setMoreAnswers] = useState([])
   const [helpfulAns, setHelpfulAns] = useState(0)
-  let renderMoreAnswers = <div />
+  const [expandCollapse, setExpandCollapse] = useState('See More Answers')
+  const [moreClicked, setMoreClicked] = useState(false)
+  const [shouldHandleScroll, setShouldHandleScroll] = useState(false)
+  let renderMoreAnswers
+  const answerListStyle = {
+    maxHeight: '250px',
+    overflow: 'scroll',
+  }
 
   // SERVER REQUESTS
   const getAllAnswers = (question, callback) => {
@@ -32,29 +40,64 @@ const AnswerList = (props) => {
       }
     })
   }
-
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = (e) => {
     e.preventDefault()
-    setAnswers(moreAnswers)
-    setMoreAnswers(0)
+    if (expandCollapse === 'Collapse Answers') {
+      setExpandCollapse('See More Answers')
+      setAnswers(prev => prev.slice(0,2))
+    } else {
+      setAnswers(moreAnswers)
+      setExpandCollapse('Collapse Answers')
+    }
   }
 
   // INITIAL RENDER INVOCATION
   useEffect(() => {
+    var loadedAnswers = []
     initialize(props.id, (err, data) => {
       if (err) {
         console.error(err)
       } else {
-        setAnswers(data.slice(0, 2))
-        setMoreAnswers(data)
+        setAnswers(prev => {
+          data.map(datum => {
+            if (datum.answerer_name.toLowerCase() === 'seller') {
+              loadedAnswers.unshift(datum)
+            } else {
+              loadedAnswers.push(datum)
+            }
+          }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
+          return loadedAnswers.slice(0, 2)
+        })
+        setMoreAnswers(loadedAnswers)
       }
     })
-  }, [props.id])
+    // if (props.updateAnswers) {
+    //   initialize(props.id, (err, data) => {
+    //     if (err) {
+    //       console.error(err)
+    //     } else {
+    //       console.log('data', data)
+    //       setAnswers(prev => {
+    //         console.log('prev', prev)
+    //         data.map(datum => {
+    //           if (datum.answerer_name.toLowerCase() === 'seller') {
+    //             loadedAnswers.unshift(datum)
+    //           } else {
+    //             loadedAnswers.push(datum)
+    //           }
+    //         }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
+    //         return loadedAnswers.slice(0, 2)
+    //       })
+    //       setMoreAnswers(loadedAnswers)
+    //     }
+    //   })
+    // }
+  }, [props.id, props.updateAnswers])
 
   return (
     <>
-      <div>{answers && answers.map(answer => {
+      <div style={answerListStyle} id="answer-list">{answers && answers.map(answer => {
         let date, day, month, year, parse
         const answerId = 0
         if (answer.date) {
@@ -63,7 +106,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <div className="answer-body"><a href="#" onClick={getMoreAnswers}>LOAD MORE ANSWERS</a></div>
+          renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>{expandCollapse}</a>
         }
         return (
           <NewAnswer
@@ -80,7 +123,7 @@ const AnswerList = (props) => {
         )
       })}
       </div>
-      {moreAnswers && moreAnswers.length > 0 ? <div>{renderMoreAnswers}</div> : null}
+      {moreAnswers.length > 0 ? renderMoreAnswers : null}
     </>
   )
 }

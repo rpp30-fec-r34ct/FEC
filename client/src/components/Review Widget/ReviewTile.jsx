@@ -1,3 +1,4 @@
+/* eslint-disable */
 import './cssFiles/reviewTile.css'
 import ReviewStars from './ReviewStars.jsx'
 import React, { useState, useEffect } from 'react'

@@ -1,110 +1,139 @@
+/* eslint-disable */
 import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const AnswerModal = (props) => {
+  // console.log('handlemodalchange', props.handleModalChange)
   const modalRef = useRef()
-  const [showModal, setShowModal] = useState(props.showModal)
   const [{alt, src}, setImg] = useState([{
     alt,
     src
   }])
   const [images, setImages] = useState([])
+  const [uploads, setUploads] = useState([])
+  const imgStyle = {
+    height: '25%',
+    width: '25%',
+  }
 
-  const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape') {
-        setShowModal(false)
-      }
-    },
-    [setShowModal, showModal]
-  )
-
-  const handleClickOutside = (e) => {
-    // e.preventDefault()
-    if (e.target.id === 'answer-modal') {
-      return setShowModal(false)
-    }
-    // setShowModal(false)
-    // console.log(showModal)
+  const imgModalStyle = {
+    height: '200px',
+    weight: '200px',
+  }
+  const modalStyle = {
+    display: 'grid',
+    justifyContent: 'center',
+    gridTemplateColumns: 'auto auto auto auto auto',
+    gridTemplateRows: 'auto auto auto auto auto',
+    position: 'fixed',
+    zIndex: '999999999999',
+    left: '0',
+    top: '0',
+    width: '100%',
+    height: '100%',
+    overflow: 'auto',
+    backgroundColor: 'rgb(0,0,0)',
+    backgroundColor: 'rgba(0,0,0,0.4)',
+  }
+  const formStyle = {
+    gridColumn: '1 / span 4',
+    gridRow: '1',
+    position: 'fixed',
+    margin: '15% auto',
+    padding: '20px',
+    backgroundColor: 'whitesmoke',
+    border: '3px solid grey',
+    width: '80%',
   }
 
   const uploadImg = (e) => {
     if (e.target.files[0]) {
+      let image = new FormData()
+      image.append('file', e.target.files[0])
       setImages(prev => {
-        return [...prev, {
-        alt: e.target.files[0].name,
-        src: URL.createObjectURL(e.target.files[0])
-      }]
+        return [...prev, e.target.files[0]]
       })
     }
   }
 
   const submitNewAnswer = (e) => {
     e.preventDefault()
-    // console.log(props.question_id);
-    // uploadImg(e.target[3].files[0], e.target[3].value)
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
       return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
     }
-    const answer = e.target[0].value
-    const nickname = e.target[1].value
-    const email = e.target[2].value
-    const id = e.target.parentNode.id
-    const photos = images
-    axios.post('/qa/answer?answer=' + answer + '&nickname=' + nickname + '&email=' + email + '&id=' + id, {
-      answer: answer,
-      nickname: nickname,
-      email: email,
-      id: id,
-      photos: photos
-    })
-      .then(data => {
-        showModal ? setShowModal(false) : null
-        return setImages([])
+    if (!e.target[2].value.includes('@')) {
+      return alert('Please enter a valid email address')
+    }
+    if (images.length > 0) {
+      console.log('1')
+      const data = new FormData()
+      data.append('answer', e.target[0].value)
+      data.append('nickname', e.target[1].value)
+      data.append('email', e.target[2].value)
+      data.append('id', e.target.parentNode.id)
+      if (images.length > 0) {images.map(image => data.append(image.name, image))}
+      console.log('data', data)
+      axios.post('/qa/answer', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       })
-      .catch(err => console.error(err))
-  }
-
-  useEffect(
-    () => {
-      if (props.showModal) {
-        setShowModal(prev => !prev)
+        .then(data => {
+          setImages([])
+          // return props.handleModalChange(e)
+        })
+        .catch(err => console.error(err))
+    } else {
+      console.log('2')
+      const data = {
+      answer: e.target[0].value,
+      nickname: e.target[1].value,
+      email: e.target[2].value,
+      id: e.target.parentNode.id,
+      photos: []
       }
-      document.addEventListener('keydown', keyPress)
-      return () => document.removeEventListener('keydown', keyPress)
-    },
-    [props.showModal]
-  )
+      axios.post('/qa/answer', {
+        answer: e.target[0].value,
+        nickname: e.target[1].value,
+        email: e.target[2].value,
+        id: e.target.parentNode.id,
+        photos: []
+        }
+      )
+        .then(data => {
+          setImages([])
+          // return props.handleModalChange(e)
+        })
+        .catch(err => console.error(err))
+    }
+  }
 
   return (
     <>
-      {console.log(showModal, 'showing modal?')}
-      {showModal ? (
-        <div id="answer-modal" onClick={handleClickOutside}>
-          <div className='add-answer-form' id={props.question_id}>
-          <button className="close-button" onClick={setShowModal(false)}>X</button>
-            <h1>{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
-            <form onSubmit={submitNewAnswer}>
-              <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox"/>
-              <input name='nickname' type='text' placeholder='Your Nickname' />
-              <input name='email' type='text' placeholder='Your Email' />
+        <div style = {modalStyle} id="answer-modal">
+          <div style={formStyle} className='add-answer-form' id={props.question_id}>
+          <button className="close-button">X</button>
+            <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
+            <form action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>
+              <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox" style={{gridRow: '4/4'}}/>
+              <input name='nickname' type='text' size="30" placeholder='Your Nickname' style={{gridRow: '4/4'}}/>
+              <input name='email' type='text' size="30" placeholder='Example: jack@email.com' style={{gridRow: '4/4'}}/>
               {images.length < 5 ? (
-                <input type="file" className="file" accept="image/*" id="files" onChange={uploadImg}/>
+                <input type="file" className="file" accept="image/*" id="files" name="myFile" onChange={uploadImg} style={{gridRow: '4/4'}}/>
               ) : null}
-              <button type='submit'>Submit</button>
+              <button type='submit' id='submit-answer' style={{gridRow: '4/4'}}>Submit</button>
             </form>
             {images ? (
               images.map(image => (
-                <img src={image.src} alt={image.alt} className="answer-image" key={image.src}/>
+                console.log(images),
+                <img style={imgModalStyle} src={URL.createObjectURL(image)} alt={image.alt} className="answer-image" key={image.src + 1}/>
               ))
             ) : null}
             <img src={src} alt={alt} />
           </div>
         </div>
-
-      ) : null}
     </>
   )
 }

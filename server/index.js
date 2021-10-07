@@ -1,3 +1,4 @@
+const compression = require('compression')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -7,29 +8,48 @@ const token = require('./config.js')
 const multer = require('multer');
 const upload = multer({dest: 'uploads/'})
 const uploadToS3 = require('./s3.js');
+// const maxAPIReturn = 8
+app.use(compression())
+const AWS = require('aws-sdk')
+const multer = require('multer')
+const fs = require('fs')
 
-app.use('/product/:id', express.static('client/dist'))
+app.use('/:id(\\d{5})', express.static('client/dist'))
+
 app.use('/reviewPage/:id', express.static('client/dist'))
 app.use('/product/:id/carousel', express.static('client/dist'))
 app.use('/questions/:id', express.static('client/dist'))
 app.use(express.json())
 
-app.get('/productDetail*', (req, res) => {
-  // console.log('product details request received', req.url);
-  const productId = req.url.slice(14, req.url.length)
-  axios.get(APIurl + `products/${productId}`, {
+app.get('/', (req, res) => {
+  res.redirect('/47421')
+})
+
+app.get('/productDetail/:id', async (req, res) => {
+  const options = {
     headers: {
       Authorization: token.API_KEY
     }
-  })
-    .then((data) => {
-      console.log('[GET][PRODUCT DETAILS] data successfully retrieved from API, sending back to client')
-      res.status(200).send(data.data)
+  }
+  const productId = req.params.id
+  try {
+    const productResponse = await axios.get(`${APIurl}products/${productId}`, options)
+    const reviewResponse = await axios.get(`${APIurl}reviews/meta?product_id=${productId}`, options)
+    const stylesResponse = await axios.get(`${APIurl}products/${productId}/styles`, options)
+
+    const defaultStyle = stylesResponse.data.results.find(style => style['default?']) || {}
+    const productStyle = stylesResponse.data.results.map(item => item.photos[0].url)
+
+    res.status(200).send({
+      ...productResponse.data,
+      price: productResponse.data.default_price,
+      ratings: reviewResponse.data.ratings,
+      sale: defaultStyle.sale_price,
+      photo: productStyle[0]
     })
-    .catch((err) => {
-      console.error(err)
-      res.sendStatus(500)
-    })
+  } catch (err) {
+    res.status(500).send(err)
+  }
 })
 
 app.get('/reviews', (req, res) => {
@@ -189,6 +209,23 @@ app.put('/reviewReport', (req, res) => {
 })
 
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+AWS.config.update({
+  apiVersion: '2012-10-17',
+  accessKeyId: token.accessKeyId,
+  secretAccessKey: token.secretAccessKey,
+  region: 'us-east-1'
+})
+
 app.get('/qa/questions', (req, res) => {
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -214,21 +251,19 @@ app.get('/qa/answers', (req, res) => {
       res.status(200).send(data.data.results)
     })
     .catch(err => {
-      console.error(err)
       res.status(500).send(err)
     })
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
-  // console.log(typeof req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-      console.log('success?')
-      res.sendStatus(200)
+      console.log(data)
+      res.send('Helpful')
     })
     .catch(err => {
       console.error(err)
@@ -243,7 +278,7 @@ app.put('/qa/answers/report', (req, res) => {
     }
   })
     .then(data => {
-      res.sendStatus(200)
+      res.send('Reported')
     })
     .catch(err => {
       console.error(err)
@@ -252,18 +287,18 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...helpful question = ', typeof req.query.answer_id)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
-  .then(data => {
-    res.status(200).send('ANSWER MARKED AS HELPFUL')
-  })
-  .catch(err => {
-    console.error(err)
-  })
+    .then(data => {
+      console.log(data)
+      res.status(200).send('ANSWER MARKED AS HELPFUL')
+    })
+    .catch(err => {
+      console.error(err)
+    })
 })
 
 app.post('/qa/newquestion', (req, res) => {
@@ -281,32 +316,91 @@ app.post('/qa/newquestion', (req, res) => {
     }
   })
     .then(data => {
+      console.log(data)
       res.send('new question added')
     })
     .catch(err => res.send(err))
 })
 
-app.post('/qa/answer', (req, res) => {
-  console.log(req)
-  axios({
-    method: 'post',
-    url: APIurl + 'qa/questions/' + req.query.id + '/answers',
-    headers: {
-      Authorization: token.API_KEY
-    },
-    data: {
-      body: req.query.answer,
-      name: req.query.nickname,
-      email: req.query.email,
-      photos: req.query.photos
-    }
-  })
-    .then(data => {
-      res.send('new answer added')
+app.post('/qa/answer', upload.any(), (req, res) => {
+  console.log('sending answer', req.files, req.body)
+  if (req.files) {
+    const s3 = new AWS.S3({
+      params: {
+        Bucket: 'fec-r34ct',
+        accessKeyId: token.accessKeyId,
+        secretAccessKey: token.secretAccessKey
+      }
     })
-    .catch(err => res.send(err))
+
+    let params;
+
+    let photoURLs = req.files.map(photo => {
+      const fileContent = fs.readFileSync('uploads/' + photo.filename)
+      params = {
+        Bucket: 'fec-r34ct',
+        Key: photo.filename,
+        Body: fileContent
+      }
+      s3.upload(params, (err, data) => {
+        if (err) {
+          console.error(err)
+        } else {
+        }
+      })
+      return 'https://fec-r34ct.s3.amazonaws.com/' + photo.filename
+    })
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: photoURLs
+      }
+    })
+      .then(data => {
+        fs.unlink('uploads/' + photo.filename, (err) => {
+          if (err) {
+            res.send(err)
+          }
+        })
+        console.log('Success')
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  } else {
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: []
+      }
+    })
+      .then(data => {
+        console.log('it should have worked')
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  }
 })
-/////////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
+/// //////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
@@ -363,6 +457,7 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}products/${relatedId}`, options)
       const product = response.data
+      const features = response.data.features
 
       response = await axios.get(`${APIurl}products/${relatedId}/styles`, options)
       const defaultStyle = response.data.results.find(style => style['default?']) || {}
@@ -370,7 +465,6 @@ app.get('/product/:id/related', async (req, res) => {
 
       response = await axios.get(`${APIurl}reviews/meta?product_id=${relatedId}`, options)
       const productRatings = response.data.ratings
-      const productChar = response.data.characteristics
 
       relatedProducts.push({
         id: product.id,
@@ -380,7 +474,7 @@ app.get('/product/:id/related', async (req, res) => {
         sale: defaultStyle.sale_price,
         price: product.default_price,
         rating: productRatings,
-        characteristics: productChar
+        features
       })
     }
     res.status(200).send(relatedProducts)

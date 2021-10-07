@@ -1,12 +1,13 @@
 import React from 'react'
+import './styles/ProductDetailPrice.css'
 
-const ProductDetailPriceComponent = (props) => {
+const ProductDetailPriceComponent = ({ selectedStyle }) => {
   return (
     <div>
       {
-      (props.selectedStyle.sales_price !== null)
-        ? <p> <strike>${props.selectedStyle.default_price}</strike> ${props.selectedStyle.sales_price}</p>
-        : <p> ${props.selectedStyle.default_price} </p>
+      (selectedStyle.sale_price !== null)
+        ? <p id='product-price'> <strike>${selectedStyle.original_price}</strike> ${selectedStyle.sale_price}</p>
+        : <p id='product-price'> ${selectedStyle.original_price} </p>
       }
     </div>
   )

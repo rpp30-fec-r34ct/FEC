@@ -13,7 +13,7 @@
   top: 50%;
   width: 15px;
   height: 15px;
-  color: black;
+  color: #757575;
   border-radius: 10px;
   z-index: 1001;
   cursor: pointer;
@@ -41,8 +41,8 @@
 
 .carousel-content-wrapper {
   overflow: hidden;
-  height: 350px;
-  background-color: #fafafa;
+  height: 320px;
+  width: 865px;
 
 }
 
@@ -60,7 +60,6 @@
 }
 
 .product-card {
-  overflow-x: hidden;
   display: flex;
   align-items: flex-start;
   float: left;
@@ -73,7 +72,7 @@
 
 .product-card:hover {
   background-color: white;
-  opacity: 0.8;
+  opacity: 0.9;
   transition: 0.1s;
 }
 
@@ -86,9 +85,20 @@
   top: 10px;
 }
 
-.favorite-btn:hover {
+.delete-btn {
+  z-index: 3000;
+  color: rgb(255, 255, 255);
+  stroke-width: 70%;
+  position: absolute;
+  left: 170px;
+  top: 10px;
+}
+
+.favorite-btn:hover,
+.delete-btn:hover {
   color: rgb(255, 167, 2);
 }
+
 
 .card-image img {
   align-self: start;
@@ -98,7 +108,6 @@
   height: 220px;
   width: 200px;
   position: relative;
-  /* z-index: 50; */
 }
 
 
@@ -124,65 +133,19 @@
   color: #757575;
 }
 
-.checked {
-  color: orange;
-}
-
-
-/****YOUR OUTFIT LIST *****/
-
-.left-arrow,
-.right-arrow {
-  position: relative;
-  top: 50%;
-  width: 15px;
-  height: 15px;
-  color: black;
-  border-radius: 10px;
-  z-index: 1001;
-  cursor: pointer;
-}
-
-.left-arrow {
-  left: 0px;
-}
-
-.right-arrow {
-  right: 0px;
-}
-
-.outfit-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.outfit-carousel-wrapper {
-  overflow: hidden;
-  height: 350px;
-  background-color: #fafafa;
-
-}
-
-.outfit-content {
-  display: flex;
-  transition: transform .5s, z-index .5s;
-}
-
 
 /**ADD OUTFIT CARD**/
-
 .add-card {
-  overflow-x: hidden;
+  align-items: flex-start;
+  float: left;
   display: flex;
   justify-content: center;
-  float: left;
-  width: 202px;
-  height: 300px;
-  margin: 1px;
+  width: 200px;
+  height: 302px;
+  margin: 0px 7px 1px 7px; /*top-right-bottom-left*/
   border: 1px solid #888;
 }
+
 
 .add-details {
   flex-wrap: nowrap;
@@ -197,73 +160,18 @@
 
 .add-btn {
   z-index: 1001;
-  align-items: center;
   top: 10px;
-}
-
-/**OUTFIT CARD**/
-
-.outfit-card {
-  overflow-x: hidden;
   display: flex;
-  align-items: flex-start;
-  float: left;
-  width: 200px;
-  height: 99%;
-  /* margin: 7px; */
-  object-fit: cover;
-  border: 1px solid #888;
+  justify-content: center;
+  color: black;
+  margin-bottom: 5px;
+  stroke-width: 80%;
+  opacity: 0.5;
 }
 
-.outfit-visuals {
-  position: relative;
-}
-
-.outfit-details {
-  margin: 0px 5px;
-}
-
-
-.outfit-image img {
-  align-self: start;
-  object-fit: cover;
-  object-position: 50% 85%;
-  background-color: #888;
-  height: 220px;
-  width: 200px;
-  position: relative;
-  z-index: 1;
-}
-
-.outfit-category,
-.outfit-name,
-.outfit-price,
-.outfit-rating {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #757575;
-  margin: 5px 0px 0px 0px;
-}
-
-.outfit-category,
-.outfit-price {
-  text-transform: uppercase;
-  font-weight: 200;
-  font-size: 10px;
-}
-
-.outfit-name {
-  font-weight: 600;
-  font-size: 14px;
-  color: #757575;
-}
-
-.delete-btn {
-  z-index: 1001;
-  color: #757575;
-  stroke-width: 30%;
-  position: absolute;
-  left: 170px;
-  top: 10px;
+.add-btn:hover {
+  opacity: 1.0;
+  transition: 0.1s;
 }
 
 
@@ -274,11 +182,65 @@
   text-align: center;
   left: 50%;
   top: 50%;
-  width: 50%;
-  height: 50%;
-  transform: translate(-50%, -50%);
-  background: ivory;
-  border: 1px solid;
-  border-radius: 10px;
+  width: 400px;
+  max-width: 100%;
+  height: 400px;
+  max-height: 100%;
+  margin: -200px 0 0 -200px;
+  background: rgb(255, 255, 255);
+  border: 1px solid #757575;
   z-index: 9999;
+  box-shadow: 0 0 60px 10px rgba(155, 154, 154, 0.9);
+}
+
+.close-btn {
+  z-index: 3000;
+  color: rgb(0, 0, 0);
+  stroke-width: 30%;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.modal-body {
+  max-height: 100%;
+  padding: 20 px 50px 20px 20px;
+}
+
+.modal-body h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+  font-size: 14px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+table thead th {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #000000;
+  font-size: 12px;
+  text-align: center;
+  font-weight: lighter;
+  padding: 10px;
+  border: 1px solid #fff;
+  border-collapse: separate;
+  border-spacing: 10px;
+}
+
+tbody {
+  overflow-y: auto;
+}
+
+tbody tr td {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #000000;
+  font-weight: lighter;
+  font-size: 10px;
+  border: 1px solid #fff;
+  border-collapse: separate;
+  text-align: center;
 }

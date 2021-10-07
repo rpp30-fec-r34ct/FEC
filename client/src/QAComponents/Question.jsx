@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import ReactDOM from 'react-dom'
@@ -13,32 +14,63 @@ const Question = (props) => {
   // const [firstRender, setFirstRender] = useState(true)
   const [showModal, setShowModal] = useState(false)
   const [qHelpfulness, setQHelpfulness] = useState(props.question_helpfulness)
-  const [helpful, setHelpful] = useState(true)
+  const [helpful, setHelpful] = useState(false)
+  const [updateAnswers, setUpdateAnswers] = useState(false)
   const productID = useParams().productId
 
-  // SERVER REQUESTS
-  // const initialize = (callback) => {
-  //   axios.get('/qa/questions' + '?product_id=' + productID)
-  //     .then((data) => {
-  //       callback(null, data.data.results)
-  //     })
-  //     .catch((err) => {
-  //       console.error('error while getting product data from server')
-  //     })
-  // }
+  const questionBodyStyle = {
+    // border: '1px solid blue',
+    marginTop: '5%',
+    // padding: '2%',
+    width: '100%',
+    display: 'grid',
+    // justifyContent: 'left',
+    // textAlign: 'left',
+  }
+
+  const questionStyle = {
+    // border: '1px solid black',
+    align: 'left',
+    // marginRight: '500px',
+    width: '100%',
+    display: 'grid',
+    justifyContent: 'left',
+  }
+
+  const tableRowStyle = {
+    textAalign: 'right',
+  }
+
+  const addAnswerStyle = {
+    height: '100%',
+    width: '100%',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+    // marginLeft: '50%',
+  }
+
+  const helpfulStyle = {
+    color: 'green',
+    textAlign: 'left',
+    width: '375px',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  }
+  const tableStyle = {
+    tableLayout: 'fixed',
+    width: '100%',
+    fontSize: '100%',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  }
+
+  // const handleModalChange = () => props.handleModalChange()
 
   const addAnswer = (e) => {
     e.preventDefault()
-    console.log('current modal:', showModal)
     return setShowModal(true)
-    // if (!document.getElementById('answer-modal')) {
-    //   console.log('modal is not shown')
-    //   setShowModal(true)
-    // }
   }
 
   const keyPress = (e) => {
-    console.log('does this work too?')
     if (e.key === 'Escape') {
       setShowModal(false)
     }
@@ -46,7 +78,6 @@ const Question = (props) => {
 
   const handleClickOutside = (e) => {
     if (e.target.id === 'answer-modal' && e.target.className !== 'add-answer-form') {
-      console.log('did not click the modal')
       setShowModal(false)
     }
     if (e.target.className === "close-button") {
@@ -54,13 +85,29 @@ const Question = (props) => {
     }
   }
 
+  const handleModalChange = (e) => {
+    console.log('answer submitted', e.target[4].id)
+    if (e.target[4].id === "submit-answer") {
+      setShowModal(false)
+    }
+    setUpdateAnswers(true)
+  }
+
   const addHelpfulQuestion = (e) => {
     e.preventDefault()
-    axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.id, {
-      question_id: e.target.id
-    })
-      .then(data => setQHelpfulness(prev => prev++))
-      .catch(err => { console.error(err) })
+    if (!helpful) {
+      setHelpful(true)
+      axios.put('/qa/helpfulquestion?question_id=' + e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id, {
+        question_id: e.target.id
+      })
+        .then(data => {
+          console.log(data)
+          setQHelpfulness(qHelpfulness + 1)
+        })
+        .catch(err => { console.error(err) })
+    } else {
+      return console.log('You have already indicated this question as being helpful')
+    }
   }
 
   useEffect(
@@ -77,37 +124,30 @@ const Question = (props) => {
 
   return (
     <>
-      <div id={props.question_id} className='question-body'>
-        <table>
+      <div style={questionBodyStyle} id={props.question_id} className='question-body'>
+        <table style={tableStyle}>
           <tbody>
             <tr>
-              <th>
+              <th style={questionStyle}>
                 Q: {props.question_body}
               </th>
             </tr>
             <tr>
-              <td>
-                Helpful?
-              </td>
-              <td>
-                <a className="panel-element" href="" className='helpful' onClick={addHelpfulQuestion}>Yes</a>
-              </td>
-              <td className="panel-element">
+              <td style={helpfulStyle} className="helpful">
+                <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Helpful?</a> | Yes
                 ({qHelpfulness ? qHelpfulness : props.question_helpfulness})
               </td>
               <td>
-                <a href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</a>
+                <button style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</button>
               </td>
             </tr>
           </tbody>
         </table>
-        <div className="question-panel">
-        </div>
+      {props.question_id ? <AnswerList id={props.question_id} updateAnswers={updateAnswers}/> : null}
       </div>
       <div>
-      {props.question_id ? <AnswerList id={props.question_id}/> : null}
       </div>
-      {<AnswerModal showModal={showModal} question_id={props.question_id} body={props.question_body}/>}
+      {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body} /*handleModalChange={(e)=>{handleModalChange(e)}}*//> : null}
     </>
   )
 }

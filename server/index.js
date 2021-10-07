@@ -1,3 +1,4 @@
+const compression = require('compression')
 const express = require('express')
 const app = express()
 const port = 3000
@@ -5,7 +6,7 @@ const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
-
+app.use(compression())
 app.use('/:id(\\d{5})', express.static('client/dist'))
 
 app.use('/reviewPage/:id', express.static('client/dist'))

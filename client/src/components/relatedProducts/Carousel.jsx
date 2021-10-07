@@ -22,7 +22,7 @@ export default function Carousel (props) {
       await getOverviewProduct()
       await getRelatedProducts()
       setLoading(false)
-    }, 2500)
+    }, 2000)
 
     return () => clearTimeout(timer)
   }, [])

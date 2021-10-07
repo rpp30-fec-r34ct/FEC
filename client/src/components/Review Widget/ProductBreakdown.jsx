@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import './cssFiles/productBreakdown.css'
 import ProductBreakDownBar from './ProductBreakDownBar.jsx'

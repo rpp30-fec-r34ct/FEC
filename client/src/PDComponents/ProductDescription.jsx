@@ -8,7 +8,6 @@ import ProductStyleSelector from './ProductStyleSelector.jsx'
 import ProductDetailPrice from './ProductDetailPrice.jsx'
 import axios from 'axios'
 
-
 const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle }) => {
   const { productId } = useParams()
   const [ratings, setRatings] = useState(null)

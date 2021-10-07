@@ -1,41 +1,52 @@
-import React, { useState } from 'react'
+/* eslint-disable */
+import React from 'react'
 import Comparison from './Comparison.jsx'
 import AverageStars from '../Shared/AverageStars.jsx'
 
-
-export default function ProductCard(props) {
-  const priceElement =
+export default function ProductCard ({ relatedItem, currentOverview }) {
+  const priceElement = (
     <>
-      {props.product.sale ?
-        <div className='card-price'>
+      {relatedItem.sale
+        ? <div className='card-price'>
           <div style={{ color: 'red' }}>
-            {props.product.sale}
+            {relatedItem.sale}
           </div>
           <div style={{ textDecoration: 'line-through', opacity: '50%' }}>
-            {props.product.price}
+            {relatedItem.price}
           </div>
-        </div> :
-        <div className='card-price'>${props.product.price}</div>
-      }
+        </div>
+        : <div className='card-price'>${relatedItem.price}</div>}
     </>
+  )
 
   return (
-    < div className='product-card' >
+    <div className='product-card'>
       <div className='card-container'>
         <div className='card-visuals'>
-          <Comparison currentProduct={props.currentProduct} relatedProduct={props.product} />
-          <div className='card-image' onClick={() => window.location.pathname = `/${props.product.id}/`}>
-            <img src={props.product.photo} />
+          <Comparison currentOverview={currentOverview} relatedItem={relatedItem} />
+          <div className='card-image' onClick={() => window.location.pathname = `/${relatedItem.id}/`}>
+          {relatedItem.photo
+            ? (
+            <img
+              src={relatedItem.photo}
+              alt={relatedItem.name}
+            />
+            )
+          : <img
+          src={`https://via.placeholder.com/220x200?text=Image+Not+Available`}
+          alt='no-image'
+          />
+          }
           </div>
         </div>
 
         <div className='product-details'>
-          <div className='card-category'>{props.product.category}</div>
-          <div className='card-name'>{props.product.name}</div>
+          <div className='card-category'>{relatedItem.category}</div>
+          <div className='card-name'>{relatedItem.name}</div>
           {priceElement}
-          <AverageStars rating={props.product.rating} />
+          <AverageStars rating={relatedItem.rating} />
         </div>
       </div>
-    </div >
+    </div>
   )
 };

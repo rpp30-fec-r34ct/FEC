@@ -5,6 +5,7 @@
   flex-direction: row;
   margin: 100px auto;
   font-family: 'Playfair Display', serif;
+  justify-content: 'center';
 }
 
 .averageRating {
@@ -49,7 +50,7 @@ h3 {
   height: 600px;
 }
 
-.moreReviewsButton {
+.reviewsBtn {
   border: lightgrey 2px solid;
   background: white;
   font-size: 20px;
@@ -58,7 +59,7 @@ h3 {
   box-shadow: 2px -2px grey
 }
 
-.moreReviewsButton:hover {
+.reviewsBtn:hover {
   color: lightblue;
 }
 
@@ -124,3 +125,4 @@ h3 {
 .removeFiltersBtn:hover{
   color: lightblue;
 }
+

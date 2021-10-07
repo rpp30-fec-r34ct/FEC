@@ -1,6 +1,8 @@
 # Folders
 node_modules
 coverage
+uploads
+
 bin/
 
 # Files
@@ -8,6 +10,5 @@ bundle.js
 config.js
 .DS_Store
 .DS_Store?
-
-
-
+.env
+env

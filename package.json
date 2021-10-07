@@ -41,6 +41,7 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "aws-sdk": "^2.1000.0",
     "axios": "^0.21.1",
     "compression": "^1.7.4",

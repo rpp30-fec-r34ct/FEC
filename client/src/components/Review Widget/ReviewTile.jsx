@@ -10,6 +10,7 @@ const ReviewTile = (props) => {
   const [reportedState, setReportedState] = useState(0);
   const [isMarkedReported, setIsMarkedReported] = useState(0)
   const [helpfulList, setHelpfulList] = useLocalStorage('helpfulReviews',[])
+  const [isShowingFullBody, setIsShowingFullBody] = useState(0);
   //having the reported reviews in localstorage is a backfall. Technically the reported reviews should be taken out of the REVIEWS
   //sent from the API to us once we report them, but just in case the user does a refresh before the Atlier backend can take care
   //of it, we have it saved inlocal storage.
@@ -116,6 +117,35 @@ const ReviewTile = (props) => {
     }
   }
 
+  const getReviewBody = (reviewBody) => {
+    if (!isShowingFullBody) {
+      if (reviewBody.length > 250) {
+        return (
+          <div className='tile_body'>
+            <span>{reviewBody.slice(0, 250)}</span>
+            <button onClick={onSeeMore}>See More</button>
+          </div>
+        )
+      } else {
+        return (
+          <div className='tile_body'>
+            <span>{reviewBody}</span>
+          </div>
+        )
+      }
+    } else {
+      return (
+        <div className='tile_body'>
+          <span>{reviewBody}</span>
+        </div>
+      )
+    }
+  }
+
+  const onSeeMore = () => {
+    setIsShowingFullBody(1);
+  }
+
   return (
     <div className='reviewTile'>
       <div className='tile_user_date_rating'>
@@ -126,7 +156,7 @@ const ReviewTile = (props) => {
         </div>
       </div>
       <div className='tile_summary'>{props.reviewData.summary}</div>
-      <div className='tile_body'>{props.reviewData.body}</div>
+      {getReviewBody(props.reviewData.body)}
       {getPhotos(props.reviewData.photos)}
       {getIsRecommended(props.reviewData.recommend)}
       {getResponse(props.reviewData.response)}

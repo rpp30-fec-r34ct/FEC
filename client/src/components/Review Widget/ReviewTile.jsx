@@ -117,7 +117,7 @@ const ReviewTile = (props) => {
         return (
           <div className='tile_body'>
             <span>{reviewBody.slice(0, 250)}</span>
-            <button onClick={onSeeMore}>See More</button>
+            <button className="seeMoreBtn" onClick={onSeeMore}>See More</button>
           </div>
         )
       } else {

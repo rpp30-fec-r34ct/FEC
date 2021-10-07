@@ -51,5 +51,19 @@
   font-style: italic;
 }
 
+.seeMoreBtn {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 12px;
+  padding: 2px;
+  font-family: 'Playfair Display', serif;
+  margin-top: 5px;
+  box-shadow: 2px -2px grey
+}
+
+.seeMoreBtn:hover{
+  color: lightblue;
+}
+
 
 

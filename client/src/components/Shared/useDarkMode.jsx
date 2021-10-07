@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react'
 
 export const useDarkMode = () => {
   const [theme, setTheme] = useState('light')
-  const [mounted, setMounted] = useState(false)
+  const [isMounted, setMounted] = useState(false)
 
   const setMode = mode => {
     window.localStraoge.setItem('theme', mode)
     setTheme(mode)
   }
 
-const toggleMode = () => {
+const toggleTheme = () => {
   if (theme === 'light') {
     setMode('dark')
   } else {
@@ -28,7 +28,7 @@ const toggleMode = () => {
   }, [])
 
 
-return [theme, toggleMode, mounted]
+return [theme, toggleMode, isMounted]
 
 
 }

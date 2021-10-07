@@ -10,17 +10,24 @@ import ClickTracker from './ClickTracker.jsx'
 import {ThemeProvider} from 'styled-components'
 import {GlobalTheme} from './StyledComponents/GlobalTheme.jsx'
 import {lightTheme, darkTheme} from './StyledComponents/Themes.jsx'
+import {useDarkMode} from './Shared/useDarkMode.jsx'
 
 
 const App = (props) => {
-  const [theme, setTheme] = useState('light')
+  const [theme, toggleTheme, isMounted] = useDarkMode()
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme
+
+  if (!isMounted) {
+    return <div/>
+  }
 
   return (
     <Router>
     <ThemeProvider theme={themeMode}>
+    <>
     <GlobalTheme/>
+    <Toggle theme ={theme} setTheme={setTheme}/>
       <h1>PROJECT ATLIER</h1>
       <Switch>
         <Route path='/:productId(\d{5})'>
@@ -42,6 +49,7 @@ const App = (props) => {
           <FourOhFour />
         </Route>
       </Switch>
+      </>
     </ThemeProvider>
     </Router>
   )

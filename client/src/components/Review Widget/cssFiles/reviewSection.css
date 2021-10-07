@@ -3,9 +3,8 @@
 .reviewSection {
   display: flex;
   flex-direction: row;
-  margin: 100px auto;
+  margin: 10px auto;
   font-family: 'Playfair Display', serif;
-  justify-content: 'center';
 }
 
 .averageRating {
@@ -26,11 +25,6 @@
   margin-left: 10px;
 }
 
-h3 {
-  font-size: 2em;
-  font-family: 'Playfair Display', serif;
-}
-
 .reviewSummary{
   display: flex;
   margin-bottom: 15px;
@@ -47,7 +41,7 @@ h3 {
 .reviewList {
   overflow: hidden;
   overflow-y: scroll;
-  height: 600px;
+  height: 650px;
 }
 
 .reviewsBtn {
@@ -123,6 +117,29 @@ h3 {
 }
 
 .removeFiltersBtn:hover{
+  color: lightblue;
+}
+
+.productBreakDownContainer {
+  min-width: fit-content;
+}
+
+.reviewsContainer {
+  width: 90%;
+  justify-content: center;
+}
+
+.submitReviewBtn {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 20px;
+  padding: 2px;
+  font-family: 'Playfair Display', serif;
+  margin-top: 30px;
+  box-shadow: 2px -2px grey
+}
+
+.submitReviewBtn:hover{
   color: lightblue;
 }
 

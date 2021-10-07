@@ -63,6 +63,5 @@
     "env": [
       "jest"
     ]
-  },
-  "sideEffects": false
+  }
 }

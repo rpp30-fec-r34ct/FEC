@@ -7,9 +7,9 @@ import ProductBreakdown from './ProductBreakdown.jsx'
 const ReviewMetaData = (props) => {
   const calculatePercentRecommend = (noStr, yesStr) => {
     if (noStr === undefined) {
-      noStr = 0;
+      noStr = 0
     } else if (yesStr === undefined) {
-      yesStr = 0;
+      yesStr = 0
     }
     const noCount = parseInt(noStr)
     const yesCount = parseInt(yesStr)

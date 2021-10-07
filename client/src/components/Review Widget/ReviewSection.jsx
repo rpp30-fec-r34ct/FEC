@@ -10,7 +10,6 @@ import AddReviewModal from './AddReview/AddReviewModal.jsx'
 const ReviewSection = () => {
   const { productId } = useParams()
 
-
   const [reviewsMeta, setReviewsMeta] = useState({
     ratings: null,
     recommended: {
@@ -20,7 +19,7 @@ const ReviewSection = () => {
     product_id: productId
   })
 
-   const [activeFilters, setActiveFilters] = useState({
+  const [activeFilters, setActiveFilters] = useState({
     1: true,
     2: true,
     3: true,
@@ -29,7 +28,7 @@ const ReviewSection = () => {
   })
 
   const [activeModal, setActiveModal] = useState('')
-  const [isAddReview, setAddReview] = useState(0);
+  const [isAddReview, setAddReview] = useState(0)
 
   useEffect(() => {
     getReviewsMeta()
@@ -123,18 +122,17 @@ const ReviewSection = () => {
   }
 
   const onAddReviewClick = (event) => {
-    setAddReview(isAddReview ? 0 : 1) ;
+    setAddReview(isAddReview ? 0 : 1)
   }
-
 
   return (
     <div>
       <h3>Ratings and Reviews</h3>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} onHandleFilterToggle={onHandleFilterToggle} activeFilters={activeFilters} handleClearFilter={handleClearFilter} />
-        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick}/>
+        <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick} />
         <ModalContainer activeModal={activeModal} onClickClose={onClickClose} />
-        <AddReviewModal productId={productId} isAddReview={isAddReview} onAddReviewClick={onAddReviewClick} reviewsMeta={reviewsMeta}/>
+        <AddReviewModal productId={productId} isAddReview={isAddReview} onAddReviewClick={onAddReviewClick} reviewsMeta={reviewsMeta} />
       </div>
     </div>
   )

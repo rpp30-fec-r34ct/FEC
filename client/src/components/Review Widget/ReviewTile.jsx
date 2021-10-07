@@ -2,50 +2,43 @@ import './cssFiles/reviewTile.css'
 import ReviewStars from './ReviewStars.jsx'
 import React, { useState, useEffect } from 'react'
 import PhotoThumbnailRow from './PhotoThumbnailRow.jsx'
-import axios from 'axios';
+import axios from 'axios'
 import useLocalStorage from '../Shared/useLocalStorage.jsx'
 
 const ReviewTile = (props) => {
   const [helpfulCount, setHelpfulCount] = useState(0)
-  const [reportedState, setReportedState] = useState(0);
-  const [isMarkedReported, setIsMarkedReported] = useState(0)
-  const [helpfulList, setHelpfulList] = useLocalStorage('helpfulReviews',[])
-  const [isShowingFullBody, setIsShowingFullBody] = useState(0);
-  //having the reported reviews in localstorage is a backfall. Technically the reported reviews should be taken out of the REVIEWS
-  //sent from the API to us once we report them, but just in case the user does a refresh before the Atlier backend can take care
-  //of it, we have it saved inlocal storage.
-  const [reportedList, setReportedList] = useLocalStorage('reportedReviews',[])
-
+  const [reportedState, setReportedState] = useState(0)
+  const [helpfulList, setHelpfulList] = useLocalStorage('helpfulReviews', [])
+  const [isShowingFullBody, setIsShowingFullBody] = useState(0)
+  // having the reported reviews in localstorage is a backfall. Technically the reported reviews should be taken out of the REVIEWS
+  // sent from the API to us once we report them, but just in case the user does a refresh before the Atlier backend can take care
+  // of it, we have it saved inlocal storage.
+  const [reportedList, setReportedList] = useLocalStorage('reportedReviews', [])
 
   const onHelpfulClick = (event) => {
-    let newHelpfulList = [...helpfulList];
-    console.log(event);
+    const newHelpfulList = [...helpfulList]
 
     if (newHelpfulList.indexOf(event.target.id) === -1) {
       newHelpfulList.push(event.target.id)
-      setHelpfulCount(helpfulCount + 1);
-      sendHelpfulReviewToServer(event.target.id);
-      setHelpfulList(newHelpfulList);
-    } else {
-      console.log('already marked as helpful');
+      setHelpfulCount(helpfulCount + 1)
+      sendHelpfulReviewToServer(event.target.id)
+      setHelpfulList(newHelpfulList)
     }
   }
 
   const onReportedClick = (event) => {
-    let newReportedList = [...reportedList];
+    const newReportedList = [...reportedList]
     if (newReportedList.indexOf(event.target.id) === -1) {
-      newReportedList.push(event.target.id);
-      setReportedState(1);
-      sendReportedReviewToServer(event.target.id);
-      setReportedList(newReportedList);
-    } else {
-      console.log('already marked as reported');
+      newReportedList.push(event.target.id)
+      setReportedState(1)
+      sendReportedReviewToServer(event.target.id)
+      setReportedList(newReportedList)
     }
   }
 
-  useEffect (() => {
-    setHelpfulCount(props.reviewData.helpfulness);
-  },[props.reviewData.helpfulness])
+  useEffect(() => {
+    setHelpfulCount(props.reviewData.helpfulness)
+  }, [props.reviewData.helpfulness])
 
   const sendHelpfulReviewToServer = (id) => {
     axios.put('/reviewHelpful', {
@@ -53,12 +46,12 @@ const ReviewTile = (props) => {
         review_id: id
       }
     })
-    .then ((data) => {
-      console.log('succssfully sent helpful post to server ');
-    })
-    .catch ((err) => {
-      console.log('errored out while sending helpful post');
-    });
+      .then((data) => {
+        console.log('succssfully sent helpful post to server ')
+      })
+      .catch((err) => {
+        console.log('errored out while sending helpful post')
+      })
   }
 
   const sendReportedReviewToServer = (id) => {
@@ -67,14 +60,13 @@ const ReviewTile = (props) => {
         review_id: id
       }
     })
-    .then ((data) => {
-      console.log('succssfully sent reported post to server ');
-    })
-    .catch ((err) => {
-      console.log('errored out while sending reported post');
-    });
+      .then((data) => {
+        console.log('succssfully sent reported post to server ')
+      })
+      .catch((err) => {
+        console.log('errored out while sending reported post')
+      })
   }
-
 
   const translateDate = () => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -143,7 +135,7 @@ const ReviewTile = (props) => {
   }
 
   const onSeeMore = () => {
-    setIsShowingFullBody(1);
+    setIsShowingFullBody(1)
   }
 
   return (

@@ -1,18 +1,17 @@
-import React,  { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react'
 import emptyStar from '../icons/empty-star.svg'
 import fullStar from '../icons/star.svg'
 
 const AddReviewStars = () => {
-  const [starState, setStarState] = useState([0,0,0,0,0]);
-
+  const [starState, setStarState] = useState([0, 0, 0, 0, 0])
 
   const onAddReviewClick = (event) => {
-    let newStarState = [0,0,0,0,0]
+    const newStarState = [0, 0, 0, 0, 0]
     for (let j = 0; j < newStarState.length; j++) {
       if (j <= parseInt(event.target.id)) {
-        newStarState[j] = 1;
+        newStarState[j] = 1
       } else {
-        newStarState[j] = 0;
+        newStarState[j] = 0
       }
     }
     setStarState(newStarState)
@@ -23,7 +22,7 @@ const AddReviewStars = () => {
   }, [starState])
 
   const renderStars = () => {
-    let stars = [];
+    const stars = []
     for (let i = 0; i < starState.length; i++) {
       if (starState[i] === 0) {
         stars.push(<img id={i} onClick={onAddReviewClick} key={i} src={emptyStar} />)
@@ -31,38 +30,38 @@ const AddReviewStars = () => {
         stars.push(<img id={i} key={i} onClick={onAddReviewClick} src={fullStar} />)
       }
     }
-    return stars;
+    return stars
   }
 
   const getRatingTitle = () => {
-    let starSum = 0;
+    let starSum = 0
 
     for (let i = 0; i < starState.length; i++) {
       if (starState[i]) {
-        ++starSum;
+        ++starSum
       }
     }
 
     switch (starSum) {
       case (1):
-        return 'Poor';
-      case(2):
-        return 'Fair';
-      case(3):
-        return 'Average';
-      case(4):
-        return 'Good';
-      case(5):
-        return 'Great';
+        return 'Poor'
+      case (2):
+        return 'Fair'
+      case (3):
+        return 'Average'
+      case (4):
+        return 'Good'
+      case (5):
+        return 'Great'
       default:
-        return '';
+        return ''
     }
   }
 
   return (
-    <div style={{marginLeft: '20px'}}>
+    <div style={{ marginLeft: '20px' }}>
       {renderStars()}
-      <span id="addReviewStarsOutput" style={{marginLeft: '10px', color: 'grey', opacity: '0.8'}}>{getRatingTitle()}</span>
+      <span id='addReviewStarsOutput' style={{ marginLeft: '10px', color: 'grey', opacity: '0.8' }}>{getRatingTitle()}</span>
     </div>
   )
 }

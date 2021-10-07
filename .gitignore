@@ -1,7 +1,7 @@
 # Folders
 node_modules
 coverage
-c:/uploads
+c:
 
 # Files
 bundle.js

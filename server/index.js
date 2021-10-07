@@ -280,6 +280,7 @@ app.post('/qa/answer', upload.any(), (req, res) => {
             res.send(err)
           }
         })
+        console.log('Success')
         res.sendStatus(200)
       })
       .catch(err => {
@@ -287,7 +288,6 @@ app.post('/qa/answer', upload.any(), (req, res) => {
         res.send(err)
       })
   } else {
-    console.log('no photos')
     axios({
       method: 'post',
       url: APIurl + 'qa/questions/' + req.body.id + '/answers',

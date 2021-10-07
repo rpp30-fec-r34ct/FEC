@@ -119,7 +119,6 @@ app.post('/reviews', upload.any('uploadedImage'),  (req, res) => {
       photoURLs.push(values[j].Location)
     }
 
-    console.log('breath');
     axios({
       method: 'post',
       url: APIurl + 'reviews',
@@ -139,16 +138,13 @@ app.post('/reviews', upload.any('uploadedImage'),  (req, res) => {
       }
     })
     .then((data) => {
-      console.log('SUCCESFFUL REVIEW POST');
       res.sendStatus(201);
     })
     .catch ((err) => {
-      console.log('very unssuccesful review post');
       res.status(500).send(err);
     })
   })
   .catch((err) => {
-    console.error(err);
     res.status(500).send(err);
   })
 

@@ -5,6 +5,9 @@ const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
 // const maxAPIReturn = 8
+const AWS = require('aws-sdk')
+const multer = require('multer')
+const fs = require('fs')
 
 app.use('/:id(\\d{5})', express.static('client/dist'))
 
@@ -111,7 +114,24 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
-/// //////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
+/////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
+AWS.config.update({
+  apiVersion: '2012-10-17',
+  accessKeyId: token.accessKeyId,
+  secretAccessKey: token.secretAccessKey,
+  region: 'us-east-1'
+})
+
 app.get('/qa/questions', (req, res) => {
   axios.get(APIurl + 'qa/questions/' + req._parsedUrl.search, {
     headers: {
@@ -119,7 +139,6 @@ app.get('/qa/questions', (req, res) => {
     }
   })
     .then(data => {
-      // console.log('testResponse', data.data.results[0].answers)
       res.status(200).send(data.data)
     })
     .catch(err => {
@@ -135,25 +154,22 @@ app.get('/qa/answers', (req, res) => {
     }
   })
     .then(data => {
-      // console.log('answers', data.data.results)
       res.status(200).send(data.data.results)
     })
     .catch(err => {
-      console.error(err)
       res.status(500).send(err)
     })
 })
 
 app.put('/qa/helpfulquestion/', (req, res) => {
-  // console.log(typeof req.query.question_id)
   axios.put(APIurl + 'qa/questions/' + req.query.question_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
-      console.log('success?')
-      res.sendStatus(200)
+      console.log(data)
+      res.send('Helpful')
     })
     .catch(err => {
       console.error(err)
@@ -168,7 +184,7 @@ app.put('/qa/answers/report', (req, res) => {
     }
   })
     .then(data => {
-      res.sendStatus(200)
+      res.send('Reported')
     })
     .catch(err => {
       console.error(err)
@@ -177,7 +193,6 @@ app.put('/qa/answers/report', (req, res) => {
 })
 
 app.put('/qa/answers/helpful', (req, res) => {
-  console.log('made it this far...helpful question = ', req.query)
   axios.put(APIurl + 'qa/answers/' + req.query.answer_id + '/helpful', null, {
     headers: {
       Authorization: token.API_KEY
@@ -207,36 +222,94 @@ app.post('/qa/newquestion', (req, res) => {
     }
   })
     .then(data => {
+      console.log(data)
       res.send('new question added')
     })
     .catch(err => res.send(err))
 })
 
-app.post('/qa/answer', (req, res) => {
-  console.log(req)
-  axios({
-    method: 'post',
-    url: APIurl + 'qa/questions/' + req.query.id + '/answers',
-    headers: {
-      Authorization: token.API_KEY
-    },
-    data: {
-      body: req.query.answer,
-      name: req.query.nickname,
-      email: req.query.email,
-      photos: req.query.photos
-    }
-  })
-    .then(data => {
-      res.send('new answer added')
+app.post('/qa/answer', upload.any(), (req, res) => {
+  console.log('sending answer', req.files, req.body)
+  if (req.files) {
+    const s3 = new AWS.S3({
+      params: {
+        Bucket: 'fec-r34ct',
+        accessKeyId: token.accessKeyId,
+        secretAccessKey: token.secretAccessKey
+      }
     })
-    .catch(err => res.send(err))
+
+    let params;
+
+    let photoURLs = req.files.map(photo => {
+      const fileContent = fs.readFileSync('uploads/' + photo.filename)
+      params = {
+        Bucket: 'fec-r34ct',
+        Key: photo.filename,
+        Body: fileContent
+      }
+      s3.upload(params, (err, data) => {
+        if (err) {
+          console.error(err)
+        } else {
+        }
+      })
+      return 'https://fec-r34ct.s3.amazonaws.com/' + photo.filename
+    })
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: photoURLs
+      }
+    })
+      .then(data => {
+        fs.unlink('uploads/' + photo.filename, (err) => {
+          if (err) {
+            res.send(err)
+          }
+        })
+        console.log('Success')
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  } else {
+    axios({
+      method: 'post',
+      url: APIurl + 'qa/questions/' + req.body.id + '/answers',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        body: req.body.answer,
+        name: req.body.nickname,
+        email: req.body.email,
+        photos: []
+      }
+    })
+      .then(data => {
+        console.log('it should have worked')
+        res.sendStatus(200)
+      })
+      .catch(err => {
+        console.log(err.response)
+        res.send(err)
+      })
+  }
 })
 /// //////////////////////----- END OF QUESTIONS AND ANSWERS -----/////////////////////////
 
 app.get('/api/*', async (req, res) => {
   const path = req.url.split('/api/')[1]
-  console.log('path', path)
   try {
     const response = await axios.get(APIurl + path,
       {

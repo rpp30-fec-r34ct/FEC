@@ -32,7 +32,7 @@ import Question from '../../../client/src/QAComponents/Question.jsx'
 // afterEach(()=> server.resetHandlers())
 // afterAll(()=> server.close())
 
-describe('Individual Question Component', () => {
+xdescribe('Individual Question Component', () => {
   test('Should render a Question', function () {
     let app
     const history = createMemoryHistory()

@@ -5,10 +5,12 @@ const port = 3000
 const axios = require('axios')
 const APIurl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/'
 const token = require('./config.js')
+const multer = require('multer');
+const upload = multer({dest: 'uploads/'})
+const uploadToS3 = require('./s3.js');
 // const maxAPIReturn = 8
 app.use(compression())
 const AWS = require('aws-sdk')
-const multer = require('multer')
 const fs = require('fs')
 
 app.use('/:id(\\d{5})', express.static('client/dist'))
@@ -116,6 +118,95 @@ app.get('/reviews/meta', (req, res) => {
     })
 })
 
+app.post('/reviews', upload.any('uploadedImage'),  (req, res) => {
+  console.log('placeholder');
+
+  let otherEntries = JSON.parse(req.body.otherFormEntries);
+  let photos = req.files;
+  let s3Promises = [];
+
+  for (let i = 0; i < photos.length; i++) {
+    s3Promises.push(uploadToS3.uploadToS3(photos[i]))
+  }
+
+
+  Promise.all(s3Promises)
+  .then((values) => {
+    let photoURLs = [];
+
+    for (let j = 0; j < values.length; j++) {
+      photoURLs.push(values[j].Location)
+    }
+
+    axios({
+      method: 'post',
+      url: APIurl + 'reviews',
+      headers: {
+        Authorization: token.API_KEY
+      },
+      data: {
+        product_id: parseInt(otherEntries.product_id),
+        rating: otherEntries.rating,
+        summary: otherEntries.summary,
+        body: otherEntries.body,
+        recommend: otherEntries.recommend,
+        name: otherEntries.name,
+        email: otherEntries.email,
+        photos: photoURLs,
+        characteristics: otherEntries.characteristics
+      }
+    })
+    .then((data) => {
+      res.sendStatus(201);
+    })
+    .catch ((err) => {
+      res.status(500).send(err);
+    })
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+  })
+
+})
+
+app.put('/reviewHelpful', (req, res) => {
+  console.log('placeholder');
+  axios({
+    method: 'put',
+    url: APIurl + `reviews/${req.body.params.review_id}/helpful`,
+    headers: {
+      Authorization: token.API_KEY
+    }
+  })
+  .then((data) => {
+    console.log('successful while adding helpful review')
+    res.sendStatus(204);
+  })
+  .catch((err) => {
+    console.log('issue while adding helpful review')
+    res.status(500).send(err);
+  })
+})
+
+app.put('/reviewReport', (req, res) => {
+  console.log('placeholder');
+  axios({
+    method: 'put',
+    url: APIurl + `reviews/${req.body.params.review_id}/report`,
+    headers: {
+      Authorization: token.API_KEY
+    }
+  })
+  .then((data) => {
+    console.log('success reporting review')
+    res.sendStatus(204);
+  })
+  .catch((err) => {
+    console.log('issue while reporting review')
+    res.status(500).send(err);
+  })
+})
+
 /////////////////////////----- QUESTIONS AND ANSWERS -----/////////////////////////
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -126,7 +217,6 @@ var storage = multer.diskStorage({
   }
 })
 
-var upload = multer({ storage: storage })
 AWS.config.update({
   apiVersion: '2012-10-17',
   accessKeyId: token.accessKeyId,

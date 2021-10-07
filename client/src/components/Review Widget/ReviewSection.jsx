@@ -127,8 +127,8 @@ const ReviewSection = () => {
   }
 
   return (
-    <div>
-      <h3>Ratings and Reviews</h3>
+    <div className="reviewsContainer">
+      <h3 style={{fontSize: '2em', fontFamily: 'Playfair Display, serif'}}>Ratings and Reviews</h3>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} onHandleFilterToggle={onHandleFilterToggle} activeFilters={activeFilters} handleClearFilter={handleClearFilter} />
         <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick} />

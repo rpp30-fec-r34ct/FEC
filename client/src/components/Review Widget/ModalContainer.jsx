@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const ModalContainer = (props) => {
   const imgStyle = {
@@ -21,7 +22,7 @@ const ModalContainer = (props) => {
     border: 'solid 2px coral',
     width: '70%',
     height: '650px',
-    margin: 'auto 15%',
+    margin: 'auto',
     background: 'white',
     position: 'absolute'
   }
@@ -45,7 +46,7 @@ const ModalContainer = (props) => {
           <div style={imgContainerStyle}>
             <img src={props.activeModal} style={imgStyle} />
           </div>
-          <i className='fas fa-times' onClick={props.onClickClose} style={{ color: 'black' }} />
+          <AiOutlineClose onClick={props.onClickClose}/>
         </div>
       </>
     )

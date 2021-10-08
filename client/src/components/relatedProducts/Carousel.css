@@ -63,9 +63,11 @@
   display: flex;
   align-items: flex-start;
   float: left;
+  min-height: 302px;
+  min-width: 200px;
   width: 200px;
   height: 302px;
-  margin: 7px;
+  margin: 5px;
   object-fit: cover;
   border: 1px solid #888;
 }
@@ -150,7 +152,7 @@
 .add-details {
   flex-wrap: nowrap;
   margin: auto;
-  padding: 10px;
+  padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
   color: #757575;
   font-weight: 200;

@@ -27,7 +27,7 @@ describe('Outfit List Component', function () {
       </Router>
     )
   })
-  test('outfit list should exist', () => {
+  test('Outfit List should exist', () => {
     expect(app.container.querySelector('.outfit-list')).toBeInTheDocument()
   })
   test('Outfit List should initially have no items', () => {

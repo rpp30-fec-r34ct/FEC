@@ -19,7 +19,7 @@ Object {
         >
           <div
             class="carousel-container"
-            style="width: 100%; max-width: 675px;"
+            style="width: 870px;"
           >
             <div
               class="add-card"
@@ -80,7 +80,7 @@ Object {
       >
         <div
           class="carousel-container"
-          style="width: 100%; max-width: 675px;"
+          style="width: 870px;"
         >
           <div
             class="add-card"

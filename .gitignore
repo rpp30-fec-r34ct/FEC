@@ -12,3 +12,4 @@ config.js
 .DS_Store?
 .env
 env
+bundle.js.LICENSE.txt

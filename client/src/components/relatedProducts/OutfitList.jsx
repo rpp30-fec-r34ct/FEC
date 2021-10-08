@@ -44,8 +44,8 @@ export default function OutfitList ({ currentOverview }) {
 
   return (
     <>
-      <h3 style={{ marginTop: '5px' }}>YOUR OUTFIT</h3>
-      <div className='product-list'>
+      <h3 style={{ marginTop: '5px' }} className='outfit-list-header-1'>YOUR OUTFIT</h3>
+      <div className='outfit-list'>
         <div className='carousels-overview'>
           <div className='carousel-container' style={{ width: '100%', maxWidth: '675px' }}>
             <AddCard addOutfit={addOutfit} style={{ display: 'inline' }} />

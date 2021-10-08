@@ -1,7 +1,5 @@
 // /* eslint-disable */
-import React from 'react'
 import styled from 'styled-components'
-
 
 export const CardSkeleton = styled.div`
   display: inline-block;
@@ -24,5 +22,4 @@ export const CardSkeleton = styled.div`
     rgba(lightgrey, 0) 100%
   )
   }
-  `;
-
+  `

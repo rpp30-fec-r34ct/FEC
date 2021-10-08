@@ -8,11 +8,11 @@ export default function ProductCard ({ relatedItem, currentOverview }) {
     <>
       {relatedItem.sale
         ? <div className='card-price'>
-          <div style={{ color: 'red' }}>
-            {relatedItem.sale}
+          <div style={{ color: 'red' }} data-testid={`rel-product-sale-${relatedItem.id}`}>
+            ${relatedItem.sale}
           </div>
-          <div style={{ textDecoration: 'line-through', opacity: '50%' }}>
-            {relatedItem.price}
+          <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`rel-product-price-${relatedItem.id}`}>
+            ${relatedItem.price}
           </div>
         </div>
         : <div className='card-price'>${relatedItem.price}</div>}
@@ -41,8 +41,8 @@ export default function ProductCard ({ relatedItem, currentOverview }) {
         </div>
 
         <div className='product-details'>
-          <div className='card-category'>{relatedItem.category}</div>
-          <div className='card-name'>{relatedItem.name}</div>
+          <div className='card-category' data-testid={`rel-product-category-${relatedItem.id}`}>{relatedItem.category}</div>
+          <div className='card-name' data-testid={`rel-product-name-${relatedItem.id}`}>{relatedItem.name}</div>
           {priceElement}
           <AverageStars rating={relatedItem.rating} />
         </div>

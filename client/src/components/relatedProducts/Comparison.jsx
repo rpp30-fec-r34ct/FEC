@@ -44,7 +44,7 @@ const Comparison = ({relatedItem, currentOverview}) => {
 
   return (
     <React.Fragment>
-      <div className="favorite-btn" data-testid={`rel-product-toggle`} onClick={toggleModal}>
+      <div className="favorite-btn" data-testid='rel-product-toggle' onClick={toggleModal}>
         <RiStarSmileFill />
       </div>
       {

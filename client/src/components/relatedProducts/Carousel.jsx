@@ -29,13 +29,13 @@ export default function Carousel (props) {
 
   const getRelatedProducts = async () => {
     try {
-      const cachedRelated = window.localStorage.getItem(JSON.stringify(productId))
-      if (cachedRelated) {
-        setRelatedProducts(JSON.parse(cachedRelated))
+      const cachedRelated = JSON.parse(window.localStorage.getItem(JSON.stringify(productId)))
+      if (cachedRelated && cachedRelated.expiration > Date.now()) {
+        setRelatedProducts(cachedRelated.value)
       } else {
         const { data } = await axios.get(`/product/${productId}/related`)
         setRelatedProducts(data)
-        window.localStorage.setItem(JSON.stringify(productId), JSON.stringify(data))
+        window.localStorage.setItem(JSON.stringify(productId), JSON.stringify({value: data, expiration: Date.now() + 30000 }))
       }
     } catch (error) {
       console.log(error.message)

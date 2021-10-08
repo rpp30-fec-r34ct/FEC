@@ -1,11 +1,7 @@
 // /* eslint-disable */
 import styled from 'styled-components'
 
-<<<<<<< HEAD
-const StyledSkeleton = styled.div`
-=======
 export const CardSkeleton = styled.div`
->>>>>>> main
   display: inline-block;
   align-items: flex-start;
   float: left;
@@ -24,21 +20,4 @@ export const CardSkeleton = styled.div`
   100% {
     background-position: -135% 0%;
   }
-<<<<<<< HEAD
-}
-  `;
-
-  const CardSkeleton = styled(StyledSkeleton)`
-    width: 5.5em;
-    border-radius: 5px;
-
-    &::before {
-      content: "\00a0";
-    }
-    `;
-
-  export default CardSkeleton
-
-=======
   `
->>>>>>> main

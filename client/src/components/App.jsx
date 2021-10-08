@@ -18,6 +18,7 @@ const App = (props) => {
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme
 
+
   if (!isMounted) {
     return <div/>
   }
@@ -25,9 +26,9 @@ const App = (props) => {
   return (
     <Router>
     <ThemeProvider theme={themeMode}>
-    <>
-    <GlobalTheme/>
-    <Toggle theme ={theme} setTheme={setTheme}/>
+      <>
+      <GlobalTheme/>
+      <button onClick={toggleTheme}>Toggle theme</button>
       <h1>PROJECT ATLIER</h1>
       <Switch>
         <Route path='/:productId(\d{5})'>
@@ -51,7 +52,7 @@ const App = (props) => {
       </Switch>
       </>
     </ThemeProvider>
-    </Router>
+  </Router>
   )
 }
 

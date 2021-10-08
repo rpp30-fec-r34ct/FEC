@@ -38,11 +38,7 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
           alt='no-image'
           />
           }
-<<<<<<< HEAD
-          </div>
-=======
         </div>
->>>>>>> main
         </div>
 
         <div className='product-details'>

@@ -59,8 +59,8 @@ export default function Carousel (props) {
 
   return (
     <div className='carousels-overview'>
-      <h3>RELATED PRODUCTS</h3>
-      <div className='carousel-container' data-testid='carousel'>
+      <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
+      <div className='carousel-container' data-testid='rel-product-carousel'>
         {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} data-testid='left-arrow-1' />}
         {isLoading
           ? placeHolder.map((card, index) => (

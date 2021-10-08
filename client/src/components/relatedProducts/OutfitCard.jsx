@@ -7,22 +7,22 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
   const priceElement = (
     <>
       {outfit.sale
-        ? <div className='card-price'>
+        ? <div className='card-price' data-testid={`outfit-sale-${outfit.id}`}>
           <div style={{ color: 'red' }}>
-            {outfit.sale}
+            ${outfit.sale}
           </div>
           <div style={{ textDecoration: 'line-through', opacity: '50%' }}>
-            {outfit.price}
+            ${outfit.price}
           </div>
         </div>
-        : <div className='card-price'>${outfit.price}</div>}
+        : <div className='card-price' data-testid={`outfit-price-${outfit.id}`}>${outfit.price}</div>}
     </>
   )
   return (
     <div className='product-card'>
       <div className='card-container'>
         <div className='card-visuals'>
-          <div className='delete-btn' onClick={() => deleteOutfit(outfit.id)}>
+          <div className='delete-btn' data-testid={`delete-outfit-${outfit.id}`} onClick={() => deleteOutfit(outfit.id)}>
             <AiOutlineCloseCircle />
           </div>
           <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
@@ -42,10 +42,10 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
         </div>
 
         <div className='product-details'>
-          <div className='card-category'>{outfit.category}</div>
-          <div className='card-name'>{outfit.name}</div>
+          <div className='card-category' data-testid={`outfit-category-${oufit.id}`}> {outfit.category}</div>
+          <div className='card-name' data-testid={`outfit-name-${outfit.id}`}>{outfit.name}</div>
           {priceElement}
-          <AverageStars rating={outfit.ratings} />
+          <AverageStars rating={outfit.ratings} data-testid={`outfit-rating-${outfit.id}`}/>
         </div>
       </div>
     </div>

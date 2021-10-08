@@ -5,7 +5,7 @@ const testRelatedProducts = [
     "photo":null,
     "category":"Accessories",
     "name":"Bright Future Sunglasses",
-    "sale":null,
+    "sale":"50.00",
     "price":"69.00",
     "rating":{
       "2":"1",

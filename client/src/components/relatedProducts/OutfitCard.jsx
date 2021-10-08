@@ -42,10 +42,10 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
         </div>
 
         <div className='product-details'>
-          <div className='card-category' data-testid={`outfit-category-${oufit.id}`}> {outfit.category}</div>
+          <div className='card-category' data-testid={`outfit-category-${outfit.id}`}> {outfit.category}</div>
           <div className='card-name' data-testid={`outfit-name-${outfit.id}`}>{outfit.name}</div>
           {priceElement}
-          <AverageStars rating={outfit.ratings} data-testid={`outfit-rating-${outfit.id}`}/>
+          <AverageStars rating={outfit.ratings}/>
         </div>
       </div>
     </div>

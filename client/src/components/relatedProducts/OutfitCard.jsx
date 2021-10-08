@@ -8,11 +8,11 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
     <>
       {outfit.sale
         ? <div className='card-price'>
-          <div style={{ color: 'red' }}>
-            {outfit.sale}
+          <div style={{ color: 'red' }} data-testid={`outfit-sale-${outfit.id}`}>
+            ${outfit.sale}
           </div>
-          <div style={{ textDecoration: 'line-through', opacity: '50%' }}>
-            {outfit.price}
+          <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`outfit-price-${outfit.id}`}>
+            ${outfit.price}
           </div>
         </div>
         : <div className='card-price'>${outfit.price}</div>}
@@ -22,7 +22,7 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
     <div className='product-card'>
       <div className='card-container'>
         <div className='card-visuals'>
-          <div className='delete-btn' onClick={() => deleteOutfit(outfit.id)}>
+          <div className='delete-btn' data-testid='delete-outfit-btn' onClick={() => deleteOutfit(outfit.id)}>
             <AiOutlineCloseCircle />
           </div>
           <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
@@ -38,14 +38,18 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
           alt='no-image'
           />
           }
+<<<<<<< HEAD
           </div>
+=======
+        </div>
+>>>>>>> main
         </div>
 
         <div className='product-details'>
-          <div className='card-category'>{outfit.category}</div>
-          <div className='card-name'>{outfit.name}</div>
+          <div className='card-category' data-testid={`outfit-category-${outfit.id}`}> {outfit.category}</div>
+          <div className='card-name' data-testid={`outfit-name-${outfit.id}`}>{outfit.name}</div>
           {priceElement}
-          <AverageStars rating={outfit.ratings} />
+          <AverageStars rating={outfit.ratings}/>
         </div>
       </div>
     </div>

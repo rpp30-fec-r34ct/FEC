@@ -1,8 +1,11 @@
 // /* eslint-disable */
-import React from 'react'
 import styled from 'styled-components'
 
+<<<<<<< HEAD
 const StyledSkeleton = styled.div`
+=======
+export const CardSkeleton = styled.div`
+>>>>>>> main
   display: inline-block;
   align-items: flex-start;
   float: left;
@@ -21,6 +24,7 @@ const StyledSkeleton = styled.div`
   100% {
     background-position: -135% 0%;
   }
+<<<<<<< HEAD
 }
   `;
 
@@ -35,3 +39,6 @@ const StyledSkeleton = styled.div`
 
   export default CardSkeleton
 
+=======
+  `
+>>>>>>> main

@@ -136,13 +136,13 @@
 
 /**ADD OUTFIT CARD**/
 .add-card {
-  display: flex;
   align-items: flex-start;
   float: left;
+  display: flex;
   justify-content: center;
   width: 200px;
   height: 302px;
-  margin: 7px 7px 1px 7px; /*top-right-bottom-left*/
+  margin: 0px 7px 1px 7px; /*top-right-bottom-left*/
   border: 1px solid #888;
 }
 
@@ -163,10 +163,11 @@
   top: 10px;
   display: flex;
   justify-content: center;
-  color: black;
+  background-color: white;
   margin-bottom: 5px;
   stroke-width: 80%;
   opacity: 0.5;
+  outline: none;
 }
 
 .add-btn:hover {

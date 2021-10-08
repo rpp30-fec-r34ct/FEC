@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 import './cssFiles/reviewSection.css'
 import ReviewStars from './ReviewStars.jsx'
@@ -6,6 +7,11 @@ import ProductBreakdown from './ProductBreakdown.jsx'
 
 const ReviewMetaData = (props) => {
   const calculatePercentRecommend = (noStr, yesStr) => {
+    if (noStr === undefined) {
+      noStr = 0
+    } else if (yesStr === undefined) {
+      yesStr = 0
+    }
     const noCount = parseInt(noStr)
     const yesCount = parseInt(yesStr)
 
@@ -58,7 +64,7 @@ const ReviewMetaData = (props) => {
   }
 
   return (
-    <div>
+    <div className="productBreakDownContainer">
       <div>
         <div className='reviewSummary'>
           <div data-testid='testAverage' className='ratingItem'>{calculateAverage(props.metaData.ratings)}</div>

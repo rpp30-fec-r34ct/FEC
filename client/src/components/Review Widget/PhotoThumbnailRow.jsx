@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react'
 
 const PhotoThumbnailRow = (props) => {
@@ -29,7 +30,7 @@ const PhotoThumbnailRow = (props) => {
     const photosToRender = []
     for (let i = 0; i < photos.length; i++) {
       photosToRender.push(
-        <div key={photos[i].id} style={photoThumbnailStyle}>
+        <div key={i} style={photoThumbnailStyle}>
           <img src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
         </div>)
     }

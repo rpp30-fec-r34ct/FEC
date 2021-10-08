@@ -1,25 +1,52 @@
+/* eslint-disable */
 import React from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
+import AverageStars from '../Shared/AverageStars.jsx'
 
-export default function OutfitCard (props) {
-  return (
-    <div className='outfit-card'>
-      <div className='outfit-container'>
-        <div className='outfit-visuals'>
-          <div className='delete-btn'><AiOutlineCloseCircle /></div>
-          <div className='outfit-image' />
-          <img src='https://via.placeholder.com/200' />
+export default function OutfitCard ({ deleteOutfit, outfit }) {
+  const priceElement = (
+    <>
+      {outfit.sale
+        ? <div className='card-price' style={{display: 'flex'}}>
+          <div style={{ color: 'red', float: 'left'}} data-testid={`outfit-sale-${outfit.id}`}>
+            ${outfit.sale}
+          </div>
+          <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`outfit-price-${outfit.id}`}>
+            ${outfit.price}
+          </div>
         </div>
-      </div>
-      <div className='outfit-details'>
-        <div className='outfit-category'>CATEGORY</div>
-        <div className='outfit-name'>NAME</div>
-        <div className='outfit-price'>$PRICE</div>
-        <span className='fa fa-star checked' />
-        <span className='fa fa-star checked' />
-        <span className='fa fa-star checked' />
-        <span className='fa fa-star' />
-        <span className='fa fa-star' />
+        : <div className='card-price'>${outfit.price}</div>}
+    </>
+  )
+  return (
+    <div className='product-card'>
+      <div className='card-container'>
+        <div className='card-visuals'>
+          <div className='delete-btn' data-testid='delete-outfit-btn' onClick={() => deleteOutfit(outfit.id)}>
+            <AiOutlineCloseCircle />
+          </div>
+          <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
+          {outfit.photo
+            ? (
+            <img
+              src={outfit.photo}
+              alt={outfit.name}
+            />
+            )
+          : <img
+          src={`https://via.placeholder.com/220x200?text=Image+Not+Available`}
+          alt='no-image'
+          />
+          }
+        </div>
+        </div>
+
+        <div className='product-details'>
+          <div className='card-category' data-testid={`outfit-category-${outfit.id}`}> {outfit.category}</div>
+          <div className='card-name' data-testid={`outfit-name-${outfit.id}`}>{outfit.name}</div>
+          {priceElement}
+          <AverageStars rating={outfit.ratings}/>
+        </div>
       </div>
     </div>
   )

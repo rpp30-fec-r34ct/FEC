@@ -1,17 +1,16 @@
+/* eslint-disable */
 /**
  * @jest-environment jsdom
  */
 
- import React from 'react'
- import { render, fireEvent, waitFor, screen } from '@testing-library/react'
- import '@testing-library/jest-dom'
- import { createMemoryHistory } from 'history'
- import { Router, Route, Switch } from 'react-router-dom'
- import { rest } from 'msw'
- import { setupServer } from 'msw/node'
- import { regeneratorRuntime } from 'regenerator-runtime'
-
-
+import React from 'react'
+import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import '@testing-library/jest-dom'
+import { createMemoryHistory } from 'history'
+import { Router, Route, Switch } from 'react-router-dom'
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
+import { regeneratorRuntime } from 'regenerator-runtime'
 
 // components
 import Question from '../../../client/src/QAComponents/Question.jsx'
@@ -33,20 +32,20 @@ import Question from '../../../client/src/QAComponents/Question.jsx'
 // afterEach(()=> server.resetHandlers())
 // afterAll(()=> server.close())
 
-describe('Individual Question Component', () => {
+xdescribe('Individual Question Component', () => {
   test('Should render a Question', function () {
-    var app;
+    let app
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
     app = render(
       <Router history={history}>
         <Switch>
-          <Route path="/product/:id">
+          <Route path='/product/:id'>
             <Question />
           </Route>
         </Switch>
-      </Router>,
+      </Router>
     )
     expect(app.container.querySelector("div[class='question-body']")).toBeInTheDocument()
   })

@@ -3,20 +3,28 @@ import { useParams } from 'react-router-dom'
 import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { CardSkeleton } from '../StyledComponents/CardSkeleton.jsx'
+
 import axios from 'axios'
-import { FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 import './Carousel.css'
 
-export default function Carousel(props) {
+export default function Carousel (props) {
   const [relatedProducts, setRelatedProducts] = useState([])
-  const [currentProduct, setCurrentProduct] = useState([])
+  const [currentOverview, setCurrentOverview] = useState([])
+  const [currentPosition, setCurrentPosition] = useState(0)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const currentRelated = relatedProducts.length
+  const [isLoading, setLoading] = useState(false)
   const { productId } = useParams()
 
   useEffect(() => {
-    getRelatedProducts()
-    getCurrentProduct()
+    setLoading(true)
+    const timer = setTimeout(async () => {
+      await getOverviewProduct()
+      await getRelatedProducts()
+      setLoading(false)
+    }, 500)
+    return () => clearTimeout(timer)
   }, [])
 
   const getRelatedProducts = async () => {
@@ -28,53 +36,47 @@ export default function Carousel(props) {
     }
   }
 
-  const getCurrentProduct = async () => {
+  const getOverviewProduct = async () => {
     try {
-      const { data } = await axios.get(`/api/products/${productId}`)
-      setCurrentProduct(data)
+      const { data } = await axios.get(`/productDetail/${productId}`)
+      setCurrentOverview(data)
     } catch (error) {
       console.log(error.message)
     }
   }
 
-
   const nextCard = () => {
-    if (currentIndex >= 0 && currentIndex < (currentRelated - 1)) {
-      setCurrentIndex(currentIndex => currentIndex + 1)
-    }
+    setCurrentIndex(currentIndex => currentIndex + 1)
+    setCurrentPosition(currentPosition - 220)
   }
 
   const prevCard = () => {
-    if (currentIndex > 0 && currentIndex <= (currentRelated - 1)) {
-      setCurrentIndex(currentIndex => currentIndex - 1)
-    }
+    setCurrentIndex(currentIndex => currentIndex - 1)
+    setCurrentPosition(currentPosition + 220)
   }
+
+  const placeHolder = Array(4).fill('')
 
   return (
     <div className='carousels-overview'>
-      <h3>RELATED PRODUCTS</h3>
-      <div className='carousel-container'>
-        {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
-        <ProductList
-          relatedProducts={relatedProducts}
-          currentProduct={currentProduct}
-          currentIndex={currentIndex}
-          getCurrentProduct={getCurrentProduct}
-        />
-        {currentIndex < (currentRelated - 1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+      <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
+      <div className='carousel-container' data-testid='rel-product-carousel'>
+      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+        {isLoading
+          ? placeHolder.map((card, index) => (
+            <CardSkeleton key={index} style={{ minHeight: '302px', minWidth: '200px' }} />
+            ))
+          : <ProductList
+              relatedProducts={relatedProducts}
+              currentOverview={currentOverview}
+              currentIndex={currentIndex}
+              currentPosition={currentPosition}
+            />}
+        {relatedProducts.length > 4 && ((currentIndex + 3) < relatedProducts.length -1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
-      <div className='outfit-overview'>
-        <h3>YOUR OUTFIT</h3>
-        <div className='outfit-container'>
-          <FaChevronLeft className='left-arrow' />
-          <div className='outfit-carousel-wrapper'>
-            <div className='outfit-content'>
-              <OutfitList />
-            </div>
-          </div>
-          <FaChevronRight className='right-arrow' />
-        </div>
-      </div>
-    </div >
+      <OutfitList
+        currentOverview={currentOverview}
+      />
+    </div>
   )
 }

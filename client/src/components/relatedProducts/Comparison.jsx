@@ -8,7 +8,7 @@ import { createPortal } from 'react-dom'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
-const Comparison = (props) => {
+const Comparison = ({relatedItem, currentOverview}) => {
   const [isOpen, setOpen] = useState(false)
   const [allFeatures, setAllFeatures] = useState({})
   const { productId } = useParams()
@@ -22,11 +22,10 @@ const Comparison = (props) => {
 
   const getComparedFeatures = () => {
     let comparedFeatures = {}
+    let overviewFeatures = currentOverview.features
+    let relatedFeatures = relatedItem.features
 
-    let currentProductFeatures = props.currentProduct.features
-    let relatedFeatures = props.relatedProduct.features
-
-    currentProductFeatures.forEach((item) => {
+    overviewFeatures.forEach((item) => {
       comparedFeatures[item.feature] = {
         value1: item.value || <GiCheckMark />,
         value2: null
@@ -45,7 +44,7 @@ const Comparison = (props) => {
 
   return (
     <React.Fragment>
-      <div className="favorite-btn" onClick={toggleModal}>
+      <div className="favorite-btn" data-testid='rel-product-toggle' onClick={toggleModal}>
         <RiStarSmileFill />
       </div>
       {
@@ -53,17 +52,17 @@ const Comparison = (props) => {
           ? createPortal(
             <React.Fragment>
               <div className="modal">
-                <div className="close-btn" onClick={toggleModal}>
+                <div className='close-btn' data-testid='toggle-comparison-modal' onClick={toggleModal}>
                   <AiOutlineCloseCircle />
                 </div>
-                <div className="modal-body">
-                  <h3>Comparing</h3>
+                <div className="modal-body" >
+                  <h3 data-testid='comparing-header-modal'>Comparing</h3>
                   <table>
                     <thead>
                       <tr>
-                        <th>{props.currentProduct.name}</th>
+                        <th>{currentOverview.name}</th>
                         <th>Characteristic</th>
-                        <th>{props.relatedProduct.name}</th>
+                        <th>{relatedItem.name}</th>
                       </tr>
                     </thead>
                     <tbody>

@@ -1,6 +1,6 @@
 const path = require('path')
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: path.join(__dirname, '/client/src/index.jsx'),
   output: {
     filename: 'bundle.js',
@@ -32,6 +32,16 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        }
       }
     ]
   }

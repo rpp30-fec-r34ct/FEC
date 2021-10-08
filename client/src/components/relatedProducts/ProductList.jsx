@@ -1,18 +1,20 @@
 import React from 'react'
 import ProductCard from './ProductCard.jsx'
 
-export default function ProductList(props) {
+export default function ProductList ({ currentIndex, relatedProducts, currentOverview }) {
   return (
     <div className='product-list'>
       <div className='carousel-content-wrapper'>
-        <div className='carousel-content' style={{ transform: `translateX(${props.currentIndex * 15}%)` }}>
+        <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
           {
-            props.relatedProducts.map((product, index) => {
-              return <ProductCard
-                key={index}
-                product={product}
-                currentProduct={props.currentProduct}
-              />
+            relatedProducts.map((relatedItem, index) => {
+              return (
+                <ProductCard
+                  key={index}
+                  relatedItem={relatedItem}
+                  currentOverview={currentOverview}
+                />
+              )
             })
           }
         </div>

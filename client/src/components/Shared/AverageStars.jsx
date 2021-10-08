@@ -7,58 +7,58 @@ import ThreeQuarterStar from './../Review Widget/icons/star-three-quarter.svg'
 import EmptyStar from './../Review Widget/icons/empty-star.svg'
 
 const AverageStars = (props) => {
-  const averageRating = helper.findStarRating(props.rating);
+  const averageRating = helper.findStarRating(props.rating)
 
-  let wholeRating = Math.floor(averageRating) || 0;
+  const wholeRating = Math.floor(averageRating) || 0
 
-  let wholeStars = Array.from(Array(wholeRating)).map((_, i) => (
-    <img key={i} src={FullStar} />
-  ));
+  const wholeStars = Array.from(Array(wholeRating)).map((_, i) => (
+    <img key={i} src={FullStar} data-testid='full-star-img' />
+  ))
 
-  let emptyStars = Array.from(Array(5)).map((_, i) => <img key={i} src={EmptyStar} />);
+  const emptyStars = Array.from(Array(5)).map((_, i) => <img key={i} src={EmptyStar} data-testid='empty-star-img' />)
 
-  let remaining = Math.round(((averageRating - wholeRating) * 100) % 4); //remaining in quarters
-  let remainingStar;
+  const remaining = Math.round(((averageRating - wholeRating) * 100) % 4) // remaining in quarters
+  let remainingStar
 
   switch (remaining) {
     case 1:
-      remainingStar = <img src={QuarterStar} />
-      break;
+      remainingStar = <img src={QuarterStar} data-testid='quarter-star-img' />
+      break
     case 2:
-      remainingStar = <img src={HalfStar} />
-      break;
+      remainingStar = <img src={HalfStar} data-testid='half-star-img' />
+      break
     case 3:
-      remainingStar = <img src={ThreeQuarterStar} />
-      break;
+      remainingStar = <img src={ThreeQuarterStar} data-testid='three-quarter-star-img' />
+      break
     default:
-      break;
+      break
   }
 
   const ratingElement = (
     <>
       {
-        averageRating ? (
-          <>
-            <div style={{ display: 'flex', position: 'absolute' }} >
-              {emptyStars}
-            </div>
-            <div style={{ display: 'flex' }}>
-              {wholeStars}
-              {remainingStar}
-            </div>
-          </>
-        ) : null
+        averageRating
+          ? (
+            <>
+              <div style={{ display: 'flex', position: 'absolute' }}>
+                {emptyStars}
+              </div>
+              <div style={{ display: 'flex' }}>
+                {wholeStars}
+                {remainingStar}
+              </div>
+            </>
+            )
+          : null
       }
     </>
-  );
-
-
+  )
 
   return (
-    <div className='card-rating' style={{ visibility: !averageRating ? "hidden" : "" }}>
+    <div className='card-rating' style={{ visibility: !averageRating ? 'hidden' : '' }}>
       {ratingElement}
     </div>
   )
 }
 
-export default AverageStars;
+export default AverageStars

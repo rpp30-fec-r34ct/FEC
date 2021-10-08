@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react'
 import ReviewTile from './ReviewTile.jsx'
 import axios from 'axios'
@@ -10,6 +11,8 @@ const ReviewList = (props) => {
   const [pullMoreReviews, setPullMoreReviews] = useState(1)
   const [sortType, setSortType] = useState('relevance')
   const [filterChange, setFilterChange] = useState(false)
+
+  // const [reportedList, setReportedList]
 
   useEffect(() => {
     getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
@@ -64,7 +67,7 @@ const ReviewList = (props) => {
 
   const renderMoreBtn = (totalReviews) => {
     if (reviewDisplayCount < props.totalReviews && pullMoreReviews) {
-      return <button onClick={moreReviews} className='moreReviewsButton'>More Reviews</button>
+      return <button onClick={moreReviews} className='reviewsBtn'>More Reviews</button>
     }
   }
 
@@ -77,6 +80,7 @@ const ReviewList = (props) => {
       <div className='reviewList'>{reviews}</div>
       <div>
         {renderMoreBtn()}
+        <button className='reviewsBtn' onClick={props.onAddReviewClick}>Add Review +</button>
       </div>
     </div>
   )

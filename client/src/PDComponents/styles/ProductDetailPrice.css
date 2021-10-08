@@ -1,0 +1,8 @@
+#product-price {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+#product-price strike {
+  color: red;
+}

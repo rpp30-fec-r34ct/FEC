@@ -12,7 +12,7 @@ describe('Outfit List Component', () => {
     const OutfitListComponent = render(<OutfitList currentOverview={testProduct} />)
     expect(OutfitListComponent.container.querySelector('.outfit-list')).toBeInTheDocument()
   })
-  test('should render list of 0 products ', () => {
+  test('Outfit List should initially have no items', () => {
     const OutfitListComponent = render(<OutfitList currentOverview={testProduct} />)
     expect(OutfitListComponent.container.querySelector('.carousel-content').children.length).toEqual(0)
   })

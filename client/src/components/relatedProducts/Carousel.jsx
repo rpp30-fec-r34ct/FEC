@@ -5,7 +5,6 @@ import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { CardSkeleton } from '../StyledComponents/CardSkeleton.jsx'
-import testRelatedProducts from '/testData/testRelatedProducts'
 
 import axios from 'axios'
 import './Carousel.css'
@@ -24,8 +23,7 @@ export default function Carousel (props) {
       await getOverviewProduct()
       await getRelatedProducts()
       setLoading(false)
-    }, 2500)
-
+    }, 500)
     return () => clearTimeout(timer)
   }, [])
 
@@ -62,20 +60,19 @@ export default function Carousel (props) {
   return (
     <div className='carousels-overview'>
       <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
-        {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard}/>}
+      {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
       <div className='carousel-container' data-testid='rel-product-carousel'>
         {isLoading
           ? placeHolder.map((card, index) => (
-            <CardSkeleton key={index} style={{minHeight: '302px', minWidth: '200px'}}/>
+            <CardSkeleton key={index} style={{ minHeight: '302px', minWidth: '200px' }} />
             ))
           : <ProductList
-              testRelatedProducts={testRelatedProducts}
               relatedProducts={relatedProducts}
               currentOverview={currentOverview}
               currentIndex={currentIndex}
               currentPosition={currentPosition}
             />}
-        {relatedProducts.length > 3 && currentIndex < (relatedProducts.length - 3) && <FaChevronRight className='right-arrow' onClick={nextCard}/>}
+        {relatedProducts.length > 3 && currentIndex < (relatedProducts.length - 3) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <OutfitList
         currentOverview={currentOverview}

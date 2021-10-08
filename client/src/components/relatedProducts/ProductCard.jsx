@@ -7,11 +7,12 @@ export default function ProductCard ({ relatedItem, currentOverview }) {
   const priceElement = (
     <>
       {relatedItem.sale
-        ? <div className='card-price'>
-          <div style={{ color: 'red' }} data-testid={`rel-product-sale-${relatedItem.id}`}>
+        ? <div className='card-price' style={{display: 'flex'}}>
+
+        <div style={{ color: 'red', float: 'left'  }} data-testid={`rel-product-sale-${relatedItem.id}`}>
             ${relatedItem.sale}
           </div>
-          <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`rel-product-price-${relatedItem.id}`}>
+           <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`rel-product-price-${relatedItem.id}`}>
             ${relatedItem.price}
           </div>
         </div>

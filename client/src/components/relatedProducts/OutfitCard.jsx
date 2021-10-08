@@ -7,8 +7,8 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
   const priceElement = (
     <>
       {outfit.sale
-        ? <div className='card-price'>
-          <div style={{ color: 'red' }} data-testid={`outfit-sale-${outfit.id}`}>
+        ? <div className='card-price' style={{display: 'flex'}}>
+          <div style={{ color: 'red', float: 'left'}} data-testid={`outfit-sale-${outfit.id}`}>
             ${outfit.sale}
           </div>
           <div style={{ textDecoration: 'line-through', opacity: '50%' }} data-testid={`outfit-price-${outfit.id}`}>

@@ -47,20 +47,20 @@ export default function OutfitList ({ currentOverview }) {
       <h3 style={{ marginTop: '5px' }} className='outfit-list-header-1'>YOUR OUTFIT</h3>
       <div className='outfit-list'>
         <div className='carousels-overview'>
-          <div className='carousel-container' style={{ width: '100%', maxWidth: '675px' }}>
+          <div className='carousel-container' style={{width: '870px' }}>
             <AddCard addOutfit={addOutfit} style={{ display: 'inline' }} />
+            {outfitPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit}/>}
             <div className='carousel-content-wrapper'>
-            {outfitPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevOutfit} />}
-              <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 31}%)` }}>
+              <div className='carousel-content' style={{ transform: `translateX(-${outfitIndex * 34}%)` }}>
                 {
                     userOutfits.map((outfit) => <OutfitCard key={outfit.id} outfit={outfit} deleteOutfit={deleteOutfit} />)
                   }
               </div>
             </div>
+            {userOutfits.length > 3 && outfitIndex + 2 < (userOutfits.length - 1) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
           </div>
-        </div>
-            {userOutfits.length > 3 && outfitIndex < (userOutfits.length - 3) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
       </div>
+    </div>
     </>
   )
 }

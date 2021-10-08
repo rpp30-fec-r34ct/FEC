@@ -60,8 +60,8 @@ export default function Carousel (props) {
   return (
     <div className='carousels-overview'>
       <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
-      {currentIndex > 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
       <div className='carousel-container' data-testid='rel-product-carousel'>
+      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         {isLoading
           ? placeHolder.map((card, index) => (
             <CardSkeleton key={index} style={{ minHeight: '302px', minWidth: '200px' }} />
@@ -72,7 +72,7 @@ export default function Carousel (props) {
               currentIndex={currentIndex}
               currentPosition={currentPosition}
             />}
-        {relatedProducts.length > 3 && currentIndex < (relatedProducts.length - 3) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        {relatedProducts.length > 4 && ((currentIndex + 3) < relatedProducts.length -1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <OutfitList
         currentOverview={currentOverview}

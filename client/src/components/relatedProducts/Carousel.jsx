@@ -9,7 +9,7 @@ import CardSkeleton from '../StyledComponents/CardSkeleton.jsx'
 import axios from 'axios'
 import './Carousel.css'
 
-export default function Carousel (props) {
+export default function Carousel ({theme}) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentOverview, setCurrentOverview] = useState([])
   const [currentPosition, setCurrentPosition] = useState(0)

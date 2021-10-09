@@ -47,20 +47,22 @@ const ProductDetailPageComponent = ({ theme }) => {
     display: 'flex',
     backgroundColor: 'rgb(236 236 236)',
     borderRadius: '10px',
-    width: 'fit-content',
-    padding: '15px'
+    width: '100%',
+    padding: '15px 0 15px 0',
+    justifyContent: 'space-evenly'
   }
 
   const darkStyles = {
     display: 'flex',
     backgroundColor: 'rgb(44 44 45)',
     borderRadius: '10px',
-    width: 'fit-content',
-    padding: '15px'
+    width: '100%',
+    padding: '15px 0px 15px 0px',
+    justifyContent: 'space-evenly'
   }
 
   return (
-    <>
+    <div style={{ width: '100%' }}>
       {redirect
         ? <Redirect to={{
           pathname: '/404',
@@ -78,7 +80,7 @@ const ProductDetailPageComponent = ({ theme }) => {
         theme={theme} />
       </div>
       <ProductDetailFooter productDetails={productDetails} theme={theme}/>
-    </>
+    </div>
   )
 }
 

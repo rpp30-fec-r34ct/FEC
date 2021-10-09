@@ -39,7 +39,7 @@ const ToggleContainer = styled.button`
 const Toggle = ({theme, toggleTheme}) => {
   const isLight = theme === 'light';
   return (
-    <ToggleContainer lightTheme={isLight }onClick={toggleTheme}>
+    <ToggleContainer aria-label='toggle-theme' lightTheme={isLight }onClick={toggleTheme}>
    <CgSun/>
    <CgMoon/>
     </ToggleContainer>

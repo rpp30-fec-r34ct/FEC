@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom'
 import axios from 'axios'
 
 const AnswerModal = (props) => {
-  // console.log('handlemodalchange', props.handleModalChange)
   const modalRef = useRef()
   const [{alt, src}, setImg] = useState([{
     alt,
@@ -49,7 +48,6 @@ const AnswerModal = (props) => {
   }
 
   const uploadImg = (e) => {
-    console.log(e.target.files[0])
     if (e.target.files[0]) {
       let image = new FormData()
       image.append('file', e.target.files[0])

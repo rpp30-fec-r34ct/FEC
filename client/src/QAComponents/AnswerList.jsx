@@ -73,7 +73,6 @@ const AnswerList = (props) => {
           }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
           return loadedAnswers.slice(0, 2)
         })
-        console.log(loadedAnswers)
         setMoreAnswers(loadedAnswers)
       }
     })

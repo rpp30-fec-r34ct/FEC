@@ -6,7 +6,6 @@ import axios from 'axios'
 import './QA.css'
 import Question from './Question.jsx'
 import QuestionModal from './QuestionModal.jsx'
-// import './Test.jsx';
 
 const QAList = (props) => {
   const [answerCount, setAnswerCount] = useState(2)
@@ -48,7 +47,6 @@ const QAList = (props) => {
   }
   const renderAllQuestions = () => {
     setQuestions(allQuestions.slice(0, questions.length + 2))
-    // setAllQuestions(0)
     setFirstRender(false)
   }
 
@@ -143,7 +141,6 @@ const QAList = (props) => {
               question_body={question.question_body}
               question_helpfulness={question.question_helpfulness}
               question_id={question.question_id}
-              // handleModalChange={(e) => { handleModalChange(e) }}
             />
           )
         }) : null}

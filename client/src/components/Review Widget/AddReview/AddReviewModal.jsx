@@ -32,7 +32,6 @@ const AddReviewModal = (props) => {
 
   // onChange/onClick functions
   const handleCharacteristicChange = (event) => {
-    console.log(event)
     const newState = {}
     Object.assign(newState, characteristicsToSend)
     newState[event.target.name.toString()] = parseInt(event.target.id)
@@ -82,7 +81,11 @@ const AddReviewModal = (props) => {
       const { data } = await axios.get('/productDetail/' + id)
       setProductName(data.name)
     } catch (error) {
-      console.error(error)
+      if (props.testName !== undefined) {
+        setProductName(props.testName)
+      } else {
+        console.error(error)
+      }
     }
   }
 
@@ -204,13 +207,13 @@ const AddReviewModal = (props) => {
             <div style={{ marginTop: '10px' }}>
               <label className='addReviewTitleStyle'>4. Review Summary:</label><br />
               <div className='addReviewItemStyle'>
-                <input id='reviewSummary' onChange={handleReviewChange} type='textarea' maxLength='60' placeholder='Example: Best purhcase ever!' style={{ width: '90%', height: '30px', fontFamily: 'Playfair Display serif' }} />
+                <input data-testid="testReviewSummary" id='reviewSummary' onChange={handleReviewChange} type='textarea' maxLength='60' placeholder='Example: Best purhcase ever!' style={{ width: '90%', height: '30px', fontFamily: 'Playfair Display serif' }} />
               </div>
             </div>
             <div style={{ marginTop: '10px' }}>
               <label className='addReviewTitleStyle'>5. Review Body: *</label><br />
               <div className='addReviewItemStyle'>
-                <textarea id='reviewBody' onChange={handleReviewChange} maxLength='1000' minLength='50' placeholder='Why did you like the product or not?' style={{ width: '90%', height: '100px', fontFamily: 'Playfair Display serif' }} />
+                <textarea data-testid="testReviewBody" id='reviewBody' onChange={handleReviewChange} maxLength='1000' minLength='50' placeholder='Why did you like the product or not?' style={{ width: '90%', height: '100px', fontFamily: 'Playfair Display serif' }} />
                 <br />
                 <span className='subTextStyle'>{getCharCountDisplay()}</span>
               </div>
@@ -218,7 +221,7 @@ const AddReviewModal = (props) => {
             <div style={{ marginTop: '10px' }}>
               <label className='addReviewTitleStyle'>6. What is your nickname?: *</label><br />
               <div className='addReviewItemStyle'>
-                <input id='reviewNickName' onChange={handleReviewChange} type='text' maxLength='60' placeholder='Example: jackson11!' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} />
+                <input data-testid="testReviewNickName" id='reviewNickName' onChange={handleReviewChange} type='text' maxLength='60' placeholder='Example: jackson11!' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} />
                 <br />
                 <span className='subTextStyle'>For privacy reasons, do not use your full name or email address</span>
               </div>
@@ -226,7 +229,7 @@ const AddReviewModal = (props) => {
             <div style={{ marginTop: '10px' }}>
               <label className='addReviewTitleStyle'>7. Your email: *</label><br />
               <div className='addReviewItemStyle'>
-                <input id='reviewEmail' onChange={handleReviewChange} type='text' maxLength='60' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} placeholder='Example: jackson11@email.com' />
+                <input data-testid="testReviewEmail" id='reviewEmail' onChange={handleReviewChange} type='text' maxLength='60' style={{ width: '70%', fontFamily: 'Playfair Display serif' }} placeholder='Example: jackson11@email.com' />
                 <br />
                 <span className='subTextStyle'>For authentication reasons, you will not be not be emailed</span>
               </div>
@@ -235,7 +238,7 @@ const AddReviewModal = (props) => {
               <label className='addReviewTitleStyle'>8. Upload Photos (optional, up to five)</label><br />
               <UploadPhotoBar addNewUploadedPhoto={addNewUploadedPhoto} />
             </div>
-            <input className='submitReviewBtn' type='submit' onClick={onAddReviwSubmit} value='Submit' />
+            <input data-testid="testAddReviewSubmit" className='submitReviewBtn' type='submit' onClick={onAddReviwSubmit} value='Submit' />
           </form>
         </div>
       </>

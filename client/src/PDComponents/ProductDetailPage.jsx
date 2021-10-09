@@ -9,7 +9,7 @@ import ProductDetailFooter from './ProductDetailFooter.jsx'
 const ProductDetailPageComponent = (props) => {
   const { productId } = useParams()
   const [productDetails, setProductDetails] = useState(false)
-  const [styles, setStyles] = useState([])
+  const [styles, setStyles] = useState(null)
   const [selectedStyle, setSelectedStyle] = useState(false)
   const [redirect, setRedirect] = useState(false)
 
@@ -60,7 +60,7 @@ const ProductDetailPageComponent = (props) => {
         <MainImageGallery selectedStyle={selectedStyle} />
         <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       </div>
-      {(productDetails.description || productDetails.slogan) && <ProductDetailFooter productDetails={productDetails} />}
+      <ProductDetailFooter productDetails={productDetails} />
     </div>
   )
 }

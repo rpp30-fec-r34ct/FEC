@@ -34,19 +34,13 @@ const QuestionModal = (props) => {
     width: '80%',
   }
 
-  const keyPress = useCallback(
-    e => {
-      if (e.key === 'Escape') {
-        setShowQuestionModal(false)
-      }
-    },
-    [setShowQuestionModal, showQuestionModal]
-  )
-
   const submitNewQuestion = (e) => {
     e.preventDefault()
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
-      return alert('Your question could not be processed. You must enter ALL of the following: \nQuestion, \nYour Name, and \nYour Email Address')
+      return document.getElementsByClassName('add-question-form')[0].append('Your question could not be processed. You must enter ALL of the following: \nQuestion, \nYour Name, and \nYour Email Address')
+    }
+    if (!e.target[2].value.includes('@')) {
+      return document.getElementsByClassName('add-question-form')[0].append('Please enter a valid email address\n\n')
     }
     const body = e.target[0].value
     const name = e.target[1].value
@@ -58,38 +52,24 @@ const QuestionModal = (props) => {
       email: email,
       id: id
     })
-    .then(data => showQuestionModal ? setShowQuestionModal(false) : null)
-    .catch(err => console.error(err))
+    .then(data => null)
+    .catch(err => err)
   }
-
-  useEffect(
-    () => {
-      if (props.showQuestionModal) {
-        setShowQuestionModal(prev => !prev)
-      }
-      document.addEventListener('keydown', keyPress)
-      return () => document.removeEventListener('keydown', keyPress)
-    },
-    [props.showQuestionModal]
-  )
 
   return (
     <>
-      {showQuestionModal ? (
-          <div style={modalStyle} id="question-modal">
-          <div style={formStyle} className='add-question-form' id={props.product_id}>
-            <button className="close-button" onClick={()=> setShowQuestionModal(false)}>X</button>
-            <h1>Product: {document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
-            <form onSubmit={submitNewQuestion}>
-              <input name='question' maxLength="1000" size="100" type='text' className="modal-textbox" placeholder='Your Question' />
-              <input name='nickname' size="30" type='text' placeholder='Your Nickname' />
-              <input name='email' size="30" type='text' placeholder='Example: jack@email.com' />
-              <button type='submit'>Submit</button>
-            </form>
-          </div>
-          </div>
-
-        ) : null}
+      <div style={modalStyle} id="question-modal">
+      <div style={formStyle} className='add-question-form' id={props.product_id}>
+        <button id="close-question-modal" className="close-button">X</button>
+        <h1>Product: {document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}</h1>
+        <form id="question-modal-form" onSubmit={submitNewQuestion}>
+          <input name='question' maxLength="1000" size="100" type='text' className="modal-textbox" placeholder='Your Question' />
+          <input name='nickname' size="30" type='text' placeholder='Your Nickname' />
+          <input name='email' size="30" type='text' placeholder='Example: jack@email.com' />
+          <button id="submit-question" type='submit'>Submit</button>
+        </form>
+      </div>
+      </div>
     </>
   )
 }

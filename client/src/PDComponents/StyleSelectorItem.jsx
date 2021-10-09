@@ -1,4 +1,5 @@
 import React from 'react'
+import { SkeletonCircle } from '../components/Shared/SSkeleton.jsx'
 
 const StylesSelectorItemComponent = (props) => {
   const styles = {
@@ -8,7 +9,16 @@ const StylesSelectorItemComponent = (props) => {
     border: 'solid, 1px, black'
   }
   return (
-    <img style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.handleSelectorClick} />
+    <>
+      {props.style
+        ? (
+          <>
+            {props.style.photos[0].thumbnail_url
+              ? <img style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.handleSelectorClick} />
+              : <div style={styles}> <SkeletonCircle /> </div>}
+          </>)
+        : <div style={styles}> <SkeletonCircle /> </div>}
+    </>
   )
 }
 

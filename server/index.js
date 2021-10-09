@@ -239,7 +239,8 @@ app.get('/qa/questions', (req, res) => {
 })
 
 app.get('/qa/answers', (req, res) => {
-  axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
+  let queryString = '?page=' + req.query.page + '&count=' + req.query.count
+  axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers' + queryString, {
     headers: {
       Authorization: token.API_KEY
     }
@@ -259,7 +260,6 @@ app.put('/qa/helpfulquestion/', (req, res) => {
     }
   })
     .then(data => {
-      console.log(data)
       res.send('Helpful')
     })
     .catch(err => {
@@ -290,7 +290,6 @@ app.put('/qa/answers/helpful', (req, res) => {
     }
   })
     .then(data => {
-      console.log(data)
       res.status(200).send('ANSWER MARKED AS HELPFUL')
     })
     .catch(err => {
@@ -313,14 +312,12 @@ app.post('/qa/newquestion', (req, res) => {
     }
   })
     .then(data => {
-      console.log(data)
       res.send('new question added')
     })
     .catch(err => res.send(err))
 })
 
 app.post('/qa/answer', upload.any(), (req, res) => {
-  console.log('sending answer', req.files, req.body)
   if (req.files) {
     const s3 = new AWS.S3({
       params: {
@@ -366,11 +363,9 @@ app.post('/qa/answer', upload.any(), (req, res) => {
             res.send(err)
           }
         })
-        console.log('Success')
         res.sendStatus(200)
       })
       .catch(err => {
-        console.log(err.response)
         res.send(err)
       })
   } else {
@@ -388,11 +383,9 @@ app.post('/qa/answer', upload.any(), (req, res) => {
       }
     })
       .then(data => {
-        console.log('it should have worked')
-        res.sendStatus(200)
+        res.status(200).send('Success')
       })
       .catch(err => {
-        console.log(err.response)
         res.send(err)
       })
   }

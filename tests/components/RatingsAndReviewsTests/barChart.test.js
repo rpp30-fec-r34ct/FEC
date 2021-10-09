@@ -17,4 +17,11 @@ describe('Bar Chart Component', () => {
     const barChartElement = screen.getByTestId('testBarChart')
     expect(barChartElement).toHaveClass('BarChart')
   })
+
+  test('Should exist on the dom', function () {
+    render(<BarChart breakDownRatings={null} totalReviews={0} />)
+
+    const barChartElement = screen.getByTestId('testBarChart')
+    expect(barChartElement).toHaveClass('BarChart')
+  })
 })

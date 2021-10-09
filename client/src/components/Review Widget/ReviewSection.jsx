@@ -8,7 +8,7 @@ import axios from 'axios'
 import ModalContainer from './ModalContainer.jsx'
 import AddReviewModal from './AddReview/AddReviewModal.jsx'
 
-const ReviewSection = () => {
+const ReviewSection = (props) => {
   const { productId } = useParams()
 
   const [reviewsMeta, setReviewsMeta] = useState({

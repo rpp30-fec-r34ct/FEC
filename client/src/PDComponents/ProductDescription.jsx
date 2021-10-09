@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { findTotalReviews } from '../components/Shared/helpers.js'
 import './styles/ProductDescription.css'
+import { SkeletonLine } from '../components/Shared/SSkeleton.jsx'
 import ProductCheckout from './ProductCheckout.jsx'
 import AverageStars from '../components/Shared/AverageStars.jsx'
 import ProductStyleSelector from './ProductStyleSelector.jsx'
@@ -46,6 +47,7 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
     flexDirection: 'column',
     marginLeft: '20px'
   }
+
   return (
     <div style={descriptionStyles}>
       <div style={{ display: 'block' }}>
@@ -53,10 +55,17 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
         {totalReviews > 0 &&
           <a href='' id='overview-review-count' onClick={handleReviewCountClick}> Read All {totalReviews} Reviews</a>}
       </div>
-      <div>
-        <h4 id='category-title'>{`${productDetails.category}`.toUpperCase()}</h4>
-        <h1 id='product-title'>{productDetails.name}</h1>
-      </div>
+      {productDetails
+        ? (
+          <div>
+            <h4 id='category-title'>{`${productDetails.category}`.toUpperCase()}</h4>
+            <h1 id='product-title'>{productDetails.name}</h1>
+          </div>)
+        : (
+          <div>
+            <h4><SkeletonLine /></h4>
+            <h1><SkeletonLine /></h1>
+          </div>)}
       <ProductDetailPrice selectedStyle={selectedStyle} />
       <ProductStyleSelector styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
       <ProductCheckout selectedStyle={selectedStyle} />

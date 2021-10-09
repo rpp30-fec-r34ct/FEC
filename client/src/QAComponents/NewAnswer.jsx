@@ -68,26 +68,11 @@ const NewAnswer = (props) => {
     fontSize: '100%',
   }
 
-  // SERVER REQUESTS
-  const getAllAnswers = (question, callback) => {
-    if (question === undefined) {
-      return
-    }
-    axios.get('/qa/answers?question_id=' + question)
-      .then(data => {
-        callback(null, data)
-      })
-      .catch(err => console.log(err))
-  }
-
   const reportAnswer = (e) => {
     const answerId = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.id
-    console.log(answerId)
-    console.log('reporting')
     e.preventDefault()
     axios.put('/qa/answers/report/?answer_id=' + answerId)
       .then(data => {
-        console.log(data)
         return setReport(data.data)
       })
       .catch(err => {
@@ -108,7 +93,7 @@ const NewAnswer = (props) => {
           console.error(err)
         })
     } else {
-      console.log('This answer has already been marked as "helpful"')
+      return
     }
   }
 
@@ -128,14 +113,14 @@ const NewAnswer = (props) => {
                   <td style={answerHelpfulStyle}>
                     Helpful?
                     {!helpful ? <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a> : 'Yes'}
-                    ({helpfulness ? helpfulness : 0})
+                    (<span id="answer-helpfulness">{helpfulness ? helpfulness : 0}</span>)
                   </td>
                   {/* <td>
                   </td>
                   <td>
                   </td> */}
                   {report === 'Report' ? <td style={answerReportStyle} className='report-answer'>
-                    <a href='' onClick={reportAnswer}>{report}</a>
+                    <a href='' id="report-answer-link" onClick={reportAnswer}>{report}</a>
                   </td> : <td style={answerReportStyle} className='report-answer'>
                     {report}
                   </td>}

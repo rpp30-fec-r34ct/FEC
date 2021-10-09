@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * @jest-environment jsdom
  */
@@ -31,8 +30,8 @@ const testResponse = {
       question_helpfulness: 29,
       reported: false,
       answers: {
-        3715723: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715724: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] }
+        3715723: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715724: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] }
       }
     },
     {
@@ -54,20 +53,20 @@ const testResponse = {
       question_helpfulness: 24,
       reported: false,
       answers: {
-        3715682: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715684: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715685: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715686: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715687: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715688: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715689: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715690: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715691: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715693: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715694: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715695: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715696: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] },
-        3715697: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] }
+        3715682: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715684: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715685: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715686: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715687: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715688: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715689: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715690: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715691: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715693: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715694: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715695: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715696: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] },
+        3715697: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] }
       }
     },
     {
@@ -78,7 +77,7 @@ const testResponse = {
       question_helpfulness: 24,
       reported: false,
       answers: {
-        1234567: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] }
+        1234567: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] }
       }
     },
     {
@@ -89,7 +88,7 @@ const testResponse = {
       question_helpfulness: 22,
       reported: false,
       answers: {
-        1234567: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['='] }
+        1234567: { id: 0, body: '0', date: '0', answerer_name: '-', helpfulness: 0, photos: ['https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/783px-Test-Logo.svg.png'] }
       }
     }
   ]
@@ -113,37 +112,39 @@ const testAnswer = [
     photos: [[Object]]
   }
 ]
-// { key: 1, answers: { 3715723: { answerer_name: 'Oje', body: 'Tested and approved', date: '2021-02-23T00:00:00.000Z', helpfulness: 12, id: 3715723, photos: [] } }, asker_name: 'Oje', question_body: 'This test should work', question_helpfulness: 17, question_id: 101501, question_date: '2021-03-31T00:00:00.000Z', reported: false }
 
 const handlers = [
   rest.get('/qa/questions', (req, res, ctx) => {
     return res(
       ctx.json(testResponse)
     )
-  })
-  // rest.get('/qa/answers', (req, res, ctx) => {
-  //   return res(
-  //     ctx.json(testResponse)
-  //     )
-  //   })
+  }),
+  rest.get('/qa/answers', (req, res, ctx) => {
+    return res(
+      ctx.json(testAnswer)
+      )
+    })
 ]
 
-const server = setupServer(rest.get('/qa/questions', (req, res, ctx) => {
+const server = setupServer(
+  rest.get('/qa/questions', (req, res, ctx) => {
   return res(
     ctx.json(testResponse)
-  )
-}), rest.get('/qa/answers', (req, res, ctx) => {
-  return res(
+    )
+  })
+  , rest.get('/qa/answers', (req, res, ctx) => {
+    return res(
     ctx.json(testAnswer)
   )
-}))
+})
+)
 
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
-xdescribe('QA List', (done) => {
-  xtest('Should render the Q/A List', async () => {
+describe('QA List', (done) => {
+  test('Should render the Q/A List', async () => {
     jest.useFakeTimers()
     let app
     const history = createMemoryHistory()
@@ -161,16 +162,16 @@ xdescribe('QA List', (done) => {
     )
     // })
     // setTimeout(()=>{
-    act(() => {
-      jest.advanceTimersByTime(1000)
-    })
+      // act(()=>{
+      //   jest.advanceTimersByTime(1000);
+      // })
     // await waitFor(()=>{
-    expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
-    // })
+      await expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
+  //   })
   // }, 5000)
   })
 
-  xtest('Should have a search bar', () => {
+  test('Should have a search bar', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -187,7 +188,7 @@ xdescribe('QA List', (done) => {
     expect(app.container.querySelector("input[id='search-bar']")).toBeInTheDocument()
   })
 
-  xtest('Should render a question from the Question component', () => {
+  test('Should render a question from the Question component', async () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -206,7 +207,7 @@ xdescribe('QA List', (done) => {
     }, 5000)
   })
 
-  xtest('Should render buttons', () => {
+  test('Should render buttons', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -224,7 +225,7 @@ xdescribe('QA List', (done) => {
     // expect(buttons.length).toBe(2)
   })
 
-  xtest('Should render a button to show more answered questions', () => {
+  test('Should render a button to show more answered questions', async () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -239,12 +240,12 @@ xdescribe('QA List', (done) => {
       </Router>
     )
     setTimeout(() => {
-      expect(app.container.findByText('More Answered Questions')).toBeInTheDocument()
+      expect(app.container.querySelector("div[id='more-questions']")).toBeInTheDocument()
     }, 5000
     )
   })
 
-  xtest('Should render a button to add a question', () => {
+  test('Should render a button to add a question', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -261,7 +262,7 @@ xdescribe('QA List', (done) => {
     expect(app.container.querySelector("button[id='add-question']")).toBeInTheDocument()
   })
 
-  xtest('Should render a question from get request', function () {
+  test('Should render a question from get request', function () {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -282,7 +283,6 @@ xdescribe('QA List', (done) => {
   })
 
   test('Should render a button to show more answered questions', async () => {
-    // jest.useFakeTimers()
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -296,14 +296,8 @@ xdescribe('QA List', (done) => {
         </Switch>
       </Router>
     )
-    // setTimeout(()=>{
-    await act(() => {
-      waitFor(async () => {
-        expect(await app.container.querySelector("div[class='answer-body']")).toBeInTheDocument()
-      })
-    })
-    // done()
-    // }, 5000
-    // )
+    setTimeout(()=>{
+      expect(app.container.querySelector("button[id='more-questions']")).toBeInTheDocument()
+    }, 2000)
   })
 })

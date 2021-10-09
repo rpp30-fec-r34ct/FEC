@@ -117,7 +117,7 @@ const ReviewTile = (props) => {
         return (
           <div className='tile_body'>
             <span>{reviewBody.slice(0, 250)}</span>
-            <button className="seeMoreBtn" onClick={onSeeMore}>See More</button>
+            <button className="seeMoreBtn" data-testid="testSeeMoreBtn" onClick={onSeeMore}>See More</button>
           </div>
         )
       } else {
@@ -156,7 +156,7 @@ const ReviewTile = (props) => {
       {getResponse(props.reviewData.response)}
       <div className='tile_helpfulSection'>
         <span>Helfpul?</span>
-        <span className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>{`Yes (${helpfulCount})`}</span>
+        <span data-testid="testTileHelpfulCount" className='tile_helpfulVote' id={props.reviewData.review_id} onClick={onHelpfulClick}>{`Yes (${helpfulCount})`}</span>
         {getReportRender()}
       </div>
     </div>

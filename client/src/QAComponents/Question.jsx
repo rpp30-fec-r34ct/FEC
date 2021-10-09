@@ -86,9 +86,11 @@ const Question = (props) => {
   }
 
   const handleModalChange = (e) => {
-    console.log('answer submitted', e.target[4].id)
     if (e.target[4].id === "submit-answer") {
-      setShowModal(false)
+      document.getElementsByClassName('add-answer-form')[0].append('Answer Submitted')
+      setTimeout(()=>{
+        setShowModal(false)
+      }, 500)
     }
     setUpdateAnswers(true)
   }
@@ -101,12 +103,11 @@ const Question = (props) => {
         question_id: e.target.id
       })
         .then(data => {
-          console.log(data)
           setQHelpfulness(qHelpfulness + 1)
         })
-        .catch(err => { console.error(err) })
+        .catch(err => { err })
     } else {
-      return console.log('You have already indicated this question as being helpful')
+      return
     }
   }
 
@@ -135,7 +136,7 @@ const Question = (props) => {
             <tr>
               <td style={helpfulStyle} className="helpful">
                 <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Helpful?</a> | Yes
-                ({qHelpfulness ? qHelpfulness : props.question_helpfulness})
+                (<span id="question-helpfulness">{qHelpfulness ? qHelpfulness : props.question_helpfulness}</span>)
               </td>
               <td>
                 <button style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</button>
@@ -147,7 +148,7 @@ const Question = (props) => {
       </div>
       <div>
       </div>
-      {showModal ? <AnswerModal question_id={props.question_id} body={props.question_body} /*handleModalChange={(e)=>{handleModalChange(e)}}*//> : null}
+      {showModal ? <AnswerModal handleModalChange={handleModalChange} question_id={props.question_id} body={props.question_body} /*handleModalChange={(e)=>{handleModalChange(e)}}*//> : null}
     </>
   )
 }

@@ -6,7 +6,6 @@ import axios from 'axios'
 import './QA.css'
 import Question from './Question.jsx'
 import QuestionModal from './QuestionModal.jsx'
-// import './Test.jsx';
 
 const QAList = (props) => {
   const [answerCount, setAnswerCount] = useState(2)
@@ -48,7 +47,6 @@ const QAList = (props) => {
   }
   const renderAllQuestions = () => {
     setQuestions(allQuestions.slice(0, questions.length + 2))
-    // setAllQuestions(0)
     setFirstRender(false)
   }
 
@@ -64,6 +62,12 @@ const QAList = (props) => {
     }
     if (e.target.className === "close-button") {
       setShowQuestionModal(false)
+    }
+    if (e.target.id === "submit-question") {
+      document.getElementsByClassName('add-question-form')[0].append('Question Submitted')
+      setTimeout(()=>{
+        setShowQuestionModal(false)
+      }, 1000)
     }
   }
 
@@ -92,16 +96,14 @@ const QAList = (props) => {
   }
 
   const handleModalChange = (e) => {
-    console.log('answer submitted', e.target[4].button.id)
     axios.get('/qa/questions' + '?product_id=' + productID)
     .then(data => {
-      console.log('axios worked')
       setQuestions(data.data.results.slice(0, 2))
       setAllQuestions(data.data.results)
       setQuestionsCache(data.data.results)
     })
     .catch((err) => {
-      console.error('error while getting product-related questions from server', err)
+      return err
     })
   }
 
@@ -113,7 +115,7 @@ const QAList = (props) => {
         setQuestionsCache(data.data.results)
       })
       .catch((err) => {
-        console.error('error while getting product-related questions from server', err)
+        return err
       })
       document.addEventListener('keydown', keyPress)
       document.addEventListener('click', handleClickOutside)
@@ -140,7 +142,6 @@ const QAList = (props) => {
               question_body={question.question_body}
               question_helpfulness={question.question_helpfulness}
               question_id={question.question_id}
-              // handleModalChange={(e) => { handleModalChange(e) }}
             />
           )
         }) : null}

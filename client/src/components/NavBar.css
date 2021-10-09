@@ -15,20 +15,24 @@
 #logo {
   float: left;
   display: block;
-  color: rgb(227, 227, 238);
+  /* color: rgb(227, 227, 238); */
   text-align: center;
   padding: 14px 16px;
   font-size: 40px;
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: 400;
+  background: -webkit-linear-gradient(#eee, rgb(151, 139, 255));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 
 #search {
   float: right;
   padding: 10px;
   border: 2px solid white;
   border-radius: 10px;
-  margin-top: 8px;
+  margin-top: 12px;
   margin-right: 16px;
   font-size: 17px;
   font-family: Arial, Helvetica, sans-serif;

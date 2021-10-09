@@ -19,11 +19,11 @@
   cursor: pointer;
 }
 
-.left-arrow {
+.carousel-container .left-arrow {
   left: 0px;
 }
 
-.right-arrow {
+.carousel-container .right-arrow  {
   right: 0px;
 }
 
@@ -63,8 +63,6 @@
   display: flex;
   align-items: flex-start;
   float: left;
-  min-height: 302px;
-  min-width: 200px;
   width: 200px;
   height: 302px;
   margin: 5px;
@@ -178,6 +176,7 @@
 }
 
 
+
 /**MODAL**/
 
 .modal {
@@ -247,3 +246,4 @@ tbody tr td {
   border-collapse: separate;
   text-align: center;
 }
+

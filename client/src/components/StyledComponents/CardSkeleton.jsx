@@ -8,18 +8,16 @@ export const CardSkeleton = styled.div`
   width: 200px;
   height: 302px;
   margin: 7px;
-  object-fit: cover;
   border: 1px solid lightgray;
-  box-shadow: 0 10px 45px rgba(0, 0, 0, .1);
+  box-shadow: 0 5px 35px rgba(0, 0, 0, .2);
   background-repeat: no-repeat;
-  background:lightgray;
-
-  background-image:
-  linear-gradient(
-    90deg,
-    rgba(lightgrey, 0) 0,
-    rgba(lightgray, .8) 50%,
-    rgba(lightgrey, 0) 100%
-  )
+  background: linear-gradient(-90deg, #f0f0f0 0%, #F8F8F8 50%, #F0F0F0 100%);
+  animation: pulse 1.2s ease-in-out infinite;
+@keyframes pulse {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -135% 0%;
   }
   `

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import './App.css'
 import NavBar from './NavBar.jsx'
@@ -8,11 +8,29 @@ import Carousel from './relatedProducts/Carousel.jsx'
 import ReviewSection from './Review Widget/ReviewSection.jsx'
 import QAList from '../QAComponents/QAList.jsx'
 import ClickTracker from './ClickTracker.jsx'
+import {ThemeProvider} from 'styled-components'
+import {GlobalTheme} from './StyledComponents/GlobalTheme.jsx'
+import {lightTheme, darkTheme} from './StyledComponents/Themes.jsx'
+import {useDarkMode} from './Shared/useDarkMode.jsx'
+
 
 const App = (props) => {
+  const [theme, toggleTheme, isMounted] = useDarkMode()
+
+  const themeMode = theme === 'light' ? lightTheme : darkTheme
+
+
+  if (!isMounted) {
+    return <div/>
+  }
+
   return (
     <Router>
+    <ThemeProvider theme={themeMode}>
+      <>
+      <GlobalTheme/>
       <NavBar />
+      <button onClick={toggleTheme}>Toggle theme</button>
       <Switch>
         <Route path='/:productId(\d{5})'>
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />
@@ -33,7 +51,9 @@ const App = (props) => {
           <FourOhFour />
         </Route>
       </Switch>
-    </Router>
+      </>
+    </ThemeProvider>
+  </Router>
   )
 }
 

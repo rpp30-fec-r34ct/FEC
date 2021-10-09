@@ -59,8 +59,8 @@ export default function OutfitList ({ currentOverview }) {
             </div>
             {userOutfits.length > 3 && outfitIndex + 2 < (userOutfits.length - 1) && <FaChevronRight className='right-arrow' onClick={nextOutfit} />}
           </div>
-        </div>
       </div>
+    </div>
     </>
   )
 }

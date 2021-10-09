@@ -2,13 +2,18 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-style: none none solid none;
+  border-bottom: 2px solid gray;
   margin-left: 70px;
+  min-width: 500px;
+  max-width: 700px;
 }
 
 .tile_user_date_rating {
-  flex-direction: row;
+  display: flex;
   justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .tile_user_date {
@@ -18,6 +23,46 @@
 
 .tile_summary {
   font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.tile_helpfulSection {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.tile_helpfulVote {
+  text-decoration: underline;
+  margin-left: 10px;
+  margin-right: 3px;
+}
+
+.tile_helpfulVote:hover {
+  color: lightblue;
+}
+
+.tile_report:hover {
+  color: lightblue;
+}
+
+.tile_recommend {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+.seeMoreBtn {
+  border: lightgrey 2px solid;
+  background: white;
+  font-size: 12px;
+  padding: 2px;
+  font-family: 'Playfair Display', serif;
+  margin-top: 5px;
+  box-shadow: 2px -2px grey
+}
+
+.seeMoreBtn:hover{
+  color: lightblue;
 }
 
 

@@ -399,9 +399,9 @@ describe('Product Description Component', function () {
     history.push('/product/47421')
     const app = render(
       <Router history={history}>
-          <Switch>
+        <Switch>
           <Route path='/product/:productId' exact>
-          <ProductDescription
+            <ProductDescription
               productDetails={productData}
               styles={productStyleData}
               selectedStyle={productStyleData.results[0]}
@@ -418,9 +418,9 @@ describe('Product Description Component', function () {
     history.push('/product/47421')
     const app = render(
       <Router history={history}>
-          <Switch>
+        <Switch>
           <Route path='/product/:productId' exact>
-          <ProductDescription
+            <ProductDescription
               productDetails={productData}
               styles={productStyleData}
               selectedStyle={productStyleData.results[0]}
@@ -437,9 +437,9 @@ describe('Product Description Component', function () {
     history.push('/product/47421')
     const app = render(
       <Router history={history}>
-          <Switch>
+        <Switch>
           <Route path='/product/:productId' exact>
-          <ProductDescription
+            <ProductDescription
               productDetails={productData}
               styles={productStyleData}
               selectedStyle={productStyleData.results[0]}
@@ -456,9 +456,9 @@ describe('Product Description Component', function () {
     history.push('/product/47421')
     const app = render(
       <Router history={history}>
-          <Switch>
+        <Switch>
           <Route path='/product/:productId' exact>
-          <ProductDescription
+            <ProductDescription
               productDetails={productData}
               styles={productStyleData}
               selectedStyle={productStyleData.results[0]}

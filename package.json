@@ -41,20 +41,27 @@
     "webpack-cli": "^4.8.0"
   },
   "dependencies": {
+    "aws-sdk": "^2.1000.0",
     "axios": "^0.21.1",
+    "compression": "^1.7.4",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "multer": "^1.4.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-inner-image-zoom": "^2.1.0",
+    "react-is": "^16.13.1",
     "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0"
+    "react-router-dom": "^5.3.0",
+    "styled-components": "^5.3.1"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
-    }
+    },
+    "testEnvironment": "jsdom"
   },
   "standard": {
     "env": [

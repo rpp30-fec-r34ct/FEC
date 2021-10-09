@@ -1,5 +1,6 @@
+/* eslint-disable */
 import React from 'react'
-
+import { AiOutlineCaretDown } from 'react-icons/ai'
 const ProductBreakDownBar = (props) => {
   // infile styling required to place thing over bars.
 
@@ -26,7 +27,7 @@ const ProductBreakDownBar = (props) => {
         <div className='breakDownRect' style={charBar} />
         <div className='breakDownRect' style={charBar} />
       </div>
-      <i className='fas fa-caret-down' style={charPointer} />
+      <AiOutlineCaretDown style={charPointer} />
     </div>
   )
 }

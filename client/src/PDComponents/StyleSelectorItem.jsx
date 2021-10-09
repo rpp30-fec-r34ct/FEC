@@ -6,7 +6,8 @@ const StylesSelectorItemComponent = (props) => {
     height: '50px',
     width: '50px',
     borderRadius: '50%',
-    border: 'solid, 1px, black'
+    border: 'solid, 1px, black',
+    margin: '2px'
   }
   return (
     <>

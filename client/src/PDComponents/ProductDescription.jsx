@@ -9,7 +9,7 @@ import ProductStyleSelector from './ProductStyleSelector.jsx'
 import ProductDetailPrice from './ProductDetailPrice.jsx'
 import axios from 'axios'
 
-const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle }) => {
+const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, updateSelectedStyle, theme }) => {
   const { productId } = useParams()
   const [ratings, setRatings] = useState(null)
   const [totalReviews, setTotalReviews] = useState(0)
@@ -45,11 +45,23 @@ const ProductDescriptionComponent = ({ productDetails, selectedStyle, styles, up
   const descriptionStyles = {
     display: 'flex',
     flexDirection: 'column',
-    marginLeft: '20px'
+    marginLeft: '20px',
+    borderRadius: '10px ',
+    backgroundColor: 'hsl(0, 0%, 97%)',
+    padding: '15px'
+  }
+
+  const darkStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    marginLeft: '20px',
+    borderRadius: '10px ',
+    backgroundColor: '#444445',
+    padding: '15px'
   }
 
   return (
-    <div style={descriptionStyles}>
+    <div style={theme === 'light' ? descriptionStyles : darkStyles}>
       <div style={{ display: 'block' }}>
         {ratings && <AverageStars rating={ratings} />}
         {totalReviews > 0 &&

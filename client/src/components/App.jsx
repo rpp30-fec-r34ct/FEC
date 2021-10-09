@@ -12,13 +12,15 @@ import {ThemeProvider} from 'styled-components'
 import {GlobalTheme} from './StyledComponents/GlobalTheme.jsx'
 import {lightTheme, darkTheme} from './StyledComponents/Themes.jsx'
 import {useDarkMode} from './Shared/useDarkMode.jsx'
+import Toggle from './StyledComponents/Toggle.jsx'
+import {CgMoon, CgSun} from 'react-icons/cg'
 
 
 const App = (props) => {
   const [theme, toggleTheme, isMounted] = useDarkMode()
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme
-
+  const icon = theme === 'light' ? <CgSun/> : <CgMoon/>
 
   if (!isMounted) {
     return <div/>
@@ -30,7 +32,8 @@ const App = (props) => {
       <>
       <GlobalTheme/>
       <NavBar />
-      <button onClick={toggleTheme}>Toggle theme</button>
+      <Toggle theme={theme} toggleTheme={toggleTheme}/>{icon}
+      <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
       <Switch>
         <Route path='/:productId(\d{5})'>
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />

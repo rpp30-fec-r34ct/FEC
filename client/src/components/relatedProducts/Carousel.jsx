@@ -4,7 +4,7 @@ import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { CardSkeleton } from '../StyledComponents/CardSkeleton.jsx'
+import CardSkeleton from '../StyledComponents/CardSkeleton.jsx'
 
 import axios from 'axios'
 import './Carousel.css'
@@ -29,13 +29,13 @@ export default function Carousel (props) {
 
   const getRelatedProducts = async () => {
     try {
-      const cachedRelated = window.localStorage.getItem(JSON.stringify(productId))
-      if (cachedRelated) {
-        setRelatedProducts(JSON.parse(cachedRelated))
+      const cachedRelated = JSON.parse(window.localStorage.getItem(JSON.stringify(productId)))
+      if (cachedRelated && cachedRelated.expiration > Date.now()) {
+        setRelatedProducts(cachedRelated.value)
       } else {
         const { data } = await axios.get(`/product/${productId}/related`)
         setRelatedProducts(data)
-        window.localStorage.setItem(JSON.stringify(productId), JSON.stringify(data))
+        window.localStorage.setItem(JSON.stringify(productId), JSON.stringify({value: data, expiration: Date.now() + 30000 }))
       }
     } catch (error) {
       console.log(error.message)
@@ -70,7 +70,7 @@ export default function Carousel (props) {
       {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         {isLoading
           ? placeHolder.map((card, index) => (
-            <CardSkeleton key={index} style={{ minHeight: '302px', minWidth: '200px' }} />
+            <CardSkeleton key={index} />
             ))
           : <ProductList
               relatedProducts={relatedProducts}

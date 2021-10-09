@@ -1,5 +1,5 @@
 import React from 'react'
-import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { IoMdAddCircle } from 'react-icons/io'
 
 const AddCard = ({ addOutfit }) => {
   const handleAdd = (e) => {
@@ -17,7 +17,7 @@ const AddCard = ({ addOutfit }) => {
           className='add-btn'
           onClick={handleAdd}
         >
-          <AiOutlinePlusCircle />
+          <IoMdAddCircle style={{margin: 'auto'}} aria-pressed='false'/>
         </div>
         Add to Outfit
       </div>

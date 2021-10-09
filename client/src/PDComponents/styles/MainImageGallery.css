@@ -2,7 +2,7 @@
 
 #gallery-container {
   height: 500px;
-  width: 550px;
+  width: 600px;
   display: flex;
   justify-content: space-evenly;
   overflow: hidden;

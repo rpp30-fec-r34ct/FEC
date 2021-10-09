@@ -19,6 +19,7 @@ const App = (props) => {
   const [theme, toggleTheme, isMounted] = useDarkMode()
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme
+  const icon = theme === 'light' ? <CgSun/> : <CgMoon/>
 
   if (!isMounted) {
     return <div/>
@@ -29,7 +30,7 @@ const App = (props) => {
     <ThemeProvider theme={themeMode}>
       <>
       <GlobalTheme/>
-      <Toggle theme={theme} toggleTheme={toggleTheme}/>
+      <Toggle theme={theme} toggleTheme={toggleTheme}/>{icon}
       <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
       <h1>PROJECT ATLIER</h1>
       <Switch>

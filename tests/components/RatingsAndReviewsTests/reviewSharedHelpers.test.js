@@ -166,28 +166,4 @@ describe('review shared helpers', () => {
     expect(rating).toBe(13)
   })
 
-  test('Should return 1 for a rating of Poor', function () {
-    const rating = helpers.getFormStarRating('Poor')
-    expect(rating).toBe(1)
-  })
-
-  test('Should return 2 for a rating of Fair', function () {
-    const rating = helpers.getFormStarRating('Fair')
-    expect(rating).toBe(2)
-  })
-
-  test('Should return 3 for a rating of Average', function () {
-    const rating = helpers.getFormStarRating('Average')
-    expect(rating).toBe(3)
-  })
-
-  test('Should return 4 for a rating of Good', function () {
-    const rating = helpers.getFormStarRating('Good')
-    expect(rating).toBe(4)
-  })
-
-  test('Should return 5 for a rating of Great', function () {
-    const rating = helpers.getFormStarRating('Great')
-    expect(rating).toBe(5)
-  })
 })

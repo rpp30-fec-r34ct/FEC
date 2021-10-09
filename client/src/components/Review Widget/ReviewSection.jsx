@@ -128,7 +128,7 @@ const ReviewSection = (props) => {
 
   return (
     <div className="reviewsContainer">
-      <h3 style={{fontSize: '2em', fontFamily: 'Playfair Display, serif'}}>Ratings and Reviews</h3>
+      <h2 style={{fontSize: '2em', fontFamily: 'Playfair Display, serif'}}>Ratings and Reviews</h2>
       <div className='reviewSection'>
         <ReviewMetaData metaData={reviewsMeta} totalReviews={getTotalReviews()} onHandleFilterToggle={onHandleFilterToggle} activeFilters={activeFilters} handleClearFilter={handleClearFilter} />
         <ReviewList product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick} />

@@ -15,16 +15,20 @@ const ReviewList = (props) => {
   // const [reportedList, setReportedList]
 
   useEffect(() => {
-    getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
+    if (props.testing === undefined) {
+      getReviews(reviewDisplayCount, props.product_id, sortType, props.activeFilters)
+    }
   }, [sortType, reviewDisplayCount, filterChange])
 
   useEffect(() => {
-    setReviews([])
-    setPullMoreReviews(1)
-    if (reviewDisplayCount !== 2) {
-      setDisplayCount(2)
+    if (props.testing === undefined) {
+      setReviews([])
+      setPullMoreReviews(1)
+      if (reviewDisplayCount !== 2) {
+        setDisplayCount(2)
+      }
+      filterChange ? setFilterChange(false) : setFilterChange(true)
     }
-    filterChange ? setFilterChange(false) : setFilterChange(true)
   }, [props.activeFilters])
 
   const onSortTypeChange = (event) => {

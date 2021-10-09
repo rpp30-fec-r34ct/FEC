@@ -28,11 +28,4 @@ describe('Review Meta Data Component', () => {
     const percentElement = screen.getByTestId('testPercent')
     expect(percentElement).toHaveClass('percentRecommend')
   })
-  // failig due to network issue - need to look into this furhter. i need to simulate the axios request for data but i'm not there yet.
-  // test('Should render the average element', function () {
-  //   render(<ReviewMetaData product_id={productId} />)
-
-  //   const averageElement = screen.getByTestId('testAverage')
-  //   expect(averageElement).toHaveClass('ratingItem')
-  // })
 })

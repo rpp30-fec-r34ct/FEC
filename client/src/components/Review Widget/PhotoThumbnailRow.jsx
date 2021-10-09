@@ -31,7 +31,7 @@ const PhotoThumbnailRow = (props) => {
     for (let i = 0; i < photos.length; i++) {
       photosToRender.push(
         <div key={i} style={photoThumbnailStyle}>
-          <img src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
+          <img alt="review-thumbnail" src={photos[i].url} style={imageStyle} onClick={props.onPhotoClick} />
         </div>)
     }
 

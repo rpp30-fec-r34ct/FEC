@@ -3,6 +3,9 @@
 
 
 #nav-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
   background-color: rgb(83, 76, 152);
   width: 50%;
   height: 5em;

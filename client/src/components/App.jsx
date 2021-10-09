@@ -29,8 +29,7 @@ const App = (props) => {
     <ThemeProvider theme={themeMode}>
       <>
       <GlobalTheme/>
-      <NavBar />
-      <Toggle theme={theme} toggleTheme={toggleTheme} />
+      <NavBar theme={theme} toggleTheme={toggleTheme}/>
       <Switch>
         <Route path='/:productId(\d{5})'>
           <div id='App'>

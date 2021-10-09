@@ -14,6 +14,12 @@ const CardSkeleton = () => {
 
 
 const CardContainer = styled.div`
+  background: rgba(176, 173, 173, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(176, 173, 173, 0.03);
   float: left;
   width: 200px;
   height: 300px;
@@ -22,7 +28,6 @@ const CardContainer = styled.div`
   margin: 5px;
   position: relative;
   align-items: flex-start;
-  background-color: rgba(0,0,0,0.11);;
 `
 
 

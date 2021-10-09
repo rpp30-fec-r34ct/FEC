@@ -9,7 +9,7 @@ import CardSkeleton from '../StyledComponents/CardSkeleton.jsx'
 import axios from 'axios'
 import './Carousel.css'
 
-export default function Carousel (props) {
+export default function Carousel (theme) {
   const [relatedProducts, setRelatedProducts] = useState([])
   const [currentOverview, setCurrentOverview] = useState([])
   const [currentPosition, setCurrentPosition] = useState(0)
@@ -67,7 +67,7 @@ export default function Carousel (props) {
     <div className='carousels-overview'>
       <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
       <div className='carousel-container' data-testid='rel-product-carousel'>
-      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
+      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} aria-hidden='true'/>}
         {isLoading
           ? placeHolder.map((card, index) => (
             <CardSkeleton key={index} />
@@ -78,7 +78,7 @@ export default function Carousel (props) {
               currentIndex={currentIndex}
               currentPosition={currentPosition}
             />}
-        {relatedProducts.length > 4 && ((currentIndex + 3) < relatedProducts.length -1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
+        {relatedProducts.length > 4 && ((currentIndex + 3) < relatedProducts.length -1) && <FaChevronRight className='right-arrow' onClick={nextCard} aria-hidden='true'/>}
       </div>
       <OutfitList
         currentOverview={currentOverview}

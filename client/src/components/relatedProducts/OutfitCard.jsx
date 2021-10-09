@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import { AiOutlineCloseCircle } from 'react-icons/ai'
+import { IoMdCloseCircle } from 'react-icons/io'
 import AverageStars from '../Shared/AverageStars.jsx'
 
 export default function OutfitCard ({ deleteOutfit, outfit }) {
@@ -23,7 +23,7 @@ export default function OutfitCard ({ deleteOutfit, outfit }) {
       <div className='card-container'>
         <div className='card-visuals'>
           <div className='delete-btn' data-testid='delete-outfit-btn' onClick={() => deleteOutfit(outfit.id)}>
-            <AiOutlineCloseCircle />
+            <IoMdCloseCircle style={{margin: 'auto'}} aria-pressed='false'/>
           </div>
           <div className='card-image' onClick={() => window.location.pathname = `/${outfit.id}/`}>
           {outfit.photo

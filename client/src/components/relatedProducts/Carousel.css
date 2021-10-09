@@ -1,10 +1,15 @@
 /** RELATED PRODUCTS LIST **/
+
+.product-list{
+  width: 100%;
+  height: auto;
+}
+
 .carousels-overview h3 {
   font-family: Arial, Helvetica, sans-serif;
-  color: #757575;
   font-weight: 200;
-  font-size: 12px;
-  padding-left: 8px;
+  font-size: 14px;
+  padding: 24px 0px 0px 8px;
 }
 
 .left-arrow,
@@ -13,18 +18,17 @@
   top: 50%;
   min-width: 15px;
   min-width: 15px;
-  color: #757575;
   border-radius: 10px;
   z-index: 1001;
   cursor: pointer;
 }
 
 .carousel-container .left-arrow {
-  left: 0px;
+  left: 2px;
 }
 
 .carousel-container .right-arrow  {
-  right: 0px;
+  right: 2px;
 }
 
 
@@ -42,11 +46,13 @@
 .carousel-content-wrapper {
   overflow: hidden;
   height: 320px;
-  width: 855px;
-
+  width: 873px;
+  float: left;
+  border-radius: 10px;
 }
 
 .carousel-content {
+  margin: 0 auto;
   display: flex;
   transition: transform .5s, z-index .5s;
 }
@@ -67,18 +73,21 @@
   height: 302px;
   margin: 5px;
   object-fit: cover;
-  border: 1px solid #888;
+  border-radius: 16px;
+  border: .5px solid rgba(170, 170, 170, 0.25);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
-.product-card:hover {
-  background-color: white;
-  opacity: 0.9;
-  transition: 0.1s;
-}
 
 .favorite-btn {
   z-index: 3000;
-  color: rgb(255, 255, 255);
+  height: 25px;
+  width: 25px;
+  background-color: rgb(232, 215, 215);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  color:rgba(0, 0, 0, 0.9);
   stroke-width: 30%;
   position: absolute;
   left: 170px;
@@ -87,7 +96,13 @@
 
 .delete-btn {
   z-index: 3000;
-  color: rgb(255, 255, 255);
+  height: 25px;
+  width: 25px;
+  background-color: rgba(248,248,255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  color:rgba(0, 0, 0, 0.9);
   stroke-width: 70%;
   position: absolute;
   left: 170px;
@@ -96,7 +111,7 @@
 
 .favorite-btn:hover,
 .delete-btn:hover {
-  color: rgb(255, 167, 2);
+  background-color: rgba(170, 170, 170);
 }
 
 
@@ -104,10 +119,15 @@
   align-self: start;
   object-fit: cover;
   object-position: 50% 85%;
-  background-color: #888;
   height: 220px;
   width: 200px;
+  border-radius: 4% 4%;
   position: relative;
+}
+
+.card-image:hover {
+  opacity: 0.8;
+  transition: 0.2s;
 }
 
 
@@ -116,7 +136,6 @@
 .card-price,
 .card-rating {
   font-family: Arial, Helvetica, sans-serif;
-  color: #757575;
   margin: 5px 0px 0px 0px;
 }
 
@@ -130,7 +149,6 @@
 .card-name {
   font-weight: 600;
   font-size: 14px;
-  color: #757575;
 }
 
 
@@ -143,7 +161,9 @@
   width: 200px;
   height: 302px;
   margin: 0px 7px 1px 7px; /*top-right-bottom-left*/
-  border: 1px solid #888;
+  border-radius: 16px;
+  border: .5px solid rgba(170, 170, 170, 0.25);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -152,7 +172,6 @@
   margin: auto;
   padding: 5px;
   font-family: Arial, Helvetica, sans-serif;
-  color: #757575;
   font-weight: 200;
   font-size: 14px;
 
@@ -160,19 +179,24 @@
 
 .add-btn {
   z-index: 1001;
-  top: 10px;
+  top: 4px;
+  left: 30px;
   display: flex;
   justify-content: center;
-  background-color: white;
+  height: 25px;
+  width: 25px;
+  background-color: rgba(248,248,255);
+  border-radius: 50%;
+  color:rgba(0, 0, 0, 0.9);
   margin-bottom: 5px;
   stroke-width: 80%;
-  opacity: 0.5;
-  outline: none;
+  position: relative;
 }
 
 .add-btn:hover {
   opacity: 1.0;
   transition: 0.1s;
+  background-color: rgba(170, 170, 170);
 }
 
 
@@ -189,10 +213,12 @@
   height: 400px;
   max-height: 100%;
   margin: -200px 0 0 -200px;
-  background: rgb(255, 255, 255);
-  border: 1px solid #757575;
+  background: rgb(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  font-size: 16;
+  color: black;
   z-index: 9999;
-  box-shadow: 0 0 60px 10px rgba(155, 154, 154, 0.9);
 }
 
 .close-btn {
@@ -211,7 +237,6 @@
 
 .modal-body h3 {
   font-family: Arial, Helvetica, sans-serif;
-  color: #000000;
   font-size: 14px;
 }
 
@@ -223,12 +248,11 @@ table {
 
 table thead th {
   font-family: Arial, Helvetica, sans-serif;
-  color: #000000;
-  font-size: 12px;
+  font-size: 14px;
   text-align: center;
   font-weight: lighter;
   padding: 10px;
-  border: 1px solid #fff;
+  color: black;
   border-collapse: separate;
   border-spacing: 10px;
 }
@@ -239,10 +263,9 @@ tbody {
 
 tbody tr td {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #000000;
   font-weight: lighter;
-  font-size: 10px;
-  border: 1px solid #fff;
+  font-size: 12px;
+  color: black;
   border-collapse: separate;
   text-align: center;
 }

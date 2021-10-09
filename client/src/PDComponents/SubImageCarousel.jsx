@@ -11,7 +11,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
       setTopIndex(0)
       setThumbnails(selectedStyle.photos.map((image, index) => {
         return (image.thumbnail_url
-          ? <img key={index} data-index={index} className='product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
+          ? <img alt="sub-imgae-thumbnail" key={index} data-index={index} className='product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
           : <SkeletonDiv />)
       }))
     }

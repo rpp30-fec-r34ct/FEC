@@ -15,7 +15,7 @@ const StylesSelectorItemComponent = (props) => {
         ? (
           <>
             {props.style.photos[0].thumbnail_url
-              ? <img style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.handleSelectorClick} />
+              ? <img alt="style-selector-img"style={styles} src={props.style.photos[0].thumbnail_url} data-index={props.index} onClick={props.handleSelectorClick} />
               : <div style={styles}> <SkeletonCircle /> </div>}
           </>)
         : <div style={styles}> <SkeletonCircle /> </div>}

@@ -12,23 +12,23 @@ const AverageStars = (props) => {
   const wholeRating = Math.floor(averageRating) || 0
 
   const wholeStars = Array.from(Array(wholeRating)).map((_, i) => (
-    <img key={i} src={FullStar} data-testid='full-star-img' />
+    <img alt="full-Star" key={i} src={FullStar} data-testid='full-star-img' />
   ))
 
-  const emptyStars = Array.from(Array(5)).map((_, i) => <img key={i} src={EmptyStar} data-testid='empty-star-img' />)
+  const emptyStars = Array.from(Array(5)).map((_, i) => <img alt="empty-Star" key={i} src={EmptyStar} data-testid='empty-star-img' />)
 
   const remaining = Math.round(((averageRating - wholeRating) * 100) % 4) // remaining in quarters
   let remainingStar
 
   switch (remaining) {
     case 1:
-      remainingStar = <img src={QuarterStar} data-testid='quarter-star-img' />
+      remainingStar = <img alt="quarter-star" src={QuarterStar} data-testid='quarter-star-img' />
       break
     case 2:
-      remainingStar = <img src={HalfStar} data-testid='half-star-img' />
+      remainingStar = <img alt="half-star" src={HalfStar} data-testid='half-star-img' />
       break
     case 3:
-      remainingStar = <img src={ThreeQuarterStar} data-testid='three-quarter-star-img' />
+      remainingStar = <img alt="three-quarter-star" src={ThreeQuarterStar} data-testid='three-quarter-star-img' />
       break
     default:
       break

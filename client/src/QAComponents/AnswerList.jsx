@@ -23,18 +23,19 @@ const AnswerList = (props) => {
     if (question === undefined) {
       return
     }
-    axios.get('/qa/answers?question_id=' + question)
+    let queryString = '?question_id=' + question + '&page=1&count=10'
+    axios.get('/qa/answers' + queryString)
       .then(data => {
         callback(null, data)
       })
-      .catch(err => console.log(err))
+      .catch(err => err)
   }
 
   // INITIAL RENDER
   const initialize = (questionId, callback) => {
     getAllAnswers(questionId, (err, data) => {
       if (err) {
-        console.error(err)
+        return err
       } else {
         callback(null, data.data)
       }
@@ -42,13 +43,16 @@ const AnswerList = (props) => {
   }
   // LOAD MORE ANSWERS UPON USER CLICK
   const getMoreAnswers = (e) => {
-    e.preventDefault()
+    if (e) {
+      e.preventDefault()
+    }
     if (expandCollapse === 'Collapse Answers') {
-      setExpandCollapse('See More Answers')
-      setAnswers(prev => prev.slice(0,2))
-    } else {
+      setAnswers(moreAnswers.slice(0,2))
+      return setExpandCollapse('See More Answers')
+    }
+    if (moreAnswers.length > answers.length) {
       setAnswers(moreAnswers)
-      setExpandCollapse('Collapse Answers')
+      return setExpandCollapse('Collapse Answers')
     }
   }
 
@@ -57,7 +61,7 @@ const AnswerList = (props) => {
     var loadedAnswers = []
     initialize(props.id, (err, data) => {
       if (err) {
-        console.error(err)
+        return err
       } else {
         setAnswers(prev => {
           data.map(datum => {
@@ -69,30 +73,13 @@ const AnswerList = (props) => {
           }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
           return loadedAnswers.slice(0, 2)
         })
+        console.log(loadedAnswers)
         setMoreAnswers(loadedAnswers)
       }
     })
-    // if (props.updateAnswers) {
-    //   initialize(props.id, (err, data) => {
-    //     if (err) {
-    //       console.error(err)
-    //     } else {
-    //       console.log('data', data)
-    //       setAnswers(prev => {
-    //         console.log('prev', prev)
-    //         data.map(datum => {
-    //           if (datum.answerer_name.toLowerCase() === 'seller') {
-    //             loadedAnswers.unshift(datum)
-    //           } else {
-    //             loadedAnswers.push(datum)
-    //           }
-    //         }).sort((answer1, answer2) => answer2.helpfulness - answer1.helpfulness)
-    //         return loadedAnswers.slice(0, 2)
-    //       })
-    //       setMoreAnswers(loadedAnswers)
-    //     }
-    //   })
-    // }
+    if (props.updateAnswers) {
+      return getMoreAnswers(null)
+    }
   }, [props.id, props.updateAnswers])
 
   return (
@@ -106,7 +93,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <a href="#" onClick={getMoreAnswers}>{expandCollapse}</a>
+          renderMoreAnswers = <a href="#" id="get-more-answers" onClick={getMoreAnswers}>{expandCollapse}</a>
         }
         return (
           <NewAnswer

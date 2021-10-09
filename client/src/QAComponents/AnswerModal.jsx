@@ -49,6 +49,7 @@ const AnswerModal = (props) => {
   }
 
   const uploadImg = (e) => {
+    console.log(e.target.files[0])
     if (e.target.files[0]) {
       let image = new FormData()
       image.append('file', e.target.files[0])
@@ -61,20 +62,18 @@ const AnswerModal = (props) => {
   const submitNewAnswer = (e) => {
     e.preventDefault()
     if (!e.target[0].value || !e.target[1].value || !e.target[2].value) {
-      return alert('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address')
+      return document.getElementsByClassName('add-answer-form')[0].append('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address \n\n')
     }
     if (!e.target[2].value.includes('@')) {
-      return alert('Please enter a valid email address')
+      return document.getElementsByClassName('add-answer-form')[0].append('Please enter a valid email address\n\n')
     }
     if (images.length > 0) {
-      console.log('1')
       const data = new FormData()
       data.append('answer', e.target[0].value)
       data.append('nickname', e.target[1].value)
       data.append('email', e.target[2].value)
       data.append('id', e.target.parentNode.id)
       if (images.length > 0) {images.map(image => data.append(image.name, image))}
-      console.log('data', data)
       axios.post('/qa/answer', data, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -82,18 +81,10 @@ const AnswerModal = (props) => {
       })
         .then(data => {
           setImages([])
-          // return props.handleModalChange(e)
+          return props.handleModalChange(e)
         })
         .catch(err => console.error(err))
     } else {
-      console.log('2')
-      const data = {
-      answer: e.target[0].value,
-      nickname: e.target[1].value,
-      email: e.target[2].value,
-      id: e.target.parentNode.id,
-      photos: []
-      }
       axios.post('/qa/answer', {
         answer: e.target[0].value,
         nickname: e.target[1].value,
@@ -102,13 +93,14 @@ const AnswerModal = (props) => {
         photos: []
         }
       )
-        .then(data => {
+        .then(response => {
           setImages([])
-          // return props.handleModalChange(e)
+          return props.handleModalChange(e)
         })
         .catch(err => console.error(err))
+      }
     }
-  }
+
 
   return (
     <>
@@ -116,7 +108,7 @@ const AnswerModal = (props) => {
           <div style={formStyle} className='add-answer-form' id={props.question_id}>
           <button className="close-button">X</button>
             <h1 id="answerModal-product">{document.getElementsByClassName('card-name')[0] ? document.getElementsByClassName('card-name')[0].innerHTML : 'Product'}: {props.body}</h1>
-            <form action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>
+            <form id="answer-form" action="/test" method="post" encType="multipart/form-data" onSubmit={submitNewAnswer}>
               <input name='answer' type='text' placeholder='Your Answer' maxLength="1000" size="100" className="modal-textbox" style={{gridRow: '4/4'}}/>
               <input name='nickname' type='text' size="30" placeholder='Your Nickname' style={{gridRow: '4/4'}}/>
               <input name='email' type='text' size="30" placeholder='Example: jack@email.com' style={{gridRow: '4/4'}}/>
@@ -127,7 +119,6 @@ const AnswerModal = (props) => {
             </form>
             {images ? (
               images.map(image => (
-                console.log(images),
                 <img style={imgModalStyle} src={URL.createObjectURL(image)} alt={image.alt} className="answer-image" key={image.src + 1}/>
               ))
             ) : null}

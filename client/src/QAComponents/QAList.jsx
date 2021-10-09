@@ -65,6 +65,11 @@ const QAList = (props) => {
     if (e.target.className === "close-button") {
       setShowQuestionModal(false)
     }
+    if (e.target.id === "submit-question") {
+      setTimeout(()=>{
+        setShowQuestionModal(false)
+      }, 2000)
+    }
   }
 
   const addQuestion = (e) => {
@@ -92,16 +97,14 @@ const QAList = (props) => {
   }
 
   const handleModalChange = (e) => {
-    console.log('answer submitted', e.target[4].button.id)
     axios.get('/qa/questions' + '?product_id=' + productID)
     .then(data => {
-      console.log('axios worked')
       setQuestions(data.data.results.slice(0, 2))
       setAllQuestions(data.data.results)
       setQuestionsCache(data.data.results)
     })
     .catch((err) => {
-      console.error('error while getting product-related questions from server', err)
+      return err
     })
   }
 
@@ -113,7 +116,7 @@ const QAList = (props) => {
         setQuestionsCache(data.data.results)
       })
       .catch((err) => {
-        console.error('error while getting product-related questions from server', err)
+        return err
       })
       document.addEventListener('keydown', keyPress)
       document.addEventListener('click', handleClickOutside)

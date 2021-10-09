@@ -240,12 +240,15 @@ app.get('/qa/questions', (req, res) => {
 })
 
 app.get('/qa/answers', (req, res) => {
-  axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers', {
+  console.log(req.query)
+  let queryString = '?page=' + req.query.page + '&count=' + req.query.count
+  axios.get(APIurl + 'qa/questions/' + req.query.question_id + '/answers' + queryString, {
     headers: {
       Authorization: token.API_KEY
     }
   })
     .then(data => {
+      console.log(data)
       res.status(200).send(data.data.results)
     })
     .catch(err => {
@@ -390,7 +393,7 @@ app.post('/qa/answer', upload.any(), (req, res) => {
     })
       .then(data => {
         console.log('it should have worked')
-        res.sendStatus(200)
+        res.status(200).send('Success')
       })
       .catch(err => {
         console.log(err.response)

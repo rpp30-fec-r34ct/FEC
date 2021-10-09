@@ -1,4 +1,3 @@
-/* eslint-disable */
 /**
  * @jest-environment jsdom
  */
@@ -10,9 +9,8 @@ import { createMemoryHistory } from 'history'
 import { Router, Route, Switch } from 'react-router-dom'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
-import { regeneratorRuntime } from 'regenerator-runtime'
+import regeneratorRuntime from 'regenerator-runtime'
 
-<<<<<<< HEAD
  // components
  import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
  import QAList from '../../../client/src/QAComponents/QAList.jsx'
@@ -119,12 +117,12 @@ const handlers = [
     return res(
       ctx.json(testResponse)
       )
+    }),
+  rest.get('/qa/answers', (req, res, ctx) => {
+    return res(
+      ctx.json(testResponse)
+      )
     })
-  // rest.get('/qa/answers', (req, res, ctx) => {
-  //   return res(
-  //     ctx.json(testResponse)
-  //     )
-  //   })
       ]
 
 const server = setupServer(rest.get('/qa/questions', (req, res, ctx) => {
@@ -142,18 +140,8 @@ afterEach(()=> server.resetHandlers())
 afterAll(()=> server.close())
 
  describe('Individual Question Component', () => {
-
-
    test('Should have a heading for the product', function () {
     var app;
-=======
-// components
-import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
-
-xdescribe('Individual Question Component', () => {
-  test('Should have a heading for the product', function () {
-    let app
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -166,7 +154,6 @@ xdescribe('Individual Question Component', () => {
         </Switch>
       </Router>
     )
-<<<<<<< HEAD
      expect(app.container.querySelector("h1[id='answerModal-product']")).toBeInTheDocument()
    })
 
@@ -223,9 +210,9 @@ xdescribe('Individual Question Component', () => {
     const form = app.container.querySelector("input[name='answer']")
     fireEvent.change(form, {target: {value: 'Test'}})
     expect(form.value).toBe('Test')
-   })
+  })
 
-   test('Should allow a user to input an email address', function () {
+  test('Should allow a user to input an email address', function () {
     var app;
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -242,17 +229,10 @@ xdescribe('Individual Question Component', () => {
     const form = app.container.querySelector("input[name='email']")
     fireEvent.change(form, {target: {value: 'Tester@test.com'}})
     expect(form.value).toBe('Tester@test.com')
-   })
-
-   test('Should allow a user to input a name of the answerer', function () {
-    var app;
-=======
-    expect(app.container.querySelector("h1[id='answerModal-product'")).toBeInTheDocument()
   })
 
-  xtest('Should render if props.showModal is true', function () {
-    let app
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
+  test('Should allow a user to input a name of the answerer', function () {
+    var app;
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -265,7 +245,6 @@ xdescribe('Individual Question Component', () => {
         </Switch>
       </Router>
     )
-<<<<<<< HEAD
     const form = app.container.querySelector("input[name='nickname']")
     fireEvent.change(form, {target: {value: 'Tester'}})
     expect(form.value).toBe('Tester')
@@ -273,13 +252,6 @@ xdescribe('Individual Question Component', () => {
 
    test('Should render a form', function () {
     var app;
-=======
-    expect(app.container.findByText('Product, Question Body')).toBeInTheDocument()
-  })
-
-  xtest('Should render a form', function () {
-    let app
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -295,13 +267,8 @@ xdescribe('Individual Question Component', () => {
     expect(app.container.querySelector("div[class='add-answer-form']")).toBeInTheDocument()
   })
 
-<<<<<<< HEAD
    test('Should render a form with an input for the answer', function () {
     var app;
-=======
-  xtest('Should render a form with an input for the question', function () {
-    let app
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -317,7 +284,6 @@ xdescribe('Individual Question Component', () => {
     expect(app.container.querySelector("input[name='answer']")).toBeInTheDocument()
   })
 
-<<<<<<< HEAD
    test('Should render a form with an input for the nickname of the answerer', function () {
      var app;
      const history = createMemoryHistory()
@@ -337,27 +303,6 @@ xdescribe('Individual Question Component', () => {
 
    test('Should render a form with an input for the email address of the answerer', function () {
     var app;
-=======
-  xtest('Should render a form with an input for the nickname of the asker', function () {
-    let app
-    const history = createMemoryHistory()
-    const route = '/product/47421'
-    history.push(route)
-    app = render(
-      <Router history={history}>
-        <Switch>
-          <Route path='/product/:id'>
-            <AnswerModal />
-          </Route>
-        </Switch>
-      </Router>
-    )
-    expect(app.container.querySelector("input[name='nickname']")).toBeInTheDocument()
-  })
-
-  xtest('Should render a form with an input for the email address of the asker', function () {
-    let app
->>>>>>> 56c7017145e89bd1fd8c2ff622ab3adb84c60f10
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -372,4 +317,133 @@ xdescribe('Individual Question Component', () => {
     )
     expect(app.container.querySelector("input[name='email']")).toBeInTheDocument()
   })
+
+  test('Should toggle the answer modal by pressing escape', function () {
+    var app;
+    const history = createMemoryHistory()
+    const route = '/product/47421'
+    history.push(route)
+    app = render(
+      <Router history={history}>
+        <Switch>
+          <Route path="/product/:id">
+            <Question />
+          </Route>
+        </Switch>
+      </Router>,
+    )
+    const button = app.container.querySelector("button[id='add-answer']")
+    fireEvent.click(button)
+    expect(app.container.querySelector("div[id='answer-modal']")).toBeInTheDocument()
+    fireEvent.keyDown(app.container, {
+      key: "Escape",
+      code: "Escape",
+      keyCode: 27,
+      charCode: 27
+    })
+    expect(app.container.querySelector("div[id='answer-modal']")).not.toBeInTheDocument()
+   })
+
+   test('Should cause an error if user fails to enter a valid email address', async function () {
+     var app;
+     const history = createMemoryHistory()
+     const route = '/product/47421'
+     history.push(route)
+     app = render(
+       <Router history={history}>
+         <Switch>
+           <Route path="/product/:id">
+             <Question />
+           </Route>
+         </Switch>
+       </Router>,
+     )
+     const button = app.container.querySelector("button[id='add-answer']")
+     fireEvent.click(button)
+    //  fireEvent.change(app.container.querySelector("input[name='answer']"), {target: {value: 'Tester'}})
+    //  fireEvent.change(app.container.querySelector("input[name='nickname']"), {target: {value: 'Tester'}})
+    //  fireEvent.change(app.container.querySelector("input[name='email']"), {target: {value: 'Tester'}})
+     await fireEvent.submit(app.container.querySelector("form[id='answer-form']"), {target: [
+       { value: 'tester'}, { value: 'tester'}, { value: 'tester'}
+     ]})
+     await expect(app.container.querySelector("div[id='answer-modal']").innerHTML).toContain('Please enter a valid email address\n\n')
+
+    })
+   test('Should cause an error if user fails to enter a value for each input of the form', async function () {
+     var app;
+     const history = createMemoryHistory()
+     const route = '/product/47421'
+     history.push(route)
+     app = render(
+       <Router history={history}>
+         <Switch>
+           <Route path="/product/:id">
+             <Question />
+           </Route>
+         </Switch>
+       </Router>,
+     )
+     const button = app.container.querySelector("button[id='add-answer']")
+     fireEvent.click(button)
+    //  fireEvent.change(app.container.querySelector("input[name='answer']"), {target: {value: 'Tester'}})
+    //  fireEvent.change(app.container.querySelector("input[name='nickname']"), {target: {value: 'Tester'}})
+    //  fireEvent.change(app.container.querySelector("input[name='email']"), {target: {value: 'Tester'}})
+     await fireEvent.submit(app.container.querySelector("form[id='answer-form']"), {target: [
+       { value: null }, { value: null }, { value: null }
+     ]})
+     await expect(app.container.querySelector("div[id='answer-modal']").innerHTML).toContain('Your answer could not be processed. You must enter ALL of the following: \n Your Answer, \n Your Nickname, and \n Your Email Address \n\n')
+
+    })
+
+    test('Modal should close upon submitting', async function () {
+      var app;
+      const history = createMemoryHistory()
+      const route = '/product/47421'
+      history.push(route)
+      app = render(
+        <Router history={history}>
+          <Switch>
+            <Route path="/product/:id">
+              <Question />
+            </Route>
+          </Switch>
+        </Router>,
+      )
+      const button = app.container.querySelector("button[id='add-answer']")
+      fireEvent.click(button)
+     //  fireEvent.change(app.container.querySelector("input[name='answer']"), {target: {value: 'Tester'}})
+     //  fireEvent.change(app.container.querySelector("input[name='nickname']"), {target: {value: 'Tester'}})
+     //  fireEvent.change(app.container.querySelector("input[name='email']"), {target: {value: 'Tester'}})
+      await fireEvent.submit(app.container.querySelector("form[id='answer-form']"), {target: [
+        { value: 'null' }, { value: 'null' }, { value: 'null@email.com' }
+      ]})
+      await setTimeout(()=>{
+        expect(app.container.querySelector("div[id='answer-modal']")).not.toBeInTheDocument()
+      }, 1000)
+
+     })
+    test('Modal should close upon submitting', async function () {
+      var app;
+      const history = createMemoryHistory()
+      const route = '/product/47421'
+      history.push(route)
+      app = render(
+        <Router history={history}>
+          <Switch>
+            <Route path="/product/:id">
+              <AnswerModal />
+            </Route>
+          </Switch>
+        </Router>,
+      )
+      const documentIntial = { content: 'aaa' };
+      global.URL.createObjectURL = jest.fn();
+
+      fireEvent.change(app.container.querySelector("input[name='myFile']"), {
+        target: {
+          files: [new File(['(⌐□_□)'], 'chucknorris.png', {type: 'image/png'})]
+        }
+      })
+      expect(app.container.querySelector("img[class='answer-image']")).toBeInTheDocument()
+     })
 })

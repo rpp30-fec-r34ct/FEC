@@ -144,7 +144,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('QA List', (done) => {
-  xtest('Should render the Q/A List', async () => {
+  test('Should render the Q/A List', async () => {
     jest.useFakeTimers()
     let app
     const history = createMemoryHistory()
@@ -162,25 +162,16 @@ describe('QA List', (done) => {
     )
     // })
     // setTimeout(()=>{
-<<<<<<< HEAD
       // act(()=>{
       //   jest.advanceTimersByTime(1000);
       // })
     // await waitFor(()=>{
       await expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
   //   })
-=======
-    act(() => {
-      jest.advanceTimersByTime(1000)
-    })
-    // await waitFor(()=>{
-    expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
-    // })
->>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
   // }, 5000)
   })
 
-  xtest('Should have a search bar', () => {
+  test('Should have a search bar', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -197,7 +188,7 @@ describe('QA List', (done) => {
     expect(app.container.querySelector("input[id='search-bar']")).toBeInTheDocument()
   })
 
-  xtest('Should render a question from the Question component', async () => {
+  test('Should render a question from the Question component', async () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -216,7 +207,7 @@ describe('QA List', (done) => {
     }, 5000)
   })
 
-  xtest('Should render buttons', () => {
+  test('Should render buttons', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -234,7 +225,7 @@ describe('QA List', (done) => {
     // expect(buttons.length).toBe(2)
   })
 
-  xtest('Should render a button to show more answered questions', async () => {
+  test('Should render a button to show more answered questions', async () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -254,7 +245,7 @@ describe('QA List', (done) => {
     )
   })
 
-  xtest('Should render a button to add a question', () => {
+  test('Should render a button to add a question', () => {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'
@@ -271,7 +262,7 @@ describe('QA List', (done) => {
     expect(app.container.querySelector("button[id='add-question']")).toBeInTheDocument()
   })
 
-  xtest('Should render a question from get request', function () {
+  test('Should render a question from get request', function () {
     let app
     const history = createMemoryHistory()
     const route = '/product/47421'

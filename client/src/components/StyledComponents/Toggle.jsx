@@ -38,7 +38,7 @@ const ToggleContainer = styled.button`
 const Toggle = ({theme, toggleTheme}) => {
   return (
     <ToggleContainer onClick={toggleTheme}>
-    <CgMoon/>
+    Change Mode
     </ToggleContainer>
   )
 }

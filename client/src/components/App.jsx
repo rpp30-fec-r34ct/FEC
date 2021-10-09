@@ -32,7 +32,7 @@ const App = (props) => {
       <>
       <GlobalTheme/>
       <NavBar />
-      <Toggle theme={theme} toggleTheme={toggleTheme}/>{icon}
+      <Toggle theme={theme} toggleTheme={toggleTheme} darkTheme={icon} lightTheme={icon}/>
       <Switch>
         <Route path='/:productId(\d{5})'>
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />

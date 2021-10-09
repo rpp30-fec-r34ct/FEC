@@ -39,6 +39,7 @@ const NewAnswer = (props) => {
   }
   const answerInfoStyle = {
     // border: '1px solid black',
+    color: 'grey',
     textAlign: 'left',
     margin: '2%',
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -50,8 +51,14 @@ const NewAnswer = (props) => {
     margin: '2%',
     fontSize: '80%',
     fontFamily: 'Arial, Helvetica, sans-serif',
-    color: 'green',
+    color: 'grey',
   }
+
+  const helpfulButtonStyle = {
+    color: 'limeGreen',
+    textDecoration: 'underline',
+  }
+
   const answerReportStyle = {
     // border: '1px solid black',
     color: 'red',
@@ -59,9 +66,10 @@ const NewAnswer = (props) => {
     margin: '2%',
     fontSize: '80%',
     fontFamily: 'Arial, Helvetica, sans-serif',
+    fontWeight: 'bold',
   }
   const sellerStyle = {
-    color: 'blue',
+    color: 'grey',
     textAlign: 'left',
     margin: '2%',
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -108,11 +116,10 @@ const NewAnswer = (props) => {
               <tbody>
                 <tr>
                   <td style={answerInfoStyle} className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b style={sellerStyle}>Seller,</b> : props.name + ','} {props.month} {props.day}, {props.year}
-                    {/* <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div> */}
                   </td>
                   <td style={answerHelpfulStyle}>
                     Helpful?
-                    {!helpful ? <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a> : 'Yes'}
+                    {!helpful ? <b href="" className='helpful-answer' onClick={helpfulAnswer} style={helpfulButtonStyle} >Yes</b> : 'Yes'}
                     (<span id="answer-helpfulness">{helpfulness ? helpfulness : 0}</span>)
                   </td>
                   {/* <td>
@@ -120,7 +127,7 @@ const NewAnswer = (props) => {
                   <td>
                   </td> */}
                   {report === 'Report' ? <td style={answerReportStyle} className='report-answer'>
-                    <a href='' id="report-answer-link" onClick={reportAnswer}>{report}</a>
+                    <span href='' id="report-answer-link" onClick={reportAnswer}>{report}</span>
                   </td> : <td style={answerReportStyle} className='report-answer'>
                     {report}
                   </td>}

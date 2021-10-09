@@ -9,7 +9,7 @@ const AnswerList = (props) => {
   const [answers, setAnswers] = useState([])
   const [moreAnswers, setMoreAnswers] = useState([])
   const [helpfulAns, setHelpfulAns] = useState(0)
-  const [expandCollapse, setExpandCollapse] = useState('See More Answers')
+  const [expandCollapse, setExpandCollapse] = useState('SEE MORE ANSWERS')
   const [moreClicked, setMoreClicked] = useState(false)
   const [shouldHandleScroll, setShouldHandleScroll] = useState(false)
   let renderMoreAnswers
@@ -46,13 +46,13 @@ const AnswerList = (props) => {
     if (e) {
       e.preventDefault()
     }
-    if (expandCollapse === 'Collapse Answers') {
+    if (expandCollapse === 'COLLAPSE ANSWERS') {
       setAnswers(moreAnswers.slice(0,2))
-      return setExpandCollapse('See More Answers')
+      return setExpandCollapse('SEE MORE ANSWERS')
     }
     if (moreAnswers.length > answers.length) {
       setAnswers(moreAnswers)
-      return setExpandCollapse('Collapse Answers')
+      return setExpandCollapse('COLLAPSE ANSWERS')
     }
   }
 
@@ -92,7 +92,7 @@ const AnswerList = (props) => {
           month = date.toString().slice(4, 7)
         }
         if (moreAnswers.length > 2) {
-          renderMoreAnswers = <a href="#" id="get-more-answers" onClick={getMoreAnswers}>{expandCollapse}</a>
+          renderMoreAnswers = <div href="#" id="get-more-answers" onClick={getMoreAnswers}>{expandCollapse}</div>
         }
         return (
           <NewAnswer

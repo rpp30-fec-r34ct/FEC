@@ -19,7 +19,7 @@ const Question = (props) => {
   const productID = useParams().productId
 
   const questionBodyStyle = {
-    // border: '1px solid blue',
+    borderTop: '1px solid',
     marginTop: '5%',
     // padding: '2%',
     width: '100%',
@@ -32,7 +32,7 @@ const Question = (props) => {
     // border: '1px solid black',
     align: 'left',
     // marginRight: '500px',
-    width: '100%',
+    width: '80%',
     display: 'grid',
     justifyContent: 'left',
   }
@@ -42,20 +42,32 @@ const Question = (props) => {
   }
 
   const addAnswerStyle = {
+    border: 'none',
+    backgroundColor: 'transparent',
+    backgroundRepeat: 'no-repeat',
+    outline: 'none',
     height: '100%',
-    width: '100%',
+    color: 'grey',
+    // width: '100%',
     fontSize: '100%',
     fontFamily: 'Arial, Helvetica, sans-serif',
+    // borderLeft: '1px solid',
     // marginLeft: '50%',
   }
 
   const helpfulStyle = {
-    color: 'green',
-    textAlign: 'left',
-    width: '375px',
+    color: 'grey',
+    textAlign: 'right',
+    // width: '20%',
     fontSize: '100%',
     fontFamily: 'Arial, Helvetica, sans-serif',
   }
+
+  const helpfulButtonStyle = {
+    color: 'limeGreen',
+    textDecoration: 'underline',
+  }
+
   const tableStyle = {
     tableLayout: 'fixed',
     width: '100%',
@@ -132,15 +144,15 @@ const Question = (props) => {
               <th style={questionStyle}>
                 Q: {props.question_body}
               </th>
-            </tr>
-            <tr>
               <td style={helpfulStyle} className="helpful">
-                <a className="panel-element" href="" id="helpful-question" className='helpful' onClick={addHelpfulQuestion}>Helpful?</a> | Yes
+                <span className="panel-element" id="helpful-question" className='helpful'>Helpful?</span> | <b style={helpfulButtonStyle} onClick={addHelpfulQuestion}> Yes </b>
                 (<span id="question-helpfulness">{qHelpfulness ? qHelpfulness : props.question_helpfulness}</span>)
               </td>
               <td>
-                <button style={addAnswerStyle} href="" id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</button>
+                <button style={addAnswerStyle} id='add-answer' className="panel-element" onClick={addAnswer}>ADD ANSWER</button>
               </td>
+            </tr>
+            <tr>
             </tr>
           </tbody>
         </table>

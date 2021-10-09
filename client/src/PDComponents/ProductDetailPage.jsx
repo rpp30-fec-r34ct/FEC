@@ -6,7 +6,7 @@ import MainImageGallery from './MainImageGallery.jsx'
 import ProductDescription from './ProductDescription.jsx'
 import ProductDetailFooter from './ProductDetailFooter.jsx'
 
-const ProductDetailPageComponent = (props) => {
+const ProductDetailPageComponent = ({ theme }) => {
   const { productId } = useParams()
   const [productDetails, setProductDetails] = useState(false)
   const [styles, setStyles] = useState(null)
@@ -43,12 +43,24 @@ const ProductDetailPageComponent = (props) => {
     getProductDetails()
   }, [])
 
-  const productDetailStyles = {
-    display: 'flex'
+  const lightStyles = {
+    display: 'flex',
+    backgroundColor: 'rgb(236 236 236)',
+    borderRadius: '10px',
+    width: 'fit-content',
+    padding: '15px'
+  }
+
+  const darkStyles = {
+    display: 'flex',
+    backgroundColor: 'rgb(44 44 45)',
+    borderRadius: '10px',
+    width: 'fit-content',
+    padding: '15px'
   }
 
   return (
-    <div>
+    <>
       {redirect
         ? <Redirect to={{
           pathname: '/404',
@@ -56,12 +68,17 @@ const ProductDetailPageComponent = (props) => {
         }}
           />
         : null}
-      <div style={productDetailStyles}>
-        <MainImageGallery selectedStyle={selectedStyle} />
-        <ProductDescription productDetails={productDetails} productId={productId} styles={styles} selectedStyle={selectedStyle} updateSelectedStyle={updateSelectedStyle} />
+      <div style={theme === 'light' ? lightStyles : darkStyles}>
+        <MainImageGallery selectedStyle={selectedStyle} theme={theme}/>
+        <ProductDescription
+        productDetails={productDetails}
+        productId={productId} styles={styles}
+        selectedStyle={selectedStyle}
+        updateSelectedStyle={updateSelectedStyle}
+        theme={theme} />
       </div>
-      <ProductDetailFooter productDetails={productDetails} />
-    </div>
+      <ProductDetailFooter productDetails={productDetails} theme={theme}/>
+    </>
   )
 }
 

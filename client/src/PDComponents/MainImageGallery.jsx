@@ -45,7 +45,7 @@ const MainImageGalleryComponent = (props) => {
   }
 
   return (
-    <div>
+    <>
       {showModal && <GalleryModal selectedStyle={selectedStyle} currentIndex={topIndex} handleClickOffModal={handleClickOffModal} />}
       {selectedStyle !== null
         ? (
@@ -70,7 +70,7 @@ const MainImageGalleryComponent = (props) => {
             </div>
           </div>
           )}
-    </div>
+    </>
   )
 }
 

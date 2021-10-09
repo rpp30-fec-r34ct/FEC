@@ -112,7 +112,6 @@ const testAnswer = [
     photos: [[Object]]
   }
 ]
-// { key: 1, answers: { 3715723: { answerer_name: 'Oje', body: 'Tested and approved', date: '2021-02-23T00:00:00.000Z', helpfulness: 12, id: 3715723, photos: [] } }, asker_name: 'Oje', question_body: 'This test should work', question_helpfulness: 17, question_id: 101501, question_date: '2021-03-31T00:00:00.000Z', reported: false }
 
 const handlers = [
   rest.get('/qa/questions', (req, res, ctx) => {

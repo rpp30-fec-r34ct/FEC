@@ -28,7 +28,7 @@ const UploadPhotoBar = (props) => {
   }
 
   return (
-    <div data-testid="testUploadPhotos">
+    <div data-testid='testUploadPhotos'>
       {getPhotos()}
       {getRemainingUploads()}
     </div>

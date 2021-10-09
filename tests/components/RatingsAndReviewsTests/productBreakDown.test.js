@@ -44,28 +44,27 @@ describe('Product Breakdown Component', () => {
   })
 
   test('Should have the correct middle limit for size ', function () {
-    render(<ProductBreakdown characteristicsData={{Size: 2.4}} />)
+    render(<ProductBreakdown characteristicsData={{ Size: 2.4 }} />)
     expect(screen.getByText('Perfect')).toBeInTheDocument()
   })
 
   test('Should have the correct middle limit for comfort ', function () {
-    render(<ProductBreakdown characteristicsData={{Comfort: 2.4}} />)
+    render(<ProductBreakdown characteristicsData={{ Comfort: 2.4 }} />)
     expect(screen.getByText('Okay')).toBeInTheDocument()
   })
 
   test('Should have the correct middle limit for quality ', function () {
-    render(<ProductBreakdown characteristicsData={{Quality: 2.4}} />)
+    render(<ProductBreakdown characteristicsData={{ Quality: 2.4 }} />)
     expect(screen.getByText('What I expected')).toBeInTheDocument()
   })
 
   test('Should have the correct middle limit for length ', function () {
-    render(<ProductBreakdown characteristicsData={{Length: 2.4}} />)
+    render(<ProductBreakdown characteristicsData={{ Length: 2.4 }} />)
     expect(screen.getByText('Perfect')).toBeInTheDocument()
   })
 
   test('Should have the correct middle limit for width ', function () {
-    render(<ProductBreakdown characteristicsData={{Width: 2.4}} />)
+    render(<ProductBreakdown characteristicsData={{ Width: 2.4 }} />)
     expect(screen.getByText('Perfect')).toBeInTheDocument()
   })
-
 })

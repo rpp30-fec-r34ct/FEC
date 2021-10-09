@@ -3,8 +3,6 @@ import '../cssFiles/addReview.css'
 import helpers from '../../Shared/helpers.js'
 
 const CharacteristicsBar = (props) => {
-
-
   const characteristicBarStyle = {
     display: 'flex',
     flexDirection: 'row',
@@ -28,12 +26,12 @@ const CharacteristicsBar = (props) => {
   }
 
   return (
-    <div data-testid="testCharacteristcBar" className='characteristicBar' style={{ background: 'lightblue', border: '2px solid grey' }}>
+    <div data-testid='testCharacteristcBar' className='characteristicBar' style={{ background: 'lightblue', border: '2px solid grey' }}>
       <span style={{ marginLeft: '2px' }}>{props.characteristic + ': '}</span>
       <br />
       <div id={props.characteristic} style={characteristicBarStyle}>
         <div style={characteristicDescriptionStyle}>
-          <input data-testid="testRadioBar"  onChange={props.handleCharacteristicChange} className='characteristicRadio' type='radio' id='1' name={props.characteristic_id} value={helpers.getRatingTitle(props.characteristic, 1)} />
+          <input data-testid='testRadioBar' onChange={props.handleCharacteristicChange} className='characteristicRadio' type='radio' id='1' name={props.characteristic_id} value={helpers.getRatingTitle(props.characteristic, 1)} />
           <label style={characteristicRatingsStyle} htmlFor={props.characteristic_id}>{helpers.getRatingTitle(props.characteristic, 1)}</label><br />
         </div>
         <div style={characteristicDescriptionStyle}>

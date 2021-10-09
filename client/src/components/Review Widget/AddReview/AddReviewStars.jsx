@@ -27,7 +27,7 @@ const AddReviewStars = () => {
       if (starState[i] === 0) {
         stars.push(<img id={i} onClick={onAddReviewClick} key={i} src={emptyStar} />)
       } else {
-        stars.push(<img id={i} key={i} onClick={onAddReviewClick} data-testid="testfullStar" src={fullStar} />)
+        stars.push(<img id={i} key={i} onClick={onAddReviewClick} data-testid='testfullStar' src={fullStar} />)
       }
     }
     return stars
@@ -61,7 +61,7 @@ const AddReviewStars = () => {
   return (
     <div style={{ marginLeft: '20px' }}>
       {renderStars()}
-      <span id='addReviewStarsOutput' data-testid="testAddReviewStarsOutput" style={{ marginLeft: '10px', color: 'grey', opacity: '0.8' }}>{getRatingTitle()}</span>
+      <span id='addReviewStarsOutput' data-testid='testAddReviewStarsOutput' style={{ marginLeft: '10px', color: 'grey', opacity: '0.8' }}>{getRatingTitle()}</span>
     </div>
   )
 }

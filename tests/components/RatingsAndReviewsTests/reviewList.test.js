@@ -7,8 +7,6 @@ import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import ReviewList from '../../../client/src/components/Review Widget/ReviewList.jsx'
 
-
-
 const activeFilters =
   {
     1: true,
@@ -19,26 +17,24 @@ const activeFilters =
   }
 
 const getTotalReviews = () => {
-  return 5;
+  return 5
 }
 
-const productId = 47424;
+const productId = 47424
 
 const onPhotoClick = () => {
-  console.log('dummy function');
+  console.log('dummy function')
 }
 
 const onAddReviewClick = () => {
-  console.log('dummy function');
+  console.log('dummy function')
 }
 
+describe('Review List Component', () => {
+  test('Should render the add review button', function () {
+    render(<ReviewList testing product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick} />)
 
- describe('Review List Component', () => {
-   test('Should render the add review button', function () {
-
-     render(<ReviewList testing={true} product_id={productId} totalReviews={getTotalReviews()} activeFilters={activeFilters} onPhotoClick={onPhotoClick} onAddReviewClick={onAddReviewClick} />)
-
-     const AddReviewBtn = screen.getByText('Add Review +')
-     expect(AddReviewBtn).toBeInTheDocument();
-   })
- })
+    const AddReviewBtn = screen.getByText('Add Review +')
+    expect(AddReviewBtn).toBeInTheDocument()
+  })
+})

@@ -6,24 +6,23 @@ import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import 'regenerator-runtime/runtime'
-import ReactDOM from 'react-dom';
+
 import '@testing-library/jest-dom/extend-expect'
-import { act } from 'react-dom/test-utils';
-import userEvent from "@testing-library/user-event"
+import { act } from 'react-dom/test-utils'
+import userEvent from '@testing-library/user-event'
 import ReviewTile from '../../../client/src/components/Review Widget/ReviewTile.jsx'
 
-let container;
+let container
 
 beforeEach(() => {
-  container = document.createElement('div');
-  document.body.appendChild(container);
-});
+  container = document.createElement('div')
+  document.body.appendChild(container)
+})
 
 afterEach(() => {
-  document.body.removeChild(container);
-  container = null;
-});
-
+  document.body.removeChild(container)
+  container = null
+})
 
 const reviewData =
   {
@@ -46,7 +45,7 @@ describe('Review Tile Component', () => {
     expect(screen.getByText('January 11, 2019')).toBeInTheDocument()
   })
 
-  //test for presences of show more button
+  // test for presences of show more button
   test('Should have a see more button by default', function () {
     render(<ReviewTile reviewData={reviewData} />)
     const showMoreBtn = screen.getByTestId('testSeeMoreBtn')
@@ -55,11 +54,10 @@ describe('Review Tile Component', () => {
 
   test('should add a count to the helpful count when clicked', async () => {
     await act(async () => {
-      const result = render(<ReviewTile reviewData={reviewData} />, container);
-    });
-    const elementToClick = screen.getByText('Yes (13)');
+      render(<ReviewTile reviewData={reviewData} />, container)
+    })
+    const elementToClick = screen.getByText('Yes (13)')
     userEvent.click(elementToClick)
-    expect(await screen.getByText('Yes (14)')).toBeInTheDocument();
-
+    expect(await screen.getByText('Yes (14)')).toBeInTheDocument()
   })
 })

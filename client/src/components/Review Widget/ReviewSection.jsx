@@ -33,7 +33,7 @@ const ReviewSection = (props) => {
 
   useEffect(() => {
     getReviewsMeta()
-  }, [])
+  }, [isAddReview])
 
   const getReviewsMeta = () => {
     axios.get('/reviews/meta', {

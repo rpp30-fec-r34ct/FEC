@@ -33,10 +33,12 @@ const App = (props) => {
       <Toggle theme={theme} toggleTheme={toggleTheme} />
       <Switch>
         <Route path='/:productId(\d{5})'>
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Carousel') }}><Carousel /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'QAList') }}><QAList /> </div>} />
-          <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'ReviewSection') }}> <ReviewSection /> </div>} />
+          <div id='App'>
+            <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage theme={theme}/> </div>} />
+            <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Carousel') }}><Carousel /> </div>} />
+            <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'QAList') }}><QAList /> </div>} />
+            <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'ReviewSection') }}> <ReviewSection /> </div>} />
+          </div>
         </Route>
         <Route path='/product/:productId/carousel/'>
           <Carousel />

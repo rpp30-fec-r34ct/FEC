@@ -13,6 +13,7 @@ const MainImageGalleryComponent = (props) => {
   useEffect(() => {
     if (props.selectedStyle !== false) {
       setSelectedStyle(props.selectedStyle)
+      setTopIndex(0)
     }
   }, [props])
 

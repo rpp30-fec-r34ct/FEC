@@ -5,7 +5,7 @@ export default function ProductList ({ currentIndex, relatedProducts, currentOve
   return (
     <div className='product-list'>
       <div className='carousel-content-wrapper'>
-        <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 25}%)` }}>
+        <div className='carousel-content' style={{ transform: `translateX(-${currentIndex * 27}%)` }}>
           {
             relatedProducts.map((relatedItem, index) => {
               return (

@@ -83,7 +83,7 @@
   z-index: 3000;
   height: 25px;
   width: 25px;
-  background-color: rgba(170, 170, 170, 0.25);
+  background-color: rgb(232, 215, 215);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -98,7 +98,7 @@
   z-index: 3000;
   height: 25px;
   width: 25px;
-  background-color: rgba(232, 215, 215, 0.25);
+  background-color: rgba(248,248,255);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -179,13 +179,13 @@
 
 .add-btn {
   z-index: 1001;
-  top: 10px;
+  top: 4px;
   left: 30px;
   display: flex;
   justify-content: center;
   height: 25px;
   width: 25px;
-  background-color: rgba(170, 170, 170, 0.25);
+  background-color: rgba(248,248,255);
   border-radius: 50%;
   color:rgba(0, 0, 0, 0.9);
   margin-bottom: 5px;

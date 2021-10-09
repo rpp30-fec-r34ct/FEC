@@ -11,13 +11,14 @@ import {ThemeProvider} from 'styled-components'
 import {GlobalTheme} from './StyledComponents/GlobalTheme.jsx'
 import {lightTheme, darkTheme} from './StyledComponents/Themes.jsx'
 import {useDarkMode} from './Shared/useDarkMode.jsx'
+import Toggle from './StyledComponents/Toggle.jsx'
+import {CgMoon, CgSun} from 'react-icons/cg'
 
 
 const App = (props) => {
   const [theme, toggleTheme, isMounted] = useDarkMode()
 
   const themeMode = theme === 'light' ? lightTheme : darkTheme
-
 
   if (!isMounted) {
     return <div/>
@@ -28,7 +29,8 @@ const App = (props) => {
     <ThemeProvider theme={themeMode}>
       <>
       <GlobalTheme/>
-      <button onClick={toggleTheme}>Toggle theme</button>
+      <Toggle theme={theme} toggleTheme={toggleTheme}/>
+      <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
       <h1>PROJECT ATLIER</h1>
       <Switch>
         <Route path='/:productId(\d{5})'>

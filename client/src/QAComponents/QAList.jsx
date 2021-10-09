@@ -26,6 +26,12 @@ const QAList = (props) => {
   const searchStyle = {
     width: '99.1%',
     margin: 'auto',
+    height: '10%',
+  }
+  const searchBarStyle = {
+    width: '99.1%',
+    margin: 'auto',
+    height: '100%',
   }
   const moreQuestionsStyle = {
     width: '50%',
@@ -130,8 +136,8 @@ const QAList = (props) => {
     <>
       <h1 style={headingStyle} id="QA-heading">Questions and Answers</h1>
       <div style={qListStyle}>
-        <form>
-          <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch} style={searchStyle} />
+        <form style={searchStyle}>
+          <input id='search-bar' type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS' onChange={handleSearch} onSubmit={handleSearch} style={searchBarStyle} />
         </form>
         {questions ? questions.sort((question1, question2) => question2.question_helpfulness - question1.question_helpfulness).map((question, i) => {
           let key = question.question_id + 1

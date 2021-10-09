@@ -10,14 +10,12 @@ const NewAnswer = (props) => {
   const [helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState('Report')
-  // let renderMoreAnswers = <div />
 
   const tableStyle = {
     tableLayout: 'fixed',
     width: '100%',
   }
   const imgStyle = {
-    // display: 'block',
     align: 'left',
     margin: '1%',
     height: '20%',
@@ -26,42 +24,43 @@ const NewAnswer = (props) => {
   const answerBorderStyle = {
     width: '90%',
     margin: '5%',
-    // borderBottom: '2px solid black',
   }
   const answerStyle = {
     width: '95%',
-    // border: '1px solid black',
     margin: '5%',
     borderBottom: '1px solid black',
     maxHeight: '100%',
-    // width: '500px',
-    // margin: '2%',
   }
   const answerInfoStyle = {
-    // border: '1px solid black',
+    color: 'grey',
     textAlign: 'left',
     margin: '2%',
     fontFamily: 'Arial, Helvetica, sans-serif',
     fontSize: '80%',
   }
   const answerHelpfulStyle = {
-    // border: '1px solid black',
     textAlign: 'left',
     margin: '2%',
     fontSize: '80%',
     fontFamily: 'Arial, Helvetica, sans-serif',
-    color: 'green',
+    color: 'grey',
   }
+
+  const helpfulButtonStyle = {
+    color: 'limeGreen',
+    textDecoration: 'underline',
+  }
+
   const answerReportStyle = {
-    // border: '1px solid black',
     color: 'red',
     textAlign: 'left',
     margin: '2%',
     fontSize: '80%',
     fontFamily: 'Arial, Helvetica, sans-serif',
+    fontWeight: 'bold',
   }
   const sellerStyle = {
-    color: 'blue',
+    color: 'grey',
     textAlign: 'left',
     margin: '2%',
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -108,19 +107,14 @@ const NewAnswer = (props) => {
               <tbody>
                 <tr>
                   <td style={answerInfoStyle} className='answer-panel'> by {props.name && props.name.toLowerCase() === 'seller' ? <b style={sellerStyle}>Seller,</b> : props.name + ','} {props.month} {props.day}, {props.year}
-                    {/* <div className='answer-panel'><div>by {props.name}, {props.month} {props.day}, {props.year} | <div>Helpful?</div><a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a><div>({helpfulness ? helpfulness : 0})</div> | <div className='report-answer' onClick={reportAnswer}>Report</div></div></div> */}
                   </td>
                   <td style={answerHelpfulStyle}>
                     Helpful?
-                    {!helpful ? <a href="" className='helpful-answer' onClick={helpfulAnswer}>Yes</a> : 'Yes'}
+                    {!helpful ? <b href="" className='helpful-answer' onClick={helpfulAnswer} style={helpfulButtonStyle} >Yes</b> : 'Yes'}
                     (<span id="answer-helpfulness">{helpfulness ? helpfulness : 0}</span>)
                   </td>
-                  {/* <td>
-                  </td>
-                  <td>
-                  </td> */}
                   {report === 'Report' ? <td style={answerReportStyle} className='report-answer'>
-                    <a href='' id="report-answer-link" onClick={reportAnswer}>{report}</a>
+                    <span href='' id="report-answer-link" onClick={reportAnswer}>{report}</span>
                   </td> : <td style={answerReportStyle} className='report-answer'>
                     {report}
                   </td>}
@@ -128,7 +122,6 @@ const NewAnswer = (props) => {
               </tbody>
             </table>
           </div>
-      {/* <div>{renderMoreAnswers}</div> */}
     </div>
   )
 }

@@ -9,30 +9,28 @@ const ToggleContainer = styled.button`
   cursor: pointer;
   display: flex;
   font-size: 0.5rem;
-  background-color: #c5cae9;
+  background-color: ${({ lightTheme }) => lightTheme ? '#4da6f3' : '#3d3d3d'};
   justify-content: space-between;
   margin: 0 auto;
-  margin-bottom: 10px;
   overflow: hidden;
-  padding: 0.5rem;
-  position: relative;
-  width: 6rem;
-  height: 3.5rem;
-
+  width: 12em;
+  height: 5em;
 
   svg {
     height: auto;
-    width: 2.5rem;
+    width: 4em;
     transition: all 0.3s linear;
 
     //sun
     &:first-child {
       transform: ${({ lightTheme }) => lightTheme ? 'translateX(0)' : 'translateX(100px)'};
+      color: #f5ce44;
     }
 
     // moon
     &:nth-child(2) {
       transform: ${({ lightTheme }) => lightTheme ? 'translateX(-100px)' : 'translateX(0)'};
+      color: #ffe000;
     }
   }
 `;

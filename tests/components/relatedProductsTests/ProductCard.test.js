@@ -6,28 +6,42 @@ import React from 'react'
 import 'regenerator-runtime/runtime'
 import { render } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { createMemoryHistory } from 'history'
+import { Router, Route, Switch } from 'react-router-dom'
 import testRelatedProducts from '../../../testData/testRelatedProducts'
 import ProductCard from '../../../client/src/components/relatedProducts/ProductCard.jsx'
+import testProduct from '../../../testData/testProduct'
+
+let app
 
 describe('Product Cards', function () {
-  test('Should render the related product categories on cards', function () {
-    const app = render(<ProductCard product={testRelatedProducts[0]} />)
-    expect(app.getByText(testRelatedProducts[0].category)).toBeInTheDocument()
+  beforeEach(() => {
+    const history = createMemoryHistory()
+    const route = '/product/47421/carousel'
+    history.push(route)
+    app = render(
+      <Router history={history}>
+        <Switch>
+          <Route path='/product/:productId/carousel/'>
+            <ProductCard relatedItem={testRelatedProducts[0]} currentOverview={testProduct} />
+          </Route>
+        </Switch>
+      </Router>
+    )
   })
-  test('Should render the related product names on cards', function () {
-    const app = render(<ProductCard product={testRelatedProducts[0]} />)
-    expect(app.getByText(testRelatedProducts[0].name)).toBeInTheDocument()
+  test('Should render the related product category on card', async () => {
+    expect(await app.findByTestId(`rel-product-category-${testRelatedProducts[0].id}`)).toHaveTextContent('Accessories')
   })
-  // test('Should render the related product prices on cards', function () {
-  //   const app = render(<ProductCard product={testRelatedProducts[0]} />)
-  //   expect(app.getByText(`$${testRelatedProducts[0].price}`)).toBeInTheDocument()
-  // })
-  // test('Should render the related product categories on cards', function () {
-  //   const app = render(<ProductCard product={testRelatedProducts[0]} />)
-  //   expect(app.getByText(testRelatedProducts[0].sale)).toBeInTheDocument()
-  // })
-  test('Should render the related product images on cards', function () {
-    const app = render(<ProductCard product={testRelatedProducts[0]} />)
+  test('Should render the related product name on card', async () => {
+    expect(await app.findByTestId(`rel-product-name-${testRelatedProducts[0].id}`)).toHaveTextContent('Bright Future Sunglasses')
+  })
+  test('Should render the related product price on card', async () => {
+    expect(await app.findByTestId(`rel-product-price-${testRelatedProducts[0].id}`)).toHaveTextContent('$69.00')
+  })
+  test('Should render the related product category on card', async () => {
+    expect(await app.findByTestId(`rel-product-sale-${testRelatedProducts[0].id}`)).toHaveTextContent('$50.00')
+  })
+  test('Should render the related product image on card', () => {
     expect(app.container.querySelector(`[src='${testRelatedProducts[0].photo}']`)).toBeInTheDocument()
   })
 })

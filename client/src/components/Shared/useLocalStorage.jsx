@@ -1,29 +1,31 @@
+/* eslint-disable */
+
 import React, { useState } from 'react'
 // Hook
-function useLocalStorage(key, initialValue) {
+function useLocalStorage (key, initialValue) {
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      const item = window.localStorage.getItem(key)
+      return item ? JSON.parse(item) : initialValue
     } catch (error) {
-      console.log(error);
-      return initialValue;
+      console.log(error)
+      return initialValue
     }
-  });
+  })
 
   const setValue = (value) => {
     try {
       // Allow value to be a function so we have same API as useState
-      const valueToStore = value;
-        // value instanceof Function ? value(storedValue) : value;
+      const valueToStore = value
+      // value instanceof Function ? value(storedValue) : value;
 
-      setStoredValue(valueToStore);
-      window.localStorage.setItem(key, JSON.stringify(valueToStore));
+      setStoredValue(valueToStore)
+      window.localStorage.setItem(key, JSON.stringify(valueToStore))
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
-  };
-  return [storedValue, setValue];
+  }
+  return [storedValue, setValue]
 }
 
-export default useLocalStorage;
+export default useLocalStorage

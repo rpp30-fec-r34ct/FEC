@@ -162,12 +162,21 @@ describe('QA List', (done) => {
     )
     // })
     // setTimeout(()=>{
+<<<<<<< HEAD
       // act(()=>{
       //   jest.advanceTimersByTime(1000);
       // })
     // await waitFor(()=>{
       await expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
   //   })
+=======
+    act(() => {
+      jest.advanceTimersByTime(1000)
+    })
+    // await waitFor(()=>{
+    expect(app.container.querySelector("h1[id='QA-heading']")).toBeInTheDocument()
+    // })
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
   // }, 5000)
   })
 

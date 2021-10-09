@@ -4,7 +4,8 @@ import 'regenerator-runtime/runtime'
 import ProductList from './ProductList.jsx'
 import OutfitList from './OutfitList.jsx'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
-import { CardSkeleton } from '../StyledComponents/CardSkeleton.jsx'
+import CardSkeleton from '../StyledComponents/CardSkeleton.jsx'
+
 import axios from 'axios'
 import './Carousel.css'
 
@@ -22,15 +23,20 @@ export default function Carousel (props) {
       await getOverviewProduct()
       await getRelatedProducts()
       setLoading(false)
-    }, 2500)
-
+    }, 500)
     return () => clearTimeout(timer)
   }, [])
 
   const getRelatedProducts = async () => {
     try {
-      const { data } = await axios.get(`/product/${productId}/related`)
-      setRelatedProducts(data)
+      const cachedRelated = JSON.parse(window.localStorage.getItem(JSON.stringify(productId)))
+      if (cachedRelated && cachedRelated.expiration > Date.now()) {
+        setRelatedProducts(cachedRelated.value)
+      } else {
+        const { data } = await axios.get(`/product/${productId}/related`)
+        setRelatedProducts(data)
+        window.localStorage.setItem(JSON.stringify(productId), JSON.stringify({value: data, expiration: Date.now() + 30000 }))
+      }
     } catch (error) {
       console.log(error.message)
     }
@@ -59,9 +65,9 @@ export default function Carousel (props) {
 
   return (
     <div className='carousels-overview'>
-      <h3>RELATED PRODUCTS</h3>
-      <div className='carousel-container' data-testid='carousel'>
-        {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} data-testid='left-arrow-1'/>}
+      <h3 data-testid='rel-product-header'>RELATED PRODUCTS</h3>
+      <div className='carousel-container' data-testid='rel-product-carousel'>
+      {currentPosition < 0 && <FaChevronLeft className='left-arrow' onClick={prevCard} />}
         {isLoading
           ? placeHolder.map((card, index) => (
             <CardSkeleton key={index} />
@@ -72,7 +78,7 @@ export default function Carousel (props) {
               currentIndex={currentIndex}
               currentPosition={currentPosition}
             />}
-        {relatedProducts.length > 4 && currentIndex < (relatedProducts.length - 4) && <FaChevronRight className='right-arrow' onClick={nextCard} data-testid='right-arrow-1'/>}
+        {relatedProducts.length > 4 && ((currentIndex + 3) < relatedProducts.length -1) && <FaChevronRight className='right-arrow' onClick={nextCard} />}
       </div>
       <OutfitList
         currentOverview={currentOverview}

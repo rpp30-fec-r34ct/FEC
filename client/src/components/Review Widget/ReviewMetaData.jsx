@@ -64,7 +64,7 @@ const ReviewMetaData = (props) => {
   }
 
   return (
-    <div>
+    <div className="productBreakDownContainer">
       <div>
         <div className='reviewSummary'>
           <div data-testid='testAverage' className='ratingItem'>{calculateAverage(props.metaData.ratings)}</div>

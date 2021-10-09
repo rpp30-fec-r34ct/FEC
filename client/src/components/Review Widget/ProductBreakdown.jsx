@@ -24,6 +24,26 @@ const ProductBreakdown = (props) => {
     }
   }
 
+  const getMiddleRankingName = (charName) => {
+    switch (charName) {
+      case ('Size') :
+        return 'Perfect';
+      case ('Width'):
+        return 'Perfect';
+      case ('Comfort'):
+        return 'Okay';
+      case ('Quality'):
+        return 'What I expected';
+      case ('Length'):
+        return 'Perfect';
+      case ('Fit'):
+        return 'Perfect';
+
+      default:
+        return;
+    }
+  }
+
   const breakDownComponents = []
 
   for (const key in props.characteristicsData) {
@@ -33,6 +53,7 @@ const ProductBreakdown = (props) => {
         <ProductBreakDownBar rating={props.characteristicsData[key].value} />
         <div className='productBreakDownLimitHolder'>
           <span className='productBreakDownLimit'>{getRatingName(key, 'low')}</span>
+          <span className='productBreakDownLimit'>{getMiddleRankingName(key)}</span>
           <span className='productBreakDownLimit'>{getRatingName(key, 'high')}</span>
         </div>
       </div>

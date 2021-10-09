@@ -44,7 +44,7 @@ const Comparison = ({relatedItem, currentOverview}) => {
 
   return (
     <React.Fragment>
-      <div className="favorite-btn" onClick={toggleModal}>
+      <div className="favorite-btn" data-testid='rel-product-toggle' onClick={toggleModal}>
         <RiStarSmileFill />
       </div>
       {
@@ -52,11 +52,11 @@ const Comparison = ({relatedItem, currentOverview}) => {
           ? createPortal(
             <React.Fragment>
               <div className="modal">
-                <div className="close-btn" onClick={toggleModal}>
+                <div className='close-btn' data-testid='toggle-comparison-modal' onClick={toggleModal}>
                   <AiOutlineCloseCircle />
                 </div>
-                <div className="modal-body">
-                  <h3>Comparing</h3>
+                <div className="modal-body" >
+                  <h3 data-testid='comparing-header-modal'>Comparing</h3>
                   <table>
                     <thead>
                       <tr>

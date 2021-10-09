@@ -11,6 +11,7 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import regeneratorRuntime from 'regenerator-runtime'
 
+<<<<<<< HEAD
  // components
  import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
  import QAList from '../../../client/src/QAComponents/QAList.jsx'
@@ -142,6 +143,14 @@ afterAll(()=> server.close())
  describe('Individual Question Component', () => {
    test('Should have a heading for the product', function () {
     var app;
+=======
+// components
+import AnswerModal from '../../../client/src/QAComponents/AnswerModal.jsx'
+
+xdescribe('Individual Question Component', () => {
+  test('Should have a heading for the product', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -154,6 +163,7 @@ afterAll(()=> server.close())
         </Switch>
       </Router>
     )
+<<<<<<< HEAD
      expect(app.container.querySelector("h1[id='answerModal-product']")).toBeInTheDocument()
    })
 
@@ -233,6 +243,13 @@ afterAll(()=> server.close())
 
   test('Should allow a user to input a name of the answerer', function () {
     var app;
+=======
+    expect(app.container.querySelector("h1[id='answerModal-product'")).toBeInTheDocument()
+  })
+
+  xtest('Should render if props.showModal is true', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -245,6 +262,7 @@ afterAll(()=> server.close())
         </Switch>
       </Router>
     )
+<<<<<<< HEAD
     const form = app.container.querySelector("input[name='nickname']")
     fireEvent.change(form, {target: {value: 'Tester'}})
     expect(form.value).toBe('Tester')
@@ -252,6 +270,13 @@ afterAll(()=> server.close())
 
    test('Should render a form', function () {
     var app;
+=======
+    expect(app.container.findByText('Product, Question Body')).toBeInTheDocument()
+  })
+
+  xtest('Should render a form', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -267,8 +292,13 @@ afterAll(()=> server.close())
     expect(app.container.querySelector("div[class='add-answer-form']")).toBeInTheDocument()
   })
 
+<<<<<<< HEAD
    test('Should render a form with an input for the answer', function () {
     var app;
+=======
+  xtest('Should render a form with an input for the question', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -284,6 +314,7 @@ afterAll(()=> server.close())
     expect(app.container.querySelector("input[name='answer']")).toBeInTheDocument()
   })
 
+<<<<<<< HEAD
    test('Should render a form with an input for the nickname of the answerer', function () {
      var app;
      const history = createMemoryHistory()
@@ -303,6 +334,10 @@ afterAll(()=> server.close())
 
    test('Should render a form with an input for the email address of the answerer', function () {
     var app;
+=======
+  xtest('Should render a form with an input for the nickname of the asker', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)
@@ -318,8 +353,13 @@ afterAll(()=> server.close())
     expect(app.container.querySelector("input[name='email']")).toBeInTheDocument()
   })
 
+<<<<<<< HEAD
   test('Should toggle the answer modal by pressing escape', function () {
     var app;
+=======
+  xtest('Should render a form with an input for the email address of the asker', function () {
+    let app
+>>>>>>> 6bc3e6346ba7803396b88a2431685a187e1ffe77
     const history = createMemoryHistory()
     const route = '/product/47421'
     history.push(route)

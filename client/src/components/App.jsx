@@ -31,9 +31,7 @@ const App = (props) => {
     <ThemeProvider theme={themeMode}>
       <>
       <GlobalTheme/>
-      <NavBar />
-      <Toggle theme={theme} toggleTheme={toggleTheme}/>{icon}
-      <h1>It's a {theme === 'light' ? 'light theme' : 'dark theme'}!</h1>
+      <NavBar theme={theme} toggleTheme={toggleTheme} icon={icon}/>
       <Switch>
         <Route path='/:productId(\d{5})'>
           <ClickTracker render={submitTrackedInfo => <div onClick={(e) => { submitTrackedInfo(e, 'Product Detail Page') }}><ProductDetailPage /> </div>} />

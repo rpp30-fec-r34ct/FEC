@@ -10,12 +10,13 @@ const ToggleContainer = styled.button`
   display: flex;
   font-size: 0.5rem;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: auto;
   overflow: hidden;
   padding: 0.5rem;
   position: relative;
-  width: 8rem;
-  height: 4rem;
+  width: 8em;
+  height: 4em;
+
 
   svg {
     height: auto;
@@ -35,11 +36,14 @@ const ToggleContainer = styled.button`
 `;
 
 
-const Toggle = ({theme, toggleTheme}) => {
+const Toggle = ({ theme, toggleTheme }) => {
+  const icon = theme === 'light' ? <CgSun/> : <CgMoon/>
   return (
-    <ToggleContainer onClick={toggleTheme}>
-    <CgMoon/>
-    </ToggleContainer>
+    <div id='toggle-button'>
+      <ToggleContainer onClick={toggleTheme}>
+      </ToggleContainer>
+      {icon}
+    </div>
   )
 }
 

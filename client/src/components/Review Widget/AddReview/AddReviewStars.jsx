@@ -25,9 +25,9 @@ const AddReviewStars = () => {
     const stars = []
     for (let i = 0; i < starState.length; i++) {
       if (starState[i] === 0) {
-        stars.push(<img id={i} onClick={onAddReviewClick} key={i} src={emptyStar} />)
+        stars.push(<img alt="emptyStar" id={i} onClick={onAddReviewClick} key={i} src={emptyStar} />)
       } else {
-        stars.push(<img id={i} key={i} onClick={onAddReviewClick} data-testid='testfullStar' src={fullStar} />)
+        stars.push(<img alt="fullStar" id={i} key={i} onClick={onAddReviewClick} data-testid='testfullStar' src={fullStar} />)
       }
     }
     return stars

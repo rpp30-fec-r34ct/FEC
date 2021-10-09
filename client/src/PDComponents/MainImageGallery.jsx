@@ -55,9 +55,9 @@ const MainImageGalleryComponent = (props) => {
             <div id='main-product-image' className='collapsed-product-image'>
               <FaExpand id='expand-image-button' onClick={handleExpandImageClick} />
               {selectedStyle.photos[topIndex].url
-                ? <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
+                ? <img alt='gallery-modal-image' src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
                 : <SkeletonDiv />}
-              <img src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
+              <img alt="gallary-selected-image" src={selectedStyle.photos[topIndex].url} onClick={handleExpandImageClick} />
             </div>
             {(topIndex < selectedStyle.photos.length - 1) ? <FaChevronRight className='gallery-arrow' onClick={handleCarouselRightClick} /> : <FaChevronRight className='gallery-arrow hidden' />}
           </div>

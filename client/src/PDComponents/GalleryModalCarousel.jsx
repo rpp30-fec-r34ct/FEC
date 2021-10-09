@@ -8,7 +8,7 @@ const SubImageCarouselComponent = ({ selectedStyle, imageClickHandler }) => {
   useEffect(() => {
     if (selectedStyle) {
       setThumbnails(selectedStyle.photos.map((image, index) => {
-        return <img key={index} data-index={index} className='modal-product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
+        return <img alt="sub-carousel-image" key={index} data-index={index} className='modal-product-thumbnail' src={image.thumbnail_url} onClick={imageClickHandler} />
       }))
     }
   }, [selectedStyle])

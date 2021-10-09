@@ -101,7 +101,7 @@ const NewAnswer = (props) => {
       <div className='answer-body' id={props.id} key={props.id + 'b'}>
             <div>A: {props.body}</div>
             <div>{props.photos && Array.isArray(props.photos) ? props.photos.map((image, i) => (
-              <img style={imgStyle} className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
+              <img alt='answer-image' style={imgStyle} className="rendered-answer-img" src={image.url} key={props.id+'a' + i}/>
             )) : null}</div>
             <table style={tableStyle}>
               <tbody>

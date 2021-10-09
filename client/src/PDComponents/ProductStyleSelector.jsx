@@ -26,7 +26,7 @@ const ProductStyleComponent = (props) => {
   return (
     <div>
       <h4 id='style-selector-title'> <b>STYLE {'>'} </b>{props.selectedStyle.name || <SkeletonLine />}</h4>
-      <div style={{ display: 'flex' }}>{styleSelectors} </div>
+      <div style={{ display: 'flex', maxWidth: '300px', flexWrap: 'wrap' }}>{styleSelectors} </div>
     </div>
   )
 }

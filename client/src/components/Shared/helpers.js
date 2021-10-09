@@ -22,9 +22,10 @@ const findTotalScore = (ratings) => {
 
 const findAverageRating = (ratings) => (findTotalScore(ratings) / findTotalReviews(ratings))
 
-const getFormStarRating = () => {
-  const rating = document.getElementById('addReviewStarsOutput').innerText
-
+const getFormStarRating = (rating) => {
+  if (rating === undefined) {
+    const rating = document.getElementById('addReviewStarsOutput').innerText
+  }
   switch (rating) {
     case ('Poor'):
       return 1

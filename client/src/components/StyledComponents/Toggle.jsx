@@ -8,14 +8,15 @@ const ToggleContainer = styled.button`
   border-radius: 30px;
   cursor: pointer;
   display: flex;
-  font-size: 0.5rem;
-  justify-content: space-between;
-  margin: 0 auto;
+  font-size: 0.1rem;
+  justify-content: flex-start;
+  margin: auto;
   overflow: hidden;
   padding: 0.5rem;
-  position: relative;
-  width: 8rem;
-  height: 4rem;
+  position: absolute;
+  width: 1px;
+  height: 2px;
+  opacity: 0.1;
 
   svg {
     height: auto;

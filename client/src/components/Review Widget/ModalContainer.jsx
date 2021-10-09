@@ -44,7 +44,7 @@ const ModalContainer = (props) => {
         <div style={pageCoverStyle} />
         <div data-testid='testModalContainer' style={modalContainerStyle}>
           <div style={imgContainerStyle}>
-            <img src={props.activeModal} style={imgStyle} />
+            <img src={props.activeModal} alt="modal-container" style={imgStyle} />
           </div>
           <AiOutlineClose onClick={props.onClickClose}/>
         </div>

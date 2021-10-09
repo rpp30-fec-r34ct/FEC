@@ -18,4 +18,27 @@ describe('Review Stars Component', () => {
     // console.log(starElement);
     expect(starElement.childElementCount).toBe(5)
   })
+  test('Should render 5 stars regardless of the rating', function () {
+    render(<ReviewStars starRating={2.1} review_id={average} />)
+
+    const starElement = screen.getByTestId('testReviewStars')
+    // console.log(starElement);
+    expect(starElement.childElementCount).toBe(5)
+  })
+
+  test('Should render 5 stars regardless of the rating', function () {
+    render(<ReviewStars starRating={2.4} review_id={average} />)
+
+    const starElement = screen.getByTestId('testReviewStars')
+    // console.log(starElement);
+    expect(starElement.childElementCount).toBe(5)
+  })
+
+  test('Should render 5 stars regardless of the rating', function () {
+    render(<ReviewStars starRating={2.8} review_id={average} />)
+
+    const starElement = screen.getByTestId('testReviewStars')
+    // console.log(starElement);
+    expect(starElement.childElementCount).toBe(5)
+  })
 })

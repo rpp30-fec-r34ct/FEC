@@ -60,7 +60,6 @@ const NewAnswer = (props) => {
   }
 
   const answerReportStyle = {
-    // border: '1px solid black',
     color: 'red',
     textAlign: 'left',
     margin: '2%',

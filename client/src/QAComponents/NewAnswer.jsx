@@ -10,14 +10,12 @@ const NewAnswer = (props) => {
   const [helpfulness, setHelpfulness] = useState(props.helpfulness)
   const [helpful, setHelpful] = useState(false)
   const [report, setReport] = useState('Report')
-  // let renderMoreAnswers = <div />
 
   const tableStyle = {
     tableLayout: 'fixed',
     width: '100%',
   }
   const imgStyle = {
-    // display: 'block',
     align: 'left',
     margin: '1%',
     height: '20%',
@@ -26,19 +24,14 @@ const NewAnswer = (props) => {
   const answerBorderStyle = {
     width: '90%',
     margin: '5%',
-    // borderBottom: '2px solid black',
   }
   const answerStyle = {
     width: '95%',
-    // border: '1px solid black',
     margin: '5%',
     borderBottom: '1px solid black',
     maxHeight: '100%',
-    // width: '500px',
-    // margin: '2%',
   }
   const answerInfoStyle = {
-    // border: '1px solid black',
     color: 'grey',
     textAlign: 'left',
     margin: '2%',
@@ -46,7 +39,6 @@ const NewAnswer = (props) => {
     fontSize: '80%',
   }
   const answerHelpfulStyle = {
-    // border: '1px solid black',
     textAlign: 'left',
     margin: '2%',
     fontSize: '80%',
@@ -121,10 +113,6 @@ const NewAnswer = (props) => {
                     {!helpful ? <b href="" className='helpful-answer' onClick={helpfulAnswer} style={helpfulButtonStyle} >Yes</b> : 'Yes'}
                     (<span id="answer-helpfulness">{helpfulness ? helpfulness : 0}</span>)
                   </td>
-                  {/* <td>
-                  </td>
-                  <td>
-                  </td> */}
                   {report === 'Report' ? <td style={answerReportStyle} className='report-answer'>
                     <span href='' id="report-answer-link" onClick={reportAnswer}>{report}</span>
                   </td> : <td style={answerReportStyle} className='report-answer'>
@@ -134,7 +122,6 @@ const NewAnswer = (props) => {
               </tbody>
             </table>
           </div>
-      {/* <div>{renderMoreAnswers}</div> */}
     </div>
   )
 }

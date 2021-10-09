@@ -64,9 +64,10 @@ const QAList = (props) => {
       setShowQuestionModal(false)
     }
     if (e.target.id === "submit-question") {
+      document.getElementsByClassName('add-question-form')[0].append('Question Submitted')
       setTimeout(()=>{
         setShowQuestionModal(false)
-      }, 2000)
+      }, 1000)
     }
   }
 

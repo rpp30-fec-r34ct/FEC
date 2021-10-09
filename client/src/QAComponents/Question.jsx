@@ -87,7 +87,10 @@ const Question = (props) => {
 
   const handleModalChange = (e) => {
     if (e.target[4].id === "submit-answer") {
-      setShowModal(false)
+      document.getElementsByClassName('add-answer-form')[0].append('Answer Submitted')
+      setTimeout(()=>{
+        setShowModal(false)
+      }, 500)
     }
     setUpdateAnswers(true)
   }
